@@ -25,4 +25,18 @@ class User {
       'model_ifv': modelIfv,
       'etat': state,
   };
+
+  User({
+    required this.id,
+    required this.firstname,
+    required this.lastname,
+    required this.email,
+    required this.password,
+    required this.structure,
+    required this.dateCreation,
+    required this.dateMaj,
+    required this.token,
+    required this.modelIfv,
+    required this.state,
+  });
 }

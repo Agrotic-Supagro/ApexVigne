@@ -1,10 +1,9 @@
 import 'package:apex_vigne/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'color_schemes.g.dart';
-import 'package:material_symbols_icons/symbols.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const ApexVigneApp());
 }
 

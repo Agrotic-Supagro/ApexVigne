@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
-class StatsPage extends StatefulWidget {
-  const StatsPage({super.key, required this.title});
-  final String title;
+class ProfilPage extends StatefulWidget {
+  const ProfilPage({super.key});
 
   @override
-  State<StatsPage> createState() => _StatsPageState();
+  State<ProfilPage> createState() => _ProfilPageState();
 }
 
-class _StatsPageState extends State<StatsPage> {
+class _ProfilPageState extends State<ProfilPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: const Text('Profile'),
       ),
       body: const Center(
         child: Column(
