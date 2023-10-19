@@ -120,6 +120,21 @@ BaseURL: `https://www.agrotic.org/apexv3-sync`
 }
 ```
 
-### Update stade pheno: `POST /update_stade_pheno.php`
+### Update stade pheno: `GET /update_stade_pheno.php`
 #### Request body
 ```Nothing```
+#### Response
+```json
+{
+    "status": true,
+    "data": [
+        {
+            "id_stade": "",
+            "nom": "",
+            "resume": "",
+            "descriptif": "",
+            "url_image": ""
+        },
+    ]
+}
+```
