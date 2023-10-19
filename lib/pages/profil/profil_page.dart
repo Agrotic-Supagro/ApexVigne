@@ -1,4 +1,6 @@
+import 'package:apex_vigne/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:apex_vigne/services/auth_service.dart';
 
 class ProfilPage extends StatefulWidget {
   const ProfilPage({super.key});
@@ -8,6 +10,8 @@ class ProfilPage extends StatefulWidget {
 }
 
 class _ProfilPageState extends State<ProfilPage> {
+  final AuthenticationService auth = AuthenticationService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,13 +19,24 @@ class _ProfilPageState extends State<ProfilPage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Profile'),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
+            const Text(
               'Profil Page',
             ),
+            TextButton(
+              onPressed: () {
+                auth.logout(() {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const LoginPage(),
+                  ));
+                });
+              },
+              child: const Text('Logout'),
+            ),
+
           ],
         ),
       ),

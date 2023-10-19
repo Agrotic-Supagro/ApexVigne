@@ -1,4 +1,4 @@
-import 'package:apex_vigne/pages/login/login_page.dart';
+import 'package:apex_vigne/pages/loading/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'color_schemes.g.dart';
 
@@ -16,7 +16,7 @@ class ApexVigneApp extends StatelessWidget {
       title: 'Apex Vigne',
       theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
       // darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-      home: const LoginPage(),
+      home: LoadingPage(),
     );
   }
 }
