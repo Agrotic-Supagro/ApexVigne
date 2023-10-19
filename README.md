@@ -50,7 +50,7 @@ BaseURL: `https://www.agrotic.org/apexv3-sync`
 }
 ```
 
-> Server
+> ## Server
 ### Send a mail: `POST /contact.php`
 #### Request body
 ```json
