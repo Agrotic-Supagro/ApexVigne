@@ -100,11 +100,12 @@ class AuthenticationService {
       if (res['status']) {
         registerState.value = true;
       } else {
-        throw Exception('Erreur lors de l\'inscription');
+        return('Erreur lors de l\'inscription');
       }
     } else {
-      throw Exception('Erreur lors de l\'inscription');
+      return('Erreur lors de l\'inscription');
     }
+    return null;
   }
 
   Future<String?> resetPassword(String code, LoginData data) async {
@@ -119,6 +120,7 @@ class AuthenticationService {
     } else {
       return('Erreur lors de la réinitialisation du mot de passe');
     }
+    return null;
   }
 
   Future<void> changePassword(Map<String, dynamic> data) async {
