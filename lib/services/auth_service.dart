@@ -10,7 +10,6 @@ class AuthenticationService {
   ValueNotifier<bool> authenticationState = ValueNotifier(false);
   ValueNotifier<bool> registerState = ValueNotifier(false);
 
-  /* Methods auth state */
   Future<void> checkToken() async {
     final prefs = await SharedPreferences.getInstance();
     final userJson = prefs.getString('user');
@@ -84,7 +83,58 @@ class AuthenticationService {
     }
   }
 
-  /* Storage */
+  Future<String?> register(SignupData data) async {
+    final response = await http.post(
+      Uri.parse('$AUTH_SERVER_ADDRESS/create_user.php'),
+      body: json.encode({
+        'prenom': data.additionalSignupData!['firstName'],
+        'nom': data.additionalSignupData!['lastName'],
+        'email': data.name,
+        'mot_de_passe': data.password,
+        'structure': data.additionalSignupData!['structure'],
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> res = json.decode(response.body);
+      if (res['status']) {
+        registerState.value = true;
+      } else {
+        throw Exception('Erreur lors de l\'inscription');
+      }
+    } else {
+      throw Exception('Erreur lors de l\'inscription');
+    }
+  }
+
+  Future<String?> resetPassword(String code, LoginData data) async {
+    final response = await http.post(
+      Uri.parse('$AUTH_SERVER_ADDRESS/reset_password.php'),
+      body: json.encode(data),
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> res = json.decode(response.body);
+      // handle response
+    } else {
+      return('Erreur lors de la réinitialisation du mot de passe');
+    }
+  }
+
+  Future<void> changePassword(Map<String, dynamic> data) async {
+    final response = await http.post(
+      Uri.parse('$AUTH_SERVER_ADDRESS/change_password.php'),
+      body: json.encode(data),
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> res = json.decode(response.body);
+      // handle response
+    } else {
+      throw Exception('Erreur lors de la modification du mot de passe');
+    }
+  }
+
   Future<void> storeUserData(User userData) async {
     try {
       final prefs = await SharedPreferences.getInstance();
