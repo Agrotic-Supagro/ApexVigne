@@ -1,4 +1,4 @@
-import 'package:apex_vigne/pages/loading/loading_page.dart';
+import 'package:apex_vigne/pages/loading/loading.page.dart';
 import 'package:flutter/material.dart';
 import 'color_schemes.g.dart';
 

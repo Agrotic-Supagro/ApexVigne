@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:apex_vigne/pages/profil/profil_page.dart';
+import 'package:apex_vigne/pages/profil/profil.page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

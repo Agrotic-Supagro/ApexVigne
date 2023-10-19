@@ -1,7 +1,7 @@
-import 'package:apex_vigne/pages/home/home_page.dart';
-import 'package:apex_vigne/pages/login/login_page.dart';
+import 'package:apex_vigne/pages/home/home.page.dart';
+import 'package:apex_vigne/pages/login/login.page.dart';
 import 'package:flutter/material.dart';
-import 'package:apex_vigne/services/auth_service.dart';
+import 'package:apex_vigne/services/auth.service.dart';
 
 class LoadingPage extends StatefulWidget {
   @override
