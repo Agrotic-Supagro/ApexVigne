@@ -1,4 +1,3 @@
-// Table name: device_info
 class DeviceInfo {
   late int configId;
   late String deviceModel;
@@ -10,7 +9,33 @@ class DeviceInfo {
   late String idUser;
   late int state;
 
-  Map toJson() => {
+  DeviceInfo({
+    required this.configId,
+    required this.deviceModel,
+    required this.devicePlatform,
+    required this.deviceUuid,
+    required this.deviceVersion,
+    required this.deviceManufacturer,
+    required this.deviceSerial,
+    required this.idUser,
+    required this.state,
+  });
+
+  factory DeviceInfo.fromJson(Map<String, dynamic> json) {
+    return DeviceInfo(
+      configId: json['id_config'],
+      deviceModel: json['device_model'],
+      devicePlatform: json['device_platform'],
+      deviceUuid: json['device_uuid'],
+      deviceVersion: json['device_version'],
+      deviceManufacturer: json['device_manufacturer'],
+      deviceSerial: json['device_serial'],
+      idUser: json['id_utilisateur'],
+      state: json['etat'],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
     'id_config': configId,
     'device_model': deviceModel,
     'device_platform': devicePlatform,

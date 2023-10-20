@@ -1,4 +1,3 @@
-// Table name: observation
 class Observation {
   late int observationId;
   late int apexValue;
@@ -8,7 +7,29 @@ class Observation {
   late String observerId;
   late int state;
 
-  Map toJson() => {
+  Observation({
+    required this.observationId,
+    required this.apexValue,
+    required this.latitude,
+    required this.longitude,
+    required this.sessionId,
+    required this.observerId,
+    required this.state,
+  });
+
+  factory Observation.fromJson(Map<String, dynamic> json) {
+    return Observation(
+      observationId: json['id_observation'],
+      apexValue: json['apex_value'],
+      latitude: json['latitude'],
+      longitude: json['longitude'],
+      sessionId: json['id_session'],
+      observerId: json['id_observateur'],
+      state: json['etat'],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
     'id_observation': observationId,
     'apex_value': apexValue,
     'latitude': latitude,

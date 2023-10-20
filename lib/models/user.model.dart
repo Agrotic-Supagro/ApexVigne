@@ -24,6 +24,19 @@ class User {
   late int ifvModel;
   late int state;
 
+  Map toJson() => {
+    'id_utilisateur': id,
+    'prenom': firstname,
+    'nom': lastname,
+    'email': email,
+    'structure': structure,
+    'date_creation': creationDate,
+    'date_maj': updateDate,
+    'token': token,
+    'model_ifv': ifvModel,
+    'etat': state,
+  };
+
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json['id_utilisateur'],
@@ -38,17 +51,4 @@ class User {
       state: json['etat']
     );
   }
-
-  Map toJson() => {
-    'id_utilisateur': id,
-    'prenom': firstname,
-    'nom': lastname,
-    'email': email,
-    'structure': structure,
-    'date_creation': creationDate,
-    'date_maj': updateDate,
-    'token': token,
-    'model_ifv': ifvModel,
-    'etat': state,
-  };
 }
