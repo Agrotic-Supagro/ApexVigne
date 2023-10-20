@@ -17,6 +17,21 @@ BaseURL: `https://www.agrotic.org/apexv3-sync`
     "mot_de_passe": ""
 }
 ```
+#### Response
+```json
+{
+    "status": true,
+    "message": "",
+    "jwt": "",
+    "data": {
+        "id_utilisateur": "",
+        "prenom": "",
+        "nom": "",
+        "email": "",
+        "structure": ""
+    }
+}
+```
 
 ### Create user: `POST /create_user.php`
 #### Request body
@@ -30,6 +45,8 @@ BaseURL: `https://www.agrotic.org/apexv3-sync`
     "structure": ""
 }
 ```
+#### Response
+```Not tested yet```
 
 ### Reset password: `POST /reset_password.php`
 #### Request body
@@ -39,6 +56,8 @@ BaseURL: `https://www.agrotic.org/apexv3-sync`
     "email": ""
 }
 ```
+#### Response
+```Not tested yet```
 
 ### Change password: `POST /change_password.php`
 #### Request body
@@ -49,6 +68,8 @@ BaseURL: `https://www.agrotic.org/apexv3-sync`
     "idUser": 0
 }
 ```
+#### Response
+```Not tested yet```
 
 > ## Server
 ### Send a mail: `POST /contact.php`
@@ -59,8 +80,10 @@ BaseURL: `https://www.agrotic.org/apexv3-sync`
     "corps_email": ""
 }
 ```
+#### Response
+```Not tested yet```
 
-### Send User data: `POST /send_data.php`
+### Send local data: `POST /send_data.php`
 #### Request body
 ```json
 {
@@ -71,23 +94,36 @@ BaseURL: `https://www.agrotic.org/apexv3-sync`
     "userName": "" // lastName
 }
 ```
+#### Response
+```Not tested yet```
 
-### Send all data: `POST /send_all_data.php`
+### Send all local data: `POST /send_all_data.php`
 #### Request body
 ```json
 {
     "user": "", // lastName
-    "table": null, // loop tables: 'utilisateur_parcelle', 'parcelle', 'session', 'observation', 'device_info'
-    "data": null // data rows item of table when SQL is executed
+    "table": "", // loop tables: utilisateur_parcelle, parcelle, session, observation, device_info
+    "data": [] // data rows item of table when SQL is executed
 }
 ```
+#### Response
+```Not tested yet```
 
 ### Get User data: `POST /retrieve_data.php`
 #### Request body
 ```json
 {
-    "table": null, // loop tables: 'utilisateur_parcelle', 'parcelle', 'session', 'commentaire','session_stadepheno'
+    "table": "", // loop tables: utilisateur_parcelle, parcelle, session, commentaire, session_stadepheno
     "idUser": 0
+}
+```
+#### Response
+```json
+{
+    "status": true,
+    "data": [],
+    "idUser": null,
+    "table": null
 }
 ```
 
@@ -102,6 +138,8 @@ BaseURL: `https://www.agrotic.org/apexv3-sync`
     "email": ""
 }
 ```
+#### Response
+```Not tested yet```
 
 ### Get shared parcel: `POST /sync_parcelle_shared.php`
 #### Request body
@@ -110,15 +148,25 @@ BaseURL: `https://www.agrotic.org/apexv3-sync`
     "idUser": 0
 }
 ```
+#### Response
+```json
+{
+    "status": true,
+    "data": [],
+    "idUser": null
+}
+```
 
 ### Get shared data: `POST /sync_data.php`
 #### Request body
 ```json
 {
-    "table": null, // loop tables: 'utilisateur_parcelle', 'parcelle', 'session', 'observation', 'device_info', 'commentaire', 'session_stadepheno'
-    "data": null // data rows item of table when SQL is executed
+    "table": "", // loop tables: utilisateur_parcelle, parcelle, session, observation, device_info, commentaire, session_stadepheno
+    "data": [] // data rows item of table when SQL is executed
 }
 ```
+#### Response
+```Not tested yet```
 
 ### Update stade pheno: `GET /update_stade_pheno.php`
 #### Request body
