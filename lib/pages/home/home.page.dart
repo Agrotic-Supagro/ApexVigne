@@ -1,14 +1,27 @@
+import 'package:apex_vigne/models/parcel.model.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/pages/profil/profil.page.dart';
+import 'package:apex_vigne/services/server_api.service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  final ServerApiService _apiService = ServerApiService();
+
+  Future<List<Parcel>?> fetchParcelData() async {
+    try {
+      return await _apiService.retrieveUserData("parcelle");
+    } catch (e) {
+      debugPrint('Error fetching parcel data: $e');
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,15 +30,32 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Apex Vigne'),
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Home Page',
-            ),
-          ],
-        ),
+      body: Center(
+        child: FutureBuilder<List<Parcel>?>(
+          future: fetchParcelData(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else if (!snapshot.hasData) {
+              return const Text('No parcel data available');
+            }
+
+            final parcel = snapshot.data!;
+
+            return ListView.builder(
+              itemCount: parcel.length,
+              itemBuilder: (context, index) {
+                final currentParcel = parcel[index];
+                return ListTile(
+                  title: Text(currentParcel.name),
+                  subtitle: const Text('Dernière observation le'),
+                );
+              },
+            );
+          },
+        )
       ),
     );
   }
