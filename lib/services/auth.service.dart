@@ -14,15 +14,14 @@ class AuthenticationService {
 
   /* Methods auth state */
   Future<void> checkToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    final userJson = prefs.getString('user');
-    if (userJson != null) {
-      final user = User.fromJson(jsonDecode(userJson));
-      final token = user.token;
+    final User? user = await userStorage.getData();
+    String? token;
 
-      if (token != null) {
-        authenticationState.value = true;
-      }
+    if (user != null) {
+      token = user.token;
+    }
+    if (token != null) {
+      authenticationState.value = true;
     }
   }
 
@@ -67,11 +66,6 @@ class AuthenticationService {
 
   Future<void> logout(VoidCallback onSuccess) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final userJson = prefs.getString('user');
-      if (userJson == null) {
-        throw Exception('User error');
-      }
       final User? user = await userStorage.getData();
       String? token;
 
