@@ -4,9 +4,11 @@ import 'package:flutter_login/flutter_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../constants.dart';
+import 'package:apex_vigne/constants.dart';
+import 'package:apex_vigne/services/storage.service.dart';
 
 class AuthenticationService {
+  final userStorage = StorageService<User>('user', (json) => User.fromJson(json));
   ValueNotifier<bool> authenticationState = ValueNotifier(false);
   ValueNotifier<bool> registerState = ValueNotifier(false);
 
@@ -25,7 +27,7 @@ class AuthenticationService {
   }
 
   Future<String?> login(LoginData data) async {
-    final response = await http.post(Uri.parse('$AUTH_SERVER_ADDRESS/login.php'),
+    final response = await http.post(Uri.parse('$APEX_VIGNE_API_URL/login.php'),
       headers: {"Content-Type": "application/json"},
       body: json.encode({
         'email': data.name,
@@ -34,9 +36,8 @@ class AuthenticationService {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> res = json.decode(response.body);
-
       if (res['jwt'] == null) {
-        return null; // Échec de la connexion
+        return 'Email ou mot de passe invalide';
       }
 
       final User dataUser = User(
@@ -52,15 +53,15 @@ class AuthenticationService {
         state: 0,
       );
 
-      await storeUserData(dataUser);
+      await userStorage.storeData(dataUser);
       authenticationState.value = true;
-      final User? user = await getUserData();
+      final User? user = await userStorage.getData();
       if (user != null) {
         debugPrint(json.encode(user));
       }
       return null;
     } else {
-      return 'Errer de connexion';
+      return 'Erreur de connexion';
     }
   }
 
@@ -71,53 +72,19 @@ class AuthenticationService {
       if (userJson == null) {
         throw Exception('User error');
       }
-        final user = User.fromJson(jsonDecode(userJson));
-        final token = user.token;
+      final User? user = await userStorage.getData();
+      String? token;
 
+      if (user != null) {
+        token = user.token;
+      }
       if (token != null) {
-        await clearUserData();
+        await userStorage.clearData();
         authenticationState.value = false;
         onSuccess();
       }
     } catch (e) {
       throw Exception('Error during logout: $e');
-    }
-  }
-
-  /* Storage */
-  Future<void> storeUserData(User userData) async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final userJson = jsonEncode(userData.toJson());
-      await prefs.setString('user', userJson);
-    } catch (e) {
-      throw Exception('Erreur lors de la sauvegarde des données utilisateur : $e');
-    }
-  }
-
-  Future<User?> getUserData() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    try {
-      final userJson = prefs.getString('user');
-      if (userJson != null) {
-        final userData = User.fromJson(jsonDecode(userJson));
-        return userData;
-      }
-    } catch (e) {
-      throw Exception('Erreur lors de la récupération des données utilisateur : $e');
-    }
-
-    return null;
-  }
-
-
-  Future<void> clearUserData() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.remove('user');
-    } catch (e) {
-      throw Exception('Error clearing user data: $e');
     }
   }
 }

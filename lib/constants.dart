@@ -1,1 +1,1 @@
-const String AUTH_SERVER_ADDRESS = 'https://www.agrotic.org/apexv3-sync';
+const String APEX_VIGNE_API_URL = 'https://www.agrotic.org/apexv3-sync';
