@@ -109,7 +109,7 @@ BaseURL: `https://www.agrotic.org/apexv3-sync`
 #### Response
 ```Not tested yet```
 
-### Get User data: `POST /retrieve_data.php`
+### Retrieve User data: `POST /retrieve_data.php`
 #### Request body
 ```json
 {
@@ -121,9 +121,16 @@ BaseURL: `https://www.agrotic.org/apexv3-sync`
 ```json
 {
     "status": true,
-    "data": [],
-    "idUser": null,
-    "table": null
+    "data": [
+        {
+            "id_utilisateur": "",
+            "id_parcelle": "",
+            "statut": "",
+            "etat": ""
+        },
+    ],
+    "idUser": "",
+    "table": ""
 }
 ```
 
