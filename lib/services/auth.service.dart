@@ -45,10 +45,10 @@ class AuthenticationService {
         lastname: res['data']['nom'],
         email: res['data']['email'].toLowerCase(),
         structure: res['data']['structure'],
-        dateCreation: 0,
-        dateMaj: 0,
+        creationDate: 0,
+        updateDate: 0,
         token: res['jwt'],
-        modelIfv: 0,
+        ifvModel: 0,
         state: 0,
       );
 

@@ -6,10 +6,10 @@ class User {
     required this.lastname,
     required this.email,
     required this.structure,
-    required this.dateCreation,
-    required this.dateMaj,
+    required this.creationDate,
+    required this.updateDate,
     required this.token,
-    required this.modelIfv,
+    required this.ifvModel,
     required this.state,
   });
 
@@ -18,10 +18,10 @@ class User {
   late String lastname;
   late String email;
   late String structure;
-  late int dateCreation;
-  late int dateMaj;
+  late int creationDate;
+  late int updateDate;
   late String? token;
-  late int modelIfv;
+  late int ifvModel;
   late int state;
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -31,10 +31,10 @@ class User {
       lastname: json['nom'],
       email: json['email'],
       structure: json['structure'],
-      dateCreation: json['date_creation'],
-      dateMaj: json['date_maj'],
+      creationDate: json['date_creation'],
+      updateDate: json['date_maj'],
       token: json['token'],
-      modelIfv: json['model_ifv'],
+      ifvModel: json['model_ifv'],
       state: json['etat']
     );
   }
@@ -45,10 +45,10 @@ class User {
     'nom': lastname,
     'email': email,
     'structure': structure,
-    'date_creation': dateCreation,
-    'date_maj': dateMaj,
+    'date_creation': creationDate,
+    'date_maj': updateDate,
     'token': token,
-    'model_ifv': modelIfv,
+    'model_ifv': ifvModel,
     'etat': state,
   };
 }
