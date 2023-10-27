@@ -1,20 +1,20 @@
 class Session {
   late String id;
-  late int creationDate;
-  late int updateDate;
-  late int sessionDate;
-  late int apex0;
-  late int apex1;
-  late int apex2;
+  late String creationDate;
+  late String sessionDate;
+  late String updateDate;
+  late String apex0;
+  late String apex1;
+  late String apex2;
   late String observerId;
   late String parcelId;
-  late int state;
+  late String state;
 
   Session({
     required this.id,
     required this.creationDate,
-    required this.updateDate,
     required this.sessionDate,
+    required this.updateDate,
     required this.apex0,
     required this.apex1,
     required this.apex2,
@@ -27,8 +27,8 @@ class Session {
     return Session(
       id: json['id_session'],
       creationDate: json['date_creation'],
-      updateDate: json['date_maj'],
       sessionDate: json['date_session'],
+      updateDate: json['date_maj'],
       apex0: json['apex0'],
       apex1: json['apex1'],
       apex2: json['apex2'],

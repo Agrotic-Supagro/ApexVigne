@@ -2,6 +2,7 @@ import 'package:apex_vigne/pages/home/home.page.dart';
 import 'package:apex_vigne/pages/login/login.page.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/services/auth.service.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class LoadingPage extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   void initState() {
     super.initState();
+    initializeDateFormatting();
     _initializeApp();
   }
 
