@@ -1,7 +1,6 @@
 import 'package:apex_vigne/models/user.model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_login/flutter_login.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:apex_vigne/constants.dart';
