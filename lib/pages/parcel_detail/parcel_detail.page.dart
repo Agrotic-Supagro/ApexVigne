@@ -1,6 +1,6 @@
 import 'package:apex_vigne/models/parcel.model.dart';
 import 'package:apex_vigne/models/session.model.dart';
-import 'package:apex_vigne/pages/new_session/new_session.page.dart';
+import 'package:apex_vigne/pages/create_update_session/create_update_session.page.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -56,7 +56,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
             text: 'Nouvelle Session',
             callback: () => {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const NewSession(
+                    builder: (context) => CreateUpdateSession(
                       title: 'Nouvelle session',
                     ),
                   ))
