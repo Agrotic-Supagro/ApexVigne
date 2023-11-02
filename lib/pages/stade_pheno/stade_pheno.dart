@@ -1,8 +1,4 @@
-import 'package:apex_vigne/pages/manage_session/widgets/card_apex_button.widget.dart';
-import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:material_symbols_icons/symbols.dart';
 
 class StadePheno extends StatefulWidget {
   const StadePheno(

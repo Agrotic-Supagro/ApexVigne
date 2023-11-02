@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 import 'package:apex_vigne/models/user.model.dart';
 import 'package:apex_vigne/constants.dart';
 import 'package:apex_vigne/services/storage.service.dart';
-import 'package:intl/intl.dart';
 
 
 class AuthenticationService {
