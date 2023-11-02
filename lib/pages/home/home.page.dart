@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -165,14 +165,15 @@ class _HomePageState extends State<HomePage> {
               final currentSessionsParcel = _sessions
                   ?.where((session) => session.parcelId == currentParcel.id)
                   .toList();
+              String lastSession = '';
               currentSessionsParcel?.sort((a, b) {
                 final aDate = DateTime.parse(a.sessionDate);
                 final bDate = DateTime.parse(b.sessionDate);
                 return bDate.compareTo(aDate);
               });
-              final String lastSession = currentSessionsParcel!.isNotEmpty
-                  ? 'Dernière observation le ${_formatDate(currentSessionsParcel.first.sessionDate)}'
-                  : '';
+              if (currentSessionsParcel != null && currentSessionsParcel.isNotEmpty) {
+                lastSession = 'Dernière observation le ${_formatDate(currentSessionsParcel.first.sessionDate)}';
+              }
               return ListTile(
                 title: Text(currentParcel.name),
                 subtitle: Text(lastSession),

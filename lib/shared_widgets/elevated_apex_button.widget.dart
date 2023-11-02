@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class ElevatedApexButton extends StatelessWidget {
   const ElevatedApexButton(
-      {super.key, this.icon, this.text, required this.callback});
+      {super.key, this.icon, this.text, this.callback});
 
   final IconData? icon;
   final String? text;
-  final VoidCallback callback;
+  final VoidCallback? callback;
 
   @override
   Widget build(BuildContext context) {

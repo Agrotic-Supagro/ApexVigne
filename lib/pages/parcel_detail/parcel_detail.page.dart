@@ -1,7 +1,7 @@
 import 'package:apex_vigne/models/parcel.model.dart';
 import 'package:apex_vigne/models/session.model.dart';
 import 'package:apex_vigne/pages/new_session/new_session.page.dart';
-import 'package:apex_vigne/widgets/elevated_apex_button.widget.dart';
+import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -14,7 +14,7 @@ class ParcelDetailPage extends StatefulWidget {
       {super.key, required this.parcel, required this.sessions});
 
   @override
-  _ParcelDetailPageState createState() => _ParcelDetailPageState();
+  State<ParcelDetailPage> createState() => _ParcelDetailPageState();
 }
 
 class _ParcelDetailPageState extends State<ParcelDetailPage> {
@@ -53,8 +53,15 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
           ElevatedApexButton(icon: Symbols.cut, callback: () => {}),
           const SizedBox(width: 10),
           ElevatedApexButton(
-              text: 'Nouvelle Session',
-              callback: () => {})
+            text: 'Nouvelle Session',
+            callback: () => {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const NewSession(
+                      title: 'Nouvelle session',
+                    ),
+                  ))
+                }
+            ),
         ],
       ),
     );

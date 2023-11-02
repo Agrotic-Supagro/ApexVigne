@@ -6,7 +6,7 @@ import 'package:intl/date_symbol_data_local.dart';
 
 class LoadingPage extends StatefulWidget {
   @override
-  _LoadingPageState createState() => _LoadingPageState();
+  State<LoadingPage> createState() => _LoadingPageState();
 }
 
 class _LoadingPageState extends State<LoadingPage> {
