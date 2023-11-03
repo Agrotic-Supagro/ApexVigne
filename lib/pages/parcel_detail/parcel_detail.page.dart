@@ -56,8 +56,8 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
           ElevatedApexButton(
             text: 'Nouvelle Session',
             callback: () => {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => CreateUpdateSession(
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const CreateUpdateSession(
                       title: 'Nouvelle session',
                     ),
                   ))

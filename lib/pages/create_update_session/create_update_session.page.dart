@@ -1,8 +1,10 @@
 import 'package:apex_vigne/pages/create_update_session/widgets/card_apex_button.widget.dart';
+import 'package:apex_vigne/pages/stade_pheno/stade_pheno.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:vibration/vibration.dart';
 
 class CreateUpdateSession extends StatefulWidget {
   const CreateUpdateSession(
@@ -57,18 +59,25 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(context),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child:
-            Column(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
-          _buildOutlinedButtons(),
-          const SizedBox(height: 30),
-          _buildCardApexButtons(),
-          const SizedBox(height: 15),
-          _buildBottomSection(),
-        ]),
+    return WillPopScope(
+      onWillPop: () async {
+        _showExitConfirmationDialog();
+        return false;
+      },
+      child: Scaffold(
+        appBar: _buildAppBar(context),
+        body: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                _buildOutlinedButtons(),
+                const SizedBox(height: 30),
+                _buildCardApexButtons(),
+                const SizedBox(height: 15),
+                _buildBottomSection(),
+              ]),
+        ),
       ),
     );
   }
@@ -116,7 +125,13 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
           ),
           const SizedBox(width: 10),
           OutlinedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) {
+                  return const StadePheno();
+                },
+              ));
+            },
             child: const Text('Choix du stade'),
           ),
         ],
@@ -132,16 +147,64 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
       });
     }
 
+    void editCount(int buttonIndex) {
+      final TextEditingController countController = TextEditingController();
+      countController.text = _counts[buttonIndex].toString();
+      Vibration.vibrate(duration: 10);
+
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Éditer le nombre'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                TextField(
+                  controller: countController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(labelText: 'Nombre'),
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Annuler'),
+              ),
+              TextButton(
+                onPressed: () {
+                  final newCount = int.tryParse(countController.text);
+                  if (newCount != null) {
+                    setState(() {
+                      _counts[buttonIndex] = newCount;
+                    });
+                  }
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Sauvegarder'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Expanded(
       child: Column(
         children: <Widget>[
           CardApexButton(
               imgPath: 'assets/img/full_growth.jpg',
               text: 'Pleine croissance',
-              onPressed: () {
+              onPressed: () async {
                 incrementCount(0);
+                Vibration.vibrate(duration: 300);
               },
-              onLongPressed: () {},
+              onLongPressed: () {
+                editCount(0);
+              },
               count: _counts[0]),
           const SizedBox(height: 10),
           CardApexButton(
@@ -149,8 +212,11 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
               text: 'Croissance ralentie',
               onPressed: () {
                 incrementCount(1);
+                Vibration.vibrate(duration: 150);
               },
-              onLongPressed: () {},
+              onLongPressed: () {
+                editCount(1);
+              },
               count: _counts[1]),
           const SizedBox(height: 10),
           CardApexButton(
@@ -158,8 +224,11 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
               text: 'Arrêt de croissance',
               onPressed: () {
                 incrementCount(2);
+                Vibration.vibrate(duration: 40);
               },
-              onLongPressed: () {},
+              onLongPressed: () {
+                editCount(2);
+              },
               count: _counts[2]),
         ],
       ),
@@ -169,6 +238,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
   Expanded _buildBottomSection() {
     void undoLastAction() {
       if (_countsHistory.isNotEmpty) {
+        Vibration.vibrate(duration: 10);
         setState(() {
           _counts[_countsHistory.removeLast()]--;
         });
@@ -226,7 +296,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
                 borderRadius: BorderRadius.circular(16),
                 color: Colors.grey.shade100),
             child: Text(
-              '${_countsHistory.length}/50',
+              '${_counts.reduce((firstValue, secondValue) => firstValue + secondValue)}/50',
               style: const TextStyle(letterSpacing: 1.5),
             ),
           ),
@@ -244,7 +314,11 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
               const SizedBox(width: 10),
               ElevatedApexButton(
                   text: 'Terminer la session',
-                  callback: _countsHistory.length < 50 ? null : () {}),
+                  callback: _counts.reduce((firstValue, secondValue) =>
+                              firstValue + secondValue) <
+                          50
+                      ? null
+                      : () {}),
               const SizedBox(width: 10),
               ElevatedApexButton(
                   icon: Symbols.article,

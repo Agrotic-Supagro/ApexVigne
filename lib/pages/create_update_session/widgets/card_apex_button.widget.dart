@@ -57,7 +57,7 @@ class CardApexButton extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onLongPress: () {},
+                    onLongPress: onLongPressed,
                     onPressed: onPressed,
                     child: ClipOval(
                       child: Container(
