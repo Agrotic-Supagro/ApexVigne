@@ -118,32 +118,40 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          OutlinedButton.icon(
-            onPressed: () {
-              selectDate(context);
-            },
-            label: Text(DateFormat.MMMMd('fr').format(_selectedDate)),
-            icon: const Icon(Symbols.date_range),
+          Expanded(
+            flex: 3,
+            child: OutlinedButton.icon(
+              onPressed: () {
+                selectDate(context);
+              },
+              label: Text(DateFormat.MMMMd('fr').format(_selectedDate)),
+              icon: const Icon(Symbols.date_range),
+            ),
           ),
           const SizedBox(width: 10),
-          OutlinedButton(
-            onPressed: () async {
-              final selectedStadeId =
-                  await Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) {
-                  return const StadePheno();
-                },
-              ));
-
-              if (selectedStadeId != null) {
-                setState(() {
-                  _stadeId = selectedStadeId;
-                });
-              }
-            },
-            child: Text(_stadeId == -1
-                ? 'Choix du stade'
-                : stadesPheno[_stadeId]['name']),
+          Expanded(
+            flex: 4,
+            child: OutlinedButton(
+              onPressed: () async {
+                final selectedStadeId =
+                    await Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) {
+                    return const StadePheno();
+                  },
+                ));
+                if (selectedStadeId != null) {
+                  setState(() {
+                    _stadeId = selectedStadeId;
+                  });
+                }
+              },
+              child: Text(
+                _stadeId == -1
+                    ? 'Choix du stade'
+                    : stadesPheno[_stadeId]['name'],
+                style: const TextStyle(overflow: TextOverflow.ellipsis),
+              ),
+            ),
           ),
         ],
       ),
