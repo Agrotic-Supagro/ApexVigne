@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -115,13 +115,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       drawer: const DrawerApexVigne(),
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
         title: const Text('Apex Vigne'),
         actions: <Widget>[
           PopupMenuButton(
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(15.0))),
-            icon: const Icon(Symbols.tune),
+            icon: const Icon(Symbols.sort),
             onSelected: (selectedValue) {
               setState(() {
                 _sortingOption = selectedValue;
@@ -155,24 +156,25 @@ class _HomePageState extends State<HomePage> {
             return const Text('No parcel data available');
           }
 
-          final parcel = snapshot.data!;
+          final parcels = snapshot.data!;
+          final sortedParcels = _sortParcels(parcels);
 
           return ListView.builder(
-            itemCount: parcel.length,
+            itemCount: parcels.length,
             itemBuilder: (context, index) {
-              final sortedParcels = _sortParcels(parcel);
               final currentParcel = sortedParcels[index];
               final currentSessionsParcel = _sessions
                   ?.where((session) => session.parcelId == currentParcel.id)
                   .toList();
+              String lastSession = '';
               currentSessionsParcel?.sort((a, b) {
                 final aDate = DateTime.parse(a.sessionDate);
                 final bDate = DateTime.parse(b.sessionDate);
                 return bDate.compareTo(aDate);
               });
-              final String lastSession = currentSessionsParcel!.isNotEmpty
-                  ? 'Dernière observation le ${_formatDate(currentSessionsParcel.first.sessionDate)}'
-                  : '';
+              if (currentSessionsParcel != null && currentSessionsParcel.isNotEmpty) {
+                lastSession = 'Dernière observation le ${_formatDate(currentSessionsParcel.first.sessionDate)}';
+              }
               return ListTile(
                 title: Text(currentParcel.name),
                 subtitle: Text(lastSession),
@@ -208,9 +210,9 @@ class DrawerApexVigne extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.inversePrimary,
+              color: Theme.of(context).colorScheme.primary,
             ),
-            child: const Text('Menu'),
+            child: Text('Menu', style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)),
           ),
           ListTile(
             title: const Text('Profile'),
