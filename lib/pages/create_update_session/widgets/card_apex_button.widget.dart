@@ -61,18 +61,19 @@ class CardApexButton extends StatelessWidget {
                     onPressed: onPressed,
                     child: ClipOval(
                       child: Container(
-                        width: 50,
-                        height: 50,
+                        width: 60,
+                        height: 60,
                         color: Theme.of(context).colorScheme.primary,
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Center(
-                            child: Text(
-                              count.toString(),
-                              style: const TextStyle(
-                                color: Colors.white, // Couleur du texte
-                              ),
-                            ),
+                            child: Text(count.toString(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge!
+                                    .copyWith(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
                           ),
                         ),
                       ),

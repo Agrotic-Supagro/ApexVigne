@@ -28,7 +28,8 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
         title: Text(widget.parcel.name),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
