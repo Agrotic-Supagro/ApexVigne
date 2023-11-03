@@ -1,3 +1,4 @@
+import 'package:apex_vigne/pages/stade_pheno/widgets/tile_apex_button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/constants.dart';
 
@@ -18,14 +19,26 @@ class _StadePhenoState extends State<StadePheno> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: const Padding(
-        padding: EdgeInsets.all(20),
-        child: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('Stade pheno page'),
-              ]),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Expanded(
+              child: ListView.builder(
+                itemCount: stadesPheno.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final stadePheno = stadesPheno[index];
+                  return TileApexButton(
+                    stadePheno: stadePheno,
+                    onPressed: () {
+                      Navigator.of(context).pop(index);
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -39,7 +52,7 @@ class _StadePhenoState extends State<StadePheno> {
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
-          Navigator.of(context).pop();
+          Navigator.of(context).pop(-1);
         },
       ),
     );

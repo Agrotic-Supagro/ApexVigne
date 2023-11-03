@@ -1,3 +1,4 @@
+import 'package:apex_vigne/constants.dart';
 import 'package:apex_vigne/pages/create_update_session/widgets/card_apex_button.widget.dart';
 import 'package:apex_vigne/pages/stade_pheno/stade_pheno.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
@@ -22,6 +23,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
   final List<int> _countsHistory = [];
   late DateTime _selectedDate;
   late String _notesText;
+  int _stadeId = -1;
 
   @override
   void initState() {
@@ -36,7 +38,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
       builder: (context) {
         return AlertDialog(
           title: const Text('Quitter la session'),
-          content: const Text('L\'observation ne sera pas sauvegarder'),
+          content: const Text('La session ne sera pas sauvegardée'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
@@ -125,14 +127,23 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
           ),
           const SizedBox(width: 10),
           OutlinedButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
+            onPressed: () async {
+              final selectedStadeId =
+                  await Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) {
                   return const StadePheno();
                 },
               ));
+
+              if (selectedStadeId != null) {
+                setState(() {
+                  _stadeId = selectedStadeId;
+                });
+              }
             },
-            child: const Text('Choix du stade'),
+            child: Text(_stadeId == -1
+                ? 'Choix du stade'
+                : stadesPheno[_stadeId]['name']),
           ),
         ],
       ),
