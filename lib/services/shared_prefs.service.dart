@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class StorageService<T> {
+class SharedPrefsService<T> {
   final String _key;
   final T Function(Map<String, dynamic>) fromJson; // Fonction pour désérialiser
 
-  StorageService(this._key, this.fromJson);
+  SharedPrefsService(this._key, this.fromJson);
 
   Future<void> storeData(T data) async {
     try {

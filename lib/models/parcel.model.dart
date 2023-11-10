@@ -1,4 +1,4 @@
-class Parcel {
+class ParcelModel {
   late String id;
   late String name;
   late String creationDate;
@@ -6,7 +6,7 @@ class Parcel {
   late String ownerId;
   late String state;
 
-  Parcel({
+  ParcelModel({
     required this.id,
     required this.name,
     required this.creationDate,
@@ -15,8 +15,8 @@ class Parcel {
     required this.state,
   });
 
-  factory Parcel.fromJson(Map<String, dynamic> json) {
-    return Parcel(
+  factory ParcelModel.fromJson(Map<String, dynamic> json) {
+    return ParcelModel(
       id: json['id_parcelle'],
       name: json['nom_parcelle'],
       creationDate: json['date_creation'],

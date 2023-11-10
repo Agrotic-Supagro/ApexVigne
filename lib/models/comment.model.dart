@@ -1,18 +1,18 @@
-class Comment {
+class CommentModel {
   late int id;
   late String text;
   late String sessionId;
   late int state;
 
-  Comment({
+  CommentModel({
     required this.id,
     required this.text,
     required this.sessionId,
     required this.state,
   });
 
-  factory Comment.fromJson(Map<String, dynamic> json) {
-    return Comment(
+  factory CommentModel.fromJson(Map<String, dynamic> json) {
+    return CommentModel(
       id: json['id_comm'],
       text: json['txt_comm'],
       sessionId: json['id_session'],
