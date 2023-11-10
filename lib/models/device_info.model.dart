@@ -1,4 +1,4 @@
-class DeviceInfo {
+class DeviceInfoModel {
   late int configId;
   late String deviceModel;
   late String devicePlatform;
@@ -9,7 +9,7 @@ class DeviceInfo {
   late String idUser;
   late int state;
 
-  DeviceInfo({
+  DeviceInfoModel({
     required this.configId,
     required this.deviceModel,
     required this.devicePlatform,
@@ -21,8 +21,8 @@ class DeviceInfo {
     required this.state,
   });
 
-  factory DeviceInfo.fromJson(Map<String, dynamic> json) {
-    return DeviceInfo(
+  factory DeviceInfoModel.fromJson(Map<String, dynamic> json) {
+    return DeviceInfoModel(
       configId: json['id_config'],
       deviceModel: json['device_model'],
       devicePlatform: json['device_platform'],

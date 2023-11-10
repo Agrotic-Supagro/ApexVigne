@@ -1,11 +1,11 @@
-class StadePheno {
+class StadePhenoModel {
   late String id;
   late String name;
   late String summary;
   late String description;
   late String imageUrl;
 
-  StadePheno({
+  StadePhenoModel({
     required this.id,
     required this.name,
     required this.summary,
@@ -13,8 +13,8 @@ class StadePheno {
     required this.imageUrl,
   });
 
-  factory StadePheno.fromJson(Map<String, dynamic> json) {
-    return StadePheno(
+  factory StadePhenoModel.fromJson(Map<String, dynamic> json) {
+    return StadePhenoModel(
       id: json['id_stade'],
       name: json['nom'],
       summary: json['resume'],

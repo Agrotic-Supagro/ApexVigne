@@ -1,4 +1,4 @@
-class Session {
+class SessionModel {
   late String id;
   late String creationDate;
   late String sessionDate;
@@ -10,7 +10,7 @@ class Session {
   late String parcelId;
   late String state;
 
-  Session({
+  SessionModel({
     required this.id,
     required this.creationDate,
     required this.sessionDate,
@@ -23,8 +23,8 @@ class Session {
     required this.state,
   });
 
-  factory Session.fromJson(Map<String, dynamic> json) {
-    return Session(
+  factory SessionModel.fromJson(Map<String, dynamic> json) {
+    return SessionModel(
       id: json['id_session'],
       creationDate: json['date_creation'],
       sessionDate: json['date_session'],

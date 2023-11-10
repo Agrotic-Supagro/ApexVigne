@@ -1,16 +1,16 @@
-class SessionStadePheno {
+class SessionStadePhenoModel {
   late String sessionId;
   late String stadeId;
   late int state;
 
-  SessionStadePheno({
+  SessionStadePhenoModel({
     required this.sessionId,
     required this.stadeId,
     required this.state,
   });
 
-  factory SessionStadePheno.fromJson(Map<String, dynamic> json) {
-    return SessionStadePheno(
+  factory SessionStadePhenoModel.fromJson(Map<String, dynamic> json) {
+    return SessionStadePhenoModel(
       sessionId: json['id_session'],
       stadeId: json['id_stade'],
       state: json['etat'],
