@@ -1,4 +1,8 @@
+import 'package:apex_vigne/models/user.model.dart';
 import 'package:apex_vigne/pages/login/login.page.dart';
+import 'package:apex_vigne/pages/profil/widgets/list_tile.widget.dart';
+import 'package:apex_vigne/services/storage.service.dart';
+import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 
@@ -11,6 +15,8 @@ class ProfilPage extends StatefulWidget {
 
 class _ProfilPageState extends State<ProfilPage> {
   final AuthenticationService auth = AuthenticationService();
+  final userStorage = StorageService<User>('user', (json) => User.fromJson(json));
+  User? currentUserProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -20,24 +26,57 @@ class _ProfilPageState extends State<ProfilPage> {
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         title: const Text('Profile'),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text(
-              'Profil Page',
-            ),
-            TextButton(
-              onPressed: () {
-                auth.logout(() {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const LoginPage(),
-                  ));
-                });
-              },
-              child: const Text('Logout'),
-            ),
+            Text('INFORMATION DE MON COMPTE', style: Theme.of(context).textTheme.labelMedium!.copyWith(letterSpacing: 1.2)),
+            const SizedBox(height: 20),
+            Expanded(
+              child: FutureBuilder<User?>(
+                future: userStorage.getData(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text(
+                        'Une erreur est survenue lors de la récupération de vos informations',
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                    );
+                  }
+                  currentUserProfile = snapshot.data;
 
+                  return ListView(
+                    children: <Widget>[
+                      ListTileInfo(text: 'Prénom', info: currentUserProfile?.firstname),
+                      Divider(color: Colors.grey[200]),
+                      ListTileInfo(text: 'Nom', info: currentUserProfile?.lastname),
+                      Divider(color: Colors.grey[200]),
+                      ListTileInfo(text: 'Email', info: currentUserProfile?.email),
+                      Divider(color: Colors.grey[200]),
+                      ListTileInfo(text: 'Structure', info: currentUserProfile?.structure),
+                    ],
+                  );
+                }
+              ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedApexButton(
+                callback: () {
+                  auth.logout(() {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    ));
+                  });
+                },
+                text: 'Se déconnecter',
+              ),
+            ),
           ],
         ),
       ),
