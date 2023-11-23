@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final IsarService _isarService = IsarService();
   String _sortingOption = 'Du plus récent au plus ancien';
+  final ServerApiService _apiService = ServerApiService();
 
   List<Parcel> _sortParcels(List<Parcel> parcels, List<Session> sessions) {
     switch (_sortingOption) {
