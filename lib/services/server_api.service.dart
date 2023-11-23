@@ -12,8 +12,7 @@ import 'package:apex_vigne/models/user_parcel.model.dart';
 import 'package:apex_vigne/models/user.model.dart';
 
 class ServerApiService {
-  final userStorage =
-      SharedPrefsService<UserModel>('user', (json) => UserModel.fromJson(json));
+  final userStorage = SharedPrefsService<UserModel>('user', (json) => UserModel.fromJson(json));
 
   // Send a mail
   static Future<void> sendMail(String email, String corpsEmail) async {
@@ -73,7 +72,7 @@ class ServerApiService {
     if (response.statusCode == 200) {
       final Map<String, dynamic> res = json.decode(response.body);
       IsarService isarService = IsarService();
-      isarService.saveData(table, res);
+      await isarService.saveData(table, res);
     } else {
       throw Exception('Failed to retrieve user data');
     }
