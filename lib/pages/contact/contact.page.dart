@@ -1,6 +1,5 @@
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:apex_vigne/constants.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({super.key});
