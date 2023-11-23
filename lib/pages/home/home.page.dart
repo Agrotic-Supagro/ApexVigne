@@ -1,9 +1,9 @@
 import 'package:apex_vigne/collections/parcel.collection.dart';
 import 'package:apex_vigne/collections/session.collection.dart';
+import 'package:apex_vigne/pages/home/widgets/drawer_apex_vigne.widget.dart';
 import 'package:apex_vigne/pages/parcel_detail/parcel_detail.page.dart';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:flutter/material.dart';
-import 'package:apex_vigne/pages/profil/profil.page.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:intl/intl.dart';
 
@@ -176,40 +176,6 @@ class _HomePageState extends State<HomePage> {
           );
         },
       )),
-    );
-  }
-}
-
-class DrawerApexVigne extends StatelessWidget {
-  const DrawerApexVigne({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            child: Text('Menu', style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)),
-          ),
-          ListTile(
-            title: const Text('Profile'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const ProfilPage(),
-                ),
-              );
-            },
-          ),
-        ],
-      ),
     );
   }
 }
