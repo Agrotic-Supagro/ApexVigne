@@ -26,6 +26,22 @@ class AuthenticationService {
     }
   }
 
+  /* Check connection */
+  Future<bool> checkConnection() async {
+    final url = Uri.parse(APEX_VIGNE_API_URL);
+
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      throw Exception('Failed to connect to server');
+    }
+  }
+
   Future<String?> login(LoginData data) async {
     final response = await http.post(Uri.parse('$APEX_VIGNE_API_URL/login.php'),
       headers: {"Content-Type": "application/json"},

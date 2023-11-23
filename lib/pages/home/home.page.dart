@@ -4,7 +4,6 @@ import 'package:apex_vigne/pages/parcel_detail/parcel_detail.page.dart';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/pages/profil/profil.page.dart';
-import 'package:apex_vigne/services/server_api.service.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:intl/intl.dart';
 
@@ -19,17 +18,6 @@ class _HomePageState extends State<HomePage> {
   final IsarService _isarService = IsarService();
   String _sortingOption = 'Du plus récent au plus ancien';
   final ServerApiService _apiService = ServerApiService();
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchDataServer();
-  }
-
-  Future<void> _fetchDataServer() async {
-    await _apiService.retrieveData('parcelle');
-    await _apiService.retrieveData('session');
-  }
 
   List<Parcel> _sortParcels(List<Parcel> parcels, List<Session> sessions) {
     switch (_sortingOption) {

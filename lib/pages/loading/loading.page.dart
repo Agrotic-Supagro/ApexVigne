@@ -1,5 +1,6 @@
 import 'package:apex_vigne/pages/home/home.page.dart';
 import 'package:apex_vigne/pages/login/login.page.dart';
+import 'package:apex_vigne/services/server_api.service.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -12,7 +13,9 @@ class LoadingPage extends StatefulWidget {
 }
 
 class _LoadingPageState extends State<LoadingPage> {
-  final AuthenticationService authService = AuthenticationService();
+  final AuthenticationService _authService = AuthenticationService();
+  final ServerApiService _apiService = ServerApiService();
+  String _stepLoadingText = 'Chargement...';
 
   @override
   void initState() {
@@ -22,29 +25,97 @@ class _LoadingPageState extends State<LoadingPage> {
   }
 
   Future<void> _initializeApp() async {
-    await Future.delayed(const Duration(seconds: 1));
     if (!context.mounted) return;
 
-    await authService.checkToken();
-    if (!context.mounted) return;
+    _updateStepLoadingText('Vérification de l\'utilisateur...');
+    await _authService.checkToken();
 
-    if (authService.authenticationState.value) {
+    if (_authService.authenticationState.value) {
+      _updateStepLoadingText('Connexion au serveur...');
+      final bool isConnected = await _authService.checkConnection();
+      if (isConnected) {
+        await _fetchDataServer();
+      } else {
+        _updateStepLoadingText('Lancemenent en mode hors ligne...');
+      }
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => const HomePage(),
       ));
     } else {
+      _updateStepLoadingText('Authentification requise...');
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => const LoginPage(),
       ));
     }
   }
 
+  void _updateStepLoadingText(String newText) {
+    setState(() {
+      _stepLoadingText = newText;
+    });
+  }
+
+  Future<void> _fetchDataServer() async {
+    _updateStepLoadingText('Chargement des parcelles...');
+    await _apiService.retrieveData('parcelle');
+    _updateStepLoadingText('Chargement des sessions...');
+    await _apiService.retrieveData('session');
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child:
-            CircularProgressIndicator(),
+    return Scaffold(
+      // change colot status bar
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+      ),
+      body: SafeArea(
+        child: Container(
+          color: Theme.of(context).colorScheme.primary,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Image(
+                    image: AssetImage('assets/img/logo/logo_apex_vigne.png'),
+                    fit: BoxFit.cover,
+                    width: 180),
+                Column(
+                  children: [
+                    const SizedBox(height: 50),
+                    const CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
+                    const SizedBox(height: 30),
+                    Text(
+                      _stepLoadingText,
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Colors.white,
+                          letterSpacing: 1.2,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 50),
+                  child: Column(
+                    children: [
+                      Image(
+                          image: AssetImage('assets/img/logo/logo_ifv.png'),
+                          fit: BoxFit.cover,
+                          width: 280),
+                      SizedBox(height: 50),
+                      Image(
+                          image: AssetImage('assets/img/logo/logo_iam.png'),
+                          fit: BoxFit.cover,
+                          width: 280),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
