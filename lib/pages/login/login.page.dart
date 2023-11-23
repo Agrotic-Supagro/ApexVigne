@@ -16,7 +16,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
-      title: 'Apex Vigne',
+      title: 'ApeX Vigne',
+      logo: 'assets/img/logo/logo_apex_vigne.png',
       onLogin: auth.login,
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -34,7 +35,6 @@ class _LoginPageState extends State<LoginPage> {
           fontWeight: FontWeight.w700,
           letterSpacing: 6.4,
         ),
-        pageColorLight: Theme.of(context).colorScheme.surfaceVariant,
         inputTheme: InputDecorationTheme(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),

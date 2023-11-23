@@ -36,5 +36,6 @@ flutter:
   assets:
   - assets/
   - assets/img/
+  - assets/img/logo/
   - assets/img/stades_phenologique/
 

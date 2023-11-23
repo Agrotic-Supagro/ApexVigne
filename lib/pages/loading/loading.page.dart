@@ -53,10 +53,13 @@ class _LoadingPageState extends State<LoadingPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Image(
-                    image: AssetImage('assets/img/logo_apex_vigne.png'),
-                    fit: BoxFit.cover,
-                    width: 180),
+                const Hero(
+                  tag: 'logo',
+                  child: Image(
+                      image: AssetImage('assets/img/logo/logo_apex_vigne.png'),
+                      fit: BoxFit.cover,
+                      width: 180),
+                ),
                 Column(
                   children: [
                     const SizedBox(height: 50),
@@ -77,12 +80,12 @@ class _LoadingPageState extends State<LoadingPage> {
                   child: Column(
                     children: [
                       Image(
-                          image: AssetImage('assets/img/logo_ifv.png'),
+                          image: AssetImage('assets/img/logo/logo_ifv.png'),
                           fit: BoxFit.cover,
                           width: 280),
                       SizedBox(height: 50),
                       Image(
-                          image: AssetImage('assets/img/logo_iam.png'),
+                          image: AssetImage('assets/img/logo/logo_iam.png'),
                           fit: BoxFit.cover,
                           width: 280),
                     ],
