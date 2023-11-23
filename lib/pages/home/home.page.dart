@@ -24,7 +24,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _fetchDataServer();
-    _isarService.deleteAllData();
   }
 
   Future<void> _fetchDataServer() async {
