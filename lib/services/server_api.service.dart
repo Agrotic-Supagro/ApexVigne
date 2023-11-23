@@ -1,16 +1,19 @@
 import 'dart:convert';
-import 'package:apex_vigne/models/comment.model.dart';
-import 'package:apex_vigne/models/session.model.dart';
+import 'package:apex_vigne/models/parcel.model.dart';
 import 'package:apex_vigne/models/session_stade.model.dart';
-import 'package:apex_vigne/models/user_parcel.model.dart';
-import 'package:apex_vigne/services/storage.service.dart';
+import 'package:apex_vigne/services/isar.service.dart';
 import 'package:http/http.dart' as http;
 import 'package:apex_vigne/constants.dart';
+import 'package:apex_vigne/services/shared_prefs.service.dart';
+
+import 'package:apex_vigne/models/comment.model.dart';
+import 'package:apex_vigne/models/session.model.dart';
+import 'package:apex_vigne/models/user_parcel.model.dart';
 import 'package:apex_vigne/models/user.model.dart';
-import 'package:apex_vigne/models/parcel.model.dart';
 
 class ServerApiService {
-  final userStorage = StorageService<User>('user', (json) => User.fromJson(json));
+  final userStorage =
+      SharedPrefsService<UserModel>('user', (json) => UserModel.fromJson(json));
 
   // Send a mail
   static Future<void> sendMail(String email, String corpsEmail) async {
@@ -21,7 +24,7 @@ class ServerApiService {
     };
 
     final response = await http.post(url, body: json.encode(body));
-    
+
     // Handle the response
   }
 
@@ -42,7 +45,8 @@ class ServerApiService {
   }
 
   // Send all local data
-  static Future<void> sendAllLocalData(String user, String table, List<Map<String, dynamic>> data) async {
+  static Future<void> sendAllLocalData(
+      String user, String table, List<Map<String, dynamic>> data) async {
     final url = Uri.parse('$APEX_VIGNE_API_URL/send_all_data.php');
     final body = {
       "user": user,
@@ -56,22 +60,20 @@ class ServerApiService {
   }
 
   // Retrieve User data
-  Future<List<dynamic>> retrieveUserData(String table) async {
-    final User? user = await userStorage.getData();
+  Future<void> retrieveData(String table) async {
+    final UserModel? user = await userStorage.getData();
     final url = Uri.parse('$APEX_VIGNE_API_URL/retrieve_data.php');
     if (user == null) {
       throw Exception('User error');
     }
-    final body = {
-      "table": table,
-      "idUser": user.id
-    };
+    final body = {"table": table, "idUser": user.id};
 
     final response = await http.post(url, body: json.encode(body));
 
     if (response.statusCode == 200) {
-      final List<dynamic> data = json.decode(response.body)['data'];
-      return determineTable(table, data);
+      final Map<String, dynamic> res = json.decode(response.body);
+      IsarService isarService = IsarService();
+      isarService.saveData(table, res);
     } else {
       throw Exception('Failed to retrieve user data');
     }
@@ -80,15 +82,15 @@ class ServerApiService {
   List<dynamic> determineTable(String table, List<dynamic> data) {
     switch (table) {
       case 'parcelle':
-        return data.map((json) => Parcel.fromJson(json)).toList();
+        return data.map((json) => ParcelModel.fromJson(json)).toList();
       case 'utilisateur_parcelle':
-        return data.map((json) => UserParcel.fromJson(json)).toList();
+        return data.map((json) => UserParcelModel.fromJson(json)).toList();
       case 'session':
-        return data.map((json) => Session.fromJson(json)).toList();
+        return data.map((json) => SessionModel.fromJson(json)).toList();
       case 'commentaire':
-        return data.map((json) => Comment.fromJson(json)).toList();
+        return data.map((json) => CommentModel.fromJson(json)).toList();
       case 'session_stadepheno':
-        return data.map((json) => SessionStadePheno.fromJson(json)).toList();
+        return data.map((json) => SessionStadePhenoModel.fromJson(json)).toList();
       default:
         throw Exception('Error');
     }
@@ -127,7 +129,8 @@ class ServerApiService {
   }
 
   // Get shared data
-  static Future<Map<String, dynamic>> getSharedData(String table, List<Map<String, dynamic>> data) async {
+  static Future<Map<String, dynamic>> getSharedData(
+      String table, List<Map<String, dynamic>> data) async {
     final url = Uri.parse('$APEX_VIGNE_API_URL/sync_data.php');
     final body = {
       "table": table,

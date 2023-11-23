@@ -1,6 +1,6 @@
 // Table name: utilisateur_parcelle
-class UserParcel {
-  UserParcel({
+class UserParcelModel {
+  UserParcelModel({
     required this.userId,
     required this.parcelId,
     required this.status,
@@ -12,8 +12,8 @@ class UserParcel {
   late int status;
   late int state;
 
-  factory UserParcel.fromJson(Map<String, dynamic> json) {
-    return UserParcel(
+  factory UserParcelModel.fromJson(Map<String, dynamic> json) {
+    return UserParcelModel(
       userId: json['id_utilisateur'],
       parcelId: json['id_parcelle'],
       status: json['statut'],

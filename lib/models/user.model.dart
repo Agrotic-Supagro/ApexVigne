@@ -1,6 +1,6 @@
 // Table name: utilisateur
-class User {
-  User({
+class UserModel {
+  UserModel({
     required this.id,
     required this.firstname,
     required this.lastname,
@@ -37,8 +37,8 @@ class User {
     'etat': state,
   };
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
       id: json['id_utilisateur'],
       firstname: json['prenom'],
       lastname: json['nom'],

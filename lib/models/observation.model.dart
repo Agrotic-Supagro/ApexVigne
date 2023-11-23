@@ -1,4 +1,4 @@
-class Observation {
+class ObservationModel {
   late int observationId;
   late int apexValue;
   late double latitude;
@@ -7,7 +7,7 @@ class Observation {
   late String observerId;
   late int state;
 
-  Observation({
+  ObservationModel({
     required this.observationId,
     required this.apexValue,
     required this.latitude,
@@ -17,8 +17,8 @@ class Observation {
     required this.state,
   });
 
-  factory Observation.fromJson(Map<String, dynamic> json) {
-    return Observation(
+  factory ObservationModel.fromJson(Map<String, dynamic> json) {
+    return ObservationModel(
       observationId: json['id_observation'],
       apexValue: json['apex_value'],
       latitude: json['latitude'],

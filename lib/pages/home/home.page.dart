@@ -1,6 +1,7 @@
-import 'package:apex_vigne/models/parcel.model.dart';
-import 'package:apex_vigne/models/session.model.dart';
+import 'package:apex_vigne/collections/parcel.collection.dart';
+import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/pages/parcel_detail/parcel_detail.page.dart';
+import 'package:apex_vigne/services/isar.service.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/pages/profil/profil.page.dart';
 import 'package:apex_vigne/services/server_api.service.dart';
@@ -15,29 +16,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final ServerApiService _apiService = ServerApiService();
-  List<Session>? _sessions;
+  final IsarService _isarService = IsarService();
   String _sortingOption = 'Du plus récent au plus ancien';
+  final ServerApiService _apiService = ServerApiService();
 
-  Future<List<Parcel>?> _fetchParcelData() async {
-    try {
-      return await _apiService.retrieveUserData('parcelle') as List<Parcel>;
-    } catch (e) {
-      debugPrint('Error fetching parcel data: $e');
-      return null;
-    }
+  @override
+  void initState() {
+    super.initState();
+    _fetchDataServer();
   }
 
-  void _fetchSessionsData() async {
-    try {
-      _sessions =
-          await _apiService.retrieveUserData('session') as List<Session>;
-    } catch (e) {
-      debugPrint('Error fetching parcel data: $e');
-    }
+  Future<void> _fetchDataServer() async {
+    await _apiService.retrieveData('parcelle');
+    await _apiService.retrieveData('session');
   }
 
-  List<Parcel> _sortParcels(List<Parcel> parcels) {
+  List<Parcel> _sortParcels(List<Parcel> parcels, List<Session> sessions) {
     switch (_sortingOption) {
       case 'Par ordre alphabétique':
         parcels.sort((a, b) => a.name.compareTo(b.name));
@@ -48,16 +42,16 @@ class _HomePageState extends State<HomePage> {
       case 'Du plus récent au plus ancien':
         parcels.sort((a, b) {
           final aSessions =
-              _sessions?.where((session) => session.parcelId == a.id).toList();
+              sessions.where((session) => session.parcelId == a.id).toList();
           final bSessions =
-              _sessions?.where((session) => session.parcelId == b.id).toList();
+              sessions.where((session) => session.parcelId == b.id).toList();
 
-          if ((aSessions == null || aSessions.isEmpty) &&
-              (bSessions == null || bSessions.isEmpty)) {
+          if ((aSessions.isEmpty) &&
+              (bSessions.isEmpty)) {
             return 0;
-          } else if (aSessions == null || aSessions.isEmpty) {
+          } else if (aSessions.isEmpty) {
             return 1;
-          } else if (bSessions == null || bSessions.isEmpty) {
+          } else if (bSessions.isEmpty) {
             return -1;
           }
 
@@ -74,15 +68,15 @@ class _HomePageState extends State<HomePage> {
       case 'Du plus ancien au plus récent':
         parcels.sort((a, b) {
           final aSessions =
-              _sessions?.where((session) => session.parcelId == a.id).toList();
+              sessions.where((session) => session.parcelId == a.id).toList();
           final bSessions =
-              _sessions?.where((session) => session.parcelId == b.id).toList();
+              sessions.where((session) => session.parcelId == b.id).toList();
 
-          if (aSessions!.isEmpty && bSessions!.isEmpty) {
+          if (aSessions.isEmpty && bSessions.isEmpty) {
             return 0;
           } else if (aSessions.isEmpty) {
             return 1;
-          } else if (bSessions!.isEmpty) {
+          } else if (bSessions.isEmpty) {
             return -1;
           }
 
@@ -111,7 +105,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    _fetchSessionsData();
     return Scaffold(
       drawer: const DrawerApexVigne(),
       appBar: AppBar(
@@ -145,8 +138,8 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Center(
-          child: FutureBuilder<List<Parcel>?>(
-        future: _fetchParcelData(),
+          child: FutureBuilder<List<dynamic>?>(
+        future: Future.wait([_isarService.allParcels, _isarService.allSessions]),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
@@ -156,23 +149,26 @@ class _HomePageState extends State<HomePage> {
             return const Text('No parcel data available');
           }
 
-          final parcels = snapshot.data!;
-          final sortedParcels = _sortParcels(parcels);
+          final List<dynamic> results = snapshot.data!;
+          final List<Parcel> parcels = results[0];
+          final List<Session> sessions = results[1];
+
+          final List<Parcel> sortedParcels = _sortParcels(parcels, sessions);
 
           return ListView.builder(
             itemCount: parcels.length,
             itemBuilder: (context, index) {
               final currentParcel = sortedParcels[index];
-              final currentSessionsParcel = _sessions
-                  ?.where((session) => session.parcelId == currentParcel.id)
+              final currentSessionsParcel = sessions
+                  .where((session) => session.parcelId == currentParcel.id)
                   .toList();
               String lastSession = '';
-              currentSessionsParcel?.sort((a, b) {
+              currentSessionsParcel.sort((a, b) {
                 final aDate = DateTime.parse(a.sessionDate);
                 final bDate = DateTime.parse(b.sessionDate);
                 return bDate.compareTo(aDate);
               });
-              if (currentSessionsParcel != null && currentSessionsParcel.isNotEmpty) {
+              if (currentSessionsParcel.isNotEmpty) {
                 lastSession = 'Dernière observation le ${_formatDate(currentSessionsParcel.first.sessionDate)}';
               }
               return ListTile(

@@ -1,5 +1,5 @@
-import 'package:apex_vigne/models/parcel.model.dart';
-import 'package:apex_vigne/models/session.model.dart';
+import 'package:apex_vigne/collections/parcel.collection.dart';
+import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/pages/create_update_session/create_update_session.page.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:flutter/material.dart';

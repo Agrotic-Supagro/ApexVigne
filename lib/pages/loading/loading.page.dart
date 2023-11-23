@@ -5,6 +5,8 @@ import 'package:apex_vigne/services/auth.service.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 class LoadingPage extends StatefulWidget {
+  const LoadingPage({super.key});
+
   @override
   State<LoadingPage> createState() => _LoadingPageState();
 }

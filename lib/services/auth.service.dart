@@ -5,17 +5,17 @@ import 'package:flutter_login/flutter_login.dart';
 import 'package:http/http.dart' as http;
 import 'package:apex_vigne/models/user.model.dart';
 import 'package:apex_vigne/constants.dart';
-import 'package:apex_vigne/services/storage.service.dart';
+import 'package:apex_vigne/services/shared_prefs.service.dart';
 
 
 class AuthenticationService {
-  final userStorage = StorageService<User>('user', (json) => User.fromJson(json));
+  final userStorage = SharedPrefsService<UserModel>('user', (json) => UserModel.fromJson(json));
   ValueNotifier<bool> authenticationState = ValueNotifier(false);
   ValueNotifier<bool> registerState = ValueNotifier(false);
 
   /* Methods auth state */
   Future<void> checkToken() async {
-    final User? user = await userStorage.getData();
+    final UserModel? user = await userStorage.getData();
     String? token;
 
     if (user != null) {
@@ -40,7 +40,7 @@ class AuthenticationService {
         return 'Email ou mot de passe invalide';
       }
 
-      final User dataUser = User(
+      final UserModel dataUser = UserModel(
         id: res['data']['id_utilisateur'],
         firstname: res['data']['prenom'],
         lastname: res['data']['nom'],
@@ -55,7 +55,7 @@ class AuthenticationService {
 
       await userStorage.storeData(dataUser);
       authenticationState.value = true;
-      final User? user = await userStorage.getData();
+      final UserModel? user = await userStorage.getData();
       if (user != null) {
         debugPrint(json.encode(user));
       }
@@ -67,7 +67,7 @@ class AuthenticationService {
 
   Future<void> logout(VoidCallback onSuccess) async {
     try {
-      final User? user = await userStorage.getData();
+      final UserModel? user = await userStorage.getData();
       String? token;
 
       if (user != null) {
