@@ -100,16 +100,12 @@ class _HomePageState extends State<HomePage> {
               return -1;
             }
 
-            final aDate = aSessions
-                .map((session) => session.sessionDate.isNotEmpty
-                    ? DateTime.parse(session.sessionDate)
-                    : DateTime(0))
-                .reduce((max, element) => max.isAfter(element) ? max : element);
-            final bDate = bSessions
-                .map((session) => session.sessionDate.isNotEmpty
-                    ? DateTime.parse(session.sessionDate)
-                    : DateTime(0))
-                .reduce((max, element) => max.isAfter(element) ? max : element);
+          final aDate = aSessions
+              .map((session) => DateTime.parse(session.sessionAt))
+              .reduce((max, element) => max.isAfter(element) ? max : element);
+          final bDate = bSessions
+              .map((session) => DateTime.parse(session.sessionAt))
+              .reduce((max, element) => max.isAfter(element) ? max : element);
 
             return bDate.compareTo(aDate);
           });
@@ -129,16 +125,12 @@ class _HomePageState extends State<HomePage> {
               return -1;
             }
 
-            final aDate = aSessions
-                .map((session) => session.sessionDate.isNotEmpty
-                    ? DateTime.parse(session.sessionDate)
-                    : DateTime(0))
-                .reduce((min, element) => min.isBefore(element) ? min : element);
-            final bDate = bSessions
-                .map((session) => session.sessionDate.isNotEmpty
-                    ? DateTime.parse(session.sessionDate)
-                    : DateTime(0))
-                .reduce((min, element) => min.isBefore(element) ? min : element);
+          final aDate = aSessions
+              .map((session) => DateTime.parse(session.sessionAt))
+              .reduce((min, element) => min.isBefore(element) ? min : element);
+          final bDate = bSessions
+              .map((session) => DateTime.parse(session.sessionAt))
+              .reduce((min, element) => min.isBefore(element) ? min : element);
 
             return aDate.compareTo(bDate);
           });
@@ -188,17 +180,14 @@ class _HomePageState extends State<HomePage> {
             final List<int> apex = [0, 0, 0];
             double icApex = 0;
             currentSessionsParcel.sort((a, b) {
-              final aDate = DateTime.parse(a.sessionDate);
-              final bDate = DateTime.parse(b.sessionDate);
+              final aDate = DateTime.parse(a.sessionAt);
+              final bDate = DateTime.parse(b.sessionAt);
               return bDate.compareTo(aDate);
             });
             if (currentSessionsParcel.isNotEmpty) {
               lastSession =
-                  'Dernière observation le ${formatDate(currentSessionsParcel.first.sessionDate)}';
-              apex[0] = int.parse(currentSessionsParcel.first.apex0);
-              apex[1] = int.parse(currentSessionsParcel.first.apex1);
-              apex[2] = int.parse(currentSessionsParcel.first.apex2);
-              icApex = calculateIcApex(apex[0], apex[1], apex[2]);
+                  'Dernière observation le ${formatDate(currentSessionsParcel.first.sessionAt)}';
+              icApex = calculateIcApex(currentSessionsParcel.first.apexFullGrowth, currentSessionsParcel.first.apexSlowerGrowth, currentSessionsParcel.first.apexStuntedGrowth);
             }
             return Column(
               children: [
@@ -213,8 +202,7 @@ class _HomePageState extends State<HomePage> {
                           color: Theme.of(context).colorScheme.primary)),
                   trailing: lastSession.isNotEmpty
                       ? LabelApexHydricConstraint(
-                          text: calculateHydricConstraint(
-                              apex[0], apex[1], apex[2], icApex))
+                          text: calculateHydricConstraint(currentSessionsParcel.first.apexFullGrowth, currentSessionsParcel.first.apexSlowerGrowth, currentSessionsParcel.first.apexStuntedGrowth, icApex))
                       : null,
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(

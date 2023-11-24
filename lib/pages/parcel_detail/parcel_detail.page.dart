@@ -116,20 +116,15 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         dataRowMinHeight: 50.0,
         dataRowMaxHeight: 80.0,
         rows: widget.sessions?.map<DataRow>((session) {
-              final apex = [
-                int.parse(session.apex0),
-                int.parse(session.apex1),
-                int.parse(session.apex2)
-              ];
-              final double icApex = calculateIcApex(apex[0], apex[1], apex[2]);
+              final double icApex = calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth, session.apexStuntedGrowth);
               return DataRow(
                 cells: [
-                  DataCell(Text(formatDate(session.sessionDate),
+                  DataCell(Text(formatDate(session.sessionAt),
                       overflow: TextOverflow.ellipsis)),
                   DataCell(IcApexCell(icApex: icApex)),
                   DataCell(LabelApexHydricConstraint(
                       text: calculateHydricConstraint(
-                          apex[0], apex[1], apex[2], icApex))),
+                          session.apexFullGrowth, session.apexSlowerGrowth, session.apexStuntedGrowth, icApex))),
                   DataCell(
                     ElevatedApexButton(
                       icon: Icons.article_outlined,

@@ -7,23 +7,15 @@ part 'parcel.collection.g.dart';
 class Parcel {
 
   @Index(unique: true, replace: true)
-  @Name('id_parcelle')
   late String id;
 
   Id get isarId => fastHash(id);
 
-  @Name('nom_parcelle')
   late String name;
 
-  @Name('date_creation')
-  late String creationDate;
+  late String createdAt;
 
-  @Name('date_maj')
-  late String updateDate;
+  late String updatedAt;
 
-  @Name('id_proprietaire')
   late String ownerId;
-
-  @Name('etat')
-  late String state;
 }

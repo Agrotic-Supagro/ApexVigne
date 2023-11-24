@@ -72,7 +72,7 @@ class ServerApiService {
     if (response.statusCode == 200) {
       final Map<String, dynamic> res = json.decode(response.body);
       IsarService isarService = IsarService();
-      await isarService.saveData(table, res);
+      // await isarService.saveData(table, res);
     } else {
       throw Exception('Failed to retrieve user data');
     }

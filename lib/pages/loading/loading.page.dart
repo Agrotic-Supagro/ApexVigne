@@ -1,6 +1,8 @@
 import 'package:apex_vigne/pages/home/home.page.dart';
 import 'package:apex_vigne/pages/login/login.page.dart';
+import 'package:apex_vigne/services/parcels_api.service.dart';
 import 'package:apex_vigne/services/server_api.service.dart';
+import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -57,11 +59,10 @@ class _LoadingPageState extends State<LoadingPage> {
 
   Future<void> _fetchDataServer() async {
     _updateStepLoadingText('Chargement des parcelles...');
-    await _apiService.retrieveData('parcelle');
+    await ParcelsApiService().getAuthorizedParcels();
     _updateStepLoadingText('Chargement des sessions...');
-    await _apiService.retrieveData('session');
+    await SessionsApiService().getAuthorizedSessions();
   }
-
 
   @override
   Widget build(BuildContext context) {

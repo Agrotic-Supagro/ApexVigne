@@ -7,32 +7,23 @@ part 'session.collection.g.dart';
 class Session {
 
   @Index(unique: true, replace: true)
-  @Name('id_session')
   late String id;
 
   Id get isarId => fastHash(id);
 
-  @Name('date_creation')
-  late String creationDate;
+  late String createdAt;
 
-  @Name('date_session')
-  late String sessionDate;
+  late String sessionAt;
 
-  @Name('date_maj')
-  late String updateDate;
+  late String updatedAt;
 
-  late String apex0;
+  late String apexFullGrowth;
 
-  late String apex1;
+  late String apexSlowerGrowth;
 
-  late String apex2;
+  late String apexStuntedGrowth;
 
-  @Name('id_observateur')
   late String observerId;
 
-  @Name('id_parcelle')
   late String parcelId;
-
-  @Name('etat')
-  late String state;
 }

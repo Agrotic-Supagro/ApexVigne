@@ -1,5 +1,6 @@
 const String APEX_VIGNE_API_URL = 'https://www.agrotic.org/apexv3-sync';
 const String aboutDescription = 'L\'application ApeX Vigne a été conçue par l\'équipe d\'Explorama pour le compte d\'AgroTIC de Montpellier SupAgro, bénéficiant du soutien de la région Occitanie. Cette initiative s\'inscrit dans le cadre de recherches approfondies menées depuis plusieurs années sur la viticulture de précision. Le projet est réalisé en collaboration avec l\'Institut Français de la Vigne et du Vin (IFV) ainsi que la chambre d\'agriculture de l\'Hérault.';
+const String apiBaseUrl = 'http://192.168.1.13';
 final List<Map<String, dynamic>> stadesPheno = [
   {
     "name": "Bourgeon d'hiver",

@@ -17,34 +17,29 @@ const ParcelSchema = CollectionSchema(
   name: r'Parcel',
   id: 5510806458604258610,
   properties: {
-    r'date_creation': PropertySchema(
+    r'createdAt': PropertySchema(
       id: 0,
-      name: r'date_creation',
+      name: r'createdAt',
       type: IsarType.string,
     ),
-    r'date_maj': PropertySchema(
+    r'id': PropertySchema(
       id: 1,
-      name: r'date_maj',
+      name: r'id',
       type: IsarType.string,
     ),
-    r'etat': PropertySchema(
+    r'name': PropertySchema(
       id: 2,
-      name: r'etat',
+      name: r'name',
       type: IsarType.string,
     ),
-    r'id_parcelle': PropertySchema(
+    r'ownerId': PropertySchema(
       id: 3,
-      name: r'id_parcelle',
+      name: r'ownerId',
       type: IsarType.string,
     ),
-    r'id_proprietaire': PropertySchema(
+    r'updatedAt': PropertySchema(
       id: 4,
-      name: r'id_proprietaire',
-      type: IsarType.string,
-    ),
-    r'nom_parcelle': PropertySchema(
-      id: 5,
-      name: r'nom_parcelle',
+      name: r'updatedAt',
       type: IsarType.string,
     )
   },
@@ -54,14 +49,14 @@ const ParcelSchema = CollectionSchema(
   deserializeProp: _parcelDeserializeProp,
   idName: r'isarId',
   indexes: {
-    r'id_parcelle': IndexSchema(
-      id: 3240647825806218078,
-      name: r'id_parcelle',
+    r'id': IndexSchema(
+      id: -3268401673993471357,
+      name: r'id',
       unique: true,
       replace: true,
       properties: [
         IndexPropertySchema(
-          name: r'id_parcelle',
+          name: r'id',
           type: IndexType.hash,
           caseSensitive: true,
         )
@@ -82,12 +77,11 @@ int _parcelEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  bytesCount += 3 + object.creationDate.length * 3;
-  bytesCount += 3 + object.updateDate.length * 3;
-  bytesCount += 3 + object.state.length * 3;
+  bytesCount += 3 + object.createdAt.length * 3;
   bytesCount += 3 + object.id.length * 3;
-  bytesCount += 3 + object.ownerId.length * 3;
   bytesCount += 3 + object.name.length * 3;
+  bytesCount += 3 + object.ownerId.length * 3;
+  bytesCount += 3 + object.updatedAt.length * 3;
   return bytesCount;
 }
 
@@ -97,12 +91,11 @@ void _parcelSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.creationDate);
-  writer.writeString(offsets[1], object.updateDate);
-  writer.writeString(offsets[2], object.state);
-  writer.writeString(offsets[3], object.id);
-  writer.writeString(offsets[4], object.ownerId);
-  writer.writeString(offsets[5], object.name);
+  writer.writeString(offsets[0], object.createdAt);
+  writer.writeString(offsets[1], object.id);
+  writer.writeString(offsets[2], object.name);
+  writer.writeString(offsets[3], object.ownerId);
+  writer.writeString(offsets[4], object.updatedAt);
 }
 
 Parcel _parcelDeserialize(
@@ -112,12 +105,11 @@ Parcel _parcelDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Parcel();
-  object.creationDate = reader.readString(offsets[0]);
-  object.updateDate = reader.readString(offsets[1]);
-  object.state = reader.readString(offsets[2]);
-  object.id = reader.readString(offsets[3]);
-  object.ownerId = reader.readString(offsets[4]);
-  object.name = reader.readString(offsets[5]);
+  object.createdAt = reader.readString(offsets[0]);
+  object.id = reader.readString(offsets[1]);
+  object.name = reader.readString(offsets[2]);
+  object.ownerId = reader.readString(offsets[3]);
+  object.updatedAt = reader.readString(offsets[4]);
   return object;
 }
 
@@ -138,8 +130,6 @@ P _parcelDeserializeProp<P>(
       return (reader.readString(offset)) as P;
     case 4:
       return (reader.readString(offset)) as P;
-    case 5:
-      return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -157,55 +147,55 @@ void _parcelAttach(IsarCollection<dynamic> col, Id id, Parcel object) {}
 
 extension ParcelByIndex on IsarCollection<Parcel> {
   Future<Parcel?> getById(String id) {
-    return getByIndex(r'id_parcelle', [id]);
+    return getByIndex(r'id', [id]);
   }
 
   Parcel? getByIdSync(String id) {
-    return getByIndexSync(r'id_parcelle', [id]);
+    return getByIndexSync(r'id', [id]);
   }
 
   Future<bool> deleteById(String id) {
-    return deleteByIndex(r'id_parcelle', [id]);
+    return deleteByIndex(r'id', [id]);
   }
 
   bool deleteByIdSync(String id) {
-    return deleteByIndexSync(r'id_parcelle', [id]);
+    return deleteByIndexSync(r'id', [id]);
   }
 
   Future<List<Parcel?>> getAllById(List<String> idValues) {
     final values = idValues.map((e) => [e]).toList();
-    return getAllByIndex(r'id_parcelle', values);
+    return getAllByIndex(r'id', values);
   }
 
   List<Parcel?> getAllByIdSync(List<String> idValues) {
     final values = idValues.map((e) => [e]).toList();
-    return getAllByIndexSync(r'id_parcelle', values);
+    return getAllByIndexSync(r'id', values);
   }
 
   Future<int> deleteAllById(List<String> idValues) {
     final values = idValues.map((e) => [e]).toList();
-    return deleteAllByIndex(r'id_parcelle', values);
+    return deleteAllByIndex(r'id', values);
   }
 
   int deleteAllByIdSync(List<String> idValues) {
     final values = idValues.map((e) => [e]).toList();
-    return deleteAllByIndexSync(r'id_parcelle', values);
+    return deleteAllByIndexSync(r'id', values);
   }
 
   Future<Id> putById(Parcel object) {
-    return putByIndex(r'id_parcelle', object);
+    return putByIndex(r'id', object);
   }
 
   Id putByIdSync(Parcel object, {bool saveLinks = true}) {
-    return putByIndexSync(r'id_parcelle', object, saveLinks: saveLinks);
+    return putByIndexSync(r'id', object, saveLinks: saveLinks);
   }
 
   Future<List<Id>> putAllById(List<Parcel> objects) {
-    return putAllByIndex(r'id_parcelle', objects);
+    return putAllByIndex(r'id', objects);
   }
 
   List<Id> putAllByIdSync(List<Parcel> objects, {bool saveLinks = true}) {
-    return putAllByIndexSync(r'id_parcelle', objects, saveLinks: saveLinks);
+    return putAllByIndexSync(r'id', objects, saveLinks: saveLinks);
   }
 }
 
@@ -286,7 +276,7 @@ extension ParcelQueryWhere on QueryBuilder<Parcel, Parcel, QWhereClause> {
   QueryBuilder<Parcel, Parcel, QAfterWhereClause> idEqualTo(String id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
-        indexName: r'id_parcelle',
+        indexName: r'id',
         value: [id],
       ));
     });
@@ -297,13 +287,13 @@ extension ParcelQueryWhere on QueryBuilder<Parcel, Parcel, QWhereClause> {
       if (query.whereSort == Sort.asc) {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'id_parcelle',
+              indexName: r'id',
               lower: [],
               upper: [id],
               includeUpper: false,
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'id_parcelle',
+              indexName: r'id',
               lower: [id],
               includeLower: false,
               upper: [],
@@ -311,13 +301,13 @@ extension ParcelQueryWhere on QueryBuilder<Parcel, Parcel, QWhereClause> {
       } else {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'id_parcelle',
+              indexName: r'id',
               lower: [id],
               includeLower: false,
               upper: [],
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'id_parcelle',
+              indexName: r'id',
               lower: [],
               upper: [id],
               includeUpper: false,
@@ -328,20 +318,20 @@ extension ParcelQueryWhere on QueryBuilder<Parcel, Parcel, QWhereClause> {
 }
 
 extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> creationDateEqualTo(
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'date_creation',
+        property: r'createdAt',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> creationDateGreaterThan(
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -349,14 +339,14 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'date_creation',
+        property: r'createdAt',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> creationDateLessThan(
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -364,14 +354,14 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'date_creation',
+        property: r'createdAt',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> creationDateBetween(
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -380,7 +370,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'date_creation',
+        property: r'createdAt',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -390,329 +380,69 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> creationDateStartsWith(
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'date_creation',
+        property: r'createdAt',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> creationDateEndsWith(
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'date_creation',
+        property: r'createdAt',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> creationDateContains(
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'date_creation',
+        property: r'createdAt',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> creationDateMatches(
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'date_creation',
+        property: r'createdAt',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> creationDateIsEmpty() {
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'date_creation',
+        property: r'createdAt',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> creationDateIsNotEmpty() {
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'date_creation',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updateDateEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'date_maj',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updateDateGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'date_maj',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updateDateLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'date_maj',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updateDateBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'date_maj',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updateDateStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'date_maj',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updateDateEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'date_maj',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updateDateContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'date_maj',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updateDateMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'date_maj',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updateDateIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'date_maj',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updateDateIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'date_maj',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> stateEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'etat',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> stateGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'etat',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> stateLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'etat',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> stateBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'etat',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> stateStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'etat',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> stateEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'etat',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> stateContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'etat',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> stateMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'etat',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> stateIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'etat',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> stateIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'etat',
+        property: r'createdAt',
         value: '',
       ));
     });
@@ -724,7 +454,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id_parcelle',
+        property: r'id',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -739,7 +469,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'id_parcelle',
+        property: r'id',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -754,7 +484,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'id_parcelle',
+        property: r'id',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -770,7 +500,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'id_parcelle',
+        property: r'id',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -786,7 +516,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'id_parcelle',
+        property: r'id',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -799,7 +529,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'id_parcelle',
+        property: r'id',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -810,7 +540,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'id_parcelle',
+        property: r'id',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -821,7 +551,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'id_parcelle',
+        property: r'id',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
@@ -831,7 +561,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> idIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id_parcelle',
+        property: r'id',
         value: '',
       ));
     });
@@ -840,137 +570,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> idIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'id_parcelle',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id_proprietaire',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'id_proprietaire',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'id_proprietaire',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'id_proprietaire',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'id_proprietaire',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'id_proprietaire',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'id_proprietaire',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'id_proprietaire',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id_proprietaire',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'id_proprietaire',
+        property: r'id',
         value: '',
       ));
     });
@@ -1034,7 +634,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'nom_parcelle',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -1049,7 +649,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'nom_parcelle',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -1064,7 +664,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'nom_parcelle',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -1080,7 +680,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'nom_parcelle',
+        property: r'name',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1096,7 +696,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'nom_parcelle',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -1109,7 +709,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'nom_parcelle',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -1120,7 +720,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'nom_parcelle',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -1132,7 +732,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'nom_parcelle',
+        property: r'name',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
@@ -1142,7 +742,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> nameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'nom_parcelle',
+        property: r'name',
         value: '',
       ));
     });
@@ -1151,7 +751,267 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> nameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'nom_parcelle',
+        property: r'name',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'ownerId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'ownerId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'ownerId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'ownerId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'ownerId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'ownerId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'ownerId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'ownerId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'ownerId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'ownerId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'updatedAt',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'updatedAt',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'updatedAt',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'updatedAt',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'updatedAt',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'updatedAt',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'updatedAt',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'updatedAt',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'updatedAt',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'updatedAt',
         value: '',
       ));
     });
@@ -1163,137 +1023,89 @@ extension ParcelQueryObject on QueryBuilder<Parcel, Parcel, QFilterCondition> {}
 extension ParcelQueryLinks on QueryBuilder<Parcel, Parcel, QFilterCondition> {}
 
 extension ParcelQuerySortBy on QueryBuilder<Parcel, Parcel, QSortBy> {
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByCreationDate() {
+  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'date_creation', Sort.asc);
+      return query.addSortBy(r'createdAt', Sort.asc);
     });
   }
 
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByCreationDateDesc() {
+  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByCreatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'date_creation', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByUpdateDate() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'date_maj', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByUpdateDateDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'date_maj', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByState() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etat', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByStateDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etat', Sort.desc);
+      return query.addSortBy(r'createdAt', Sort.desc);
     });
   }
 
   QueryBuilder<Parcel, Parcel, QAfterSortBy> sortById() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_parcelle', Sort.asc);
+      return query.addSortBy(r'id', Sort.asc);
     });
   }
 
   QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByIdDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_parcelle', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByOwnerId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_proprietaire', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByOwnerIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_proprietaire', Sort.desc);
+      return query.addSortBy(r'id', Sort.desc);
     });
   }
 
   QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'nom_parcelle', Sort.asc);
+      return query.addSortBy(r'name', Sort.asc);
     });
   }
 
   QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByNameDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'nom_parcelle', Sort.desc);
+      return query.addSortBy(r'name', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByOwnerId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ownerId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByOwnerIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ownerId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByUpdatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updatedAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByUpdatedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updatedAt', Sort.desc);
     });
   }
 }
 
 extension ParcelQuerySortThenBy on QueryBuilder<Parcel, Parcel, QSortThenBy> {
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByCreationDate() {
+  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'date_creation', Sort.asc);
+      return query.addSortBy(r'createdAt', Sort.asc);
     });
   }
 
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByCreationDateDesc() {
+  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByCreatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'date_creation', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByUpdateDate() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'date_maj', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByUpdateDateDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'date_maj', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByState() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etat', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByStateDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etat', Sort.desc);
+      return query.addSortBy(r'createdAt', Sort.desc);
     });
   }
 
   QueryBuilder<Parcel, Parcel, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_parcelle', Sort.asc);
+      return query.addSortBy(r'id', Sort.asc);
     });
   }
 
   QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_parcelle', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByOwnerId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_proprietaire', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByOwnerIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_proprietaire', Sort.desc);
+      return query.addSortBy(r'id', Sort.desc);
     });
   }
 
@@ -1311,59 +1123,74 @@ extension ParcelQuerySortThenBy on QueryBuilder<Parcel, Parcel, QSortThenBy> {
 
   QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByName() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'nom_parcelle', Sort.asc);
+      return query.addSortBy(r'name', Sort.asc);
     });
   }
 
   QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByNameDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'nom_parcelle', Sort.desc);
+      return query.addSortBy(r'name', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByOwnerId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ownerId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByOwnerIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ownerId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByUpdatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updatedAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByUpdatedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updatedAt', Sort.desc);
     });
   }
 }
 
 extension ParcelQueryWhereDistinct on QueryBuilder<Parcel, Parcel, QDistinct> {
-  QueryBuilder<Parcel, Parcel, QDistinct> distinctByCreationDate(
+  QueryBuilder<Parcel, Parcel, QDistinct> distinctByCreatedAt(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'date_creation',
-          caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QDistinct> distinctByUpdateDate(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'date_maj', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QDistinct> distinctByState(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'etat', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'createdAt', caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<Parcel, Parcel, QDistinct> distinctById(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'id_parcelle', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QDistinct> distinctByOwnerId(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'id_proprietaire',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'id', caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<Parcel, Parcel, QDistinct> distinctByName(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'nom_parcelle', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'name', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QDistinct> distinctByOwnerId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'ownerId', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QDistinct> distinctByUpdatedAt(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'updatedAt', caseSensitive: caseSensitive);
     });
   }
 }
@@ -1375,39 +1202,33 @@ extension ParcelQueryProperty on QueryBuilder<Parcel, Parcel, QQueryProperty> {
     });
   }
 
-  QueryBuilder<Parcel, String, QQueryOperations> creationDateProperty() {
+  QueryBuilder<Parcel, String, QQueryOperations> createdAtProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'date_creation');
-    });
-  }
-
-  QueryBuilder<Parcel, String, QQueryOperations> updateDateProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'date_maj');
-    });
-  }
-
-  QueryBuilder<Parcel, String, QQueryOperations> stateProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'etat');
+      return query.addPropertyName(r'createdAt');
     });
   }
 
   QueryBuilder<Parcel, String, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'id_parcelle');
-    });
-  }
-
-  QueryBuilder<Parcel, String, QQueryOperations> ownerIdProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'id_proprietaire');
+      return query.addPropertyName(r'id');
     });
   }
 
   QueryBuilder<Parcel, String, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'nom_parcelle');
+      return query.addPropertyName(r'name');
+    });
+  }
+
+  QueryBuilder<Parcel, String, QQueryOperations> ownerIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'ownerId');
+    });
+  }
+
+  QueryBuilder<Parcel, String, QQueryOperations> updatedAtProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'updatedAt');
     });
   }
 }

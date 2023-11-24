@@ -25,13 +25,12 @@ class IsarService {
   Future<List<Parcel>> get allParcels async => await isar.parcels.where().findAll();
   Future<List<Session>> get allSessions async => await isar.sessions.where().findAll();
 
-  Future<void> saveData(String table, Map<String, dynamic> res) async {
-    final List<Map<String, dynamic>> dataList =
-        (res['data'] as List).cast<Map<String, dynamic>>();
+  Future<void> saveData(String name, List<dynamic> res) async {
+    final List<Map<String, dynamic>> dataList = res.cast<Map<String, dynamic>>();
     await isar.writeTxn(() async {
-      if (table == 'parcelle') {
+      if (name == 'parcels') {
         await isar.parcels.importJson(dataList);
-      } else if (table == 'session') {
+      } else if (name == 'sessions') {
         await isar.sessions.importJson(dataList);
       }
     });
