@@ -30,6 +30,9 @@ class _ContactPageState extends State<ContactPage> {
                     color: Color(0xFFF5F5F5),
                   ),
                   child: TextField(
+                    autofocus: true,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(borderSide: BorderSide.none),
                       hintText: 'Écrivez votre message ici...',

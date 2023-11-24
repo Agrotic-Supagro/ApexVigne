@@ -46,29 +46,29 @@ class _AboutPageState extends State<AboutPage> {
                     .labelMedium!
                     .copyWith(letterSpacing: 1.2)),
             const SizedBox(height: 20),
-            // Container(
-            //   width: double.infinity,
-            //   padding: const EdgeInsets.all(20),
-            //   decoration: const BoxDecoration(
-            //     borderRadius: BorderRadius.all(Radius.circular(16)),
-            //     color: Color(0xFFF5F5F5),
-            //   ),
-            //   child: const Wrap(
-            //     alignment: WrapAlignment.spaceEvenly,
-            //     runSpacing: 20,
-            //     children: [
-            //       Image(image: AssetImage('assets/img/logo/logo_ifv.png'), width: 145),
-            //       SizedBox(width: 20),
-            //       Image(image: AssetImage('assets/img/logo/logo_iam.png'), width: 145),
-            //       SizedBox(width: 20),
-            //       Image(image: AssetImage('assets/img/logo/logo_occitanie.png'), width: 145),
-            //       SizedBox(width: 20),
-            //       Image(image: AssetImage('assets/img/logo/logo_agrotic.png'), width: 145),
-            //       SizedBox(width: 20),
-            //       Image(image: AssetImage('assets/img/logo/logo_agricultures_territoires.png'), width: 145),
-            //     ],
-            //   )
-            // ),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(20),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+                color: Color(0xFFF5F5F5),
+              ),
+              child: const Wrap(
+                alignment: WrapAlignment.spaceEvenly,
+                runSpacing: 20,
+                children: [
+                  Image(image: AssetImage('assets/img/logo/logo_ifv.png'), width: 145),
+                  SizedBox(width: 20),
+                  Image(image: AssetImage('assets/img/logo/logo_iam.png'), width: 145),
+                  SizedBox(width: 20),
+                  Image(image: AssetImage('assets/img/logo/logo_occitanie.png'), width: 145),
+                  SizedBox(width: 20),
+                  Image(image: AssetImage('assets/img/logo/logo_agrotic.png'), width: 145),
+                  SizedBox(width: 20),
+                  Image(image: AssetImage('assets/img/logo/logo_agricultures_territoires.png'), width: 145),
+                ],
+              )
+            ),
           ],
         ),
       ),
