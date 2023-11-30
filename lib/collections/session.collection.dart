@@ -17,11 +17,11 @@ class Session {
 
   late String updatedAt;
 
-  late String apexFullGrowth;
+  late int apexFullGrowth;
 
-  late String apexSlowerGrowth;
+  late int apexSlowerGrowth;
 
-  late String apexStuntedGrowth;
+  late int apexStuntedGrowth;
 
   late String observerId;
 

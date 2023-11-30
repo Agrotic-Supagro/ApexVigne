@@ -101,10 +101,10 @@ class _HomePageState extends State<HomePage> {
             }
 
           final aDate = aSessions
-              .map((session) => DateTime.parse(session.sessionAt))
+              .map((session) => session.sessionAt.isNotEmpty ? DateTime.parse(session.sessionAt) : DateTime(0))
               .reduce((max, element) => max.isAfter(element) ? max : element);
           final bDate = bSessions
-              .map((session) => DateTime.parse(session.sessionAt))
+              .map((session) => session.sessionAt.isNotEmpty ? DateTime.parse(session.sessionAt) : DateTime(0))
               .reduce((max, element) => max.isAfter(element) ? max : element);
 
             return bDate.compareTo(aDate);
@@ -126,10 +126,10 @@ class _HomePageState extends State<HomePage> {
             }
 
           final aDate = aSessions
-              .map((session) => DateTime.parse(session.sessionAt))
+              .map((session) => session.sessionAt.isNotEmpty ? DateTime.parse(session.sessionAt) : DateTime(0))
               .reduce((min, element) => min.isBefore(element) ? min : element);
           final bDate = bSessions
-              .map((session) => DateTime.parse(session.sessionAt))
+              .map((session) => session.sessionAt.isNotEmpty ? DateTime.parse(session.sessionAt) : DateTime(0))
               .reduce((min, element) => min.isBefore(element) ? min : element);
 
             return aDate.compareTo(bDate);
@@ -177,7 +177,6 @@ class _HomePageState extends State<HomePage> {
                 .where((session) => session.parcelId == currentParcel.id)
                 .toList();
             String lastSession = '';
-            final List<int> apex = [0, 0, 0];
             double icApex = 0;
             currentSessionsParcel.sort((a, b) {
               final aDate = DateTime.parse(a.sessionAt);

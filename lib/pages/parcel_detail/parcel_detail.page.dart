@@ -70,7 +70,10 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
   }
 
   Theme _buildSessionsBoard(BuildContext context) {
-    String formatDate(String timestamp) {
+    String formatDate(String? timestamp) {
+      if (timestamp == null || timestamp.isEmpty) {
+        return '';
+      }
       final date = DateTime.parse(timestamp);
       final formattedDate = DateFormat.MMMMd('fr').format(date);
       return formattedDate;

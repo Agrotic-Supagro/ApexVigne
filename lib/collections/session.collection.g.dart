@@ -20,17 +20,17 @@ const SessionSchema = CollectionSchema(
     r'apexFullGrowth': PropertySchema(
       id: 0,
       name: r'apexFullGrowth',
-      type: IsarType.string,
+      type: IsarType.long,
     ),
     r'apexSlowerGrowth': PropertySchema(
       id: 1,
       name: r'apexSlowerGrowth',
-      type: IsarType.string,
+      type: IsarType.long,
     ),
     r'apexStuntedGrowth': PropertySchema(
       id: 2,
       name: r'apexStuntedGrowth',
-      type: IsarType.string,
+      type: IsarType.long,
     ),
     r'createdAt': PropertySchema(
       id: 3,
@@ -97,9 +97,6 @@ int _sessionEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  bytesCount += 3 + object.apexFullGrowth.length * 3;
-  bytesCount += 3 + object.apexSlowerGrowth.length * 3;
-  bytesCount += 3 + object.apexStuntedGrowth.length * 3;
   bytesCount += 3 + object.createdAt.length * 3;
   bytesCount += 3 + object.id.length * 3;
   bytesCount += 3 + object.observerId.length * 3;
@@ -115,9 +112,9 @@ void _sessionSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.apexFullGrowth);
-  writer.writeString(offsets[1], object.apexSlowerGrowth);
-  writer.writeString(offsets[2], object.apexStuntedGrowth);
+  writer.writeLong(offsets[0], object.apexFullGrowth);
+  writer.writeLong(offsets[1], object.apexSlowerGrowth);
+  writer.writeLong(offsets[2], object.apexStuntedGrowth);
   writer.writeString(offsets[3], object.createdAt);
   writer.writeString(offsets[4], object.id);
   writer.writeString(offsets[5], object.observerId);
@@ -133,9 +130,9 @@ Session _sessionDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Session();
-  object.apexFullGrowth = reader.readString(offsets[0]);
-  object.apexSlowerGrowth = reader.readString(offsets[1]);
-  object.apexStuntedGrowth = reader.readString(offsets[2]);
+  object.apexFullGrowth = reader.readLong(offsets[0]);
+  object.apexSlowerGrowth = reader.readLong(offsets[1]);
+  object.apexStuntedGrowth = reader.readLong(offsets[2]);
   object.createdAt = reader.readString(offsets[3]);
   object.id = reader.readString(offsets[4]);
   object.observerId = reader.readString(offsets[5]);
@@ -153,11 +150,11 @@ P _sessionDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readString(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 1:
-      return (reader.readString(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 2:
-      return (reader.readString(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 3:
       return (reader.readString(offset)) as P;
     case 4:
@@ -361,55 +358,47 @@ extension SessionQueryWhere on QueryBuilder<Session, Session, QWhereClause> {
 extension SessionQueryFilter
     on QueryBuilder<Session, Session, QFilterCondition> {
   QueryBuilder<Session, Session, QAfterFilterCondition> apexFullGrowthEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+      int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'apexFullGrowth',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition>
       apexFullGrowthGreaterThan(
-    String value, {
+    int value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'apexFullGrowth',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> apexFullGrowthLessThan(
-    String value, {
+    int value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'apexFullGrowth',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> apexFullGrowthBetween(
-    String lower,
-    String upper, {
+    int lower,
+    int upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -418,133 +407,53 @@ extension SessionQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition>
-      apexFullGrowthStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'apexFullGrowth',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> apexFullGrowthEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'apexFullGrowth',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> apexFullGrowthContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'apexFullGrowth',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> apexFullGrowthMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'apexFullGrowth',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition>
-      apexFullGrowthIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'apexFullGrowth',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition>
-      apexFullGrowthIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'apexFullGrowth',
-        value: '',
       ));
     });
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> apexSlowerGrowthEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+      int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'apexSlowerGrowth',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition>
       apexSlowerGrowthGreaterThan(
-    String value, {
+    int value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'apexSlowerGrowth',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition>
       apexSlowerGrowthLessThan(
-    String value, {
+    int value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'apexSlowerGrowth',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> apexSlowerGrowthBetween(
-    String lower,
-    String upper, {
+    int lower,
+    int upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -553,135 +462,54 @@ extension SessionQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition>
-      apexSlowerGrowthStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'apexSlowerGrowth',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition>
-      apexSlowerGrowthEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'apexSlowerGrowth',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition>
-      apexSlowerGrowthContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'apexSlowerGrowth',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> apexSlowerGrowthMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'apexSlowerGrowth',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition>
-      apexSlowerGrowthIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'apexSlowerGrowth',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition>
-      apexSlowerGrowthIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'apexSlowerGrowth',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition>
-      apexStuntedGrowthEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+      apexStuntedGrowthEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'apexStuntedGrowth',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition>
       apexStuntedGrowthGreaterThan(
-    String value, {
+    int value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'apexStuntedGrowth',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition>
       apexStuntedGrowthLessThan(
-    String value, {
+    int value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'apexStuntedGrowth',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition>
       apexStuntedGrowthBetween(
-    String lower,
-    String upper, {
+    int lower,
+    int upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -690,77 +518,6 @@ extension SessionQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition>
-      apexStuntedGrowthStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'apexStuntedGrowth',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition>
-      apexStuntedGrowthEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'apexStuntedGrowth',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition>
-      apexStuntedGrowthContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'apexStuntedGrowth',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition>
-      apexStuntedGrowthMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'apexStuntedGrowth',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition>
-      apexStuntedGrowthIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'apexStuntedGrowth',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition>
-      apexStuntedGrowthIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'apexStuntedGrowth',
-        value: '',
       ));
     });
   }
@@ -1839,27 +1596,21 @@ extension SessionQuerySortThenBy
 
 extension SessionQueryWhereDistinct
     on QueryBuilder<Session, Session, QDistinct> {
-  QueryBuilder<Session, Session, QDistinct> distinctByApexFullGrowth(
-      {bool caseSensitive = true}) {
+  QueryBuilder<Session, Session, QDistinct> distinctByApexFullGrowth() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'apexFullGrowth',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'apexFullGrowth');
     });
   }
 
-  QueryBuilder<Session, Session, QDistinct> distinctByApexSlowerGrowth(
-      {bool caseSensitive = true}) {
+  QueryBuilder<Session, Session, QDistinct> distinctByApexSlowerGrowth() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'apexSlowerGrowth',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'apexSlowerGrowth');
     });
   }
 
-  QueryBuilder<Session, Session, QDistinct> distinctByApexStuntedGrowth(
-      {bool caseSensitive = true}) {
+  QueryBuilder<Session, Session, QDistinct> distinctByApexStuntedGrowth() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'apexStuntedGrowth',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'apexStuntedGrowth');
     });
   }
 
@@ -1914,19 +1665,19 @@ extension SessionQueryProperty
     });
   }
 
-  QueryBuilder<Session, String, QQueryOperations> apexFullGrowthProperty() {
+  QueryBuilder<Session, int, QQueryOperations> apexFullGrowthProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'apexFullGrowth');
     });
   }
 
-  QueryBuilder<Session, String, QQueryOperations> apexSlowerGrowthProperty() {
+  QueryBuilder<Session, int, QQueryOperations> apexSlowerGrowthProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'apexSlowerGrowth');
     });
   }
 
-  QueryBuilder<Session, String, QQueryOperations> apexStuntedGrowthProperty() {
+  QueryBuilder<Session, int, QQueryOperations> apexStuntedGrowthProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'apexStuntedGrowth');
     });
