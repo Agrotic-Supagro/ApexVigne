@@ -32,7 +32,7 @@ class CardApexButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
-                  flex: 4,
+                  flex: 5,
                   child: Image.asset(
                     imgPath,
                     fit: BoxFit.cover,
@@ -41,7 +41,7 @@ class CardApexButton extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                    flex: 3,
+                    flex: 4,
                     child: Text(text,
                         style: Theme.of(context)
                             .textTheme

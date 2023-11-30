@@ -119,7 +119,6 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Expanded(
-            flex: 3,
             child: OutlinedButton.icon(
               onPressed: () {
                 selectDate(context);
@@ -130,7 +129,6 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
           ),
           const SizedBox(width: 10),
           Expanded(
-            flex: 4,
             child: OutlinedButton(
               onPressed: () async {
                 final selectedStadeId =
@@ -337,7 +335,10 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
                               firstValue + secondValue) <
                           50
                       ? null
-                      : () {}),
+                      : () {
+                        // TODO: Save session with Isar
+                        Navigator.of(context).pop();
+                      }),
               const SizedBox(width: 10),
               ElevatedApexButton(
                   icon: Symbols.article,
