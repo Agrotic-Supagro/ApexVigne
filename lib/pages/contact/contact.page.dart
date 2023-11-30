@@ -48,7 +48,11 @@ class _ContactPageState extends State<ContactPage> {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: ElevatedApexButton(
-                callback: () {},
+                callback: () {
+                  // TODO: Send message with the endpoint /contact
+                  // @param email The email of the user
+                  // @param message The message to send
+                },
                 text: 'Envoyer',
               ),
             ),
