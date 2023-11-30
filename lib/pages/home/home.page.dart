@@ -5,7 +5,9 @@ import 'package:apex_vigne/pages/parcel_detail/parcel_detail.page.dart';
 import 'package:apex_vigne/services/calculations.service.dart';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
+import 'package:apex_vigne/services/parcels_api.service.dart';
 import 'package:flutter/material.dart';
+import 'package:isar/isar.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:intl/intl.dart';
 
@@ -19,6 +21,63 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final IsarService _isarService = IsarService();
   String _sortingOption = 'Du plus récent au plus ancien';
+
+  Future<void> _showAddParcelDialog(BuildContext context) async {
+    final TextEditingController parcelNameController =
+        TextEditingController();
+    final formKey = GlobalKey<FormState>();
+
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Ajouter une parcelle'),
+          content: Form(
+            key: formKey,
+            child: TextFormField(
+              controller: parcelNameController,
+              decoration: const InputDecoration(
+                hintText: 'Nom de la parcelle',
+                border: InputBorder.none,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Veuillez entrer un nom de parcelle';
+                }
+                return null;
+              },
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Annuler'),
+            ),
+            TextButton(
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  // final Query<Parcel> parcels = _isarService.isar.parcels.buildQuery(filter: (parcel) => parcel.name 
+                  final parcel = Parcel()
+                    ..name = parcelNameController.text
+                    ..ownerId = 'cd3ac534-a9f8-4879-9167-5411b981202d';
+                  // parcels.findFirstSync();
+                  // final Query<Parcel> parcel = Parcel()
+                  //   ..name = parcelNameController.text
+                    // ..ownerId = 'cd3ac534-a9f8-4879-9167-5411b981202d';
+                  ParcelsApiService().addParcel(parcel);
+                  // _isarService.isar.parcels.put(parcel);
+                  Navigator.of(context).pop();
+                }
+              },
+              child: const Text('Ajouter'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +94,13 @@ class _HomePageState extends State<HomePage> {
           ),
           buildParcelsList(),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _showAddParcelDialog(context);
+        },
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        child: Icon(Symbols.add, color: Theme.of(context).colorScheme.primary),
       ),
     );
   }

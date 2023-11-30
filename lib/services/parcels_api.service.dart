@@ -31,7 +31,7 @@ class ParcelsApiService {
   Future<void> addParcel(Parcel parcel) async {
     final url = Uri.parse('$apiBaseUrl/parcels');
 
-    print(jsonEncode(parcel));
+    // Map<String, dynamic> parcelMap = parcel.
     final response = await http.post(
       url,
       headers: <String, String>{
@@ -47,5 +47,5 @@ class ParcelsApiService {
     } else {
       throw Exception('Failed to add parcel');
     }
-}
+  }
 }
