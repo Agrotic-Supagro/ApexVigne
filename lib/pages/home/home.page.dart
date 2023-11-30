@@ -43,10 +43,10 @@ class _HomePageState extends State<HomePage> {
           }
 
           final aDate = aSessions
-              .map((session) => DateTime.parse(session.sessionDate))
+              .map((session) => session.sessionDate.isNotEmpty ? DateTime.parse(session.sessionDate) : DateTime(0))
               .reduce((max, element) => max.isAfter(element) ? max : element);
           final bDate = bSessions
-              .map((session) => DateTime.parse(session.sessionDate))
+              .map((session) => session.sessionDate.isNotEmpty ? DateTime.parse(session.sessionDate) : DateTime(0))
               .reduce((max, element) => max.isAfter(element) ? max : element);
 
           return bDate.compareTo(aDate);
@@ -68,10 +68,10 @@ class _HomePageState extends State<HomePage> {
           }
 
           final aDate = aSessions
-              .map((session) => DateTime.parse(session.sessionDate))
+              .map((session) => session.sessionDate.isNotEmpty ? DateTime.parse(session.sessionDate) : DateTime(0))
               .reduce((min, element) => min.isBefore(element) ? min : element);
           final bDate = bSessions
-              .map((session) => DateTime.parse(session.sessionDate))
+              .map((session) => session.sessionDate.isNotEmpty ? DateTime.parse(session.sessionDate) : DateTime(0))
               .reduce((min, element) => min.isBefore(element) ? min : element);
 
           return aDate.compareTo(bDate);
