@@ -3,6 +3,7 @@ import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/pages/create_update_session/create_update_session.page.dart';
 import 'package:apex_vigne/services/calculations.service.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
+import 'package:apex_vigne/shared_widgets/line_chart.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -36,7 +37,12 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Text('Parcelle'),
+            const SizedBox(height: 20),
+            if (widget.sessions?.isNotEmpty ?? false)
+              SizedBox(
+                  width: 350,
+                  height: 350,
+                  child: IcApexLineChart(sessions: widget.sessions!)),
             const SizedBox(height: 20),
             buildSessionsBoard(context),
           ],
@@ -84,7 +90,8 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         columns: const [
           DataColumn(label: Text('Date')),
           DataColumn(label: Text('iC-Apex')),
-          DataColumn(label: Text('C.H.'), tooltip: 'Contrainte hydrique (C.H.)'),
+          DataColumn(
+              label: Text('C.H.'), tooltip: 'Contrainte hydrique (C.H.)'),
           DataColumn(label: Text('')),
         ],
         dividerThickness: 0.0,
@@ -92,13 +99,19 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         dataRowMinHeight: 50.0,
         dataRowMaxHeight: 80.0,
         rows: widget.sessions?.map<DataRow>((session) {
-              final apex = [int.parse(session.apex0), int.parse(session.apex1), int.parse(session.apex2)];
+              final apex = [
+                int.parse(session.apex0),
+                int.parse(session.apex1),
+                int.parse(session.apex2)
+              ];
               final double icApex = calculateIcApex(apex[0], apex[1], apex[2]);
               return DataRow(
                 cells: [
-                  DataCell(Text(formatDate(session.sessionDate), overflow: TextOverflow.ellipsis)),
+                  DataCell(Text(formatDate(session.sessionDate),
+                      overflow: TextOverflow.ellipsis)),
                   DataCell(Text(icApex.toStringAsFixed(2))),
-                  DataCell(Text(calculateHydricConstraint(apex[0], apex[1], apex[2], icApex))),
+                  DataCell(Text(calculateHydricConstraint(
+                      apex[0], apex[1], apex[2], icApex))),
                   DataCell(
                     ElevatedApexButton(
                       icon: Icons.article_outlined,
@@ -116,13 +129,14 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
   }
 
   Row buildFloatingActionButton(BuildContext context) {
-    Future<dynamic> showEcimeeParcelDialog(BuildContext context) {
+    Future<dynamic> showPrunedParcelDialog(BuildContext context) {
       return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: const Text('Écimer la parcelle'),
-            content: const Text('Êtes-vous sûr de vouloir écimer la parcelle ?'),
+            content:
+                const Text('Êtes-vous sûr de vouloir écimer la parcelle ?'),
             actions: [
               TextButton(
                 onPressed: () {
@@ -149,7 +163,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         ElevatedApexButton(
           icon: Symbols.cut,
           callback: () => {
-            showEcimeeParcelDialog(context),
+            showPrunedParcelDialog(context),
           },
         ),
         const SizedBox(width: 10),
