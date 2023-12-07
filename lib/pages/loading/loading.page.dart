@@ -68,6 +68,7 @@ class _LoadingPageState extends State<LoadingPage> {
     return Scaffold(
       // change colot status bar
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: SafeArea(
@@ -77,10 +78,26 @@ class _LoadingPageState extends State<LoadingPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Image(
-                    image: AssetImage('assets/img/logo/logo_apex_vigne.png'),
-                    fit: BoxFit.cover,
-                    width: 180),
+                const Hero(
+                  tag: 'logo',
+                  child: Image(
+                      image: AssetImage('assets/img/logo/logo_apex_vigne.png'),
+                      fit: BoxFit.cover,
+                      width: 180),
+                ),
+                const Hero(
+                  tag: 'title',
+                  child: Text(
+                    'ApeX Vigne',
+                    style: TextStyle(
+                      color: Colors.white60,
+                      fontFamily: 'Inter',
+                      fontSize: 38,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 6.4,
+                    ),
+                  ),
+                ),
                 Column(
                   children: [
                     const SizedBox(height: 50),

@@ -1,6 +1,6 @@
+import 'package:apex_vigne/pages/loading/loading.page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
-import 'package:apex_vigne/pages/home/home.page.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,11 +17,13 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return FlutterLogin(
       title: 'ApeX Vigne',
+      titleTag: 'title',
       logo: 'assets/img/logo/logo_apex_vigne.png',
+      logoTag: 'logo',
       onLogin: auth.login,
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => const HomePage(),
+          builder: (context) => const LoadingPage(),
         ));
       },
       onRecoverPassword: (_) => Future(
