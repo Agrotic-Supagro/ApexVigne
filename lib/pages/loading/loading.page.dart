@@ -120,12 +120,12 @@ class _LoadingPageState extends State<LoadingPage> {
                       Image(
                           image: AssetImage('assets/img/logo/logo_ifv.png'),
                           fit: BoxFit.cover,
-                          width: 280),
+                          height: 75),
                       SizedBox(height: 50),
                       Image(
                           image: AssetImage('assets/img/logo/logo_iam.png'),
                           fit: BoxFit.cover,
-                          width: 280),
+                          height: 75),
                     ],
                   ),
                 ),
