@@ -1,9 +1,11 @@
 import 'package:apex_vigne/collections/parcel.collection.dart';
 import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/pages/create_update_session/create_update_session.page.dart';
+import 'package:apex_vigne/pages/parcel_detail/widgets/ic_apex_cell.widget.dart';
 import 'package:apex_vigne/services/calculations.service.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
-import 'package:apex_vigne/shared_widgets/line_chart.widget.dart';
+import 'package:apex_vigne/pages/parcel_detail/widgets/ic_apex_line_chart.widget.dart';
+import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -53,7 +55,6 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
   }
 
   Theme buildSessionsBoard(BuildContext context) {
-    // TODO: Déplacer dans un service
     String formatDate(String timestamp) {
       final date = DateTime.parse(timestamp);
       final formattedDate = DateFormat.MMMMd('fr').format(date);
@@ -90,12 +91,11 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         columns: const [
           DataColumn(label: Text('Date')),
           DataColumn(label: Text('iC-Apex')),
-          DataColumn(
-              label: Text('C.H.'), tooltip: 'Contrainte hydrique (C.H.)'),
+          DataColumn(label: Text('C.H.'), tooltip: 'Contrainte hydrique (C.H.)'),
           DataColumn(label: Text('')),
         ],
         dividerThickness: 0.0,
-        columnSpacing: 30.0,
+        columnSpacing: 15.0,
         dataRowMinHeight: 50.0,
         dataRowMaxHeight: 80.0,
         rows: widget.sessions?.map<DataRow>((session) {
@@ -109,9 +109,10 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                 cells: [
                   DataCell(Text(formatDate(session.sessionDate),
                       overflow: TextOverflow.ellipsis)),
-                  DataCell(Text(icApex.toStringAsFixed(2))),
-                  DataCell(Text(calculateHydricConstraint(
-                      apex[0], apex[1], apex[2], icApex))),
+                  DataCell(
+                    IcApexCell(icApex: icApex)
+                  ),
+                  DataCell(LabelApexHydricConstraint(text: calculateHydricConstraint(apex[0], apex[1], apex[2], icApex))),
                   DataCell(
                     ElevatedApexButton(
                       icon: Icons.article_outlined,
@@ -166,7 +167,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
             showPrunedParcelDialog(context),
           },
         ),
-        const SizedBox(width: 10),
+        const SizedBox(width: 20),
         ElevatedApexButton(
           text: 'Nouvelle Session',
           callback: () => {
@@ -177,6 +178,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
             ))
           },
         ),
+        const SizedBox(width: 60),
       ],
     );
   }
