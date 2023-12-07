@@ -38,7 +38,8 @@ class AuthenticationService {
         return false;
       }
     } catch (e) {
-      throw Exception('Failed to connect to server');
+      debugPrint('Error: $e');
+      return false;
     }
   }
 
