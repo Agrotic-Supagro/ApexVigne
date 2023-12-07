@@ -46,7 +46,17 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                   height: 350,
                   child: IcApexLineChart(sessions: widget.sessions!)),
             const SizedBox(height: 20),
-            buildSessionsBoard(context),
+            if (widget.sessions?.isNotEmpty ?? false)
+              buildSessionsBoard(context),
+            if (widget.sessions?.isEmpty ?? false)
+              Center(
+                child: Text('Aucune session pour cette parcelle...',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1.2,
+                        )),
+              ),
           ],
         ),
       ),
@@ -91,7 +101,8 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         columns: const [
           DataColumn(label: Text('Date')),
           DataColumn(label: Text('iC-Apex')),
-          DataColumn(label: Text('C.H.'), tooltip: 'Contrainte hydrique (C.H.)'),
+          DataColumn(
+              label: Text('C.H.'), tooltip: 'Contrainte hydrique (C.H.)'),
           DataColumn(label: Text('')),
         ],
         dividerThickness: 0.0,
@@ -109,10 +120,10 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                 cells: [
                   DataCell(Text(formatDate(session.sessionDate),
                       overflow: TextOverflow.ellipsis)),
-                  DataCell(
-                    IcApexCell(icApex: icApex)
-                  ),
-                  DataCell(LabelApexHydricConstraint(text: calculateHydricConstraint(apex[0], apex[1], apex[2], icApex))),
+                  DataCell(IcApexCell(icApex: icApex)),
+                  DataCell(LabelApexHydricConstraint(
+                      text: calculateHydricConstraint(
+                          apex[0], apex[1], apex[2], icApex))),
                   DataCell(
                     ElevatedApexButton(
                       icon: Icons.article_outlined,
