@@ -2,7 +2,9 @@ import 'package:apex_vigne/collections/parcel.collection.dart';
 import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/pages/home/widgets/drawer_apex_vigne.widget.dart';
 import 'package:apex_vigne/pages/parcel_detail/parcel_detail.page.dart';
+import 'package:apex_vigne/services/calculations.service.dart';
 import 'package:apex_vigne/services/isar.service.dart';
+import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:intl/intl.dart';
@@ -97,7 +99,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        title: const Text('ApeX Vigne'),
+        title: const Center(child: Text('ApeX Vigne', style: TextStyle(fontWeight: FontWeight.w200))),
         actions: <Widget>[
           PopupMenuButton(
             shape: const RoundedRectangleBorder(
@@ -150,6 +152,8 @@ class _HomePageState extends State<HomePage> {
                   .where((session) => session.parcelId == currentParcel.id)
                   .toList();
               String lastSession = '';
+              final List<int> apex = [0, 0, 0];
+              double icApex = 0;
               currentSessionsParcel.sort((a, b) {
                 final aDate = DateTime.parse(a.sessionDate);
                 final bDate = DateTime.parse(b.sessionDate);
@@ -157,10 +161,16 @@ class _HomePageState extends State<HomePage> {
               });
               if (currentSessionsParcel.isNotEmpty) {
                 lastSession = 'Dernière observation le ${_formatDate(currentSessionsParcel.first.sessionDate)}';
+                apex[0] = int.parse(currentSessionsParcel.first.apex0);
+                apex[1] = int.parse(currentSessionsParcel.first.apex1);
+                apex[2] = int.parse(currentSessionsParcel.first.apex2);
+                icApex = calculateIcApex(apex[0], apex[1], apex[2]);
               }
               return ListTile(
-                title: Text(currentParcel.name),
-                subtitle: Text(lastSession),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 30.0),
+                title: Text(currentParcel.name, style: TextStyle(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.w600)),
+                subtitle: Text(lastSession, style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Theme.of(context).colorScheme.primary)),
+                trailing: lastSession.isNotEmpty ? LabelApexHydricConstraint(text: calculateHydricConstraint(apex[0], apex[1], apex[2], icApex)) : null,
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) {
