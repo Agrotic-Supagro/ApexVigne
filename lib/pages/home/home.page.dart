@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        title: const Text('Apex Vigne'),
+        title: const Text('ApeX Vigne'),
         actions: <Widget>[
           PopupMenuButton(
             shape: const RoundedRectangleBorder(

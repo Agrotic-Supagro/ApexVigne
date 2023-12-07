@@ -38,4 +38,31 @@ flutter:
   - assets/img/
   - assets/img/logo/
   - assets/img/stades_phenologique/
-
+  fonts:
+    - family: MuseoSans
+      fonts:
+        - asset: assets/fonts/MuseoSans-100.otf
+          weight: 100
+        - asset: assets/fonts/MuseoSans-100Italic.otf
+          weight: 100
+          style: italic
+        - asset: assets/fonts/MuseoSans-300Italic.otf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/MuseoSans-300.otf
+          weight: 300
+        - asset: assets/fonts/MuseoSans-500.otf
+          weight: 500
+        - asset: assets/fonts/MuseoSans-500Italic.otf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/MuseoSans-700.otf
+          weight: 700
+        - asset: assets/fonts/MuseoSans-700Italic.otf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/MuseoSans-900.otf
+          weight: 900
+        - asset: assets/fonts/MuseoSans-900Italic.otf
+          weight: 900
+          style: italic

@@ -28,8 +28,8 @@ class ApexVigneApp extends StatelessWidget {
       supportedLocales: const [
         Locale('fr', 'FR'),
       ],
-      title: 'Apex Vigne',
-      theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+      title: 'ApeX Vigne',
+      theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme, fontFamily: 'MuseoSans'),
       // darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       home: const LoadingPage(),
     );
