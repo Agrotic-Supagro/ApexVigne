@@ -67,10 +67,7 @@ class _LoadingPageState extends State<LoadingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // change colot status bar
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Theme.of(context).colorScheme.primary,
-      ),
+      appBar: _buildAppBar(context),
       body: SafeArea(
         child: Container(
           color: Theme.of(context).colorScheme.primary,
@@ -78,6 +75,7 @@ class _LoadingPageState extends State<LoadingPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                /* Logo */
                 const Hero(
                   tag: 'logo',
                   child: Image(
@@ -85,6 +83,7 @@ class _LoadingPageState extends State<LoadingPage> {
                       fit: BoxFit.cover,
                       width: 180),
                 ),
+                /* Title */
                 const Hero(
                   tag: 'title',
                   child: Text(
@@ -98,6 +97,7 @@ class _LoadingPageState extends State<LoadingPage> {
                     ),
                   ),
                 ),
+                /* Loading section */
                 Column(
                   children: [
                     const SizedBox(height: 50),
@@ -113,27 +113,40 @@ class _LoadingPageState extends State<LoadingPage> {
                     ),
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 50),
-                  child: Column(
-                    children: [
-                      Image(
-                          image: AssetImage('assets/img/logo/logo_ifv.png'),
-                          fit: BoxFit.cover,
-                          height: 75),
-                      SizedBox(height: 50),
-                      Image(
-                          image: AssetImage('assets/img/logo/logo_iam.png'),
-                          fit: BoxFit.cover,
-                          height: 75),
-                    ],
-                  ),
-                ),
+                _buildBottomSectionLogos(),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    /* Build */
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: Theme.of(context).colorScheme.primary,
+    );
+  }
+
+  Padding _buildBottomSectionLogos() {
+    /* Build */
+    return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 50),
+                child: Column(
+                  children: [
+                    Image(
+                        image: AssetImage('assets/img/logo/logo_ifv.png'),
+                        fit: BoxFit.cover,
+                        height: 75),
+                    SizedBox(height: 50),
+                    Image(
+                        image: AssetImage('assets/img/logo/logo_iam.png'),
+                        fit: BoxFit.cover,
+                        height: 75),
+                  ],
+                ),
+              );
   }
 }

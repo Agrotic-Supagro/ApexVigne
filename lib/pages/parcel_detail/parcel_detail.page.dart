@@ -25,17 +25,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        title: Text(widget.parcel.name),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
+      appBar: _buildAppBar(context),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -47,7 +37,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                   child: IcApexLineChart(sessions: widget.sessions!)),
             const SizedBox(height: 20),
             if (widget.sessions?.isNotEmpty ?? false)
-              buildSessionsBoard(context),
+              _buildSessionsBoard(context),
             if (widget.sessions?.isEmpty ?? false)
               Center(
                 child: Text('Aucune session pour cette parcelle...',
@@ -60,11 +50,26 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
           ],
         ),
       ),
-      floatingActionButton: buildFloatingActionButton(context),
+      floatingActionButton: _buildFloatingActionButton(context),
     );
   }
 
-  Theme buildSessionsBoard(BuildContext context) {
+  AppBar _buildAppBar(BuildContext context) {
+    /* Build */
+    return AppBar(
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      foregroundColor: Theme.of(context).colorScheme.onPrimary,
+      title: Text(widget.parcel.name),
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+  }
+
+  Theme _buildSessionsBoard(BuildContext context) {
     String formatDate(String timestamp) {
       final date = DateTime.parse(timestamp);
       final formattedDate = DateFormat.MMMMd('fr').format(date);
@@ -93,6 +98,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
       );
     }
 
+    /* Build */
     return Theme(
       data: Theme.of(context).copyWith(
         dividerColor: Colors.transparent,
@@ -140,7 +146,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
     );
   }
 
-  Row buildFloatingActionButton(BuildContext context) {
+  Row _buildFloatingActionButton(BuildContext context) {
     Future<dynamic> showPrunedParcelDialog(BuildContext context) {
       return showDialog(
         context: context,
@@ -169,6 +175,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
       );
     }
 
+    /* Build */
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
