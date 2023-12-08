@@ -85,6 +85,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
   }
 
   AppBar _buildAppBar(BuildContext context) {
+    /* Build */
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -113,6 +114,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
       }
     }
 
+    /* Build */
     return Expanded(
       flex: 0,
       child: Row(
@@ -209,6 +211,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
       );
     }
 
+    /* Build */
     return Expanded(
       child: Column(
         children: <Widget>[
@@ -302,6 +305,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
       );
     }
 
+    /* Build */
     return Expanded(
       flex: 0,
       child: Column(

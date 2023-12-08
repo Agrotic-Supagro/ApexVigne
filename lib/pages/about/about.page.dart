@@ -12,16 +12,13 @@ class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        title: const Text('À propos'),
-      ),
+      appBar: _buildAppBar(context),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            /* First section */
             Text('Application ApeX Vigne',
                 style: Theme.of(context)
                     .textTheme
@@ -40,6 +37,7 @@ class _AboutPageState extends State<AboutPage> {
                         .labelMedium!
                         .copyWith(letterSpacing: 1.2, color: Colors.grey[700]))),
             const SizedBox(height: 20),
+            /* Second section */
             Text('Partenaires',
                 style: Theme.of(context)
                     .textTheme
@@ -72,6 +70,15 @@ class _AboutPageState extends State<AboutPage> {
           ],
         ),
       ),
+    );
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    /* Build */
+    return AppBar(
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      foregroundColor: Theme.of(context).colorScheme.onPrimary,
+      title: const Text('À propos'),
     );
   }
 }

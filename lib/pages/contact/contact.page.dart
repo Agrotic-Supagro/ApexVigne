@@ -22,42 +22,58 @@ class _ContactPageState extends State<ContactPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Expanded(
-              child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    color: Color(0xFFF5F5F5),
-                  ),
-                  child: TextField(
-                    autofocus: true,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(borderSide: BorderSide.none),
-                      hintText: 'Écrivez votre message ici...',
-                    ),
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelMedium!
-                        .copyWith(letterSpacing: 1.2, color: Colors.grey[700]),
-                  )),
-            ),
+            _buildBodyField(context),
             const SizedBox(height: 20),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: ElevatedApexButton(
-                callback: () {
-                  // TODO: Send message with the endpoint /contact
-                  // @param email The email of the user
-                  // @param message The message to send
-                },
-                text: 'Envoyer',
-              ),
-            ),
+            const SendButton(),
           ],
         ),
+      ),
+    );
+  }
+
+  Expanded _buildBodyField(BuildContext context) {
+    /* Build */
+    return Expanded(
+            child: Container(
+                padding: const EdgeInsets.all(20),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                  color: Color(0xFFF5F5F5),
+                ),
+                child: TextField(
+                  autofocus: true,
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(borderSide: BorderSide.none),
+                    hintText: 'Écrivez votre message ici...',
+                  ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium!
+                      .copyWith(letterSpacing: 1.2, color: Colors.grey[700]),
+                )),
+          );
+  }
+}
+
+class SendButton extends StatelessWidget {
+  const SendButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: ElevatedApexButton(
+        callback: () {
+          // TODO: Send message with the endpoint /contact
+          // @param email The email of the user
+          // @param message The message to send
+        },
+        text: 'Envoyer',
       ),
     );
   }

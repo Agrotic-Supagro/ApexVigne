@@ -33,53 +33,72 @@ class _ProfilPageState extends State<ProfilPage> {
           children: <Widget>[
             Text('Information du compte', style: Theme.of(context).textTheme.labelMedium!.copyWith(letterSpacing: 1.2)),
             const SizedBox(height: 20),
-            Expanded(
-              child: FutureBuilder<UserModel?>(
-                future: userStorage.getData(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: Text(
-                        'Une erreur est survenue lors de la récupération de vos informations',
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                    );
-                  }
-                  currentUserProfile = snapshot.data;
-
-                  return ListView(
-                    children: <Widget>[
-                      ListTileInfo(text: 'Prénom', info: currentUserProfile?.firstname),
-                      Divider(color: Colors.grey[200]),
-                      ListTileInfo(text: 'Nom', info: currentUserProfile?.lastname),
-                      Divider(color: Colors.grey[200]),
-                      ListTileInfo(text: 'Email', info: currentUserProfile?.email),
-                      Divider(color: Colors.grey[200]),
-                      ListTileInfo(text: 'Structure', info: currentUserProfile?.structure),
-                    ],
-                  );
-                }
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: ElevatedApexButton(
-                callback: () {
-                  auth.logout(() {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
-                    ));
-                  });
-                },
-                text: 'Se déconnecter',
-              ),
-            ),
+            _buildProfilInfo(),
+            LogoutButton(auth: auth),
           ],
         ),
+      ),
+    );
+  }
+
+  Expanded _buildProfilInfo() {
+    /* Build */
+    return Expanded(
+            child: FutureBuilder<UserModel?>(
+              future: userStorage.getData(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text(
+                      'Une erreur est survenue lors de la récupération de vos informations',
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                  );
+                }
+                currentUserProfile = snapshot.data;
+
+                return ListView(
+                  children: <Widget>[
+                    ListTileInfo(text: 'Prénom', info: currentUserProfile?.firstname),
+                    Divider(color: Colors.grey[200]),
+                    ListTileInfo(text: 'Nom', info: currentUserProfile?.lastname),
+                    Divider(color: Colors.grey[200]),
+                    ListTileInfo(text: 'Email', info: currentUserProfile?.email),
+                    Divider(color: Colors.grey[200]),
+                    ListTileInfo(text: 'Structure', info: currentUserProfile?.structure),
+                  ],
+                );
+              }
+            ),
+          );
+  }
+}
+
+class LogoutButton extends StatelessWidget {
+  const LogoutButton({
+    super.key,
+    required this.auth,
+  });
+
+  final AuthenticationService auth;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: ElevatedApexButton(
+        callback: () {
+          auth.logout(() {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => const LoginPage(),
+            ));
+          });
+        },
+        text: 'Se déconnecter',
       ),
     );
   }
