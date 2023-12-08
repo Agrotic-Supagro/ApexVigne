@@ -126,66 +126,88 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Center(
-          child: FutureBuilder<List<dynamic>?>(
-        future: Future.wait([_isarService.allParcels, _isarService.allSessions]),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else if (!snapshot.hasData) {
-            return const Text('No parcel data available');
-          }
-
-          final List<dynamic> results = snapshot.data!;
-          final List<Parcel> parcels = results[0];
-          final List<Session> sessions = results[1];
-
-          final List<Parcel> sortedParcels = _sortParcels(parcels, sessions);
-
-          return ListView.builder(
-            itemCount: parcels.length,
-            itemBuilder: (context, index) {
-              final currentParcel = sortedParcels[index];
-              final currentSessionsParcel = sessions
-                  .where((session) => session.parcelId == currentParcel.id)
-                  .toList();
-              String lastSession = '';
-              final List<int> apex = [0, 0, 0];
-              double icApex = 0;
-              currentSessionsParcel.sort((a, b) {
-                final aDate = DateTime.parse(a.sessionDate);
-                final bDate = DateTime.parse(b.sessionDate);
-                return bDate.compareTo(aDate);
-              });
-              if (currentSessionsParcel.isNotEmpty) {
-                lastSession = 'Dernière observation le ${_formatDate(currentSessionsParcel.first.sessionDate)}';
-                apex[0] = int.parse(currentSessionsParcel.first.apex0);
-                apex[1] = int.parse(currentSessionsParcel.first.apex1);
-                apex[2] = int.parse(currentSessionsParcel.first.apex2);
-                icApex = calculateIcApex(apex[0], apex[1], apex[2]);
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/img/background_vine.png', // replace with the path to your image asset
+              fit: BoxFit.cover,
+            ),
+          ),
+          Center(
+              child: FutureBuilder<List<dynamic>?>(
+            future: Future.wait([_isarService.allParcels, _isarService.allSessions]),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else if (!snapshot.hasData) {
+                return const Text('No parcel data available');
               }
-              return ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 30.0),
-                title: Text(currentParcel.name, style: TextStyle(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.w600)),
-                subtitle: Text(lastSession, style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Theme.of(context).colorScheme.primary)),
-                trailing: lastSession.isNotEmpty ? LabelApexHydricConstraint(text: calculateHydricConstraint(apex[0], apex[1], apex[2], icApex)) : null,
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) {
-                      return ParcelDetailPage(
-                        parcel: currentParcel,
-                        sessions: currentSessionsParcel,
-                      );
-                    },
-                  ));
+
+              final List<dynamic> results = snapshot.data!;
+              final List<Parcel> parcels = results[0];
+              final List<Session> sessions = results[1];
+
+              final List<Parcel> sortedParcels = _sortParcels(parcels, sessions);
+
+              return ListView.builder(
+                padding: const EdgeInsets.symmetric(vertical: 35.0),
+                itemCount: parcels.length,
+                itemBuilder: (context, index) {
+                  final currentParcel = sortedParcels[index];
+                  final currentSessionsParcel = sessions
+                      .where((session) => session.parcelId == currentParcel.id)
+                      .toList();
+                  String lastSession = '';
+                  final List<int> apex = [0, 0, 0];
+                  double icApex = 0;
+                  currentSessionsParcel.sort((a, b) {
+                    final aDate = DateTime.parse(a.sessionDate);
+                    final bDate = DateTime.parse(b.sessionDate);
+                    return bDate.compareTo(aDate);
+                  });
+                  if (currentSessionsParcel.isNotEmpty) {
+                    lastSession = 'Dernière observation le ${_formatDate(currentSessionsParcel.first.sessionDate)}';
+                    apex[0] = int.parse(currentSessionsParcel.first.apex0);
+                    apex[1] = int.parse(currentSessionsParcel.first.apex1);
+                    apex[2] = int.parse(currentSessionsParcel.first.apex2);
+                    icApex = calculateIcApex(apex[0], apex[1], apex[2]);
+                  }
+                  return Column(
+                    children: [
+                      ListTile(
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 30.0),
+                        title: Text(currentParcel.name, style: TextStyle(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.w600)),
+                        subtitle: Text(lastSession, style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Theme.of(context).colorScheme.primary)),
+                        trailing: lastSession.isNotEmpty ? LabelApexHydricConstraint(text: calculateHydricConstraint(apex[0], apex[1], apex[2], icApex)) : null,
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return ParcelDetailPage(
+                                parcel: currentParcel,
+                                sessions: currentSessionsParcel,
+                              );
+                            },
+                          ));
+                        },
+                      ),
+                      if (index != parcels.length - 1)
+                        Divider(
+                          color: Colors.grey.shade100,
+                          indent: 30.0,
+                          endIndent: 30.0,
+                          height: 10.0,
+                        ),
+                    ],
+                  );
                 },
               );
             },
-          );
-        },
-      )),
+          )),
+        ],
+      ),
     );
   }
 }
