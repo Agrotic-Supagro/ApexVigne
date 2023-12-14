@@ -15,8 +15,8 @@ class IcApexLineChart extends StatelessWidget {
   Widget build(BuildContext context) {
     List<FlSpot> spots = sessions
         .map((session) => FlSpot(
-            DateTime.parse(session.sessionDate).millisecondsSinceEpoch.toDouble(),
-            calculateIcApex(int.parse(session.apex0), int.parse(session.apex1), int.parse(session.apex2))))
+            DateTime.parse(session.sessionAt).millisecondsSinceEpoch.toDouble(),
+            calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth, session.apexStuntedGrowth)))
         .toList();
 
     return LineChart(
@@ -30,11 +30,11 @@ class IcApexLineChart extends StatelessWidget {
         ),
         minY: 0,
         maxY: 1,
-        minX: DateTime.parse(sessions.first.sessionDate)
+        minX: DateTime.parse(sessions.first.sessionAt)
             .add(const Duration(days: 1))
             .millisecondsSinceEpoch
             .toDouble(),
-        maxX: DateTime.parse(sessions.last.sessionDate)
+        maxX: DateTime.parse(sessions.last.sessionAt)
             .add(const Duration(days: -1))
             .millisecondsSinceEpoch
             .toDouble(),
