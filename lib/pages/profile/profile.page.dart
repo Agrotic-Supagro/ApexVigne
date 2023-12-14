@@ -1,6 +1,6 @@
 import 'package:apex_vigne/models/user.model.dart';
 import 'package:apex_vigne/pages/login/login.page.dart';
-import 'package:apex_vigne/pages/profil/widgets/list_tile.widget.dart';
+import 'package:apex_vigne/pages/profile/widgets/list_tile.widget.dart';
 import 'package:apex_vigne/services/shared_prefs.service.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class _ProfilPageState extends State<ProfilPage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        title: const Text('Profile'),
+        title: const Text('Profil'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),

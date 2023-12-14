@@ -1,6 +1,6 @@
 import 'package:apex_vigne/pages/about/about.page.dart';
 import 'package:apex_vigne/pages/contact/contact.page.dart';
-import 'package:apex_vigne/pages/profil/profil.page.dart';
+import 'package:apex_vigne/pages/profile/profile.page.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
@@ -37,7 +37,7 @@ class DrawerApexVigne extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text('Profile'),
+            title: const Text('Profil'),
             trailing: Icon(Symbols.chevron_right, color: Colors.grey.shade400),
             onTap: () {
               Navigator.pop(context);
