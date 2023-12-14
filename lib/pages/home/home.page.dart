@@ -7,7 +7,6 @@ import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
 import 'package:apex_vigne/services/parcels_api.service.dart';
 import 'package:flutter/material.dart';
-import 'package:isar/isar.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:intl/intl.dart';
 
@@ -95,13 +94,7 @@ class _HomePageState extends State<HomePage> {
           buildParcelsList(),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showAddParcelDialog(context);
-        },
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        child: Icon(Symbols.add, color: Theme.of(context).colorScheme.primary),
-      ),
+      floatingActionButton: _buildFloatingActionButton(context),
     );
   }
 
@@ -293,5 +286,16 @@ class _HomePageState extends State<HomePage> {
         );
       },
     ));
+  }
+
+  FloatingActionButton _buildFloatingActionButton(BuildContext context) {
+    /* Build */
+    return FloatingActionButton(
+      onPressed: () {
+        _showAddParcelDialog(context);
+      },
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      child: Icon(Symbols.add, color: Theme.of(context).colorScheme.primary),
+    );
   }
 }

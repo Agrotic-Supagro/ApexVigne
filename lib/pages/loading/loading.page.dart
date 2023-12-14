@@ -1,7 +1,6 @@
 import 'package:apex_vigne/pages/home/home.page.dart';
 import 'package:apex_vigne/pages/login/login.page.dart';
 import 'package:apex_vigne/services/parcels_api.service.dart';
-import 'package:apex_vigne/services/server_api.service.dart';
 import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/services/auth.service.dart';
@@ -16,7 +15,6 @@ class LoadingPage extends StatefulWidget {
 
 class _LoadingPageState extends State<LoadingPage> {
   final AuthenticationService _authService = AuthenticationService();
-  final ServerApiService _apiService = ServerApiService();
   String _stepLoadingText = 'Chargement...';
 
   @override
