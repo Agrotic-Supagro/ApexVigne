@@ -109,12 +109,23 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         dividerColor: Colors.transparent,
       ),
       child: DataTable(
-        columns: const [
-          DataColumn(label: Text('Date')),
-          DataColumn(label: Text('iC-Apex')),
-          DataColumn(
+        columns: [
+          const DataColumn(label: Text('Date')),
+          const DataColumn(label: Text('iC-Apex')),
+          const DataColumn(
               label: Text('C.H.'), tooltip: 'Contrainte hydrique (C.H.)'),
-          DataColumn(label: Text('')),
+          DataColumn(
+              label: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            child: Text(widget.sessions!.length > 1 ? '${widget.sessions!.length} sessions' : '1 session',
+                style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.8))),
+          )),
         ],
         dividerThickness: 0.0,
         columnSpacing: 15.0,
