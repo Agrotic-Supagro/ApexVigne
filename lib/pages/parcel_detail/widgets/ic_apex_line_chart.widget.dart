@@ -110,7 +110,7 @@ class IcApexLineChart extends StatelessWidget {
           sideTitles: SideTitles(
             showTitles: true,
             interval: 0.5,
-            reservedSize: 20,
+            reservedSize: 30,
           ),
         ),
       );
