@@ -2,6 +2,7 @@ import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/services/calculations.service.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:intl/intl.dart';
 
 class IcApexLineChart extends StatelessWidget {
   final List<Session> sessions;
@@ -11,12 +12,22 @@ class IcApexLineChart extends StatelessWidget {
     required this.sessions,
   }) : super(key: key);
 
+  String formatDate(String? timestamp) {
+    if (timestamp == null || timestamp.isEmpty) {
+      return '';
+    }
+    final date = DateTime.parse(timestamp);
+    final formattedDate = DateFormat.Md('fr').format(date);
+    return formattedDate;
+  }
+
   @override
   Widget build(BuildContext context) {
     List<FlSpot> spots = sessions
         .map((session) => FlSpot(
-            DateTime.parse(session.sessionAt).millisecondsSinceEpoch.toDouble(),
-            calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth, session.apexStuntedGrowth)))
+            sessions.indexOf(session).toDouble(),
+            calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth,
+                session.apexStuntedGrowth)))
         .toList();
 
     return LineChart(
@@ -30,18 +41,11 @@ class IcApexLineChart extends StatelessWidget {
         ),
         minY: 0,
         maxY: 1,
-        minX: DateTime.parse(sessions.first.sessionAt)
-            .add(const Duration(days: 1))
-            .millisecondsSinceEpoch
-            .toDouble(),
-        maxX: DateTime.parse(sessions.last.sessionAt)
-            .add(const Duration(days: -1))
-            .millisecondsSinceEpoch
-            .toDouble(),
+        minX: 0,
+        maxX: sessions.length.toDouble() - 1,
         lineBarsData: [
           LineChartBarData(
             spots: spots,
-            isCurved: true,
             color: Theme.of(context).colorScheme.primary,
             barWidth: 2,
             isStrokeCapRound: true,
@@ -70,16 +74,25 @@ class IcApexLineChart extends StatelessWidget {
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
+            reservedSize: 40,
             getTitlesWidget: (value, meta) {
+              String text = '';
+              if (value == 0) {
+                text = formatDate(sessions.first.sessionAt);
+              } else if (value == sessions.length.toDouble() - 1) {
+                text = formatDate(sessions.last.sessionAt);
+              }
               return SideTitleWidget(
                 axisSide: meta.axisSide,
+                fitInside: const SideTitleFitInsideData(
+                    enabled: true,
+                    axisPosition: 1,
+                    distanceFromEdge: 0,
+                    parentAxisSize: 2),
                 child: Text(
-                  DateTime.fromMillisecondsSinceEpoch(value.toInt())
-                      .toString()
-                      .substring(5, 10),
+                  text,
                   style: const TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),
                 ),
@@ -97,7 +110,7 @@ class IcApexLineChart extends StatelessWidget {
           sideTitles: SideTitles(
             showTitles: true,
             interval: 0.5,
-            reservedSize: 40,
+            reservedSize: 20,
           ),
         ),
       );

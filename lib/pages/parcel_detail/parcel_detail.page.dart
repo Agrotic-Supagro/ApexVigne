@@ -27,27 +27,29 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
     return Scaffold(
       appBar: _buildAppBar(context),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            if (widget.sessions?.isNotEmpty ?? false)
-              SizedBox(
-                  width: 350,
-                  height: 350,
-                  child: IcApexLineChart(sessions: widget.sessions!)),
-            const SizedBox(height: 20),
-            if (widget.sessions?.isNotEmpty ?? false)
-              _buildSessionsBoard(context),
-            if (widget.sessions?.isEmpty ?? false)
-              Center(
-                child: Text('Aucune session pour cette parcelle...',
+        child: Center(
+          child: Column(
+            children: [
+              const SizedBox(height: 50),
+              if (widget.sessions?.isNotEmpty ?? false)
+                Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    width: double.infinity,
+                    height: 350,
+                    child: IcApexLineChart(sessions: widget.sessions!)),
+              const SizedBox(height: 20),
+              if (widget.sessions?.isNotEmpty ?? false)
+                _buildSessionsBoard(context),
+              if (widget.sessions?.isEmpty ?? false)
+                Text('Aucune session pour cette parcelle...',
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           color: Colors.grey,
                           fontWeight: FontWeight.w500,
                           letterSpacing: 1.2,
                         )),
-              ),
-          ],
+              const SizedBox(height: 80),
+            ],
+          ),
         ),
       ),
       floatingActionButton: _buildFloatingActionButton(context),
@@ -119,7 +121,8 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         dataRowMinHeight: 50.0,
         dataRowMaxHeight: 80.0,
         rows: widget.sessions?.map<DataRow>((session) {
-              final double icApex = calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth, session.apexStuntedGrowth);
+              final double icApex = calculateIcApex(session.apexFullGrowth,
+                  session.apexSlowerGrowth, session.apexStuntedGrowth);
               return DataRow(
                 cells: [
                   DataCell(Text(formatDate(session.sessionAt),
@@ -127,7 +130,10 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                   DataCell(IcApexCell(icApex: icApex)),
                   DataCell(LabelApexHydricConstraint(
                       text: calculateHydricConstraint(
-                          session.apexFullGrowth, session.apexSlowerGrowth, session.apexStuntedGrowth, icApex))),
+                          session.apexFullGrowth,
+                          session.apexSlowerGrowth,
+                          session.apexStuntedGrowth,
+                          icApex))),
                   DataCell(
                     ElevatedApexButton(
                       icon: Icons.article_outlined,
