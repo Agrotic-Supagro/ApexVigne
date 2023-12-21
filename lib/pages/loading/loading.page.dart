@@ -56,6 +56,8 @@ class _LoadingPageState extends State<LoadingPage> {
   }
 
   Future<void> _fetchDataServer() async {
+    _updateStepLoadingText('Chargement des données utilisateur...');
+    await _authService.getCurrentUserProfile();
     _updateStepLoadingText('Chargement des parcelles...');
     await ParcelsApiService().getAuthorizedParcels();
     _updateStepLoadingText('Chargement des sessions...');

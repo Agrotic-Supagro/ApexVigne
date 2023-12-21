@@ -1,7 +1,7 @@
-import 'package:apex_vigne/models/user.model.dart';
+import 'package:apex_vigne/collections/user.collection.dart';
 import 'package:apex_vigne/pages/login/login.page.dart';
 import 'package:apex_vigne/pages/profile/widgets/list_tile.widget.dart';
-import 'package:apex_vigne/services/shared_prefs.service.dart';
+import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/services/auth.service.dart';
@@ -15,8 +15,6 @@ class ProfilPage extends StatefulWidget {
 
 class _ProfilPageState extends State<ProfilPage> {
   final AuthenticationService auth = AuthenticationService();
-  final userStorage = SharedPrefsService<UserModel>('user', (json) => UserModel.fromJson(json));
-  UserModel? currentUserProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +42,13 @@ class _ProfilPageState extends State<ProfilPage> {
   Expanded _buildProfilInfo() {
     /* Build */
     return Expanded(
-            child: FutureBuilder<UserModel?>(
-              future: userStorage.getData(),
+            child: FutureBuilder<User?>(
+              future: IsarService().currentUser,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 }
-                if (snapshot.hasError) {
+                if (snapshot.hasError || snapshot.data == null) {
                   return Center(
                     child: Text(
                       'Une erreur est survenue lors de la récupération de vos informations',
@@ -58,17 +56,17 @@ class _ProfilPageState extends State<ProfilPage> {
                     ),
                   );
                 }
-                currentUserProfile = snapshot.data;
+                final currentUserProfile = snapshot.data!;
 
                 return ListView(
                   children: <Widget>[
-                    ListTileInfo(text: 'Prénom', info: currentUserProfile?.firstname),
+                    ListTileInfo(text: 'Prénom', info: currentUserProfile.firstname),
                     Divider(color: Colors.grey[200]),
-                    ListTileInfo(text: 'Nom', info: currentUserProfile?.lastname),
+                    ListTileInfo(text: 'Nom', info: currentUserProfile.lastname),
                     Divider(color: Colors.grey[200]),
-                    ListTileInfo(text: 'Email', info: currentUserProfile?.email),
+                    ListTileInfo(text: 'Email', info: currentUserProfile.email),
                     Divider(color: Colors.grey[200]),
-                    ListTileInfo(text: 'Structure', info: currentUserProfile?.structure),
+                    ListTileInfo(text: 'Structure', info: currentUserProfile.structure),
                   ],
                 );
               }

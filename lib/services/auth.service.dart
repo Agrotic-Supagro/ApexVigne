@@ -98,9 +98,11 @@ class AuthenticationService {
     });
 
     if (response.statusCode == 200) {
-      final List<dynamic> data = json.decode(response.body);
+      final dynamic data = json.decode(response.body);
+      final List<dynamic> listData = [];
+      listData.add(data);
       IsarService isarService = IsarService();
-      await isarService.saveData('me', data);
+      await isarService.saveData('me', listData);
     } else {
       throw Exception('Failed to retrieve user data');
     }
