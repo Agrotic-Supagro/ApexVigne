@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
               fit: BoxFit.cover,
             ),
           ),
-          buildParcelsList(),
+          _buildParcelsList(),
         ],
       ),
       floatingActionButton: _buildFloatingActionButton(context),
@@ -134,7 +134,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Center buildParcelsList() {
+  Center _buildParcelsList() {
     /* Sort parcels */
     List<Parcel> sortParcels(List<Parcel> parcels, List<Session> sessions) {
       switch (_sortingOption) {
