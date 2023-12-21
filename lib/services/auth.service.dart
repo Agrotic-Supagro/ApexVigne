@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:apex_vigne/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class AuthenticationService {
   ValueNotifier<bool> authenticationState = ValueNotifier(false);
   ValueNotifier<bool> registerState = ValueNotifier(false);
@@ -35,10 +34,13 @@ class AuthenticationService {
 
   /* Check connection */
   Future<bool> checkConnection() async {
-    final url = Uri.parse(APEX_VIGNE_API_URL);
+    final url = Uri.parse(apiBaseUrl);
 
     try {
-      final response = await http.get(url);
+      final response = await http.get(url, headers: {
+        'Authorization': 'Bearer ${await token}',
+        'Content-Type': 'application/json',
+      });
       if (response.statusCode == 200) {
         return true;
       } else {
@@ -52,11 +54,11 @@ class AuthenticationService {
 
   Future<String?> login(LoginData data) async {
     final response = await http.post(Uri.parse('$apiBaseUrl/login'),
-      headers: {"Content-Type": "application/json"},
-      body: json.encode({
-        'email': data.name,
-        'password': data.password,
-      }));
+        headers: {"Content-Type": "application/json"},
+        body: json.encode({
+          'email': data.name,
+          'password': data.password,
+        }));
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> res = json.decode(response.body);
@@ -90,14 +92,15 @@ class AuthenticationService {
 
   Future<void> getCurrentUserProfile() async {
     final url = Uri.parse('$apiBaseUrl/me');
-
-    final response = await http.get(url);
+    final response = await http.get(url, headers: {
+      'Authorization': 'Bearer ${await token}',
+      'Content-Type': 'application/json',
+    });
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);
       IsarService isarService = IsarService();
       await isarService.saveData('me', data);
-      // return User.fromJson(data);
     } else {
       throw Exception('Failed to retrieve user data');
     }
