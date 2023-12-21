@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
     return FlutterLogin(
       title: 'ApeX Vigne',
       titleTag: 'title',
-      logo: 'assets/img/logo/logo_apex_vigne.png',
+      logo: 'assets/images/logos/logo_apex_vigne_transparent.png',
       logoTag: 'logo',
       onLogin: auth.login,
       onSubmitAnimationCompleted: () {

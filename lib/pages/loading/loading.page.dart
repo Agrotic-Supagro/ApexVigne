@@ -80,7 +80,7 @@ class _LoadingPageState extends State<LoadingPage> {
                 const Hero(
                   tag: 'logo',
                   child: Image(
-                      image: AssetImage('assets/img/logo/logo_apex_vigne.png'),
+                      image: AssetImage('assets/images/logos/logo_apex_vigne_transparent.png'),
                       fit: BoxFit.cover,
                       width: 180),
                 ),
@@ -138,12 +138,12 @@ class _LoadingPageState extends State<LoadingPage> {
                 child: Column(
                   children: [
                     Image(
-                        image: AssetImage('assets/img/logo/logo_ifv.png'),
+                        image: AssetImage('assets/images/logos/logo_ifv.png'),
                         fit: BoxFit.cover,
                         height: 75),
                     SizedBox(height: 50),
                     Image(
-                        image: AssetImage('assets/img/logo/logo_iam.png'),
+                        image: AssetImage('assets/images/logos/logo_iam.png'),
                         fit: BoxFit.cover,
                         height: 75),
                   ],

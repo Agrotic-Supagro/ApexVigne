@@ -24,12 +24,12 @@ class DrawerApexVigne extends StatelessWidget {
               child: Column(
                 children: [
                   Image(
-                      image: AssetImage('assets/img/logo/logo_ifv.png'),
+                      image: AssetImage('assets/images/logos/logo_ifv.png'),
                       fit: BoxFit.cover,
                       height: 40),
                   SizedBox(height: 20),
                   Image(
-                      image: AssetImage('assets/img/logo/logo_iam.png'),
+                      image: AssetImage('assets/images/logos/logo_iam.png'),
                       fit: BoxFit.cover,
                       height: 40),
                 ],

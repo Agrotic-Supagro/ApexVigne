@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/img/background_vine.png', // replace with the path to your image asset
+              'assets/images/background_vine.png', // replace with the path to your image asset
               fit: BoxFit.cover,
             ),
           ),

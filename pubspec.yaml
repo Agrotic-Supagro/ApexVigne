@@ -36,10 +36,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-  - assets/
-  - assets/img/
-  - assets/img/logo/
-  - assets/img/stades_phenologique/
+  - assets/images/
+  - assets/images/logos/
+  - assets/images/stades_phenologique/
   fonts:
     - family: MuseoSans
       fonts:
@@ -72,5 +71,5 @@ flutter:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/img/logo/logo_apex_vigne.png"
+  image_path: "assets/images/logos/logo_apex_vigne.png"
   min_sdk_android: 21

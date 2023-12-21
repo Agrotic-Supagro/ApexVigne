@@ -216,7 +216,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
       child: Column(
         children: <Widget>[
           CardApexButton(
-              imgPath: 'assets/img/full_growth.jpg',
+              imgPath: 'assets/images/full_growth.jpg',
               text: 'Pleine croissance',
               onPressed: () async {
                 incrementCount(0);
@@ -228,7 +228,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
               count: _counts[0]),
           const SizedBox(height: 10),
           CardApexButton(
-              imgPath: 'assets/img/slower_growth.jpg',
+              imgPath: 'assets/images/slower_growth.jpg',
               text: 'Croissance ralentie',
               onPressed: () {
                 incrementCount(1);
@@ -240,7 +240,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
               count: _counts[1]),
           const SizedBox(height: 10),
           CardApexButton(
-              imgPath: 'assets/img/stunted_growth.jpg',
+              imgPath: 'assets/images/stunted_growth.jpg',
               text: 'Arrêt de croissance',
               onPressed: () {
                 incrementCount(2);

@@ -86,22 +86,7 @@ class _CardApexButtonState extends State<CardApexButton> {
         paddingFocus: 10,
         opacityShadow: 0.5,
         imageFilter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-        onFinish: () {
-          print("finish");
-        },
-        onClickTarget: (target) {
-          print('onClickTarget: $target');
-        },
-        onClickTargetWithTapPosition: (target, tapDetails) {
-          print("target: $target");
-          print(
-              "clicked at position local: ${tapDetails.localPosition} - global: ${tapDetails.globalPosition}");
-        },
-        onClickOverlay: (target) {
-          print('onClickOverlay: $target');
-        },
         onSkip: () {
-          print("skip");
           return true;
         },
     );
