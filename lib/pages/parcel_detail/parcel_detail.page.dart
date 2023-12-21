@@ -116,7 +116,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
               label: Text('C.H.'), tooltip: 'Contrainte hydrique (C.H.)'),
           DataColumn(
               label: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               color: Theme.of(context).colorScheme.primary,
