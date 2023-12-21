@@ -1,23 +1,21 @@
 import 'dart:convert';
 import 'package:apex_vigne/collections/session.collection.dart';
+import 'package:apex_vigne/services/auth.service.dart';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:http/http.dart' as http;
 import 'package:apex_vigne/constants.dart';
-import 'package:apex_vigne/services/shared_prefs.service.dart';
-
-import 'package:apex_vigne/models/user.model.dart';
 
 class SessionsApiService {
-  final userStorage = SharedPrefsService<UserModel>('user', (json) => UserModel.fromJson(json));
+  final url = Uri.parse('$apiBaseUrl/parcels');
+  Future<Map<String, String>> get headers async => {
+    'Authorization': 'Bearer ${await AuthenticationService().token}',
+    'Content-Type': 'application/json',
+  };
 
   Future<void> getAuthorizedSessions() async {
-    final UserModel? user = await userStorage.getData();
-    if (user == null) {
-      throw Exception('User error');
-    }
     final url = Uri.parse('$apiBaseUrl/sessions');
 
-    final response = await http.get(url);
+    final response = await http.get(url, headers: await headers);
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);
@@ -34,9 +32,7 @@ class SessionsApiService {
     print(jsonEncode(session));
     final response = await http.post(
       url,
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
+      headers: await headers,
       body: jsonEncode(session)
     );
 
