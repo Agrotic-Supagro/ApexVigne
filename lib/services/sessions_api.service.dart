@@ -6,15 +6,13 @@ import 'package:http/http.dart' as http;
 import 'package:apex_vigne/constants.dart';
 
 class SessionsApiService {
-  final url = Uri.parse('$apiBaseUrl/parcels');
+  final url = Uri.parse('$apiBaseUrl/sessions');
   Future<Map<String, String>> get headers async => {
     'Authorization': 'Bearer ${await AuthenticationService().token}',
     'Content-Type': 'application/json',
   };
 
   Future<void> getAuthorizedSessions() async {
-    final url = Uri.parse('$apiBaseUrl/sessions');
-
     final response = await http.get(url, headers: await headers);
 
     if (response.statusCode == 200) {
@@ -27,18 +25,22 @@ class SessionsApiService {
   }
 
   Future<void> addSession(Session session) async {
-    final url = Uri.parse('$apiBaseUrl/sessions');
-
-    print(jsonEncode(session));
     final response = await http.post(
       url,
       headers: await headers,
-      body: jsonEncode(session)
+      body: jsonEncode(<String, dynamic>{
+        'sessionAt': session.sessionAt,
+        'apexFullGrowth': session.apexFullGrowth,
+        'apexSlowerGrowth': session.apexSlowerGrowth,
+        'apexStuntedGrowth': session.apexStuntedGrowth,
+        'parcelId': session.parcelId,
+      })
     );
 
     if (response.statusCode == 200) {
+      return;
     } else {
       throw Exception('Failed to add session');
     }
-}
+  }
 }

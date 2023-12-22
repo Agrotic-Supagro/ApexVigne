@@ -2,7 +2,10 @@ import 'package:apex_vigne/collections/parcel.collection.dart';
 import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/pages/create_update_session/create_update_session.page.dart';
 import 'package:apex_vigne/pages/parcel_detail/widgets/ic_apex_cell.widget.dart';
+import 'package:apex_vigne/services/auth.service.dart';
 import 'package:apex_vigne/services/calculations.service.dart';
+import 'package:apex_vigne/services/isar.service.dart';
+import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:apex_vigne/pages/parcel_detail/widgets/ic_apex_line_chart.widget.dart';
 import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
@@ -162,6 +165,9 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
   }
 
   Row _buildFloatingActionButton(BuildContext context) {
+    final AuthenticationService authService = AuthenticationService();
+    final IsarService isarService = IsarService();
+
     Future<dynamic> showPrunedParcelDialog(BuildContext context) {
       return showDialog(
         context: context,
@@ -179,7 +185,17 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
               ),
               TextButton(
                 onPressed: () {
-                  // TODO: Créer une nouvelle session avec les apex à 0
+                  final session = Session()
+                    ..sessionAt = DateTime.now().toIso8601String()
+                    ..apexFullGrowth = 0
+                    ..apexSlowerGrowth = 0
+                    ..apexStuntedGrowth = 0
+                    ..parcelId = widget.parcel.id;
+                  if (authService.offlineModeState.value) {
+                    isarService.isar.sessions.put(session);
+                  } else {
+                    SessionsApiService().addSession(session);
+                  }
                   Navigator.of(context).pop();
                 },
                 child: const Text('Confirmer'),
@@ -205,8 +221,9 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
           text: 'Nouvelle Session',
           callback: () => {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const CreateUpdateSession(
+              builder: (context) => CreateUpdateSession(
                 title: 'Nouvelle session',
+                parcelId: widget.parcel.id,
               ),
             ))
           },

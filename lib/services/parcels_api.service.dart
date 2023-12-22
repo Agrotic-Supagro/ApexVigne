@@ -25,11 +25,12 @@ class ParcelsApiService {
   }
 
   Future<void> addParcel(Parcel parcel) async {
-    // Map<String, dynamic> parcelMap = parcel.
     final response = await http.post(
       url,
       headers: await headers,
-      body: jsonEncode(parcel)
+      body: jsonEncode(<String, String>{
+      'name': parcel.name,
+      })
     );
 
     if (response.statusCode == 200) {

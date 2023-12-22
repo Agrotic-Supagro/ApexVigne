@@ -36,6 +36,7 @@ class _LoadingPageState extends State<LoadingPage> {
       if (isConnected) {
         await _fetchDataServer();
       } else {
+        _authService.offlineModeState.value = true;
         _updateStepLoadingText('Lancemenent en mode hors ligne...');
       }
       Navigator.of(context).pushReplacement(MaterialPageRoute(

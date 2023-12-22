@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthenticationService {
   ValueNotifier<bool> authenticationState = ValueNotifier(false);
   ValueNotifier<bool> registerState = ValueNotifier(false);
+  ValueNotifier<bool> offlineModeState = ValueNotifier(false);
 
   Future<String> get token async {
     final prefs = await SharedPreferences.getInstance();

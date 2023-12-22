@@ -1,6 +1,10 @@
+import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/constants.dart';
 import 'package:apex_vigne/pages/create_update_session/widgets/card_apex_button.widget.dart';
 import 'package:apex_vigne/pages/stade_pheno/stade_pheno.dart';
+import 'package:apex_vigne/services/auth.service.dart';
+import 'package:apex_vigne/services/isar.service.dart';
+import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -9,8 +13,13 @@ import 'package:vibration/vibration.dart';
 
 class CreateUpdateSession extends StatefulWidget {
   const CreateUpdateSession(
-      {super.key, required this.title, this.selectedDate, this.noteText});
+      {super.key,
+      required this.title,
+      required this.parcelId,
+      this.selectedDate,
+      this.noteText});
   final String title;
+  final String parcelId;
   final DateTime? selectedDate;
   final String? noteText;
 
@@ -256,6 +265,9 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
   }
 
   Expanded _buildBottomSection() {
+    final AuthenticationService authService = AuthenticationService();
+    final IsarService isarService = IsarService();
+
     void undoLastAction() {
       if (_countsHistory.isNotEmpty) {
         Vibration.vibrate(duration: 10);
@@ -340,9 +352,19 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
                           50
                       ? null
                       : () {
-                        // TODO: Save session with Isar
-                        Navigator.of(context).pop();
-                      }),
+                          final session = Session()
+                            ..sessionAt = _selectedDate.toIso8601String()
+                            ..apexFullGrowth = _counts[0]
+                            ..apexSlowerGrowth = _counts[1]
+                            ..apexStuntedGrowth = _counts[2]
+                            ..parcelId = widget.parcelId;
+                          if (authService.offlineModeState.value) {
+                            isarService.isar.sessions.put(session);
+                          } else {
+                            SessionsApiService().addSession(session);
+                          }
+                          Navigator.of(context).pop();
+                        }),
               const SizedBox(width: 10),
               ElevatedApexButton(
                   icon: Symbols.article,

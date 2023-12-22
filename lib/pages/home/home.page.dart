@@ -2,6 +2,7 @@ import 'package:apex_vigne/collections/parcel.collection.dart';
 import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/pages/home/widgets/drawer_apex_vigne.widget.dart';
 import 'package:apex_vigne/pages/parcel_detail/parcel_detail.page.dart';
+import 'package:apex_vigne/services/auth.service.dart';
 import 'package:apex_vigne/services/calculations.service.dart';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
@@ -20,10 +21,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final IsarService _isarService = IsarService();
   String _sortingOption = 'Du plus récent au plus ancien';
+  final AuthenticationService _authService = AuthenticationService();
 
   Future<void> _showAddParcelDialog(BuildContext context) async {
-    final TextEditingController parcelNameController =
-        TextEditingController();
+    final TextEditingController parcelNameController = TextEditingController();
     final formKey = GlobalKey<FormState>();
 
     return showDialog(
@@ -57,16 +58,12 @@ class _HomePageState extends State<HomePage> {
             TextButton(
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  // final Query<Parcel> parcels = _isarService.isar.parcels.buildQuery(filter: (parcel) => parcel.name 
-                  final parcel = Parcel()
-                    ..name = parcelNameController.text
-                    ..ownerId = 'cd3ac534-a9f8-4879-9167-5411b981202d';
-                  // parcels.findFirstSync();
-                  // final Query<Parcel> parcel = Parcel()
-                  //   ..name = parcelNameController.text
-                    // ..ownerId = 'cd3ac534-a9f8-4879-9167-5411b981202d';
-                  ParcelsApiService().addParcel(parcel);
-                  // _isarService.isar.parcels.put(parcel);
+                  final parcel = Parcel()..name = parcelNameController.text;
+                  if (_authService.offlineModeState.value) {
+                    _isarService.isar.parcels.put(parcel);
+                  } else {
+                    ParcelsApiService().addParcel(parcel);
+                  }
                   Navigator.of(context).pop();
                 }
               },
@@ -159,12 +156,16 @@ class _HomePageState extends State<HomePage> {
               return -1;
             }
 
-          final aDate = aSessions
-              .map((session) => session.sessionAt.isNotEmpty ? DateTime.parse(session.sessionAt) : DateTime(0))
-              .reduce((max, element) => max.isAfter(element) ? max : element);
-          final bDate = bSessions
-              .map((session) => session.sessionAt.isNotEmpty ? DateTime.parse(session.sessionAt) : DateTime(0))
-              .reduce((max, element) => max.isAfter(element) ? max : element);
+            final aDate = aSessions
+                .map((session) => session.sessionAt.isNotEmpty
+                    ? DateTime.parse(session.sessionAt)
+                    : DateTime(0))
+                .reduce((max, element) => max.isAfter(element) ? max : element);
+            final bDate = bSessions
+                .map((session) => session.sessionAt.isNotEmpty
+                    ? DateTime.parse(session.sessionAt)
+                    : DateTime(0))
+                .reduce((max, element) => max.isAfter(element) ? max : element);
 
             return bDate.compareTo(aDate);
           });
@@ -184,12 +185,18 @@ class _HomePageState extends State<HomePage> {
               return -1;
             }
 
-          final aDate = aSessions
-              .map((session) => session.sessionAt.isNotEmpty ? DateTime.parse(session.sessionAt) : DateTime(0))
-              .reduce((min, element) => min.isBefore(element) ? min : element);
-          final bDate = bSessions
-              .map((session) => session.sessionAt.isNotEmpty ? DateTime.parse(session.sessionAt) : DateTime(0))
-              .reduce((min, element) => min.isBefore(element) ? min : element);
+            final aDate = aSessions
+                .map((session) => session.sessionAt.isNotEmpty
+                    ? DateTime.parse(session.sessionAt)
+                    : DateTime(0))
+                .reduce(
+                    (min, element) => min.isBefore(element) ? min : element);
+            final bDate = bSessions
+                .map((session) => session.sessionAt.isNotEmpty
+                    ? DateTime.parse(session.sessionAt)
+                    : DateTime(0))
+                .reduce(
+                    (min, element) => min.isBefore(element) ? min : element);
 
             return aDate.compareTo(bDate);
           });
@@ -238,6 +245,9 @@ class _HomePageState extends State<HomePage> {
             String lastSession = '';
             double icApex = 0;
             currentSessionsParcel.sort((a, b) {
+              if (a.sessionAt.isEmpty || b.sessionAt.isEmpty) {
+                return 0;
+              }
               final aDate = DateTime.parse(a.sessionAt);
               final bDate = DateTime.parse(b.sessionAt);
               return bDate.compareTo(aDate);
@@ -245,7 +255,10 @@ class _HomePageState extends State<HomePage> {
             if (currentSessionsParcel.isNotEmpty) {
               lastSession =
                   'Dernière observation le ${formatDate(currentSessionsParcel.first.sessionAt)}';
-              icApex = calculateIcApex(currentSessionsParcel.first.apexFullGrowth, currentSessionsParcel.first.apexSlowerGrowth, currentSessionsParcel.first.apexStuntedGrowth);
+              icApex = calculateIcApex(
+                  currentSessionsParcel.first.apexFullGrowth,
+                  currentSessionsParcel.first.apexSlowerGrowth,
+                  currentSessionsParcel.first.apexStuntedGrowth);
             }
             return Column(
               children: [
@@ -260,7 +273,11 @@ class _HomePageState extends State<HomePage> {
                           color: Theme.of(context).colorScheme.primary)),
                   trailing: lastSession.isNotEmpty
                       ? LabelApexHydricConstraint(
-                          text: calculateHydricConstraint(currentSessionsParcel.first.apexFullGrowth, currentSessionsParcel.first.apexSlowerGrowth, currentSessionsParcel.first.apexStuntedGrowth, icApex))
+                          text: calculateHydricConstraint(
+                              currentSessionsParcel.first.apexFullGrowth,
+                              currentSessionsParcel.first.apexSlowerGrowth,
+                              currentSessionsParcel.first.apexStuntedGrowth,
+                              icApex))
                       : null,
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
