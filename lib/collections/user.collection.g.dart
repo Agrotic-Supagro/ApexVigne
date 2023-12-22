@@ -115,6 +115,7 @@ User _userDeserialize(
   object.firstname = reader.readString(offsets[1]);
   object.id = reader.readString(offsets[2]);
   object.ifvModel = reader.readLong(offsets[3]);
+  object.isarId = id;
   object.lastname = reader.readString(offsets[4]);
   object.structure = reader.readString(offsets[5]);
   return object;
@@ -152,7 +153,9 @@ List<IsarLinkBase<dynamic>> _userGetLinks(User object) {
   return [];
 }
 
-void _userAttach(IsarCollection<dynamic> col, Id id, User object) {}
+void _userAttach(IsarCollection<dynamic> col, Id id, User object) {
+  object.isarId = id;
+}
 
 extension UserByIndex on IsarCollection<User> {
   Future<User?> getById(String id) {

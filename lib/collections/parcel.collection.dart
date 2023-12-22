@@ -1,5 +1,4 @@
 import 'package:isar/isar.dart';
-import 'package:apex_vigne/utils/fast_hash.dart';
 
 part 'parcel.collection.g.dart';
 
@@ -7,15 +6,15 @@ part 'parcel.collection.g.dart';
 class Parcel {
 
   @Index(unique: true, replace: true)
-  late String id;
+  String? id;
 
-  Id get isarId => fastHash(id);
+  Id isarId = Isar.autoIncrement;
 
   late String name;
 
-  late String createdAt;
+  String? createdAt;
 
-  late String updatedAt;
+  String? updatedAt;
 
-  late String ownerId;
+  String? ownerId;
 }

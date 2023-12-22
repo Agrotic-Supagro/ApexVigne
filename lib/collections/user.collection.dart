@@ -1,5 +1,4 @@
 import 'package:isar/isar.dart';
-import 'package:apex_vigne/utils/fast_hash.dart';
 
 part 'user.collection.g.dart';
 
@@ -9,7 +8,7 @@ class User {
   @Index(unique: true, replace: true)
   late String id;
 
-  Id get isarId => fastHash(id);
+  Id isarId = Isar.autoIncrement;
 
   late String firstname;
 

@@ -1,6 +1,6 @@
 import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/constants.dart';
-import 'package:apex_vigne/pages/create_update_session/widgets/card_apex_button.widget.dart';
+import 'package:apex_vigne/pages/create_session/widgets/card_apex_button.widget.dart';
 import 'package:apex_vigne/pages/stade_pheno/stade_pheno.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:apex_vigne/services/isar.service.dart';
@@ -11,8 +11,8 @@ import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:vibration/vibration.dart';
 
-class CreateUpdateSession extends StatefulWidget {
-  const CreateUpdateSession(
+class CreateSession extends StatefulWidget {
+  const CreateSession(
       {super.key,
       required this.title,
       required this.parcelId,
@@ -24,10 +24,10 @@ class CreateUpdateSession extends StatefulWidget {
   final String? noteText;
 
   @override
-  State<CreateUpdateSession> createState() => _CreateUpdateSessionState();
+  State<CreateSession> createState() => _CreateSessionState();
 }
 
-class _CreateUpdateSessionState extends State<CreateUpdateSession> {
+class _CreateSessionState extends State<CreateSession> {
   final List<int> _counts = [0, 0, 0];
   final List<int> _countsHistory = [];
   late DateTime _selectedDate;
@@ -191,7 +191,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
                 TextField(
                   controller: countController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(labelText: 'Nombre'),
+                  decoration: const InputDecoration(labelText: 'Nombre', border: InputBorder.none),
                 ),
               ],
             ),
@@ -347,21 +347,20 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
               const SizedBox(width: 10),
               ElevatedApexButton(
                   text: 'Terminer la session',
-                  callback: _counts.reduce((firstValue, secondValue) =>
-                              firstValue + secondValue) <
-                          50
+                  callback: _counts.reduce((firstValue, secondValue) => firstValue + secondValue) < 50
                       ? null
-                      : () {
+                      : () async {
                           final session = Session()
                             ..sessionAt = _selectedDate.toIso8601String()
                             ..apexFullGrowth = _counts[0]
                             ..apexSlowerGrowth = _counts[1]
                             ..apexStuntedGrowth = _counts[2]
                             ..parcelId = widget.parcelId;
-                          if (authService.offlineModeState.value) {
-                            isarService.isar.sessions.put(session);
+                          final bool isConnected = await authService.checkConnection();
+                          if (isConnected) {
+                            await SessionsApiService().addSession(session);
                           } else {
-                            SessionsApiService().addSession(session);
+                            await isarService.saveSession(session);
                           }
                           Navigator.of(context).pop();
                         }),

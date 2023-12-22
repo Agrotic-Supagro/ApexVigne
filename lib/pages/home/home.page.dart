@@ -7,6 +7,7 @@ import 'package:apex_vigne/services/calculations.service.dart';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
 import 'package:apex_vigne/services/parcels_api.service.dart';
+import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:intl/intl.dart';
@@ -56,13 +57,14 @@ class _HomePageState extends State<HomePage> {
               child: const Text('Annuler'),
             ),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   final parcel = Parcel()..name = parcelNameController.text;
-                  if (_authService.offlineModeState.value) {
-                    _isarService.isar.parcels.put(parcel);
+                  final bool isConnected = await _authService.checkConnection();
+                  if (isConnected) {
+                    await ParcelsApiService().addParcel(parcel);
                   } else {
-                    ParcelsApiService().addParcel(parcel);
+                    await _isarService.saveParcel(parcel);
                   }
                   Navigator.of(context).pop();
                 }
@@ -205,16 +207,6 @@ class _HomePageState extends State<HomePage> {
       return parcels;
     }
 
-    /* Format date */
-    String formatDate(String? timestamp) {
-      if (timestamp == null || timestamp.isEmpty) {
-        return '';
-      }
-      final date = DateTime.parse(timestamp);
-      final formattedDate = DateFormat.MMMMd('fr').format(date);
-      return formattedDate;
-    }
-
     /* Build */
     return Center(
         child: FutureBuilder<List<dynamic>?>(
@@ -254,7 +246,7 @@ class _HomePageState extends State<HomePage> {
             });
             if (currentSessionsParcel.isNotEmpty) {
               lastSession =
-                  'Dernière observation le ${formatDate(currentSessionsParcel.first.sessionAt)}';
+                  'Dernière observation le ${formatDate(currentSessionsParcel.first.sessionAt, explicit: true)}';
               icApex = calculateIcApex(
                   currentSessionsParcel.first.apexFullGrowth,
                   currentSessionsParcel.first.apexSlowerGrowth,

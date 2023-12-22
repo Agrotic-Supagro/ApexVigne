@@ -1,5 +1,6 @@
 double calculateIcApex(int apexFullGrowth, int apexSlowerGrowth, int apexStuntedGrowth) {
   int sumApex = apexFullGrowth + apexSlowerGrowth + apexStuntedGrowth;
+  sumApex = sumApex == 0 ? 1 : sumApex;
   return (apexFullGrowth + (apexSlowerGrowth / 2)) / sumApex;
 }
 

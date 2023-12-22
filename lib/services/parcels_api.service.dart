@@ -33,10 +33,10 @@ class ParcelsApiService {
       })
     );
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = json.decode(response.body);
-      IsarService isarService = IsarService();
-      await isarService.saveData('parcels', [data]);
+    if (response.statusCode == 201) {
+      print(json.decode(response.body));
+      parcel.id = json.decode(response.body)['id'];
+      await IsarService().saveParcel(parcel);
     } else {
       throw Exception('Failed to add parcel');
     }

@@ -77,11 +77,31 @@ int _parcelEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  bytesCount += 3 + object.createdAt.length * 3;
-  bytesCount += 3 + object.id.length * 3;
+  {
+    final value = object.createdAt;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.id;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.name.length * 3;
-  bytesCount += 3 + object.ownerId.length * 3;
-  bytesCount += 3 + object.updatedAt.length * 3;
+  {
+    final value = object.ownerId;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.updatedAt;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   return bytesCount;
 }
 
@@ -105,11 +125,12 @@ Parcel _parcelDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Parcel();
-  object.createdAt = reader.readString(offsets[0]);
-  object.id = reader.readString(offsets[1]);
+  object.createdAt = reader.readStringOrNull(offsets[0]);
+  object.id = reader.readStringOrNull(offsets[1]);
+  object.isarId = id;
   object.name = reader.readString(offsets[2]);
-  object.ownerId = reader.readString(offsets[3]);
-  object.updatedAt = reader.readString(offsets[4]);
+  object.ownerId = reader.readStringOrNull(offsets[3]);
+  object.updatedAt = reader.readStringOrNull(offsets[4]);
   return object;
 }
 
@@ -121,15 +142,15 @@ P _parcelDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 1:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 4:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -143,41 +164,43 @@ List<IsarLinkBase<dynamic>> _parcelGetLinks(Parcel object) {
   return [];
 }
 
-void _parcelAttach(IsarCollection<dynamic> col, Id id, Parcel object) {}
+void _parcelAttach(IsarCollection<dynamic> col, Id id, Parcel object) {
+  object.isarId = id;
+}
 
 extension ParcelByIndex on IsarCollection<Parcel> {
-  Future<Parcel?> getById(String id) {
+  Future<Parcel?> getById(String? id) {
     return getByIndex(r'id', [id]);
   }
 
-  Parcel? getByIdSync(String id) {
+  Parcel? getByIdSync(String? id) {
     return getByIndexSync(r'id', [id]);
   }
 
-  Future<bool> deleteById(String id) {
+  Future<bool> deleteById(String? id) {
     return deleteByIndex(r'id', [id]);
   }
 
-  bool deleteByIdSync(String id) {
+  bool deleteByIdSync(String? id) {
     return deleteByIndexSync(r'id', [id]);
   }
 
-  Future<List<Parcel?>> getAllById(List<String> idValues) {
+  Future<List<Parcel?>> getAllById(List<String?> idValues) {
     final values = idValues.map((e) => [e]).toList();
     return getAllByIndex(r'id', values);
   }
 
-  List<Parcel?> getAllByIdSync(List<String> idValues) {
+  List<Parcel?> getAllByIdSync(List<String?> idValues) {
     final values = idValues.map((e) => [e]).toList();
     return getAllByIndexSync(r'id', values);
   }
 
-  Future<int> deleteAllById(List<String> idValues) {
+  Future<int> deleteAllById(List<String?> idValues) {
     final values = idValues.map((e) => [e]).toList();
     return deleteAllByIndex(r'id', values);
   }
 
-  int deleteAllByIdSync(List<String> idValues) {
+  int deleteAllByIdSync(List<String?> idValues) {
     final values = idValues.map((e) => [e]).toList();
     return deleteAllByIndexSync(r'id', values);
   }
@@ -273,7 +296,27 @@ extension ParcelQueryWhere on QueryBuilder<Parcel, Parcel, QWhereClause> {
     });
   }
 
-  QueryBuilder<Parcel, Parcel, QAfterWhereClause> idEqualTo(String id) {
+  QueryBuilder<Parcel, Parcel, QAfterWhereClause> idIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'id',
+        value: [null],
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterWhereClause> idIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'id',
+        lower: [null],
+        includeLower: false,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterWhereClause> idEqualTo(String? id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
         indexName: r'id',
@@ -282,7 +325,7 @@ extension ParcelQueryWhere on QueryBuilder<Parcel, Parcel, QWhereClause> {
     });
   }
 
-  QueryBuilder<Parcel, Parcel, QAfterWhereClause> idNotEqualTo(String id) {
+  QueryBuilder<Parcel, Parcel, QAfterWhereClause> idNotEqualTo(String? id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -318,8 +361,24 @@ extension ParcelQueryWhere on QueryBuilder<Parcel, Parcel, QWhereClause> {
 }
 
 extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'createdAt',
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'createdAt',
+      ));
+    });
+  }
+
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -332,7 +391,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }
 
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -347,7 +406,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }
 
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -362,8 +421,8 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }
 
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -448,8 +507,24 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
     });
   }
 
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> idIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'id',
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> idIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'id',
+      ));
+    });
+  }
+
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> idEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -462,7 +537,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }
 
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> idGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -477,7 +552,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }
 
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> idLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -492,8 +567,8 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }
 
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> idBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -757,8 +832,24 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
     });
   }
 
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'ownerId',
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'ownerId',
+      ));
+    });
+  }
+
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -771,7 +862,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }
 
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -786,7 +877,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }
 
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -801,8 +892,8 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }
 
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> ownerIdBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -887,8 +978,24 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
     });
   }
 
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'updatedAt',
+      ));
+    });
+  }
+
+  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'updatedAt',
+      ));
+    });
+  }
+
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -901,7 +1008,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }
 
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -916,7 +1023,7 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }
 
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -931,8 +1038,8 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
   }
 
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -1202,13 +1309,13 @@ extension ParcelQueryProperty on QueryBuilder<Parcel, Parcel, QQueryProperty> {
     });
   }
 
-  QueryBuilder<Parcel, String, QQueryOperations> createdAtProperty() {
+  QueryBuilder<Parcel, String?, QQueryOperations> createdAtProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'createdAt');
     });
   }
 
-  QueryBuilder<Parcel, String, QQueryOperations> idProperty() {
+  QueryBuilder<Parcel, String?, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
@@ -1220,13 +1327,13 @@ extension ParcelQueryProperty on QueryBuilder<Parcel, Parcel, QQueryProperty> {
     });
   }
 
-  QueryBuilder<Parcel, String, QQueryOperations> ownerIdProperty() {
+  QueryBuilder<Parcel, String?, QQueryOperations> ownerIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'ownerId');
     });
   }
 
-  QueryBuilder<Parcel, String, QQueryOperations> updatedAtProperty() {
+  QueryBuilder<Parcel, String?, QQueryOperations> updatedAtProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'updatedAt');
     });

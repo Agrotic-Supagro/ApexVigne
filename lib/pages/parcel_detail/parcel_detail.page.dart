@@ -1,6 +1,6 @@
 import 'package:apex_vigne/collections/parcel.collection.dart';
 import 'package:apex_vigne/collections/session.collection.dart';
-import 'package:apex_vigne/pages/create_update_session/create_update_session.page.dart';
+import 'package:apex_vigne/pages/create_session/create_session.page.dart';
 import 'package:apex_vigne/pages/parcel_detail/widgets/ic_apex_cell.widget.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:apex_vigne/services/calculations.service.dart';
@@ -9,6 +9,7 @@ import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:apex_vigne/pages/parcel_detail/widgets/ic_apex_line_chart.widget.dart';
 import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
+import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -75,15 +76,6 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
   }
 
   Theme _buildSessionsBoard(BuildContext context) {
-    String formatDate(String? timestamp) {
-      if (timestamp == null || timestamp.isEmpty) {
-        return '';
-      }
-      final date = DateTime.parse(timestamp);
-      final formattedDate = DateFormat.MMMMd('fr').format(date);
-      return formattedDate;
-    }
-
     Future<dynamic> showNotesDialog(BuildContext context) {
       return showDialog(
         context: context,
@@ -119,7 +111,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
               label: Text('C.H.'), tooltip: 'Contrainte hydrique (C.H.)'),
           DataColumn(
               label: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               color: Theme.of(context).colorScheme.primary,
@@ -139,7 +131,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                   session.apexSlowerGrowth, session.apexStuntedGrowth);
               return DataRow(
                 cells: [
-                  DataCell(Text(formatDate(session.sessionAt),
+                  DataCell(Text(formatDate(session.sessionAt, explicit: true),
                       overflow: TextOverflow.ellipsis)),
                   DataCell(IcApexCell(icApex: icApex)),
                   DataCell(LabelApexHydricConstraint(
@@ -184,17 +176,19 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                 child: const Text('Annuler'),
               ),
               TextButton(
-                onPressed: () {
+                onPressed: () async {
                   final session = Session()
                     ..sessionAt = DateTime.now().toIso8601String()
                     ..apexFullGrowth = 0
                     ..apexSlowerGrowth = 0
                     ..apexStuntedGrowth = 0
-                    ..parcelId = widget.parcel.id;
-                  if (authService.offlineModeState.value) {
-                    isarService.isar.sessions.put(session);
+                    // TODO: Manage parcel without id
+                    ..parcelId = widget.parcel.id!;
+                  final bool isConnected = await authService.checkConnection();
+                  if (isConnected) {
+                    await SessionsApiService().addSession(session);
                   } else {
-                    SessionsApiService().addSession(session);
+                    await isarService.saveSession(session);
                   }
                   Navigator.of(context).pop();
                 },
@@ -221,9 +215,10 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
           text: 'Nouvelle Session',
           callback: () => {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => CreateUpdateSession(
+              builder: (context) => CreateSession(
                 title: 'Nouvelle session',
-                parcelId: widget.parcel.id,
+                // TODO: Manage parcel without id
+                parcelId: widget.parcel.id!,
               ),
             ))
           },

@@ -97,12 +97,27 @@ int _sessionEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  bytesCount += 3 + object.createdAt.length * 3;
+  {
+    final value = object.createdAt;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.id.length * 3;
-  bytesCount += 3 + object.observerId.length * 3;
+  {
+    final value = object.observerId;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.parcelId.length * 3;
   bytesCount += 3 + object.sessionAt.length * 3;
-  bytesCount += 3 + object.updatedAt.length * 3;
+  {
+    final value = object.updatedAt;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   return bytesCount;
 }
 
@@ -133,12 +148,13 @@ Session _sessionDeserialize(
   object.apexFullGrowth = reader.readLong(offsets[0]);
   object.apexSlowerGrowth = reader.readLong(offsets[1]);
   object.apexStuntedGrowth = reader.readLong(offsets[2]);
-  object.createdAt = reader.readString(offsets[3]);
+  object.createdAt = reader.readStringOrNull(offsets[3]);
   object.id = reader.readString(offsets[4]);
-  object.observerId = reader.readString(offsets[5]);
+  object.isarId = id;
+  object.observerId = reader.readStringOrNull(offsets[5]);
   object.parcelId = reader.readString(offsets[6]);
   object.sessionAt = reader.readString(offsets[7]);
-  object.updatedAt = reader.readString(offsets[8]);
+  object.updatedAt = reader.readStringOrNull(offsets[8]);
   return object;
 }
 
@@ -156,17 +172,17 @@ P _sessionDeserializeProp<P>(
     case 2:
       return (reader.readLong(offset)) as P;
     case 3:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 4:
       return (reader.readString(offset)) as P;
     case 5:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 6:
       return (reader.readString(offset)) as P;
     case 7:
       return (reader.readString(offset)) as P;
     case 8:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -180,7 +196,9 @@ List<IsarLinkBase<dynamic>> _sessionGetLinks(Session object) {
   return [];
 }
 
-void _sessionAttach(IsarCollection<dynamic> col, Id id, Session object) {}
+void _sessionAttach(IsarCollection<dynamic> col, Id id, Session object) {
+  object.isarId = id;
+}
 
 extension SessionByIndex on IsarCollection<Session> {
   Future<Session?> getById(String id) {
@@ -522,8 +540,24 @@ extension SessionQueryFilter
     });
   }
 
+  QueryBuilder<Session, Session, QAfterFilterCondition> createdAtIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'createdAt',
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> createdAtIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'createdAt',
+      ));
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterFilterCondition> createdAtEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -536,7 +570,7 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> createdAtGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -551,7 +585,7 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> createdAtLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -566,8 +600,8 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> createdAtBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -834,8 +868,24 @@ extension SessionQueryFilter
     });
   }
 
+  QueryBuilder<Session, Session, QAfterFilterCondition> observerIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'observerId',
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> observerIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'observerId',
+      ));
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterFilterCondition> observerIdEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -848,7 +898,7 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> observerIdGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -863,7 +913,7 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> observerIdLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -878,8 +928,8 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> observerIdBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -1224,8 +1274,24 @@ extension SessionQueryFilter
     });
   }
 
+  QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'updatedAt',
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'updatedAt',
+      ));
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -1238,7 +1304,7 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -1253,7 +1319,7 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -1268,8 +1334,8 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -1683,7 +1749,7 @@ extension SessionQueryProperty
     });
   }
 
-  QueryBuilder<Session, String, QQueryOperations> createdAtProperty() {
+  QueryBuilder<Session, String?, QQueryOperations> createdAtProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'createdAt');
     });
@@ -1695,7 +1761,7 @@ extension SessionQueryProperty
     });
   }
 
-  QueryBuilder<Session, String, QQueryOperations> observerIdProperty() {
+  QueryBuilder<Session, String?, QQueryOperations> observerIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'observerId');
     });
@@ -1713,7 +1779,7 @@ extension SessionQueryProperty
     });
   }
 
-  QueryBuilder<Session, String, QQueryOperations> updatedAtProperty() {
+  QueryBuilder<Session, String?, QQueryOperations> updatedAtProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'updatedAt');
     });

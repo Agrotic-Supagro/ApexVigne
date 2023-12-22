@@ -39,4 +39,16 @@ class IsarService {
       }
     });
   }
+
+  Future<void> saveParcel(Parcel parcel) async {
+    await isar.writeTxn(() async {
+      await isar.parcels.put(parcel);
+    });
+  }
+
+  Future<void> saveSession(Session session) async {
+    await isar.writeTxn(() async {
+      await isar.sessions.put(session);
+    });
+  }
 }

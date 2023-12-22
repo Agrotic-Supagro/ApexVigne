@@ -1,5 +1,4 @@
 import 'package:isar/isar.dart';
-import 'package:apex_vigne/utils/fast_hash.dart';
 
 part 'session.collection.g.dart';
 
@@ -9,13 +8,13 @@ class Session {
   @Index(unique: true, replace: true)
   late String id;
 
-  Id get isarId => fastHash(id);
+  Id isarId = Isar.autoIncrement;
 
-  late String createdAt;
+  String? createdAt;
 
   late String sessionAt;
 
-  late String updatedAt;
+  String? updatedAt;
 
   late int apexFullGrowth;
 
@@ -23,7 +22,7 @@ class Session {
 
   late int apexStuntedGrowth;
 
-  late String observerId;
+  String? observerId;
 
   late String parcelId;
 }
