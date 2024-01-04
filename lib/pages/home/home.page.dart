@@ -233,8 +233,8 @@ class _HomePageState extends State<HomePage> {
                                 icApex),
                           )
                         : null,
-                    onTap: () {
-                      Navigator.of(context).push(
+                    onTap: () async {
+                      await Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
                             return ParcelDetailPage(
@@ -244,6 +244,9 @@ class _HomePageState extends State<HomePage> {
                           },
                         ),
                       );
+                      setState(() {
+                        _isarService.allSessions;
+                      });
                     },
                   ),
                   if (index != parcels.length - 1)

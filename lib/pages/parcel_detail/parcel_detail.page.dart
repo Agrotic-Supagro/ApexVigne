@@ -204,6 +204,11 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                   } else {
                     await isarService.saveSession(session);
                   }
+                  setState(() {
+                    widget.sessions!.add(session);
+                    widget.sessions!.sort((a, b) => DateTime.parse(b.sessionAt)
+                        .compareTo(DateTime.parse(a.sessionAt)));
+                  });
                   Navigator.of(context).pop();
                 },
                 child: const Text('Confirmer'),
@@ -227,14 +232,23 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         const SizedBox(width: 20),
         ElevatedApexButton(
           text: 'Nouvelle Session',
-          callback: () => {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => CreateSession(
-                title: 'Nouvelle session',
-                // TODO: Manage parcel without id
-                parcelId: widget.parcel.id!,
+          callback: () async {
+            final Session? session = await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => CreateSession(
+                  title: 'Nouvelle session',
+                  // TODO: Manage parcel without id
+                  parcelId: widget.parcel.id!,
+                ),
               ),
-            ))
+            );
+            if (session != null) {
+              setState(() {
+                widget.sessions!.add(session);
+                widget.sessions!.sort((a, b) => DateTime.parse(b.sessionAt)
+                    .compareTo(DateTime.parse(a.sessionAt)));
+              });
+            }
           },
         ),
         const SizedBox(width: 60),

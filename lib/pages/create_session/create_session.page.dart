@@ -367,7 +367,7 @@ class _CreateSessionState extends State<CreateSession> {
                           } else {
                             await isarService.saveSession(session);
                           }
-                          Navigator.of(context).pop();
+                          Navigator.of(context).pop(session);
                         }),
               const SizedBox(width: 10),
               ElevatedApexButton(
