@@ -6,7 +6,7 @@ String formatDate(String? timestamp, {bool explicit = false}) {
   }
   final date = DateTime.parse(timestamp);
   if (explicit) {
-    return DateFormat.yMMMM('fr').format(date);
+    return DateFormat.MMMMd('fr').format(date);
   }
 
   return DateFormat.Md('fr').format(date);
