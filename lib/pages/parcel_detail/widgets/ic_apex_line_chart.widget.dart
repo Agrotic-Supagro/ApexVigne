@@ -3,7 +3,6 @@ import 'package:apex_vigne/services/calculations.service.dart';
 import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:intl/intl.dart';
 
 class IcApexLineChart extends StatelessWidget {
   final List<Session> sessions;

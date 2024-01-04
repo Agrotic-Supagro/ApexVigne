@@ -11,7 +11,6 @@ import 'package:apex_vigne/pages/parcel_detail/widgets/ic_apex_line_chart.widget
 import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
 import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 class ParcelDetailPage extends StatefulWidget {
