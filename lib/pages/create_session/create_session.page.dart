@@ -41,7 +41,7 @@ class _CreateSessionState extends State<CreateSession> {
     super.initState();
   }
 
-  void _showExitConfirmationDialog() {
+  void _exitConfirmationDialog() {
     showDialog(
       context: context,
       builder: (context) {
@@ -72,7 +72,7 @@ class _CreateSessionState extends State<CreateSession> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        _showExitConfirmationDialog();
+        _exitConfirmationDialog();
         return false;
       },
       child: Scaffold(
@@ -102,7 +102,7 @@ class _CreateSessionState extends State<CreateSession> {
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
-          _showExitConfirmationDialog();
+          _exitConfirmationDialog();
         },
       ),
     );
@@ -279,7 +279,7 @@ class _CreateSessionState extends State<CreateSession> {
       }
     }
 
-    void showEditNotesDialog() {
+    void editNotesDialog() {
       final TextEditingController notesController = TextEditingController();
       notesController.text = _notesText;
 
@@ -373,7 +373,7 @@ class _CreateSessionState extends State<CreateSession> {
               ElevatedApexButton(
                   icon: Symbols.article,
                   callback: () {
-                    showEditNotesDialog();
+                    editNotesDialog();
                   }),
             ],
           ),

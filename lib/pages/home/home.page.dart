@@ -23,59 +23,6 @@ class _HomePageState extends State<HomePage> {
   String _sortingOption = 'Du plus récent au plus ancien';
   final AuthenticationService _authService = AuthenticationService();
 
-  Future<void> _showAddParcelDialog(BuildContext context) async {
-    final TextEditingController parcelNameController = TextEditingController();
-    final formKey = GlobalKey<FormState>();
-
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Ajouter une parcelle'),
-          content: Form(
-            key: formKey,
-            child: TextFormField(
-              controller: parcelNameController,
-              decoration: const InputDecoration(
-                hintText: 'Nom de la parcelle',
-                border: InputBorder.none,
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Veuillez entrer un nom de parcelle';
-                }
-                return null;
-              },
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Annuler'),
-            ),
-            TextButton(
-              onPressed: () async {
-                if (formKey.currentState!.validate()) {
-                  final parcel = Parcel()..name = parcelNameController.text;
-                  final bool isConnected = await _authService.checkConnection();
-                  if (isConnected) {
-                    await ParcelsApiService().addParcel(parcel);
-                  } else {
-                    await _isarService.saveParcel(parcel);
-                  }
-                  Navigator.of(context).pop();
-                }
-              },
-              child: const Text('Ajouter'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -313,10 +260,65 @@ class _HomePageState extends State<HomePage> {
   }
 
   FloatingActionButton _buildFloatingActionButton(BuildContext context) {
+    Future<void> addParcelDialog(BuildContext context) async {
+      final TextEditingController parcelNameController =
+          TextEditingController();
+      final formKey = GlobalKey<FormState>();
+
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Ajouter une parcelle'),
+            content: Form(
+              key: formKey,
+              child: TextFormField(
+                controller: parcelNameController,
+                decoration: const InputDecoration(
+                  hintText: 'Nom de la parcelle',
+                  border: InputBorder.none,
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Veuillez entrer un nom de parcelle';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Annuler'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  if (formKey.currentState!.validate()) {
+                    final parcel = Parcel()..name = parcelNameController.text;
+                    final bool isConnected =
+                        await _authService.checkConnection();
+                    if (isConnected) {
+                      await ParcelsApiService().addParcel(parcel);
+                    } else {
+                      await _isarService.saveParcel(parcel);
+                    }
+                    Navigator.of(context).pop();
+                  }
+                },
+                child: const Text('Ajouter'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     /* Build */
     return FloatingActionButton(
       onPressed: () {
-        _showAddParcelDialog(context);
+        addParcelDialog(context);
       },
       backgroundColor: Theme.of(context).colorScheme.surface,
       child: Icon(Symbols.add, color: Theme.of(context).colorScheme.primary),

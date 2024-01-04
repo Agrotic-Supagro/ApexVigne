@@ -77,7 +77,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
   }
 
   Theme _buildSessionsBoard(BuildContext context) {
-    Future<dynamic> showNotesDialog(BuildContext context) {
+    Future<dynamic> notesDialog(BuildContext context) {
       return showDialog(
         context: context,
         builder: (context) {
@@ -158,7 +158,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                     ElevatedApexButton(
                       icon: Icons.article_outlined,
                       callback: () {
-                        showNotesDialog(context);
+                        notesDialog(context);
                       },
                     ),
                   ),
@@ -174,7 +174,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
     final AuthenticationService authService = AuthenticationService();
     final IsarService isarService = IsarService();
 
-    Future<dynamic> showPrunedParcelDialog(BuildContext context) {
+    Future<dynamic> prunedParcelDialog(BuildContext context) {
       return showDialog(
         context: context,
         builder: (context) {
@@ -221,7 +221,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         ElevatedApexButton(
           icon: Symbols.cut,
           callback: () => {
-            showPrunedParcelDialog(context),
+            prunedParcelDialog(context),
           },
         ),
         const SizedBox(width: 20),
