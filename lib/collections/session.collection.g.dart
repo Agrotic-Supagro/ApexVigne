@@ -32,34 +32,24 @@ const SessionSchema = CollectionSchema(
       name: r'apexStuntedGrowth',
       type: IsarType.long,
     ),
-    r'createdAt': PropertySchema(
-      id: 3,
-      name: r'createdAt',
-      type: IsarType.string,
-    ),
     r'id': PropertySchema(
-      id: 4,
+      id: 3,
       name: r'id',
       type: IsarType.string,
     ),
     r'observerId': PropertySchema(
-      id: 5,
+      id: 4,
       name: r'observerId',
       type: IsarType.string,
     ),
     r'parcelId': PropertySchema(
-      id: 6,
+      id: 5,
       name: r'parcelId',
       type: IsarType.string,
     ),
     r'sessionAt': PropertySchema(
-      id: 7,
+      id: 6,
       name: r'sessionAt',
-      type: IsarType.string,
-    ),
-    r'updatedAt': PropertySchema(
-      id: 8,
-      name: r'updatedAt',
       type: IsarType.string,
     )
   },
@@ -97,12 +87,6 @@ int _sessionEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  {
-    final value = object.createdAt;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
   bytesCount += 3 + object.id.length * 3;
   {
     final value = object.observerId;
@@ -112,12 +96,6 @@ int _sessionEstimateSize(
   }
   bytesCount += 3 + object.parcelId.length * 3;
   bytesCount += 3 + object.sessionAt.length * 3;
-  {
-    final value = object.updatedAt;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
   return bytesCount;
 }
 
@@ -130,12 +108,10 @@ void _sessionSerialize(
   writer.writeLong(offsets[0], object.apexFullGrowth);
   writer.writeLong(offsets[1], object.apexSlowerGrowth);
   writer.writeLong(offsets[2], object.apexStuntedGrowth);
-  writer.writeString(offsets[3], object.createdAt);
-  writer.writeString(offsets[4], object.id);
-  writer.writeString(offsets[5], object.observerId);
-  writer.writeString(offsets[6], object.parcelId);
-  writer.writeString(offsets[7], object.sessionAt);
-  writer.writeString(offsets[8], object.updatedAt);
+  writer.writeString(offsets[3], object.id);
+  writer.writeString(offsets[4], object.observerId);
+  writer.writeString(offsets[5], object.parcelId);
+  writer.writeString(offsets[6], object.sessionAt);
 }
 
 Session _sessionDeserialize(
@@ -148,13 +124,11 @@ Session _sessionDeserialize(
   object.apexFullGrowth = reader.readLong(offsets[0]);
   object.apexSlowerGrowth = reader.readLong(offsets[1]);
   object.apexStuntedGrowth = reader.readLong(offsets[2]);
-  object.createdAt = reader.readStringOrNull(offsets[3]);
-  object.id = reader.readString(offsets[4]);
+  object.id = reader.readString(offsets[3]);
   object.isarId = id;
-  object.observerId = reader.readStringOrNull(offsets[5]);
-  object.parcelId = reader.readString(offsets[6]);
-  object.sessionAt = reader.readString(offsets[7]);
-  object.updatedAt = reader.readStringOrNull(offsets[8]);
+  object.observerId = reader.readStringOrNull(offsets[4]);
+  object.parcelId = reader.readString(offsets[5]);
+  object.sessionAt = reader.readString(offsets[6]);
   return object;
 }
 
@@ -172,17 +146,13 @@ P _sessionDeserializeProp<P>(
     case 2:
       return (reader.readLong(offset)) as P;
     case 3:
-      return (reader.readStringOrNull(offset)) as P;
-    case 4:
       return (reader.readString(offset)) as P;
-    case 5:
+    case 4:
       return (reader.readStringOrNull(offset)) as P;
+    case 5:
+      return (reader.readString(offset)) as P;
     case 6:
       return (reader.readString(offset)) as P;
-    case 7:
-      return (reader.readString(offset)) as P;
-    case 8:
-      return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -536,152 +506,6 @@ extension SessionQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> createdAtIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'createdAt',
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> createdAtIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'createdAt',
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> createdAtEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> createdAtGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> createdAtLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> createdAtBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'createdAt',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> createdAtStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> createdAtEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> createdAtContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> createdAtMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'createdAt',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> createdAtIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'createdAt',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> createdAtIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'createdAt',
-        value: '',
       ));
     });
   }
@@ -1273,152 +1097,6 @@ extension SessionQueryFilter
       ));
     });
   }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'updatedAt',
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'updatedAt',
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'updatedAt',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'updatedAt',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'updatedAt',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterFilterCondition> updatedAtIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'updatedAt',
-        value: '',
-      ));
-    });
-  }
 }
 
 extension SessionQueryObject
@@ -1461,18 +1139,6 @@ extension SessionQuerySortBy on QueryBuilder<Session, Session, QSortBy> {
   QueryBuilder<Session, Session, QAfterSortBy> sortByApexStuntedGrowthDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'apexStuntedGrowth', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterSortBy> sortByCreatedAt() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdAt', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterSortBy> sortByCreatedAtDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdAt', Sort.desc);
     });
   }
 
@@ -1523,18 +1189,6 @@ extension SessionQuerySortBy on QueryBuilder<Session, Session, QSortBy> {
       return query.addSortBy(r'sessionAt', Sort.desc);
     });
   }
-
-  QueryBuilder<Session, Session, QAfterSortBy> sortByUpdatedAt() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'updatedAt', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterSortBy> sortByUpdatedAtDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'updatedAt', Sort.desc);
-    });
-  }
 }
 
 extension SessionQuerySortThenBy
@@ -1572,18 +1226,6 @@ extension SessionQuerySortThenBy
   QueryBuilder<Session, Session, QAfterSortBy> thenByApexStuntedGrowthDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'apexStuntedGrowth', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterSortBy> thenByCreatedAt() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdAt', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterSortBy> thenByCreatedAtDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdAt', Sort.desc);
     });
   }
 
@@ -1646,18 +1288,6 @@ extension SessionQuerySortThenBy
       return query.addSortBy(r'sessionAt', Sort.desc);
     });
   }
-
-  QueryBuilder<Session, Session, QAfterSortBy> thenByUpdatedAt() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'updatedAt', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Session, Session, QAfterSortBy> thenByUpdatedAtDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'updatedAt', Sort.desc);
-    });
-  }
 }
 
 extension SessionQueryWhereDistinct
@@ -1677,13 +1307,6 @@ extension SessionQueryWhereDistinct
   QueryBuilder<Session, Session, QDistinct> distinctByApexStuntedGrowth() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'apexStuntedGrowth');
-    });
-  }
-
-  QueryBuilder<Session, Session, QDistinct> distinctByCreatedAt(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'createdAt', caseSensitive: caseSensitive);
     });
   }
 
@@ -1714,13 +1337,6 @@ extension SessionQueryWhereDistinct
       return query.addDistinctBy(r'sessionAt', caseSensitive: caseSensitive);
     });
   }
-
-  QueryBuilder<Session, Session, QDistinct> distinctByUpdatedAt(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'updatedAt', caseSensitive: caseSensitive);
-    });
-  }
 }
 
 extension SessionQueryProperty
@@ -1749,12 +1365,6 @@ extension SessionQueryProperty
     });
   }
 
-  QueryBuilder<Session, String?, QQueryOperations> createdAtProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'createdAt');
-    });
-  }
-
   QueryBuilder<Session, String, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
@@ -1776,12 +1386,6 @@ extension SessionQueryProperty
   QueryBuilder<Session, String, QQueryOperations> sessionAtProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'sessionAt');
-    });
-  }
-
-  QueryBuilder<Session, String?, QQueryOperations> updatedAtProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'updatedAt');
     });
   }
 }

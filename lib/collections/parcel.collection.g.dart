@@ -17,29 +17,19 @@ const ParcelSchema = CollectionSchema(
   name: r'Parcel',
   id: 5510806458604258610,
   properties: {
-    r'createdAt': PropertySchema(
-      id: 0,
-      name: r'createdAt',
-      type: IsarType.string,
-    ),
     r'id': PropertySchema(
-      id: 1,
+      id: 0,
       name: r'id',
       type: IsarType.string,
     ),
     r'name': PropertySchema(
-      id: 2,
+      id: 1,
       name: r'name',
       type: IsarType.string,
     ),
     r'ownerId': PropertySchema(
-      id: 3,
+      id: 2,
       name: r'ownerId',
-      type: IsarType.string,
-    ),
-    r'updatedAt': PropertySchema(
-      id: 4,
-      name: r'updatedAt',
       type: IsarType.string,
     )
   },
@@ -78,12 +68,6 @@ int _parcelEstimateSize(
 ) {
   var bytesCount = offsets.last;
   {
-    final value = object.createdAt;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
     final value = object.id;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -92,12 +76,6 @@ int _parcelEstimateSize(
   bytesCount += 3 + object.name.length * 3;
   {
     final value = object.ownerId;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.updatedAt;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -111,11 +89,9 @@ void _parcelSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.createdAt);
-  writer.writeString(offsets[1], object.id);
-  writer.writeString(offsets[2], object.name);
-  writer.writeString(offsets[3], object.ownerId);
-  writer.writeString(offsets[4], object.updatedAt);
+  writer.writeString(offsets[0], object.id);
+  writer.writeString(offsets[1], object.name);
+  writer.writeString(offsets[2], object.ownerId);
 }
 
 Parcel _parcelDeserialize(
@@ -125,12 +101,10 @@ Parcel _parcelDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Parcel();
-  object.createdAt = reader.readStringOrNull(offsets[0]);
-  object.id = reader.readStringOrNull(offsets[1]);
+  object.id = reader.readStringOrNull(offsets[0]);
   object.isarId = id;
-  object.name = reader.readString(offsets[2]);
-  object.ownerId = reader.readStringOrNull(offsets[3]);
-  object.updatedAt = reader.readStringOrNull(offsets[4]);
+  object.name = reader.readString(offsets[1]);
+  object.ownerId = reader.readStringOrNull(offsets[2]);
   return object;
 }
 
@@ -144,12 +118,8 @@ P _parcelDeserializeProp<P>(
     case 0:
       return (reader.readStringOrNull(offset)) as P;
     case 1:
-      return (reader.readStringOrNull(offset)) as P;
-    case 2:
       return (reader.readString(offset)) as P;
-    case 3:
-      return (reader.readStringOrNull(offset)) as P;
-    case 4:
+    case 2:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -361,152 +331,6 @@ extension ParcelQueryWhere on QueryBuilder<Parcel, Parcel, QWhereClause> {
 }
 
 extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'createdAt',
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'createdAt',
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'createdAt',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'createdAt',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'createdAt',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> createdAtIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'createdAt',
-        value: '',
-      ));
-    });
-  }
-
   QueryBuilder<Parcel, Parcel, QAfterFilterCondition> idIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -977,152 +801,6 @@ extension ParcelQueryFilter on QueryBuilder<Parcel, Parcel, QFilterCondition> {
       ));
     });
   }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'updatedAt',
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'updatedAt',
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'updatedAt',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'updatedAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'updatedAt',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'updatedAt',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterFilterCondition> updatedAtIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'updatedAt',
-        value: '',
-      ));
-    });
-  }
 }
 
 extension ParcelQueryObject on QueryBuilder<Parcel, Parcel, QFilterCondition> {}
@@ -1130,18 +808,6 @@ extension ParcelQueryObject on QueryBuilder<Parcel, Parcel, QFilterCondition> {}
 extension ParcelQueryLinks on QueryBuilder<Parcel, Parcel, QFilterCondition> {}
 
 extension ParcelQuerySortBy on QueryBuilder<Parcel, Parcel, QSortBy> {
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByCreatedAt() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdAt', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByCreatedAtDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdAt', Sort.desc);
-    });
-  }
-
   QueryBuilder<Parcel, Parcel, QAfterSortBy> sortById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -1177,33 +843,9 @@ extension ParcelQuerySortBy on QueryBuilder<Parcel, Parcel, QSortBy> {
       return query.addSortBy(r'ownerId', Sort.desc);
     });
   }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByUpdatedAt() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'updatedAt', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> sortByUpdatedAtDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'updatedAt', Sort.desc);
-    });
-  }
 }
 
 extension ParcelQuerySortThenBy on QueryBuilder<Parcel, Parcel, QSortThenBy> {
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByCreatedAt() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdAt', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByCreatedAtDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdAt', Sort.desc);
-    });
-  }
-
   QueryBuilder<Parcel, Parcel, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -1251,28 +893,9 @@ extension ParcelQuerySortThenBy on QueryBuilder<Parcel, Parcel, QSortThenBy> {
       return query.addSortBy(r'ownerId', Sort.desc);
     });
   }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByUpdatedAt() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'updatedAt', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Parcel, Parcel, QAfterSortBy> thenByUpdatedAtDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'updatedAt', Sort.desc);
-    });
-  }
 }
 
 extension ParcelQueryWhereDistinct on QueryBuilder<Parcel, Parcel, QDistinct> {
-  QueryBuilder<Parcel, Parcel, QDistinct> distinctByCreatedAt(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'createdAt', caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<Parcel, Parcel, QDistinct> distinctById(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1293,25 +916,12 @@ extension ParcelQueryWhereDistinct on QueryBuilder<Parcel, Parcel, QDistinct> {
       return query.addDistinctBy(r'ownerId', caseSensitive: caseSensitive);
     });
   }
-
-  QueryBuilder<Parcel, Parcel, QDistinct> distinctByUpdatedAt(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'updatedAt', caseSensitive: caseSensitive);
-    });
-  }
 }
 
 extension ParcelQueryProperty on QueryBuilder<Parcel, Parcel, QQueryProperty> {
   QueryBuilder<Parcel, int, QQueryOperations> isarIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isarId');
-    });
-  }
-
-  QueryBuilder<Parcel, String?, QQueryOperations> createdAtProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'createdAt');
     });
   }
 
@@ -1330,12 +940,6 @@ extension ParcelQueryProperty on QueryBuilder<Parcel, Parcel, QQueryProperty> {
   QueryBuilder<Parcel, String?, QQueryOperations> ownerIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'ownerId');
-    });
-  }
-
-  QueryBuilder<Parcel, String?, QQueryOperations> updatedAtProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'updatedAt');
     });
   }
 }
