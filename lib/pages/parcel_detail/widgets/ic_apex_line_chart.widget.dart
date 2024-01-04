@@ -70,7 +70,7 @@ class IcApexLineChart extends StatelessWidget {
               String text = '';
               if (value == 0) {
                 text = formatDate(sessions.first.sessionAt);
-              } else if (value == sessions.length.toDouble() - 1) {
+              } else if (value + 0.1 >= sessions.length - 1) {
                 text = formatDate(sessions.last.sessionAt);
               }
               return SideTitleWidget(
