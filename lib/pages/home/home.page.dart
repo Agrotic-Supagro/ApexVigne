@@ -10,6 +10,7 @@ import 'package:apex_vigne/services/parcels_api.service.dart';
 import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -90,10 +91,12 @@ class _HomePageState extends State<HomePage> {
     List<Parcel> sortParcels(List<Parcel> parcels, List<Session> sessions) {
       switch (_sortingOption) {
         case 'Par ordre alphabétique':
-          parcels.sort((a, b) => a.name.compareTo(b.name));
+          parcels.sort(
+              (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
           break;
         case 'Par ordre alphabétique inversé':
-          parcels.sort((a, b) => b.name.compareTo(a.name));
+          parcels.sort(
+              (a, b) => b.name.toLowerCase().compareTo(a.name.toLowerCase()));
           break;
         case 'Du plus récent au plus ancien':
           parcels.sort((a, b) {
@@ -296,6 +299,8 @@ class _HomePageState extends State<HomePage> {
               TextButton(
                 onPressed: () async {
                   if (formKey.currentState!.validate()) {
+                    parcelNameController.text =
+                        toBeginningOfSentenceCase(parcelNameController.text)!;
                     final parcel = Parcel()..name = parcelNameController.text;
                     final bool isConnected =
                         await _authService.checkConnection();
@@ -304,6 +309,9 @@ class _HomePageState extends State<HomePage> {
                     } else {
                       await _isarService.saveParcel(parcel);
                     }
+                    setState(() {
+                      _isarService.allParcels;
+                    });
                     Navigator.of(context).pop();
                   }
                 },

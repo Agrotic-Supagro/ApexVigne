@@ -8,9 +8,9 @@ import 'package:apex_vigne/constants.dart';
 class ParcelsApiService {
   final url = Uri.parse('$apiBaseUrl/parcels');
   Future<Map<String, String>> get headers async => {
-    'Authorization': 'Bearer ${await AuthenticationService().token}',
-    'Content-Type': 'application/json',
-  };
+        'Authorization': 'Bearer ${await AuthenticationService().token}',
+        'Content-Type': 'application/json',
+      };
 
   Future<void> getAuthorizedParcels() async {
     final response = await http.get(url, headers: await headers);
@@ -25,16 +25,13 @@ class ParcelsApiService {
   }
 
   Future<void> addParcel(Parcel parcel) async {
-    final response = await http.post(
-      url,
-      headers: await headers,
-      body: jsonEncode(<String, String>{
-      'name': parcel.name,
-      })
-    );
+    final response = await http.post(url,
+        headers: await headers,
+        body: jsonEncode(<String, String>{
+          'name': parcel.name,
+        }));
 
     if (response.statusCode == 201) {
-      print(json.decode(response.body));
       parcel.id = json.decode(response.body)['id'];
       await IsarService().saveParcel(parcel);
     } else {
