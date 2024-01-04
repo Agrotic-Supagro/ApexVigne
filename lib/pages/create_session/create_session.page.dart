@@ -142,12 +142,13 @@ class _CreateSessionState extends State<CreateSession> {
           Expanded(
             child: OutlinedButton(
               onPressed: () async {
-                final selectedStadeId =
-                    await Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) {
-                    return const StadePheno();
-                  },
-                ));
+                final selectedStadeId = await Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const StadePheno();
+                    },
+                  ),
+                );
                 if (selectedStadeId != null) {
                   setState(() {
                     _stadeId = selectedStadeId;
@@ -191,7 +192,8 @@ class _CreateSessionState extends State<CreateSession> {
                 TextField(
                   controller: countController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(labelText: 'Nombre', border: InputBorder.none),
+                  decoration: const InputDecoration(
+                      labelText: 'Nombre', border: InputBorder.none),
                 ),
               ],
             ),
@@ -347,7 +349,9 @@ class _CreateSessionState extends State<CreateSession> {
               const SizedBox(width: 10),
               ElevatedApexButton(
                   text: 'Terminer la session',
-                  callback: _counts.reduce((firstValue, secondValue) => firstValue + secondValue) < 50
+                  callback: _counts.reduce((firstValue, secondValue) =>
+                              firstValue + secondValue) <
+                          50
                       ? null
                       : () async {
                           final session = Session()
@@ -356,7 +360,8 @@ class _CreateSessionState extends State<CreateSession> {
                             ..apexSlowerGrowth = _counts[1]
                             ..apexStuntedGrowth = _counts[2]
                             ..parcelId = widget.parcelId;
-                          final bool isConnected = await authService.checkConnection();
+                          final bool isConnected =
+                              await authService.checkConnection();
                           if (isConnected) {
                             await SessionsApiService().addSession(session);
                           } else {

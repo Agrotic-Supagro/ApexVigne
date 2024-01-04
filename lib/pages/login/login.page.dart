@@ -47,7 +47,9 @@ class _LoginPageState extends State<LoginPage> {
         buttonTheme: const LoginButtonTheme(
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
           ),
         ),
       ),

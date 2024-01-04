@@ -44,12 +44,14 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
               if (widget.sessions?.isNotEmpty ?? false)
                 _buildSessionsBoard(context),
               if (widget.sessions?.isEmpty ?? false)
-                Text('Aucune session pour cette parcelle...',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 1.2,
-                        )),
+                Text(
+                  'Aucune session pour cette parcelle...',
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1.2,
+                      ),
+                ),
               const SizedBox(height: 80),
             ],
           ),
@@ -109,17 +111,25 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
           const DataColumn(
               label: Text('C.H.'), tooltip: 'Contrainte hydrique (C.H.)'),
           DataColumn(
-              label: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            child: Text(widget.sessions!.length > 1 ? '${widget.sessions!.length} sessions' : '1 session',
+            label: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              child: Text(
+                widget.sessions!.length > 1
+                    ? '${widget.sessions!.length} sessions'
+                    : '1 session',
                 style: Theme.of(context).textTheme.labelSmall!.copyWith(
                     fontWeight: FontWeight.w700,
-                    color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.8))),
-          )),
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onPrimary
+                        .withOpacity(0.8)),
+              ),
+            ),
+          ),
         ],
         dividerThickness: 0.0,
         columnSpacing: 15.0,
@@ -130,15 +140,20 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                   session.apexSlowerGrowth, session.apexStuntedGrowth);
               return DataRow(
                 cells: [
-                  DataCell(Text(formatDate(session.sessionAt, explicit: true),
-                      overflow: TextOverflow.ellipsis)),
+                  DataCell(
+                    Text(formatDate(session.sessionAt, explicit: true),
+                        overflow: TextOverflow.ellipsis),
+                  ),
                   DataCell(IcApexCell(icApex: icApex)),
-                  DataCell(LabelApexHydricConstraint(
+                  DataCell(
+                    LabelApexHydricConstraint(
                       text: calculateHydricConstraint(
                           session.apexFullGrowth,
                           session.apexSlowerGrowth,
                           session.apexStuntedGrowth,
-                          icApex))),
+                          icApex),
+                    ),
+                  ),
                   DataCell(
                     ElevatedApexButton(
                       icon: Icons.article_outlined,

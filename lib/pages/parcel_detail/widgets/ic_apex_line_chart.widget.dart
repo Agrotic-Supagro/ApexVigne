@@ -15,10 +15,13 @@ class IcApexLineChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<FlSpot> spots = sessions
-        .map((session) => FlSpot(
+        .map(
+          (session) => FlSpot(
             sessions.indexOf(session).toDouble(),
             calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth,
-                session.apexStuntedGrowth)))
+                session.apexStuntedGrowth),
+          ),
+        )
         .toList();
 
     return LineChart(

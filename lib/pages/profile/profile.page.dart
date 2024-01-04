@@ -29,7 +29,13 @@ class _ProfilPageState extends State<ProfilPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Information du compte', style: Theme.of(context).textTheme.labelMedium!.copyWith(letterSpacing: 1.2)),
+            Text(
+              'Information du compte',
+              style: Theme.of(context)
+                  .textTheme
+                  .labelMedium!
+                  .copyWith(letterSpacing: 1.2),
+            ),
             const SizedBox(height: 20),
             _buildProfilInfo(),
             LogoutButton(auth: auth),
@@ -42,36 +48,37 @@ class _ProfilPageState extends State<ProfilPage> {
   Expanded _buildProfilInfo() {
     /* Build */
     return Expanded(
-            child: FutureBuilder<User?>(
-              future: IsarService().currentUser,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (snapshot.hasError || snapshot.data == null) {
-                  return Center(
-                    child: Text(
-                      'Une erreur est survenue lors de la récupération de vos informations',
-                      style: Theme.of(context).textTheme.labelMedium,
-                    ),
-                  );
-                }
-                final currentUserProfile = snapshot.data!;
+      child: FutureBuilder<User?>(
+          future: IsarService().currentUser,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasError || snapshot.data == null) {
+              return Center(
+                child: Text(
+                  'Une erreur est survenue lors de la récupération de vos informations',
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+              );
+            }
+            final currentUserProfile = snapshot.data!;
 
-                return ListView(
-                  children: <Widget>[
-                    ListTileInfo(text: 'Prénom', info: currentUserProfile.firstname),
-                    Divider(color: Colors.grey[200]),
-                    ListTileInfo(text: 'Nom', info: currentUserProfile.lastname),
-                    Divider(color: Colors.grey[200]),
-                    ListTileInfo(text: 'Email', info: currentUserProfile.email),
-                    Divider(color: Colors.grey[200]),
-                    ListTileInfo(text: 'Structure', info: currentUserProfile.structure),
-                  ],
-                );
-              }
-            ),
-          );
+            return ListView(
+              children: <Widget>[
+                ListTileInfo(
+                    text: 'Prénom', info: currentUserProfile.firstname),
+                Divider(color: Colors.grey[200]),
+                ListTileInfo(text: 'Nom', info: currentUserProfile.lastname),
+                Divider(color: Colors.grey[200]),
+                ListTileInfo(text: 'Email', info: currentUserProfile.email),
+                Divider(color: Colors.grey[200]),
+                ListTileInfo(
+                    text: 'Structure', info: currentUserProfile.structure),
+              ],
+            );
+          }),
+    );
   }
 }
 

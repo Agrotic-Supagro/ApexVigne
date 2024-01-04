@@ -80,7 +80,8 @@ class _LoadingPageState extends State<LoadingPage> {
                 const Hero(
                   tag: 'logo',
                   child: Image(
-                      image: AssetImage('assets/images/logos/logo_apex_vigne_transparent.png'),
+                      image: AssetImage(
+                          'assets/images/logos/logo_apex_vigne_transparent.png'),
                       fit: BoxFit.cover,
                       width: 180),
                 ),
@@ -103,7 +104,8 @@ class _LoadingPageState extends State<LoadingPage> {
                   children: [
                     const SizedBox(height: 50),
                     const CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    ),
                     const SizedBox(height: 30),
                     Text(
                       _stepLoadingText,
@@ -134,20 +136,20 @@ class _LoadingPageState extends State<LoadingPage> {
   Padding _buildBottomSectionLogos() {
     /* Build */
     return const Padding(
-                padding: EdgeInsets.symmetric(vertical: 50),
-                child: Column(
-                  children: [
-                    Image(
-                        image: AssetImage('assets/images/logos/logo_ifv.png'),
-                        fit: BoxFit.cover,
-                        height: 75),
-                    SizedBox(height: 50),
-                    Image(
-                        image: AssetImage('assets/images/logos/logo_iam.png'),
-                        fit: BoxFit.cover,
-                        height: 75),
-                  ],
-                ),
-              );
+      padding: EdgeInsets.symmetric(vertical: 50),
+      child: Column(
+        children: [
+          Image(
+              image: AssetImage('assets/images/logos/logo_ifv.png'),
+              fit: BoxFit.cover,
+              height: 75),
+          SizedBox(height: 50),
+          Image(
+              image: AssetImage('assets/images/logos/logo_iam.png'),
+              fit: BoxFit.cover,
+              height: 75),
+        ],
+      ),
+    );
   }
 }
