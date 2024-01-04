@@ -1,16 +1,23 @@
 import 'dart:convert';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:http/http.dart' as http;
 import 'package:apex_vigne/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationService {
+  static final AuthenticationService _instance =
+      AuthenticationService._internal();
   ValueNotifier<bool> authenticationState = ValueNotifier(false);
   ValueNotifier<bool> registerState = ValueNotifier(false);
-  ValueNotifier<bool> isOnline = ValueNotifier(false);
+  ValueNotifier<bool> isOnlineState = ValueNotifier(true);
+
+  factory AuthenticationService() {
+    return _instance;
+  }
+
+  AuthenticationService._internal();
 
   Future<String> get token async {
     final prefs = await SharedPreferences.getInstance();
@@ -33,6 +40,17 @@ class AuthenticationService {
     }
   }
 
+  void displaySnackBar(BuildContext context, bool switchState) {
+    if (context.mounted && isOnlineState.value != switchState) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content:
+              Text(switchState ? 'Vous êtes en ligne' : 'Vous êtes hors-ligne'),
+        ),
+      );
+    }
+  }
+
   /* Check connection */
   Future<bool> checkConnection(BuildContext context) async {
     final url = Uri.parse(apiBaseUrl);
@@ -43,28 +61,18 @@ class AuthenticationService {
         'Content-Type': 'application/json',
       });
       if (response.statusCode == 200) {
-        isOnline.value = true;
-        if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Vous êtes en ligne'),
-            ),
-          );
-        }
+        displaySnackBar(context, true);
+        isOnlineState.value = true;
         return true;
       } else {
-        isOnline.value = false;
-        if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Vous n\'êtes hors-ligne'),
-            ),
-          );
-        }
+        displaySnackBar(context, false);
+        isOnlineState.value = false;
         return false;
       }
     } catch (e) {
       debugPrint('Error: $e');
+      displaySnackBar(context, false);
+      isOnlineState.value = false;
       return false;
     }
   }

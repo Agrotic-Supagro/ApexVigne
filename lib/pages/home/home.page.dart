@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       actions: <Widget>[
-        if (!_authService.isOnline.value)
+        if (!_authService.isOnlineState.value)
           IconButton(
             icon: const Icon(Symbols.wifi_off),
             onPressed: () {

@@ -23,18 +23,24 @@ class IsarService {
     );
   }
 
-  Future<List<Parcel>> get allParcels async => await isar.parcels.where().findAll();
-  Future<List<Session>> get allSessions async => await isar.sessions.where().findAll();
+  Future<List<Parcel>> get allParcels async =>
+      await isar.parcels.where().findAll();
+  Future<List<Session>> get allSessions async =>
+      await isar.sessions.where().findAll();
   Future<User?> get currentUser async => await isar.users.where().findFirst();
 
   Future<void> saveData(String name, List<dynamic> res) async {
-    final List<Map<String, dynamic>> dataList = res.cast<Map<String, dynamic>>();
+    final List<Map<String, dynamic>> dataList =
+        res.cast<Map<String, dynamic>>();
     await isar.writeTxn(() async {
       if (name == 'parcels') {
+        await isar.parcels.where().deleteAll();
         await isar.parcels.importJson(dataList);
       } else if (name == 'sessions') {
+        await isar.sessions.where().deleteAll();
         await isar.sessions.importJson(dataList);
       } else if (name == 'me') {
+        await isar.users.where().deleteAll();
         await isar.users.importJson(dataList);
       }
     });
