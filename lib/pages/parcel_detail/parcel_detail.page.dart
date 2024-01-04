@@ -173,7 +173,6 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
 
   Row _buildFloatingActionButton(BuildContext context) {
     final AuthenticationService authService = AuthenticationService();
-    final IsarService isarService = IsarService();
 
     Future<dynamic> prunedParcelDialog(BuildContext context) {
       return showDialog(
@@ -204,7 +203,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                   if (isConnected) {
                     await SessionsApiService().addSession(session);
                   } else {
-                    await isarService.saveSession(session);
+                    await IsarService().saveSession(session);
                   }
                   setState(() {
                     widget.sessions!.add(session);

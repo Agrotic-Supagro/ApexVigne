@@ -17,8 +17,7 @@ class ParcelsApiService {
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);
-      IsarService isarService = IsarService();
-      await isarService.saveData('parcels', data);
+      await IsarService().saveData('parcels', data);
     } else {
       throw Exception('Failed to retrieve user data');
     }

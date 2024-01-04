@@ -268,7 +268,6 @@ class _CreateSessionState extends State<CreateSession> {
 
   Expanded _buildBottomSection() {
     final AuthenticationService authService = AuthenticationService();
-    final IsarService isarService = IsarService();
 
     void undoLastAction() {
       if (_countsHistory.isNotEmpty) {
@@ -365,7 +364,7 @@ class _CreateSessionState extends State<CreateSession> {
                           if (isConnected) {
                             await SessionsApiService().addSession(session);
                           } else {
-                            await isarService.saveSession(session);
+                            await IsarService().saveSession(session);
                           }
                           Navigator.of(context).pop(session);
                         }),

@@ -21,7 +21,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final IsarService _isarService = IsarService();
   String _sortingOption = 'Du plus récent au plus ancien';
   final AuthenticationService _authService = AuthenticationService();
 
@@ -203,7 +202,7 @@ class _HomePageState extends State<HomePage> {
     return Center(
       child: FutureBuilder<List<dynamic>?>(
         future:
-            Future.wait([_isarService.allParcels, _isarService.allSessions]),
+            Future.wait([IsarService().allParcels, IsarService().allSessions]),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
@@ -282,7 +281,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                       setState(() {
-                        _isarService.allSessions;
+                        IsarService().allSessions;
                       });
                     },
                   ),
@@ -347,10 +346,10 @@ class _HomePageState extends State<HomePage> {
                     if (isConnected) {
                       await ParcelsApiService().addParcel(parcel);
                     } else {
-                      await _isarService.saveParcel(parcel);
+                      await IsarService().saveParcel(parcel);
                     }
                     setState(() {
-                      _isarService.allParcels;
+                      IsarService().allParcels;
                     });
                     Navigator.of(context).pop();
                   }
