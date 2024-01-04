@@ -32,7 +32,7 @@ class _LoadingPageState extends State<LoadingPage> {
 
     if (_authService.authenticationState.value) {
       _updateStepLoadingText('Connexion au serveur...');
-      final bool isConnected = await _authService.checkConnection();
+      final bool isConnected = await _authService.checkConnection(context);
       if (isConnected) {
         await _fetchDataServer();
       } else {

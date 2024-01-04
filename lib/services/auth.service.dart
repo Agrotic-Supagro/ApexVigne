@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthenticationService {
   ValueNotifier<bool> authenticationState = ValueNotifier(false);
   ValueNotifier<bool> registerState = ValueNotifier(false);
+  ValueNotifier<bool> isOnline = ValueNotifier(false);
 
   Future<String> get token async {
     final prefs = await SharedPreferences.getInstance();
@@ -33,7 +34,7 @@ class AuthenticationService {
   }
 
   /* Check connection */
-  Future<bool> checkConnection() async {
+  Future<bool> checkConnection(BuildContext context) async {
     final url = Uri.parse(apiBaseUrl);
 
     try {
@@ -42,8 +43,24 @@ class AuthenticationService {
         'Content-Type': 'application/json',
       });
       if (response.statusCode == 200) {
+        isOnline.value = true;
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Vous êtes en ligne'),
+            ),
+          );
+        }
         return true;
       } else {
+        isOnline.value = false;
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Vous n\'êtes hors-ligne'),
+            ),
+          );
+        }
         return false;
       }
     } catch (e) {

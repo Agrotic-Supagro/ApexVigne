@@ -199,7 +199,8 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                     ..apexStuntedGrowth = 0
                     // TODO: Manage parcel without id
                     ..parcelId = widget.parcel.id!;
-                  final bool isConnected = await authService.checkConnection();
+                  final bool isConnected =
+                      await authService.checkConnection(context);
                   if (isConnected) {
                     await SessionsApiService().addSession(session);
                   } else {

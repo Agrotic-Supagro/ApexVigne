@@ -361,7 +361,7 @@ class _CreateSessionState extends State<CreateSession> {
                             ..apexStuntedGrowth = _counts[2]
                             ..parcelId = widget.parcelId;
                           final bool isConnected =
-                              await authService.checkConnection();
+                              await authService.checkConnection(context);
                           if (isConnected) {
                             await SessionsApiService().addSession(session);
                           } else {

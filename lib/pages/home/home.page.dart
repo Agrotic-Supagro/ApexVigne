@@ -1,6 +1,7 @@
 import 'package:apex_vigne/collections/parcel.collection.dart';
 import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/pages/home/widgets/drawer_apex_vigne.widget.dart';
+import 'package:apex_vigne/pages/loading/loading.page.dart';
 import 'package:apex_vigne/pages/parcel_detail/parcel_detail.page.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:apex_vigne/services/calculations.service.dart';
@@ -33,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/images/background_vine.png', // replace with the path to your image asset
+              'assets/images/background_vine.png',
               fit: BoxFit.cover,
             ),
           ),
@@ -45,6 +46,37 @@ class _HomePageState extends State<HomePage> {
   }
 
   AppBar _buildAppBar(BuildContext context) {
+    Future<dynamic> offlineDialog(BuildContext context) {
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Vous êtes hors-ligne'),
+            content: const Text(
+              'Celà peut être dû à une mauvaise connexion internet ou à une maintenance du serveur.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Rester hors-ligne'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const LoadingPage(),
+                  ));
+                },
+                child: const Text('Passer en ligne'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     /* Build */
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -56,11 +88,16 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       actions: <Widget>[
+        if (!_authService.isOnline.value)
+          IconButton(
+            icon: const Icon(Symbols.wifi_off),
+            onPressed: () {
+              offlineDialog(context);
+            },
+          ),
         PopupMenuButton(
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(15.0),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(15.0)),
           ),
           icon: const Icon(Symbols.sort),
           onSelected: (selectedValue) {
@@ -306,7 +343,7 @@ class _HomePageState extends State<HomePage> {
                         toBeginningOfSentenceCase(parcelNameController.text)!;
                     final parcel = Parcel()..name = parcelNameController.text;
                     final bool isConnected =
-                        await _authService.checkConnection();
+                        await _authService.checkConnection(context);
                     if (isConnected) {
                       await ParcelsApiService().addParcel(parcel);
                     } else {
