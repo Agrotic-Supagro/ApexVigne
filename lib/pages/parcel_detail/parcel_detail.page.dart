@@ -39,7 +39,8 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     width: double.infinity,
                     height: 350,
-                    child: IcApexLineChart(sessions: widget.sessions!)),
+                    child: IcApexLineChart(
+                        sessions: widget.sessions!.reversed.toList())),
               const SizedBox(height: 20),
               if (widget.sessions?.isNotEmpty ?? false)
                 _buildSessionsBoard(context),
