@@ -39,7 +39,7 @@ class _CardApexButtonState extends State<CardApexButton> {
   void initialTutorial() async {
     prefs = await SharedPreferences.getInstance();
     bool isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
-    if (widget.text == "Pleine croissance" && true) {
+    if (widget.text == "Pleine croissance" && isFirstLaunch) {
       createTutorial();
       Future.delayed(Duration.zero, showTutorial);
       prefs.setBool('isFirstLaunch', false);
