@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:apex_vigne/services/isar.service.dart';
+import 'package:apex_vigne/services/parcels_api.service.dart';
+import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:http/http.dart' as http;
@@ -40,12 +42,16 @@ class AuthenticationService {
     }
   }
 
-  void displaySnackBar(BuildContext context, bool switchState) {
+  void displayStateSnackBar(BuildContext context, bool switchState) async {
     if (context.mounted && isOnlineState.value != switchState) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content:
-              Text(switchState ? 'Vous êtes en ligne' : 'Vous êtes hors-ligne'),
+          content: Text(switchState
+              ? 'Vous êtes connecté'
+              : 'Échec de la connection, vous êtes déconnecté'),
+          duration: const Duration(seconds: 2),
+          backgroundColor:
+              switchState ? Colors.green.shade700 : Colors.red.shade700,
         ),
       );
     }
@@ -61,19 +67,52 @@ class AuthenticationService {
         'Content-Type': 'application/json',
       });
       if (response.statusCode == 200) {
-        displaySnackBar(context, true);
+        displayStateSnackBar(context, true);
+        await syncData(context);
         isOnlineState.value = true;
         return true;
       } else {
-        displaySnackBar(context, false);
+        displayStateSnackBar(context, false);
         isOnlineState.value = false;
         return false;
       }
     } catch (e) {
       debugPrint('Error: $e');
-      displaySnackBar(context, false);
+      displayStateSnackBar(context, false);
       isOnlineState.value = false;
       return false;
+    }
+  }
+
+  Future<void> syncData(BuildContext context) async {
+    /* If isOnlineState already true, no need to sync */
+    if (!context.mounted || isOnlineState.value) {
+      return;
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Synchronisation des données...'),
+        backgroundColor: Theme.of(context).primaryColor,
+      ),
+    );
+
+    await getCurrentUserProfile();
+    await ParcelsApiService().getAuthorizedParcels();
+    await SessionsApiService().getAuthorizedSessions();
+
+    final offlineParcels = await IsarService().offlineParcels;
+    final offlineSessions = await IsarService().offlineSessions;
+
+    if (offlineParcels.isNotEmpty) {
+      for (final parcel in offlineParcels) {
+        await ParcelsApiService().addParcel(parcel, offlineParcel: true);
+      }
+    }
+    if (offlineSessions.isNotEmpty) {
+      for (final session in offlineSessions) {
+        await SessionsApiService().addSession(session, offlineSession: true);
+      }
     }
   }
 

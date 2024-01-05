@@ -38,7 +38,7 @@ class _LoadingPageState extends State<LoadingPage> {
         await _sendOfflineData();
         await _fetchDataServer();
       } else {
-        _updateStepLoadingText('Lancemenent en mode hors ligne...');
+        _updateStepLoadingText('Lancemenent en mode déconnecté...');
       }
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => const HomePage(),
@@ -71,13 +71,13 @@ class _LoadingPageState extends State<LoadingPage> {
     final offlineSessions = await IsarService().offlineSessions;
 
     if (offlineParcels.isNotEmpty) {
-      _updateStepLoadingText('Envoi des parcelles hors-ligne au serveur...');
+      _updateStepLoadingText('Envoi des parcelles au serveur...');
       for (final parcel in offlineParcels) {
         await ParcelsApiService().addParcel(parcel, offlineParcel: true);
       }
     }
     if (offlineSessions.isNotEmpty) {
-      _updateStepLoadingText('Envoi des sessions hors-ligne au serveur...');
+      _updateStepLoadingText('Envoi des sessions au serveur...');
       for (final session in offlineSessions) {
         await SessionsApiService().addSession(session, offlineSession: true);
       }

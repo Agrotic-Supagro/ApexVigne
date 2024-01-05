@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Vous êtes hors-ligne'),
+            title: const Text('Vous êtes déconnecté'),
             content: const Text(
               'Celà peut être dû à une mauvaise connexion internet ou à une maintenance du serveur.',
             ),
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('Rester hors-ligne'),
+                child: const Text('Rester déconnecté'),
               ),
               TextButton(
                 onPressed: () {
@@ -67,8 +67,9 @@ class _HomePageState extends State<HomePage> {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (context) => const LoadingPage(),
                   ));
+                  _authService.isOnlineState.value = true;
                 },
-                child: const Text('Passer en ligne'),
+                child: const Text('Se connecter'),
               ),
             ],
           );
@@ -89,7 +90,11 @@ class _HomePageState extends State<HomePage> {
       actions: <Widget>[
         if (!_authService.isOnlineState.value)
           IconButton(
-            icon: const Icon(Symbols.wifi_off),
+            icon: const Icon(
+              Symbols.cloud_off,
+              weight: 350,
+              size: 28.0,
+            ),
             onPressed: () {
               offlineDialog(context);
             },
@@ -244,31 +249,50 @@ class _HomePageState extends State<HomePage> {
                     currentSessionsParcel.first.apexSlowerGrowth,
                     currentSessionsParcel.first.apexStuntedGrowth);
               }
+
+              bool isOnline = currentParcel.id != null;
+              Color color = Theme.of(context).colorScheme.primary;
+              String subtitle = lastSession;
+              dynamic trailing = lastSession.isNotEmpty
+                  ? LabelApexHydricConstraint(
+                      text: calculateHydricConstraint(
+                          currentSessionsParcel.first.apexFullGrowth,
+                          currentSessionsParcel.first.apexSlowerGrowth,
+                          currentSessionsParcel.first.apexStuntedGrowth,
+                          icApex),
+                    )
+                  : null;
+
+              if (isOnline == false) {
+                color = Colors.grey.shade400;
+                subtitle =
+                    'Vous ne pouvez pas créer de session car la parcelle n\'a pas été sauvegardée';
+                trailing = Icon(
+                  Symbols.cloud_off,
+                  color: Colors.grey.shade400,
+                  weight: 350,
+                  size: 28.0,
+                );
+              }
+
               return Column(
                 children: [
                   ListTile(
+                    enabled: isOnline,
                     contentPadding:
                         const EdgeInsets.symmetric(horizontal: 30.0),
                     title: Text(
                       currentParcel.name,
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.w600),
+                      style:
+                          TextStyle(color: color, fontWeight: FontWeight.w600),
                     ),
                     subtitle: Text(
-                      lastSession,
+                      subtitle,
                       style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.primary),
+                          color: color,
+                          fontStyle: isOnline ? null : FontStyle.italic),
                     ),
-                    trailing: lastSession.isNotEmpty
-                        ? LabelApexHydricConstraint(
-                            text: calculateHydricConstraint(
-                                currentSessionsParcel.first.apexFullGrowth,
-                                currentSessionsParcel.first.apexSlowerGrowth,
-                                currentSessionsParcel.first.apexStuntedGrowth,
-                                icApex),
-                          )
-                        : null,
+                    trailing: trailing,
                     onTap: () async {
                       await Navigator.of(context).push(
                         MaterialPageRoute(
