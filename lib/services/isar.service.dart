@@ -25,8 +25,12 @@ class IsarService {
 
   Future<List<Parcel>> get allParcels async =>
       await isar.parcels.where().findAll();
+  Future<List<Parcel>> get offlineParcels async =>
+      await isar.parcels.where().idEqualTo(null).findAll();
   Future<List<Session>> get allSessions async =>
       await isar.sessions.where().findAll();
+  Future<List<Session>> get offlineSessions async =>
+      await isar.sessions.where().idEqualTo(null).findAll();
   Future<User?> get currentUser async => await isar.users.where().findFirst();
 
   Future<void> saveData(String name, List<dynamic> res) async {

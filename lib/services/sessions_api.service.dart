@@ -23,7 +23,8 @@ class SessionsApiService {
     }
   }
 
-  Future<void> addSession(Session session) async {
+  Future<void> addSession(Session session,
+      {bool offlineSession = false}) async {
     final response = await http.post(url,
         headers: await headers,
         body: jsonEncode(<String, dynamic>{
@@ -36,7 +37,9 @@ class SessionsApiService {
 
     if (response.statusCode == 201) {
       session.id = json.decode(response.body)['id'];
-      await IsarService().saveSession(session);
+      if (!offlineSession) {
+        await IsarService().saveSession(session);
+      }
     } else {
       throw Exception('Failed to add session');
     }

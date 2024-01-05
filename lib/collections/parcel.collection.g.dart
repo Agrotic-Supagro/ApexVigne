@@ -42,8 +42,8 @@ const ParcelSchema = CollectionSchema(
     r'id': IndexSchema(
       id: -3268401673993471357,
       name: r'id',
-      unique: true,
-      replace: true,
+      unique: false,
+      replace: false,
       properties: [
         IndexPropertySchema(
           name: r'id',
@@ -136,60 +136,6 @@ List<IsarLinkBase<dynamic>> _parcelGetLinks(Parcel object) {
 
 void _parcelAttach(IsarCollection<dynamic> col, Id id, Parcel object) {
   object.isarId = id;
-}
-
-extension ParcelByIndex on IsarCollection<Parcel> {
-  Future<Parcel?> getById(String? id) {
-    return getByIndex(r'id', [id]);
-  }
-
-  Parcel? getByIdSync(String? id) {
-    return getByIndexSync(r'id', [id]);
-  }
-
-  Future<bool> deleteById(String? id) {
-    return deleteByIndex(r'id', [id]);
-  }
-
-  bool deleteByIdSync(String? id) {
-    return deleteByIndexSync(r'id', [id]);
-  }
-
-  Future<List<Parcel?>> getAllById(List<String?> idValues) {
-    final values = idValues.map((e) => [e]).toList();
-    return getAllByIndex(r'id', values);
-  }
-
-  List<Parcel?> getAllByIdSync(List<String?> idValues) {
-    final values = idValues.map((e) => [e]).toList();
-    return getAllByIndexSync(r'id', values);
-  }
-
-  Future<int> deleteAllById(List<String?> idValues) {
-    final values = idValues.map((e) => [e]).toList();
-    return deleteAllByIndex(r'id', values);
-  }
-
-  int deleteAllByIdSync(List<String?> idValues) {
-    final values = idValues.map((e) => [e]).toList();
-    return deleteAllByIndexSync(r'id', values);
-  }
-
-  Future<Id> putById(Parcel object) {
-    return putByIndex(r'id', object);
-  }
-
-  Id putByIdSync(Parcel object, {bool saveLinks = true}) {
-    return putByIndexSync(r'id', object, saveLinks: saveLinks);
-  }
-
-  Future<List<Id>> putAllById(List<Parcel> objects) {
-    return putAllByIndex(r'id', objects);
-  }
-
-  List<Id> putAllByIdSync(List<Parcel> objects, {bool saveLinks = true}) {
-    return putAllByIndexSync(r'id', objects, saveLinks: saveLinks);
-  }
 }
 
 extension ParcelQueryWhereSort on QueryBuilder<Parcel, Parcel, QWhere> {

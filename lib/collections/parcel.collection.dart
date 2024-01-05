@@ -4,7 +4,7 @@ part 'parcel.collection.g.dart';
 
 @collection
 class Parcel {
-  @Index(unique: true, replace: true)
+  @Index()
   String? id;
 
   Id isarId = Isar.autoIncrement;

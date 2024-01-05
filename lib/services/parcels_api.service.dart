@@ -23,7 +23,7 @@ class ParcelsApiService {
     }
   }
 
-  Future<void> addParcel(Parcel parcel) async {
+  Future<void> addParcel(Parcel parcel, {bool offlineParcel = false}) async {
     final response = await http.post(url,
         headers: await headers,
         body: jsonEncode(<String, String>{
@@ -32,7 +32,9 @@ class ParcelsApiService {
 
     if (response.statusCode == 201) {
       parcel.id = json.decode(response.body)['id'];
-      await IsarService().saveParcel(parcel);
+      if (!offlineParcel) {
+        await IsarService().saveParcel(parcel);
+      }
     } else {
       throw Exception('Failed to add parcel');
     }

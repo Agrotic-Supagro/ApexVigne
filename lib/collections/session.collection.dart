@@ -4,8 +4,8 @@ part 'session.collection.g.dart';
 
 @collection
 class Session {
-  @Index(unique: true, replace: true)
-  late String id;
+  @Index()
+  String? id;
 
   Id isarId = Isar.autoIncrement;
 

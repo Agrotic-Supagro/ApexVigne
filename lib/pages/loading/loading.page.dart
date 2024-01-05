@@ -1,5 +1,6 @@
 import 'package:apex_vigne/pages/home/home.page.dart';
 import 'package:apex_vigne/pages/login/login.page.dart';
+import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/services/parcels_api.service.dart';
 import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ class _LoadingPageState extends State<LoadingPage> {
       _updateStepLoadingText('Connexion au serveur...');
       final bool isConnected = await _authService.checkConnection(context);
       if (isConnected) {
+        await _sendOfflineData();
         await _fetchDataServer();
       } else {
         _updateStepLoadingText('Lancemenent en mode hors ligne...');
@@ -62,6 +64,24 @@ class _LoadingPageState extends State<LoadingPage> {
     await ParcelsApiService().getAuthorizedParcels();
     _updateStepLoadingText('Chargement des sessions...');
     await SessionsApiService().getAuthorizedSessions();
+  }
+
+  Future<void> _sendOfflineData() async {
+    final offlineParcels = await IsarService().offlineParcels;
+    final offlineSessions = await IsarService().offlineSessions;
+
+    if (offlineParcels.isNotEmpty) {
+      _updateStepLoadingText('Envoi des parcelles hors-ligne au serveur...');
+      for (final parcel in offlineParcels) {
+        await ParcelsApiService().addParcel(parcel, offlineParcel: true);
+      }
+    }
+    if (offlineSessions.isNotEmpty) {
+      _updateStepLoadingText('Envoi des sessions hors-ligne au serveur...');
+      for (final session in offlineSessions) {
+        await SessionsApiService().addSession(session, offlineSession: true);
+      }
+    }
   }
 
   @override
