@@ -97,10 +97,6 @@ class AuthenticationService {
       ),
     );
 
-    await getCurrentUserProfile();
-    await ParcelsApiService().getAuthorizedParcels();
-    await SessionsApiService().getAuthorizedSessions();
-
     final offlineParcels = await IsarService().offlineParcels;
     final offlineSessions = await IsarService().offlineSessions;
 
@@ -114,6 +110,10 @@ class AuthenticationService {
         await SessionsApiService().addSession(session, offlineSession: true);
       }
     }
+
+    await getCurrentUserProfile();
+    await ParcelsApiService().getAuthorizedParcels();
+    await SessionsApiService().getAuthorizedSessions();
   }
 
   Future<String?> login(LoginData data) async {

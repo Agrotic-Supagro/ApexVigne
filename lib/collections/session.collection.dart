@@ -1,3 +1,4 @@
+import 'package:apex_vigne/collections/observation.collection.dart';
 import 'package:isar/isar.dart';
 
 part 'session.collection.g.dart';
@@ -20,4 +21,11 @@ class Session {
   String? observerId;
 
   late String parcelId;
+
+  late String notes;
+
+  late int stadePhenoId;
+
+  @Ignore()
+  late List<Observation> observation;
 }

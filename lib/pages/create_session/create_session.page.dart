@@ -347,33 +347,37 @@ class _CreateSessionState extends State<CreateSession> {
                         }),
               const SizedBox(width: 10),
               ElevatedApexButton(
-                  text: 'Terminer la session',
-                  callback: _counts.reduce((firstValue, secondValue) =>
-                              firstValue + secondValue) <
-                          50
-                      ? null
-                      : () async {
-                          final session = Session()
-                            ..sessionAt = _selectedDate.toIso8601String()
-                            ..apexFullGrowth = _counts[0]
-                            ..apexSlowerGrowth = _counts[1]
-                            ..apexStuntedGrowth = _counts[2]
-                            ..parcelId = widget.parcelId;
-                          final bool isConnected =
-                              await authService.checkConnection(context);
-                          if (isConnected) {
-                            await SessionsApiService().addSession(session);
-                          } else {
-                            await IsarService().saveSession(session);
-                          }
-                          Navigator.of(context).pop(session);
-                        }),
+                text: 'Terminer la session',
+                callback: _counts.reduce((firstValue, secondValue) =>
+                            firstValue + secondValue) <
+                        50
+                    ? null
+                    : () async {
+                        final session = Session()
+                          ..sessionAt = _selectedDate.toIso8601String()
+                          ..apexFullGrowth = _counts[0]
+                          ..apexSlowerGrowth = _counts[1]
+                          ..apexStuntedGrowth = _counts[2]
+                          ..parcelId = widget.parcelId
+                          ..notes = _notesText
+                          ..stadePhenoId = _stadeId;
+                        final bool isConnected =
+                            await authService.checkConnection(context);
+                        if (isConnected) {
+                          await SessionsApiService().addSession(session);
+                        } else {
+                          await IsarService().saveSession(session);
+                        }
+                        Navigator.of(context).pop(session);
+                      },
+              ),
               const SizedBox(width: 10),
               ElevatedApexButton(
-                  icon: Symbols.article,
-                  callback: () {
-                    editNotesDialog();
-                  }),
+                icon: Symbols.article,
+                callback: () {
+                  editNotesDialog();
+                },
+              ),
             ],
           ),
         ],

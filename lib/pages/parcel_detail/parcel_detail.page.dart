@@ -78,15 +78,13 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
   }
 
   Theme _buildSessionsBoard(BuildContext context) {
-    Future<dynamic> notesDialog(BuildContext context) {
+    Future<dynamic> notesDialog(BuildContext context, String notes) {
       return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: const Text('Notes'),
-            content: const Text(
-                'La contrainte hydrique est calculée à partir de la moyenne des iC-Apex. '
-                'Si la parcelle est écimée, la contrainte hydrique est égale à "Ecimée".'),
+            content: Text(notes),
             actions: [
               TextButton(
                 onPressed: () {
@@ -159,7 +157,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                     ElevatedApexButton(
                       icon: Icons.article_outlined,
                       callback: () {
-                        notesDialog(context);
+                        notesDialog(context, session.notes);
                       },
                     ),
                   ),

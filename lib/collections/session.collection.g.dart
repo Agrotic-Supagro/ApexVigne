@@ -37,20 +37,30 @@ const SessionSchema = CollectionSchema(
       name: r'id',
       type: IsarType.string,
     ),
-    r'observerId': PropertySchema(
+    r'notes': PropertySchema(
       id: 4,
+      name: r'notes',
+      type: IsarType.string,
+    ),
+    r'observerId': PropertySchema(
+      id: 5,
       name: r'observerId',
       type: IsarType.string,
     ),
     r'parcelId': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'parcelId',
       type: IsarType.string,
     ),
     r'sessionAt': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'sessionAt',
       type: IsarType.string,
+    ),
+    r'stadePhenoId': PropertySchema(
+      id: 8,
+      name: r'stadePhenoId',
+      type: IsarType.long,
     )
   },
   estimateSize: _sessionEstimateSize,
@@ -93,6 +103,7 @@ int _sessionEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  bytesCount += 3 + object.notes.length * 3;
   {
     final value = object.observerId;
     if (value != null) {
@@ -114,9 +125,11 @@ void _sessionSerialize(
   writer.writeLong(offsets[1], object.apexSlowerGrowth);
   writer.writeLong(offsets[2], object.apexStuntedGrowth);
   writer.writeString(offsets[3], object.id);
-  writer.writeString(offsets[4], object.observerId);
-  writer.writeString(offsets[5], object.parcelId);
-  writer.writeString(offsets[6], object.sessionAt);
+  writer.writeString(offsets[4], object.notes);
+  writer.writeString(offsets[5], object.observerId);
+  writer.writeString(offsets[6], object.parcelId);
+  writer.writeString(offsets[7], object.sessionAt);
+  writer.writeLong(offsets[8], object.stadePhenoId);
 }
 
 Session _sessionDeserialize(
@@ -131,9 +144,11 @@ Session _sessionDeserialize(
   object.apexStuntedGrowth = reader.readLong(offsets[2]);
   object.id = reader.readStringOrNull(offsets[3]);
   object.isarId = id;
-  object.observerId = reader.readStringOrNull(offsets[4]);
-  object.parcelId = reader.readString(offsets[5]);
-  object.sessionAt = reader.readString(offsets[6]);
+  object.notes = reader.readString(offsets[4]);
+  object.observerId = reader.readStringOrNull(offsets[5]);
+  object.parcelId = reader.readString(offsets[6]);
+  object.sessionAt = reader.readString(offsets[7]);
+  object.stadePhenoId = reader.readLong(offsets[8]);
   return object;
 }
 
@@ -153,11 +168,15 @@ P _sessionDeserializeProp<P>(
     case 3:
       return (reader.readStringOrNull(offset)) as P;
     case 4:
-      return (reader.readStringOrNull(offset)) as P;
-    case 5:
       return (reader.readString(offset)) as P;
+    case 5:
+      return (reader.readStringOrNull(offset)) as P;
     case 6:
       return (reader.readString(offset)) as P;
+    case 7:
+      return (reader.readString(offset)) as P;
+    case 8:
+      return (reader.readLong(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -679,6 +698,136 @@ extension SessionQueryFilter
     });
   }
 
+  QueryBuilder<Session, Session, QAfterFilterCondition> notesEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'notes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> notesGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'notes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> notesLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'notes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> notesBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'notes',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> notesStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'notes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> notesEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'notes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> notesContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'notes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> notesMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'notes',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> notesIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'notes',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> notesIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'notes',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterFilterCondition> observerIdIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1084,6 +1233,59 @@ extension SessionQueryFilter
       ));
     });
   }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> stadePhenoIdEqualTo(
+      int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'stadePhenoId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> stadePhenoIdGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'stadePhenoId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> stadePhenoIdLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'stadePhenoId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> stadePhenoIdBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'stadePhenoId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
 }
 
 extension SessionQueryObject
@@ -1141,6 +1343,18 @@ extension SessionQuerySortBy on QueryBuilder<Session, Session, QSortBy> {
     });
   }
 
+  QueryBuilder<Session, Session, QAfterSortBy> sortByNotes() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'notes', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> sortByNotesDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'notes', Sort.desc);
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterSortBy> sortByObserverId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'observerId', Sort.asc);
@@ -1174,6 +1388,18 @@ extension SessionQuerySortBy on QueryBuilder<Session, Session, QSortBy> {
   QueryBuilder<Session, Session, QAfterSortBy> sortBySessionAtDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'sessionAt', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> sortByStadePhenoId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'stadePhenoId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> sortByStadePhenoIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'stadePhenoId', Sort.desc);
     });
   }
 }
@@ -1240,6 +1466,18 @@ extension SessionQuerySortThenBy
     });
   }
 
+  QueryBuilder<Session, Session, QAfterSortBy> thenByNotes() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'notes', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> thenByNotesDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'notes', Sort.desc);
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterSortBy> thenByObserverId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'observerId', Sort.asc);
@@ -1275,6 +1513,18 @@ extension SessionQuerySortThenBy
       return query.addSortBy(r'sessionAt', Sort.desc);
     });
   }
+
+  QueryBuilder<Session, Session, QAfterSortBy> thenByStadePhenoId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'stadePhenoId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> thenByStadePhenoIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'stadePhenoId', Sort.desc);
+    });
+  }
 }
 
 extension SessionQueryWhereDistinct
@@ -1304,6 +1554,13 @@ extension SessionQueryWhereDistinct
     });
   }
 
+  QueryBuilder<Session, Session, QDistinct> distinctByNotes(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'notes', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<Session, Session, QDistinct> distinctByObserverId(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1322,6 +1579,12 @@ extension SessionQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'sessionAt', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Session, Session, QDistinct> distinctByStadePhenoId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'stadePhenoId');
     });
   }
 }
@@ -1358,6 +1621,12 @@ extension SessionQueryProperty
     });
   }
 
+  QueryBuilder<Session, String, QQueryOperations> notesProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'notes');
+    });
+  }
+
   QueryBuilder<Session, String?, QQueryOperations> observerIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'observerId');
@@ -1373,6 +1642,12 @@ extension SessionQueryProperty
   QueryBuilder<Session, String, QQueryOperations> sessionAtProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'sessionAt');
+    });
+  }
+
+  QueryBuilder<Session, int, QQueryOperations> stadePhenoIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'stadePhenoId');
     });
   }
 }
