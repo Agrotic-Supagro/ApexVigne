@@ -126,7 +126,7 @@ class AuthenticationService {
       final dynamic data = json.decode(response.body);
       final List<dynamic> listData = [];
       listData.add(data);
-      await IsarService().saveData('me', listData);
+      await IsarService().saveDataServer('me', listData);
     } else {
       throw Exception('Failed to retrieve user data');
     }

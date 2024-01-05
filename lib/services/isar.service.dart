@@ -33,7 +33,7 @@ class IsarService {
       await isar.sessions.where().idEqualTo(null).findAll();
   Future<User?> get currentUser async => await isar.users.where().findFirst();
 
-  Future<void> saveData(String name, List<dynamic> res) async {
+  Future<void> saveDataServer(String name, List<dynamic> res) async {
     final List<Map<String, dynamic>> dataList =
         res.cast<Map<String, dynamic>>();
     await isar.writeTxn(() async {

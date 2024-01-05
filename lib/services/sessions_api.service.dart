@@ -17,7 +17,7 @@ class SessionsApiService {
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);
-      await IsarService().saveData('sessions', data);
+      await IsarService().saveDataServer('sessions', data);
     } else {
       throw Exception('Failed to retrieve user data');
     }
