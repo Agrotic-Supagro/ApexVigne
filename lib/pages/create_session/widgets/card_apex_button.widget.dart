@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
@@ -38,7 +39,7 @@ class _CardApexButtonState extends State<CardApexButton> {
   void initialTutorial() async {
     prefs = await SharedPreferences.getInstance();
     bool isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
-    if (widget.text == "Pleine croissance" && isFirstLaunch) {
+    if (widget.text == "Pleine croissance" && true) {
       createTutorial();
       Future.delayed(Duration.zero, showTutorial);
       prefs.setBool('isFirstLaunch', false);
@@ -71,6 +72,19 @@ class _CardApexButtonState extends State<CardApexButton> {
                   Text(
                     "Vous pouvez éditer le nombre d'observations en maintenant le compteur",
                     style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(height: 30),
+                  Row(
+                    children: [
+                      Icon(Symbols.warning, color: Color(0xFFCCB152)),
+                      SizedBox(width: 15),
+                      Expanded(
+                        child: Text(
+                          "Attention, si vous changez le nombre d'observations, vous perdrez la position des observations",
+                          style: TextStyle(color: Colors.white70),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
