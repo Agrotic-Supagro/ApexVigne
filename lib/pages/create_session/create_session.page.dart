@@ -6,18 +6,22 @@ import 'package:apex_vigne/services/auth.service.dart';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
+import 'package:apex_vigne/utils/determine_position.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:vibration/vibration.dart';
 
 class CreateSession extends StatefulWidget {
-  const CreateSession(
-      {super.key,
-      required this.title,
-      required this.parcelId,
-      this.selectedDate,
-      this.noteText});
+  const CreateSession({
+    super.key,
+    required this.title,
+    required this.parcelId,
+    this.selectedDate,
+    this.noteText,
+  });
+
   final String title;
   final String parcelId;
   final DateTime? selectedDate;
@@ -30,15 +34,43 @@ class CreateSession extends StatefulWidget {
 class _CreateSessionState extends State<CreateSession> {
   final List<int> _counts = [0, 0, 0];
   final List<int> _countsHistory = [];
+  final List<List<Position>> _positions = [[], [], []];
   late DateTime _selectedDate;
   late String _notesText;
+  bool _locationIsEnbaled = true;
   int _stadeId = -1;
 
   @override
   void initState() {
     _selectedDate = widget.selectedDate ?? DateTime.now();
     _notesText = widget.noteText ?? '';
+    _checkLocationPermission();
     super.initState();
+  }
+
+  void _checkLocationPermission() async {
+    final LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      setState(() {
+        _locationIsEnbaled = false;
+      });
+    } else {
+      setState(() {
+        _locationIsEnbaled = true;
+      });
+    }
+  }
+
+  void _undoLastAction() {
+    if (_countsHistory.isNotEmpty) {
+      Vibration.vibrate(duration: 10);
+      int lastCount = _countsHistory.removeLast();
+      setState(() {
+        _counts[lastCount]--;
+        _positions[lastCount].removeLast();
+      });
+    }
   }
 
   void _exitConfirmationDialog() {
@@ -105,6 +137,30 @@ class _CreateSessionState extends State<CreateSession> {
           _exitConfirmationDialog();
         },
       ),
+      actions: <Widget>[
+        if (!_locationIsEnbaled)
+          IconButton(
+            icon: const Icon(Symbols.location_off),
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Row(
+                    children: [
+                      Icon(Symbols.location_off, color: Colors.white),
+                      SizedBox(width: 20),
+                      Expanded(
+                        child: Text('La localisation est désactivée, si vous '
+                            'souhaitez l\'activer, allez dans les paramètres de '
+                            'votre téléphone.'),
+                      ),
+                    ],
+                  ),
+                  backgroundColor: Color(0xFFCCB152),
+                ),
+              );
+            },
+          ),
+      ],
     );
   }
 
@@ -222,45 +278,66 @@ class _CreateSessionState extends State<CreateSession> {
       );
     }
 
+    void addPositionToSession(int buttonIndex) async {
+      await determinePosition().then((value) {
+        _positions[buttonIndex].add(value);
+      }).catchError((error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(error),
+            backgroundColor: const Color(0xFFCCB152),
+          ),
+        );
+        _undoLastAction();
+      });
+      _checkLocationPermission();
+    }
+
     /* Build */
     return Expanded(
       child: Column(
         children: <Widget>[
           CardApexButton(
-              imgPath: 'assets/images/full_growth.jpg',
-              text: 'Pleine croissance',
-              onPressed: () async {
-                incrementCount(0);
-                Vibration.vibrate(duration: 300);
-              },
-              onLongPressed: () {
-                editCount(0);
-              },
-              count: _counts[0]),
+            imgPath: 'assets/images/full_growth.jpg',
+            text: 'Pleine croissance',
+            onPressed: () async {
+              incrementCount(0);
+              Vibration.vibrate(duration: 300);
+              addPositionToSession(0);
+            },
+            onLongPressed: () {
+              editCount(0);
+            },
+            count: _counts[0],
+          ),
           const SizedBox(height: 10),
           CardApexButton(
-              imgPath: 'assets/images/slower_growth.jpg',
-              text: 'Croissance ralentie',
-              onPressed: () {
-                incrementCount(1);
-                Vibration.vibrate(duration: 150);
-              },
-              onLongPressed: () {
-                editCount(1);
-              },
-              count: _counts[1]),
+            imgPath: 'assets/images/slower_growth.jpg',
+            text: 'Croissance ralentie',
+            onPressed: () async {
+              incrementCount(1);
+              Vibration.vibrate(duration: 150);
+              addPositionToSession(1);
+            },
+            onLongPressed: () {
+              editCount(1);
+            },
+            count: _counts[1],
+          ),
           const SizedBox(height: 10),
           CardApexButton(
-              imgPath: 'assets/images/stunted_growth.jpg',
-              text: 'Arrêt de croissance',
-              onPressed: () {
-                incrementCount(2);
-                Vibration.vibrate(duration: 40);
-              },
-              onLongPressed: () {
-                editCount(2);
-              },
-              count: _counts[2]),
+            imgPath: 'assets/images/stunted_growth.jpg',
+            text: 'Arrêt de croissance',
+            onPressed: () async {
+              incrementCount(2);
+              Vibration.vibrate(duration: 40);
+              addPositionToSession(2);
+            },
+            onLongPressed: () {
+              editCount(2);
+            },
+            count: _counts[2],
+          ),
         ],
       ),
     );
@@ -268,15 +345,6 @@ class _CreateSessionState extends State<CreateSession> {
 
   Expanded _buildBottomSection() {
     final AuthenticationService authService = AuthenticationService();
-
-    void undoLastAction() {
-      if (_countsHistory.isNotEmpty) {
-        Vibration.vibrate(duration: 10);
-        setState(() {
-          _counts[_countsHistory.removeLast()]--;
-        });
-      }
-    }
 
     void editNotesDialog() {
       final TextEditingController notesController = TextEditingController();
@@ -339,12 +407,13 @@ class _CreateSessionState extends State<CreateSession> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ElevatedApexButton(
-                  icon: Symbols.undo,
-                  callback: _countsHistory.isEmpty
-                      ? null
-                      : () {
-                          undoLastAction();
-                        }),
+                icon: Symbols.undo,
+                callback: _countsHistory.isEmpty
+                    ? null
+                    : () {
+                        _undoLastAction();
+                      },
+              ),
               const SizedBox(width: 10),
               ElevatedApexButton(
                 text: 'Terminer la session',

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:http/http.dart' as http;
 import 'package:apex_vigne/constants.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationService {
@@ -92,7 +93,12 @@ class AuthenticationService {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text('Synchronisation des données...'),
+        content: const Row(
+          children: [
+            Icon(Symbols.sync, color: Colors.white),
+            Expanded(child: Text('Synchronisation des données...')),
+          ],
+        ),
         backgroundColor: Theme.of(context).primaryColor,
       ),
     );
