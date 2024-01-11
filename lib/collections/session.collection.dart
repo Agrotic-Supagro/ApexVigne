@@ -1,38 +1,31 @@
+import 'package:apex_vigne/collections/observation.collection.dart';
 import 'package:isar/isar.dart';
-import 'package:apex_vigne/utils/fast_hash.dart';
 
 part 'session.collection.g.dart';
 
 @collection
 class Session {
+  @Index()
+  String? id;
 
-  @Index(unique: true, replace: true)
-  @Name('id_session')
-  late String id;
+  Id isarId = Isar.autoIncrement;
 
-  Id get isarId => fastHash(id);
+  late String sessionAt;
 
-  @Name('date_creation')
-  late String creationDate;
+  late int apexFullGrowth;
 
-  @Name('date_session')
-  late String sessionDate;
+  late int apexSlowerGrowth;
 
-  @Name('date_maj')
-  late String updateDate;
+  late int apexStuntedGrowth;
 
-  late String apex0;
+  String? observerId;
 
-  late String apex1;
-
-  late String apex2;
-
-  @Name('id_observateur')
-  late String observerId;
-
-  @Name('id_parcelle')
   late String parcelId;
 
-  @Name('etat')
-  late String state;
+  late String notes;
+
+  late int stadePhenoId;
+
+  @Ignore()
+  late List<Observation> observation;
 }

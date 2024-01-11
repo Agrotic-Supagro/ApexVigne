@@ -17,42 +17,37 @@ const ObservationSchema = CollectionSchema(
   name: r'Observation',
   id: 7013591097600907058,
   properties: {
-    r'apex_value': PropertySchema(
+    r'apexValue': PropertySchema(
       id: 0,
-      name: r'apex_value',
+      name: r'apexValue',
       type: IsarType.long,
-    ),
-    r'etat': PropertySchema(
-      id: 1,
-      name: r'etat',
-      type: IsarType.long,
-    ),
-    r'id_observateur': PropertySchema(
-      id: 2,
-      name: r'id_observateur',
-      type: IsarType.string,
-    ),
-    r'id_session': PropertySchema(
-      id: 3,
-      name: r'id_session',
-      type: IsarType.string,
     ),
     r'latitude': PropertySchema(
-      id: 4,
+      id: 1,
       name: r'latitude',
       type: IsarType.double,
     ),
     r'longitude': PropertySchema(
-      id: 5,
+      id: 2,
       name: r'longitude',
       type: IsarType.double,
+    ),
+    r'observerId': PropertySchema(
+      id: 3,
+      name: r'observerId',
+      type: IsarType.string,
+    ),
+    r'sessionId': PropertySchema(
+      id: 4,
+      name: r'sessionId',
+      type: IsarType.string,
     )
   },
   estimateSize: _observationEstimateSize,
   serialize: _observationSerialize,
   deserialize: _observationDeserialize,
   deserializeProp: _observationDeserializeProp,
-  idName: r'id_observation',
+  idName: r'observationId',
   indexes: {},
   links: {},
   embeddedSchemas: {},
@@ -80,11 +75,10 @@ void _observationSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeLong(offsets[0], object.apexValue);
-  writer.writeLong(offsets[1], object.state);
-  writer.writeString(offsets[2], object.observerId);
-  writer.writeString(offsets[3], object.sessionId);
-  writer.writeDouble(offsets[4], object.latitude);
-  writer.writeDouble(offsets[5], object.longitude);
+  writer.writeDouble(offsets[1], object.latitude);
+  writer.writeDouble(offsets[2], object.longitude);
+  writer.writeString(offsets[3], object.observerId);
+  writer.writeString(offsets[4], object.sessionId);
 }
 
 Observation _observationDeserialize(
@@ -95,12 +89,11 @@ Observation _observationDeserialize(
 ) {
   final object = Observation();
   object.apexValue = reader.readLong(offsets[0]);
-  object.state = reader.readLong(offsets[1]);
-  object.observerId = reader.readString(offsets[2]);
+  object.latitude = reader.readDouble(offsets[1]);
+  object.longitude = reader.readDouble(offsets[2]);
   object.observationId = id;
-  object.sessionId = reader.readString(offsets[3]);
-  object.latitude = reader.readDouble(offsets[4]);
-  object.longitude = reader.readDouble(offsets[5]);
+  object.observerId = reader.readString(offsets[3]);
+  object.sessionId = reader.readString(offsets[4]);
   return object;
 }
 
@@ -114,15 +107,13 @@ P _observationDeserializeProp<P>(
     case 0:
       return (reader.readLong(offset)) as P;
     case 1:
-      return (reader.readLong(offset)) as P;
+      return (reader.readDouble(offset)) as P;
     case 2:
-      return (reader.readString(offset)) as P;
+      return (reader.readDouble(offset)) as P;
     case 3:
       return (reader.readString(offset)) as P;
     case 4:
-      return (reader.readDouble(offset)) as P;
-    case 5:
-      return (reader.readDouble(offset)) as P;
+      return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -229,7 +220,7 @@ extension ObservationQueryFilter
       apexValueEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'apex_value',
+        property: r'apexValue',
         value: value,
       ));
     });
@@ -243,7 +234,7 @@ extension ObservationQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'apex_value',
+        property: r'apexValue',
         value: value,
       ));
     });
@@ -257,7 +248,7 @@ extension ObservationQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'apex_value',
+        property: r'apexValue',
         value: value,
       ));
     });
@@ -272,393 +263,11 @@ extension ObservationQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'apex_value',
+        property: r'apexValue',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition> stateEqualTo(
-      int value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'etat',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      stateGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'etat',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition> stateLessThan(
-    int value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'etat',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition> stateBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'etat',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      observerIdEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id_observateur',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      observerIdGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'id_observateur',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      observerIdLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'id_observateur',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      observerIdBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'id_observateur',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      observerIdStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'id_observateur',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      observerIdEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'id_observateur',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      observerIdContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'id_observateur',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      observerIdMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'id_observateur',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      observerIdIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id_observateur',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      observerIdIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'id_observateur',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      observationIdEqualTo(Id value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id_observation',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      observationIdGreaterThan(
-    Id value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'id_observation',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      observationIdLessThan(
-    Id value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'id_observation',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      observationIdBetween(
-    Id lower,
-    Id upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'id_observation',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      sessionIdEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id_session',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      sessionIdGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'id_session',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      sessionIdLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'id_session',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      sessionIdBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'id_session',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      sessionIdStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'id_session',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      sessionIdEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'id_session',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      sessionIdContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'id_session',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      sessionIdMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'id_session',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      sessionIdIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id_session',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterFilterCondition>
-      sessionIdIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'id_session',
-        value: '',
       ));
     });
   }
@@ -792,6 +401,334 @@ extension ObservationQueryFilter
       ));
     });
   }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      observationIdEqualTo(Id value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'observationId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      observationIdGreaterThan(
+    Id value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'observationId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      observationIdLessThan(
+    Id value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'observationId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      observationIdBetween(
+    Id lower,
+    Id upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'observationId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      observerIdEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'observerId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      observerIdGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'observerId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      observerIdLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'observerId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      observerIdBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'observerId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      observerIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'observerId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      observerIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'observerId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      observerIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'observerId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      observerIdMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'observerId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      observerIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'observerId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      observerIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'observerId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      sessionIdEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'sessionId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      sessionIdGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'sessionId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      sessionIdLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'sessionId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      sessionIdBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'sessionId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      sessionIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'sessionId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      sessionIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'sessionId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      sessionIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'sessionId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      sessionIdMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'sessionId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      sessionIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'sessionId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterFilterCondition>
+      sessionIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'sessionId',
+        value: '',
+      ));
+    });
+  }
 }
 
 extension ObservationQueryObject
@@ -804,49 +741,13 @@ extension ObservationQuerySortBy
     on QueryBuilder<Observation, Observation, QSortBy> {
   QueryBuilder<Observation, Observation, QAfterSortBy> sortByApexValue() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'apex_value', Sort.asc);
+      return query.addSortBy(r'apexValue', Sort.asc);
     });
   }
 
   QueryBuilder<Observation, Observation, QAfterSortBy> sortByApexValueDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'apex_value', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterSortBy> sortByState() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etat', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterSortBy> sortByStateDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etat', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterSortBy> sortByObserverId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_observateur', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterSortBy> sortByObserverIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_observateur', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterSortBy> sortBySessionId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_session', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterSortBy> sortBySessionIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_session', Sort.desc);
+      return query.addSortBy(r'apexValue', Sort.desc);
     });
   }
 
@@ -873,68 +774,43 @@ extension ObservationQuerySortBy
       return query.addSortBy(r'longitude', Sort.desc);
     });
   }
+
+  QueryBuilder<Observation, Observation, QAfterSortBy> sortByObserverId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'observerId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterSortBy> sortByObserverIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'observerId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterSortBy> sortBySessionId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sessionId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterSortBy> sortBySessionIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sessionId', Sort.desc);
+    });
+  }
 }
 
 extension ObservationQuerySortThenBy
     on QueryBuilder<Observation, Observation, QSortThenBy> {
   QueryBuilder<Observation, Observation, QAfterSortBy> thenByApexValue() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'apex_value', Sort.asc);
+      return query.addSortBy(r'apexValue', Sort.asc);
     });
   }
 
   QueryBuilder<Observation, Observation, QAfterSortBy> thenByApexValueDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'apex_value', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterSortBy> thenByState() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etat', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterSortBy> thenByStateDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etat', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterSortBy> thenByObserverId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_observateur', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterSortBy> thenByObserverIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_observateur', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterSortBy> thenByObservationId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_observation', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterSortBy>
-      thenByObservationIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_observation', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterSortBy> thenBySessionId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_session', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QAfterSortBy> thenBySessionIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id_session', Sort.desc);
+      return query.addSortBy(r'apexValue', Sort.desc);
     });
   }
 
@@ -961,34 +837,50 @@ extension ObservationQuerySortThenBy
       return query.addSortBy(r'longitude', Sort.desc);
     });
   }
+
+  QueryBuilder<Observation, Observation, QAfterSortBy> thenByObservationId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'observationId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterSortBy>
+      thenByObservationIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'observationId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterSortBy> thenByObserverId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'observerId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterSortBy> thenByObserverIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'observerId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterSortBy> thenBySessionId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sessionId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QAfterSortBy> thenBySessionIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sessionId', Sort.desc);
+    });
+  }
 }
 
 extension ObservationQueryWhereDistinct
     on QueryBuilder<Observation, Observation, QDistinct> {
   QueryBuilder<Observation, Observation, QDistinct> distinctByApexValue() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'apex_value');
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QDistinct> distinctByState() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'etat');
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QDistinct> distinctByObserverId(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'id_observateur',
-          caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<Observation, Observation, QDistinct> distinctBySessionId(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'id_session', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'apexValue');
     });
   }
 
@@ -1003,37 +895,33 @@ extension ObservationQueryWhereDistinct
       return query.addDistinctBy(r'longitude');
     });
   }
+
+  QueryBuilder<Observation, Observation, QDistinct> distinctByObserverId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'observerId', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Observation, Observation, QDistinct> distinctBySessionId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'sessionId', caseSensitive: caseSensitive);
+    });
+  }
 }
 
 extension ObservationQueryProperty
     on QueryBuilder<Observation, Observation, QQueryProperty> {
   QueryBuilder<Observation, int, QQueryOperations> observationIdProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'id_observation');
+      return query.addPropertyName(r'observationId');
     });
   }
 
   QueryBuilder<Observation, int, QQueryOperations> apexValueProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'apex_value');
-    });
-  }
-
-  QueryBuilder<Observation, int, QQueryOperations> stateProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'etat');
-    });
-  }
-
-  QueryBuilder<Observation, String, QQueryOperations> observerIdProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'id_observateur');
-    });
-  }
-
-  QueryBuilder<Observation, String, QQueryOperations> sessionIdProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'id_session');
+      return query.addPropertyName(r'apexValue');
     });
   }
 
@@ -1046,6 +934,18 @@ extension ObservationQueryProperty
   QueryBuilder<Observation, double, QQueryOperations> longitudeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'longitude');
+    });
+  }
+
+  QueryBuilder<Observation, String, QQueryOperations> observerIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'observerId');
+    });
+  }
+
+  QueryBuilder<Observation, String, QQueryOperations> sessionIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'sessionId');
     });
   }
 }

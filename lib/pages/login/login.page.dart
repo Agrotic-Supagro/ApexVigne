@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
     return FlutterLogin(
       title: 'ApeX Vigne',
       titleTag: 'title',
-      logo: 'assets/img/logo/logo_apex_vigne.png',
+      logo: 'assets/images/logos/logo_apex_vigne_transparent.png',
       logoTag: 'logo',
       onLogin: auth.login,
       onSubmitAnimationCompleted: () {
@@ -47,7 +47,9 @@ class _LoginPageState extends State<LoginPage> {
         buttonTheme: const LoginButtonTheme(
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
           ),
         ),
       ),

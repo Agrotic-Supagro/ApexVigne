@@ -6,7 +6,8 @@ class LabelApexHydricConstraint extends StatefulWidget {
   final String text;
 
   @override
-  State<LabelApexHydricConstraint> createState() => _LabelApexHydricConstraintState();
+  State<LabelApexHydricConstraint> createState() =>
+      _LabelApexHydricConstraintState();
 }
 
 class _LabelApexHydricConstraintState extends State<LabelApexHydricConstraint> {
@@ -15,6 +16,10 @@ class _LabelApexHydricConstraintState extends State<LabelApexHydricConstraint> {
 
   void determineHydricConstraintStyle() {
     switch (widget.text) {
+      case 'Écimée':
+        textColor = const Color(0xFF707070);
+        bgColor = const Color(0xFFE8E8E8);
+        break;
       case 'Sévère':
         textColor = const Color(0xFFCC5E52);
         bgColor = const Color(0xFFFAEAE8);
