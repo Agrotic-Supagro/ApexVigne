@@ -102,6 +102,12 @@ class _CreateSessionState extends State<CreateSession> {
 
   @override
   Widget build(BuildContext context) {
+    /*
+      WillPopScope is used to prevent the user from leaving the page
+      We should use PopScope because WillPopScope is deprecated but PopScope is actually bugged
+      So we use WillPopScope until PopScope is fixed
+      https://github.com/flutter/flutter/issues/138624
+    */
     return WillPopScope(
       onWillPop: () async {
         _exitConfirmationDialog();
