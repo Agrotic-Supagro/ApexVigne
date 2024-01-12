@@ -318,8 +318,6 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
   }
 
   Expanded _buildBottomSection() {
-    final AuthenticationService authService = AuthenticationService();
-
     void editNotesDialog() {
       final TextEditingController notesController = TextEditingController();
       notesController.text = _notesText;
@@ -386,7 +384,8 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         session.latitude = 0;
         session.longitude = 0;
       }
-      final bool isConnected = await authService.checkConnection(context);
+      final bool isConnected =
+          await AuthenticationService().checkConnection(context);
       if (isConnected) {
         if (widget.session != null) {
           session.id = widget.session!.id;

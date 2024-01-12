@@ -8,6 +8,7 @@ import 'package:apex_vigne/services/calculations.service.dart';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
 import 'package:apex_vigne/services/parcels_api.service.dart';
+import 'package:apex_vigne/shared_widgets/offline_dialog.dart';
 import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -22,7 +23,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String _sortingOption = 'Du plus récent au plus ancien';
-  final AuthenticationService _authService = AuthenticationService();
 
   @override
   Widget build(BuildContext context) {
@@ -45,38 +45,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   AppBar _buildAppBar(BuildContext context) {
-    Future<dynamic> offlineDialog(BuildContext context) {
-      return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Vous êtes déconnecté'),
-            content: const Text(
-              'Celà peut être dû à une mauvaise connexion internet ou à une maintenance du serveur.',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Rester déconnecté'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const LoadingPage(),
-                  ));
-                  _authService.isOnlineState.value = true;
-                },
-                child: const Text('Se connecter'),
-              ),
-            ],
-          );
-        },
-      );
-    }
-
     /* Build */
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -88,16 +56,19 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       actions: <Widget>[
-        if (!_authService.isOnlineState.value)
-          IconButton(
-            icon: const Icon(
-              Symbols.cloud_off,
-              weight: 350,
-              size: 28.0,
+        if (!AuthenticationService().isOnlineState.value)
+          Hero(
+            tag: 'offline',
+            child: IconButton(
+              icon: const Icon(
+                Symbols.cloud_off,
+                weight: 350,
+                size: 28.0,
+              ),
+              onPressed: () {
+                offlineDialog(context);
+              },
             ),
-            onPressed: () {
-              offlineDialog(context);
-            },
           ),
         PopupMenuButton(
           shape: const RoundedRectangleBorder(
@@ -366,7 +337,7 @@ class _HomePageState extends State<HomePage> {
                         toBeginningOfSentenceCase(parcelNameController.text)!;
                     final parcel = Parcel()..name = parcelNameController.text;
                     final bool isConnected =
-                        await _authService.checkConnection(context);
+                        await AuthenticationService().checkConnection(context);
                     if (isConnected) {
                       await ParcelsApiService().addParcel(parcel);
                     } else {

@@ -15,7 +15,6 @@ class LoadingPage extends StatefulWidget {
 }
 
 class _LoadingPageState extends State<LoadingPage> {
-  final AuthenticationService _authService = AuthenticationService();
   String _stepLoadingText = 'Chargement...';
 
   @override
@@ -29,11 +28,12 @@ class _LoadingPageState extends State<LoadingPage> {
     if (!context.mounted) return;
 
     _updateStepLoadingText('Vérification de l\'utilisateur...');
-    await _authService.checkToken();
+    await AuthenticationService().checkToken();
 
-    if (_authService.authenticationState.value) {
+    if (AuthenticationService().authenticationState.value) {
       _updateStepLoadingText('Connexion au serveur...');
-      final bool isConnected = await _authService.checkConnection(context);
+      final bool isConnected =
+          await AuthenticationService().checkConnection(context);
       if (isConnected) {
         await _sendOfflineData();
         await _fetchDataServer();
@@ -59,7 +59,7 @@ class _LoadingPageState extends State<LoadingPage> {
 
   Future<void> _fetchDataServer() async {
     _updateStepLoadingText('Chargement des données utilisateur...');
-    await _authService.getCurrentUserProfile();
+    await AuthenticationService().getCurrentUserProfile();
     _updateStepLoadingText('Chargement des parcelles...');
     await ParcelsApiService().getAuthorizedParcels();
     _updateStepLoadingText('Chargement des sessions...');

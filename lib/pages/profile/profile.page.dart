@@ -3,8 +3,10 @@ import 'package:apex_vigne/pages/login/login.page.dart';
 import 'package:apex_vigne/pages/profile/widgets/list_tile.widget.dart';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
+import 'package:apex_vigne/shared_widgets/offline_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/services/auth.service.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class ProfilPage extends StatefulWidget {
   const ProfilPage({super.key});
@@ -23,6 +25,22 @@ class _ProfilPageState extends State<ProfilPage> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         title: const Text('Profil'),
+        actions: [
+          if (!AuthenticationService().isOnlineState.value)
+            Hero(
+              tag: 'offline',
+              child: IconButton(
+                icon: const Icon(
+                  Symbols.cloud_off,
+                  weight: 350,
+                  size: 28.0,
+                ),
+                onPressed: () {
+                  offlineDialog(context);
+                },
+              ),
+            ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),

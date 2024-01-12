@@ -9,6 +9,7 @@ import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:apex_vigne/pages/parcel_detail/widgets/ic_apex_line_chart.widget.dart';
 import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
+import 'package:apex_vigne/shared_widgets/offline_dialog.dart';
 import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -74,6 +75,22 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
           Navigator.of(context).pop();
         },
       ),
+      actions: [
+        if (!AuthenticationService().isOnlineState.value)
+          Hero(
+            tag: 'offline',
+            child: IconButton(
+              icon: const Icon(
+                Symbols.cloud_off,
+                weight: 350,
+                size: 28.0,
+              ),
+              onPressed: () {
+                offlineDialog(context);
+              },
+            ),
+          ),
+      ],
     );
   }
 
@@ -99,8 +116,8 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
     }
 
     void updateSession(BuildContext context, Session session) async {
-      final AuthenticationService authService = AuthenticationService();
-      final bool isConnected = await authService.checkConnection(context);
+      final bool isConnected =
+          await AuthenticationService().checkConnection(context);
 
       if (!context.mounted) {
         return;
@@ -216,8 +233,6 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
   }
 
   Row _buildFloatingActionButton(BuildContext context) {
-    final AuthenticationService authService = AuthenticationService();
-
     Future<dynamic> prunedParcelDialog(BuildContext context) {
       return showDialog(
         context: context,
@@ -242,7 +257,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                     ..apexStuntedGrowth = 0
                     ..parcelId = widget.parcel.id!;
                   final bool isConnected =
-                      await authService.checkConnection(context);
+                      await AuthenticationService().checkConnection(context);
                   if (isConnected) {
                     await SessionsApiService().addSession(session);
                   } else {
