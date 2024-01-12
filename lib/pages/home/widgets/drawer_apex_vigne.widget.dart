@@ -56,7 +56,7 @@ class DrawerApexVigne extends StatelessWidget {
           ),
           ListTile(
             title: const Text('Nous contacter'),
-            trailing: Icon(Symbols.chevron_right, color: Colors.grey.shade400),
+            trailing: Icon(Symbols.open_in_new, color: Colors.grey.shade400),
             onTap: () {
               launchMail();
             },
