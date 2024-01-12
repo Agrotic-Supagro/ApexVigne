@@ -79,6 +79,14 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         if (!AuthenticationService().isOnlineState.value)
           Hero(
             tag: 'offline',
+            flightShuttleBuilder: (flightContext, animation, flightDirection,
+                fromHeroContext, toHeroContext) {
+              return const Icon(
+                Icons.cloud_off,
+                color: Colors.white,
+                size: 28.0,
+              );
+            },
             child: IconButton(
               icon: const Icon(
                 Symbols.cloud_off,
