@@ -23,6 +23,24 @@ class SessionsApiService {
     }
   }
 
+  Future<void> updateSession(Session session) async {
+    final response = await http.put(Uri.parse('$url/${session.id}'),
+        headers: await headers,
+        body: jsonEncode(<String, dynamic>{
+          'sessionAt': session.sessionAt,
+          'apexFullGrowth': session.apexFullGrowth,
+          'apexSlowerGrowth': session.apexSlowerGrowth,
+          'apexStuntedGrowth': session.apexStuntedGrowth,
+          'parcelId': session.parcelId,
+        }));
+
+    if (response.statusCode == 204) {
+      await IsarService().updateSession(session);
+    } else {
+      throw Exception('Failed to update session');
+    }
+  }
+
   Future<void> addSession(Session session,
       {bool offlineSession = false}) async {
     final response = await http.post(url,

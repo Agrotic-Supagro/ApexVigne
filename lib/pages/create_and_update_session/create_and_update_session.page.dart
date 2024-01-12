@@ -18,14 +18,12 @@ class CreateUpdateSession extends StatefulWidget {
     super.key,
     required this.title,
     required this.parcelId,
-    this.selectedDate,
-    this.noteText,
+    this.session,
   });
 
   final String title;
   final String parcelId;
-  final DateTime? selectedDate;
-  final String? noteText;
+  final Session? session;
 
   @override
   State<CreateUpdateSession> createState() => _CreateUpdateSessionState();
@@ -34,18 +32,28 @@ class CreateUpdateSession extends StatefulWidget {
 class _CreateUpdateSessionState extends State<CreateUpdateSession> {
   final List<int> _counts = [0, 0, 0];
   final List<int> _countsHistory = [];
-  bool _positionSaved = false;
   late Position _position;
-  late DateTime _selectedDate;
-  late String _notesText;
+  bool _positionSaved = false;
+  DateTime _selectedDate = DateTime.now();
+  String _notesText = '';
   int _stadeId = -1;
 
   @override
   void initState() {
-    _selectedDate = widget.selectedDate ?? DateTime.now();
-    _notesText = widget.noteText ?? '';
+    _initSessionEditing();
     _checkLocation();
     super.initState();
+  }
+
+  void _initSessionEditing() {
+    if (widget.session != null) {
+      // _stadeId = widget.session!.stadePhenoId; // TODO: Wait when we'll have the stadePhenoId in database
+      _selectedDate = DateTime.parse(widget.session!.sessionAt);
+      _notesText = widget.session!.notes;
+      _counts[0] = widget.session!.apexFullGrowth;
+      _counts[1] = widget.session!.apexSlowerGrowth;
+      _counts[2] = widget.session!.apexStuntedGrowth;
+    }
   }
 
   void _checkLocation() async {
@@ -270,13 +278,13 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
             imgPath: 'assets/images/full_growth.jpg',
             text: 'Pleine croissance',
             onPressed: () async {
-              incrementCount(2);
+              incrementCount(0);
               Vibration.vibrate(duration: 300);
             },
             onLongPressed: () {
-              editCount(2);
+              editCount(0);
             },
-            count: _counts[2],
+            count: _counts[0],
           ),
           const SizedBox(height: 10),
           CardApexButton(
@@ -296,13 +304,13 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
             imgPath: 'assets/images/stunted_growth.jpg',
             text: 'Arrêt de croissance',
             onPressed: () async {
-              incrementCount(0);
+              incrementCount(2);
               Vibration.vibrate(duration: 40);
             },
             onLongPressed: () {
-              editCount(0);
+              editCount(2);
             },
-            count: _counts[0],
+            count: _counts[2],
           ),
         ],
       ),
@@ -365,9 +373,9 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
     void addSession() async {
       final session = Session()
         ..sessionAt = _selectedDate.toIso8601String()
-        ..apexStuntedGrowth = _counts[0]
+        ..apexFullGrowth = _counts[0]
         ..apexSlowerGrowth = _counts[1]
-        ..apexFullGrowth = _counts[2]
+        ..apexStuntedGrowth = _counts[2]
         ..parcelId = widget.parcelId
         ..notes = _notesText
         ..stadePhenoId = _stadeId;
@@ -380,7 +388,15 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
       }
       final bool isConnected = await authService.checkConnection(context);
       if (isConnected) {
-        await SessionsApiService().addSession(session);
+        if (widget.session != null) {
+          session.id = widget.session!.id;
+          session.isarId = widget.session!.isarId;
+          session.latitude = widget.session!.latitude;
+          session.longitude = widget.session!.longitude;
+          await SessionsApiService().updateSession(session);
+        } else {
+          await SessionsApiService().addSession(session);
+        }
       } else {
         await IsarService().saveSession(session);
       }

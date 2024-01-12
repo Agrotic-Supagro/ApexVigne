@@ -98,6 +98,27 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
       );
     }
 
+    void updateSession(BuildContext context, Session session) async {
+      final Session? sessionUpdated = await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => CreateUpdateSession(
+            title: 'Modification de la session',
+            parcelId: widget.parcel.id!,
+            session: session,
+          ),
+        ),
+      );
+
+      if (sessionUpdated != null) {
+        setState(() {
+          widget.sessions!.remove(session);
+          widget.sessions!.add(sessionUpdated);
+          widget.sessions!.sort((a, b) => DateTime.parse(b.sessionAt)
+              .compareTo(DateTime.parse(a.sessionAt)));
+        });
+      }
+    }
+
     /* Build */
     return Theme(
       data: Theme.of(context).copyWith(
@@ -138,6 +159,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
               final double icApex = calculateIcApex(session.apexFullGrowth,
                   session.apexSlowerGrowth, session.apexStuntedGrowth);
               return DataRow(
+                onLongPress: () => updateSession(context, session),
                 cells: [
                   DataCell(
                     Text(formatDate(session.sessionAt, explicit: true),
@@ -194,7 +216,6 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                     ..apexFullGrowth = 0
                     ..apexSlowerGrowth = 0
                     ..apexStuntedGrowth = 0
-                    // TODO: Manage parcel without id
                     ..parcelId = widget.parcel.id!;
                   final bool isConnected =
                       await authService.checkConnection(context);
@@ -208,7 +229,9 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                     widget.sessions!.sort((a, b) => DateTime.parse(b.sessionAt)
                         .compareTo(DateTime.parse(a.sessionAt)));
                   });
-                  Navigator.of(context).pop();
+                  if (context.mounted) {
+                    Navigator.of(context).pop();
+                  }
                 },
                 child: const Text('Confirmer'),
               ),
@@ -236,7 +259,6 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
               MaterialPageRoute(
                 builder: (context) => CreateUpdateSession(
                   title: 'Nouvelle session',
-                  // TODO: Manage parcel without id
                   parcelId: widget.parcel.id!,
                 ),
               ),

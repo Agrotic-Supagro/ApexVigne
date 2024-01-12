@@ -61,4 +61,11 @@ class IsarService {
       await isar.sessions.put(session);
     });
   }
+
+  Future<void> updateSession(Session session) async {
+    await isar.writeTxn(() async {
+      await isar.sessions.delete(session.isarId);
+      await isar.sessions.put(session);
+    });
+  }
 }
