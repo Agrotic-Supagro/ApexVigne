@@ -73,19 +73,6 @@ class _CardApexButtonState extends State<CardApexButton> {
                     "Vous pouvez éditer le nombre d'observations en maintenant le compteur",
                     style: TextStyle(color: Colors.white),
                   ),
-                  SizedBox(height: 30),
-                  Row(
-                    children: [
-                      Icon(Symbols.warning, color: Color(0xFFCCB152)),
-                      SizedBox(width: 15),
-                      Expanded(
-                        child: Text(
-                          "Attention, si vous changez le nombre d'observations, vous perdrez la position des observations",
-                          style: TextStyle(color: Colors.white70),
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             )
