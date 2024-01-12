@@ -102,7 +102,10 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
       final AuthenticationService authService = AuthenticationService();
       final bool isConnected = await authService.checkConnection(context);
 
-      if (!isConnected && context.mounted) {
+      if (!context.mounted) {
+        return;
+      }
+      if (!isConnected) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Row(
