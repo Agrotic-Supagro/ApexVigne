@@ -1,7 +1,6 @@
 import 'package:apex_vigne/collections/parcel.collection.dart';
 import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/pages/home/widgets/drawer_apex_vigne.widget.dart';
-import 'package:apex_vigne/pages/loading/loading.page.dart';
 import 'package:apex_vigne/pages/parcel_detail/parcel_detail.page.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:apex_vigne/services/calculations.service.dart';
