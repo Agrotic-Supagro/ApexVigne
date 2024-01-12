@@ -1,6 +1,6 @@
 import 'package:apex_vigne/pages/about/about.page.dart';
-import 'package:apex_vigne/pages/contact/contact.page.dart';
 import 'package:apex_vigne/pages/profile/profile.page.dart';
+import 'package:apex_vigne/utils/launch_mail.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
@@ -58,12 +58,7 @@ class DrawerApexVigne extends StatelessWidget {
             title: const Text('Nous contacter'),
             trailing: Icon(Symbols.chevron_right, color: Colors.grey.shade400),
             onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const ContactPage(),
-                ),
-              );
+              launchMail();
             },
           ),
           Divider(
