@@ -1,4 +1,3 @@
-import 'package:apex_vigne/collections/observation.collection.dart';
 import 'package:isar/isar.dart';
 
 part 'session.collection.g.dart';
