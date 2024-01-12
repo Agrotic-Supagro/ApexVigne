@@ -156,9 +156,9 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                   DataCell(
                     ElevatedApexButton(
                       icon: Icons.article_outlined,
-                      callback: () {
-                        notesDialog(context, session.notes);
-                      },
+                      callback: session.notes.isEmpty
+                          ? null
+                          : () => notesDialog(context, session.notes),
                     ),
                   ),
                 ],
