@@ -99,6 +99,27 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
     }
 
     void updateSession(BuildContext context, Session session) async {
+      final AuthenticationService authService = AuthenticationService();
+      final bool isConnected = await authService.checkConnection(context);
+
+      if (!isConnected && context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Row(
+              children: [
+                Icon(Symbols.cloud_off, color: Colors.white),
+                SizedBox(width: 20),
+                Expanded(
+                  child: Text(
+                      'Vous devez être connecté pour modifier une session.'),
+                ),
+              ],
+            ),
+            backgroundColor: Color(0xFFCCB152),
+          ),
+        );
+        return;
+      }
       final Session? sessionUpdated = await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => CreateUpdateSession(
