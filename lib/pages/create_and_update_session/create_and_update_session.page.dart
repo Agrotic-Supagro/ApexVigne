@@ -211,7 +211,6 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         _counts[buttonIndex]++;
         _countsHistory.add(buttonIndex);
         if (_countsHistory.length > 14 && !_positionSaved) {
-          _checkLocation();
           _positionSaved = true;
         }
       });
