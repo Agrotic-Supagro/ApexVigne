@@ -26,6 +26,7 @@ class Session {
 
   late int stadePhenoId;
 
-  @Ignore()
-  late List<Observation> observation;
+  late double latitude;
+
+  late double longitude;
 }

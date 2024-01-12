@@ -29,8 +29,11 @@ class ApexVigneApp extends StatelessWidget {
         Locale('fr', 'FR'),
       ],
       title: 'ApeX Vigne',
-      theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme, fontFamily: 'MuseoSans'),
-      // darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: lightColorScheme,
+        fontFamily: 'MuseoSans',
+      ),
       home: const LoadingPage(),
     );
   }

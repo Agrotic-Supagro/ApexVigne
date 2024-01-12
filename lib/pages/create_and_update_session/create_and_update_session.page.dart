@@ -1,6 +1,6 @@
 import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/constants.dart';
-import 'package:apex_vigne/pages/create_session/widgets/card_apex_button.widget.dart';
+import 'package:apex_vigne/pages/create_and_update_session/widgets/card_apex_button.widget.dart';
 import 'package:apex_vigne/pages/stade_pheno/stade_pheno.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:apex_vigne/services/isar.service.dart';
@@ -13,8 +13,8 @@ import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:vibration/vibration.dart';
 
-class CreateSession extends StatefulWidget {
-  const CreateSession({
+class CreateUpdateSession extends StatefulWidget {
+  const CreateUpdateSession({
     super.key,
     required this.title,
     required this.parcelId,
@@ -28,49 +28,48 @@ class CreateSession extends StatefulWidget {
   final String? noteText;
 
   @override
-  State<CreateSession> createState() => _CreateSessionState();
+  State<CreateUpdateSession> createState() => _CreateUpdateSessionState();
 }
 
-class _CreateSessionState extends State<CreateSession> {
+class _CreateUpdateSessionState extends State<CreateUpdateSession> {
   final List<int> _counts = [0, 0, 0];
   final List<int> _countsHistory = [];
-  final List<List<Position>> _positions = [[], [], []];
+  bool _positionSaved = false;
+  late Position _position;
   late DateTime _selectedDate;
   late String _notesText;
-  bool _locationIsEnbaled = true;
   int _stadeId = -1;
 
   @override
   void initState() {
     _selectedDate = widget.selectedDate ?? DateTime.now();
     _notesText = widget.noteText ?? '';
-    _checkLocationPermission();
+    _checkLocation();
     super.initState();
   }
 
-  void _checkLocationPermission() async {
-    final LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) {
-      setState(() {
-        _locationIsEnbaled = false;
-      });
-    } else {
-      setState(() {
-        _locationIsEnbaled = true;
-      });
-    }
-  }
-
-  void _undoLastAction() {
-    if (_countsHistory.isNotEmpty) {
-      Vibration.vibrate(duration: 10);
-      int lastCount = _countsHistory.removeLast();
-      setState(() {
-        _counts[lastCount]--;
-        _positions[lastCount].removeLast();
-      });
-    }
+  void _checkLocation() async {
+    await determinePosition().then((value) {
+      _position = value;
+    }).catchError((error) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Symbols.location_off, color: Colors.white),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: Text(error),
+                ),
+              ],
+            ),
+            backgroundColor: const Color(0xFFCCB152),
+          ),
+        );
+        Navigator.of(context).pop();
+      }
+    });
   }
 
   void _exitConfirmationDialog() {
@@ -143,30 +142,6 @@ class _CreateSessionState extends State<CreateSession> {
           _exitConfirmationDialog();
         },
       ),
-      actions: <Widget>[
-        if (!_locationIsEnbaled)
-          IconButton(
-            icon: const Icon(Symbols.location_off),
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Row(
-                    children: [
-                      Icon(Symbols.location_off, color: Colors.white),
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: Text('La localisation est désactivée, si vous '
-                            'souhaitez l\'activer, allez dans les paramètres de '
-                            'votre téléphone.'),
-                      ),
-                    ],
-                  ),
-                  backgroundColor: Color(0xFFCCB152),
-                ),
-              );
-            },
-          ),
-      ],
     );
   }
 
@@ -235,6 +210,10 @@ class _CreateSessionState extends State<CreateSession> {
       setState(() {
         _counts[buttonIndex]++;
         _countsHistory.add(buttonIndex);
+        if (_countsHistory.length > 14 && !_positionSaved) {
+          _checkLocation();
+          _positionSaved = true;
+        }
       });
     }
 
@@ -284,21 +263,6 @@ class _CreateSessionState extends State<CreateSession> {
       );
     }
 
-    void addPositionToSession(int buttonIndex) async {
-      await determinePosition().then((value) {
-        _positions[buttonIndex].add(value);
-      }).catchError((error) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(error),
-            backgroundColor: const Color(0xFFCCB152),
-          ),
-        );
-        _undoLastAction();
-      });
-      _checkLocationPermission();
-    }
-
     /* Build */
     return Expanded(
       child: Column(
@@ -307,14 +271,13 @@ class _CreateSessionState extends State<CreateSession> {
             imgPath: 'assets/images/full_growth.jpg',
             text: 'Pleine croissance',
             onPressed: () async {
-              incrementCount(0);
+              incrementCount(2);
               Vibration.vibrate(duration: 300);
-              addPositionToSession(0);
             },
             onLongPressed: () {
-              editCount(0);
+              editCount(2);
             },
-            count: _counts[0],
+            count: _counts[2],
           ),
           const SizedBox(height: 10),
           CardApexButton(
@@ -323,7 +286,6 @@ class _CreateSessionState extends State<CreateSession> {
             onPressed: () async {
               incrementCount(1);
               Vibration.vibrate(duration: 150);
-              addPositionToSession(1);
             },
             onLongPressed: () {
               editCount(1);
@@ -335,14 +297,13 @@ class _CreateSessionState extends State<CreateSession> {
             imgPath: 'assets/images/stunted_growth.jpg',
             text: 'Arrêt de croissance',
             onPressed: () async {
-              incrementCount(2);
+              incrementCount(0);
               Vibration.vibrate(duration: 40);
-              addPositionToSession(2);
             },
             onLongPressed: () {
-              editCount(2);
+              editCount(0);
             },
-            count: _counts[2],
+            count: _counts[0],
           ),
         ],
       ),
@@ -392,6 +353,43 @@ class _CreateSessionState extends State<CreateSession> {
       );
     }
 
+    void undoLastAction() {
+      if (_countsHistory.isNotEmpty) {
+        Vibration.vibrate(duration: 10);
+        int lastCount = _countsHistory.removeLast();
+        setState(() {
+          _counts[lastCount]--;
+        });
+      }
+    }
+
+    void addSession() async {
+      final session = Session()
+        ..sessionAt = _selectedDate.toIso8601String()
+        ..apexStuntedGrowth = _counts[0]
+        ..apexSlowerGrowth = _counts[1]
+        ..apexFullGrowth = _counts[2]
+        ..parcelId = widget.parcelId
+        ..notes = _notesText
+        ..stadePhenoId = _stadeId;
+      if (_positionSaved) {
+        session.latitude = _position.latitude;
+        session.longitude = _position.longitude;
+      } else {
+        session.latitude = 0;
+        session.longitude = 0;
+      }
+      final bool isConnected = await authService.checkConnection(context);
+      if (isConnected) {
+        await SessionsApiService().addSession(session);
+      } else {
+        await IsarService().saveSession(session);
+      }
+      if (context.mounted) {
+        Navigator.of(context).pop(session);
+      }
+    }
+
     /* Build */
     return Expanded(
       flex: 0,
@@ -414,11 +412,7 @@ class _CreateSessionState extends State<CreateSession> {
             children: <Widget>[
               ElevatedApexButton(
                 icon: Symbols.undo,
-                callback: _countsHistory.isEmpty
-                    ? null
-                    : () {
-                        _undoLastAction();
-                      },
+                callback: _countsHistory.isEmpty ? null : undoLastAction,
               ),
               const SizedBox(width: 10),
               ElevatedApexButton(
@@ -427,24 +421,7 @@ class _CreateSessionState extends State<CreateSession> {
                             firstValue + secondValue) <
                         50
                     ? null
-                    : () async {
-                        final session = Session()
-                          ..sessionAt = _selectedDate.toIso8601String()
-                          ..apexFullGrowth = _counts[0]
-                          ..apexSlowerGrowth = _counts[1]
-                          ..apexStuntedGrowth = _counts[2]
-                          ..parcelId = widget.parcelId
-                          ..notes = _notesText
-                          ..stadePhenoId = _stadeId;
-                        final bool isConnected =
-                            await authService.checkConnection(context);
-                        if (isConnected) {
-                          await SessionsApiService().addSession(session);
-                        } else {
-                          await IsarService().saveSession(session);
-                        }
-                        Navigator.of(context).pop(session);
-                      },
+                    : addSession,
               ),
               const SizedBox(width: 10),
               ElevatedApexButton(

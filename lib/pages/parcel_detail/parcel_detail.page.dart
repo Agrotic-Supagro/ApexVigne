@@ -1,6 +1,6 @@
 import 'package:apex_vigne/collections/parcel.collection.dart';
 import 'package:apex_vigne/collections/session.collection.dart';
-import 'package:apex_vigne/pages/create_session/create_session.page.dart';
+import 'package:apex_vigne/pages/create_and_update_session/create_and_update_session.page.dart';
 import 'package:apex_vigne/pages/parcel_detail/widgets/ic_apex_cell.widget.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:apex_vigne/services/calculations.service.dart';
@@ -234,7 +234,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
           callback: () async {
             final Session? session = await Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => CreateSession(
+                builder: (context) => CreateUpdateSession(
                   title: 'Nouvelle session',
                   // TODO: Manage parcel without id
                   parcelId: widget.parcel.id!,
