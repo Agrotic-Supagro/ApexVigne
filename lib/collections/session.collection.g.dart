@@ -37,28 +37,38 @@ const SessionSchema = CollectionSchema(
       name: r'id',
       type: IsarType.string,
     ),
-    r'notes': PropertySchema(
+    r'latitude': PropertySchema(
       id: 4,
+      name: r'latitude',
+      type: IsarType.double,
+    ),
+    r'longitude': PropertySchema(
+      id: 5,
+      name: r'longitude',
+      type: IsarType.double,
+    ),
+    r'notes': PropertySchema(
+      id: 6,
       name: r'notes',
       type: IsarType.string,
     ),
     r'observerId': PropertySchema(
-      id: 5,
+      id: 7,
       name: r'observerId',
       type: IsarType.string,
     ),
     r'parcelId': PropertySchema(
-      id: 6,
+      id: 8,
       name: r'parcelId',
       type: IsarType.string,
     ),
     r'sessionAt': PropertySchema(
-      id: 7,
+      id: 9,
       name: r'sessionAt',
       type: IsarType.string,
     ),
     r'stadePhenoId': PropertySchema(
-      id: 8,
+      id: 10,
       name: r'stadePhenoId',
       type: IsarType.long,
     )
@@ -125,11 +135,13 @@ void _sessionSerialize(
   writer.writeLong(offsets[1], object.apexSlowerGrowth);
   writer.writeLong(offsets[2], object.apexStuntedGrowth);
   writer.writeString(offsets[3], object.id);
-  writer.writeString(offsets[4], object.notes);
-  writer.writeString(offsets[5], object.observerId);
-  writer.writeString(offsets[6], object.parcelId);
-  writer.writeString(offsets[7], object.sessionAt);
-  writer.writeLong(offsets[8], object.stadePhenoId);
+  writer.writeDouble(offsets[4], object.latitude);
+  writer.writeDouble(offsets[5], object.longitude);
+  writer.writeString(offsets[6], object.notes);
+  writer.writeString(offsets[7], object.observerId);
+  writer.writeString(offsets[8], object.parcelId);
+  writer.writeString(offsets[9], object.sessionAt);
+  writer.writeLong(offsets[10], object.stadePhenoId);
 }
 
 Session _sessionDeserialize(
@@ -144,11 +156,13 @@ Session _sessionDeserialize(
   object.apexStuntedGrowth = reader.readLong(offsets[2]);
   object.id = reader.readStringOrNull(offsets[3]);
   object.isarId = id;
-  object.notes = reader.readString(offsets[4]);
-  object.observerId = reader.readStringOrNull(offsets[5]);
-  object.parcelId = reader.readString(offsets[6]);
-  object.sessionAt = reader.readString(offsets[7]);
-  object.stadePhenoId = reader.readLong(offsets[8]);
+  object.latitude = reader.readDouble(offsets[4]);
+  object.longitude = reader.readDouble(offsets[5]);
+  object.notes = reader.readString(offsets[6]);
+  object.observerId = reader.readStringOrNull(offsets[7]);
+  object.parcelId = reader.readString(offsets[8]);
+  object.sessionAt = reader.readString(offsets[9]);
+  object.stadePhenoId = reader.readLong(offsets[10]);
   return object;
 }
 
@@ -168,14 +182,18 @@ P _sessionDeserializeProp<P>(
     case 3:
       return (reader.readStringOrNull(offset)) as P;
     case 4:
-      return (reader.readString(offset)) as P;
+      return (reader.readDouble(offset)) as P;
     case 5:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDouble(offset)) as P;
     case 6:
       return (reader.readString(offset)) as P;
     case 7:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 8:
+      return (reader.readString(offset)) as P;
+    case 9:
+      return (reader.readString(offset)) as P;
+    case 10:
       return (reader.readLong(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -694,6 +712,130 @@ extension SessionQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> latitudeEqualTo(
+    double value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'latitude',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> latitudeGreaterThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'latitude',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> latitudeLessThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'latitude',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> latitudeBetween(
+    double lower,
+    double upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'latitude',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> longitudeEqualTo(
+    double value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'longitude',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> longitudeGreaterThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'longitude',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> longitudeLessThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'longitude',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> longitudeBetween(
+    double lower,
+    double upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'longitude',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
       ));
     });
   }
@@ -1343,6 +1485,30 @@ extension SessionQuerySortBy on QueryBuilder<Session, Session, QSortBy> {
     });
   }
 
+  QueryBuilder<Session, Session, QAfterSortBy> sortByLatitude() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'latitude', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> sortByLatitudeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'latitude', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> sortByLongitude() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'longitude', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> sortByLongitudeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'longitude', Sort.desc);
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterSortBy> sortByNotes() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'notes', Sort.asc);
@@ -1466,6 +1632,30 @@ extension SessionQuerySortThenBy
     });
   }
 
+  QueryBuilder<Session, Session, QAfterSortBy> thenByLatitude() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'latitude', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> thenByLatitudeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'latitude', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> thenByLongitude() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'longitude', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> thenByLongitudeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'longitude', Sort.desc);
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterSortBy> thenByNotes() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'notes', Sort.asc);
@@ -1554,6 +1744,18 @@ extension SessionQueryWhereDistinct
     });
   }
 
+  QueryBuilder<Session, Session, QDistinct> distinctByLatitude() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'latitude');
+    });
+  }
+
+  QueryBuilder<Session, Session, QDistinct> distinctByLongitude() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'longitude');
+    });
+  }
+
   QueryBuilder<Session, Session, QDistinct> distinctByNotes(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1618,6 +1820,18 @@ extension SessionQueryProperty
   QueryBuilder<Session, String?, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<Session, double, QQueryOperations> latitudeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'latitude');
+    });
+  }
+
+  QueryBuilder<Session, double, QQueryOperations> longitudeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'longitude');
     });
   }
 
