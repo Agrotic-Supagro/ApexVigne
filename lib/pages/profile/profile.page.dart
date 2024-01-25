@@ -1,4 +1,5 @@
 import 'package:apex_vigne/collections/user.collection.dart';
+import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/pages/login/login.page.dart';
 import 'package:apex_vigne/pages/profile/widgets/list_tile.widget.dart';
 import 'package:apex_vigne/services/isar.service.dart';
@@ -24,7 +25,7 @@ class _ProfilPageState extends State<ProfilPage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        title: const Text('Profil'),
+        title: const Text(titleProfile),
         actions: [
           if (!AuthenticationService().isOnlineState.value)
             Hero(
@@ -56,7 +57,7 @@ class _ProfilPageState extends State<ProfilPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Information du compte',
+              infoAccount,
               style: Theme.of(context)
                   .textTheme
                   .labelMedium!
@@ -83,7 +84,7 @@ class _ProfilPageState extends State<ProfilPage> {
             if (snapshot.hasError || snapshot.data == null) {
               return Center(
                 child: Text(
-                  'Une erreur est survenue lors de la récupération de vos informations',
+                  infoErrorProfileInfo,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               );
@@ -93,14 +94,24 @@ class _ProfilPageState extends State<ProfilPage> {
             return ListView(
               children: <Widget>[
                 ListTileInfo(
-                    text: 'Prénom', info: currentUserProfile.firstname),
-                Divider(color: Colors.grey[200]),
-                ListTileInfo(text: 'Nom', info: currentUserProfile.lastname),
-                Divider(color: Colors.grey[200]),
-                ListTileInfo(text: 'Email', info: currentUserProfile.email),
+                  text: infoFirstname,
+                  info: currentUserProfile.firstname,
+                ),
                 Divider(color: Colors.grey[200]),
                 ListTileInfo(
-                    text: 'Structure', info: currentUserProfile.structure),
+                  text: infoLastname,
+                  info: currentUserProfile.lastname,
+                ),
+                Divider(color: Colors.grey[200]),
+                ListTileInfo(
+                  text: infoEmail,
+                  info: currentUserProfile.email,
+                ),
+                Divider(color: Colors.grey[200]),
+                ListTileInfo(
+                  text: infoStructure,
+                  info: currentUserProfile.structure,
+                ),
               ],
             );
           }),
@@ -129,7 +140,7 @@ class LogoutButton extends StatelessWidget {
             ));
           });
         },
-        text: 'Se déconnecter',
+        text: actionLogout,
       ),
     );
   }

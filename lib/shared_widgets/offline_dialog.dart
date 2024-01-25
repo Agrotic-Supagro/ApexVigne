@@ -1,3 +1,4 @@
+import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/pages/loading/loading.page.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:flutter/material.dart';
@@ -7,16 +8,16 @@ Future<dynamic> offlineDialog(BuildContext context) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Text('Vous êtes déconnecté'),
+        title: const Text(titleDisconnected),
         content: const Text(
-          'Celà peut être dû à une mauvaise connexion internet ou à une maintenance du serveur.',
+          infoWhyOffline,
         ),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text('Rester déconnecté'),
+            child: const Text(actionStayOffline),
           ),
           TextButton(
             onPressed: () {
@@ -26,7 +27,7 @@ Future<dynamic> offlineDialog(BuildContext context) {
               ));
               AuthenticationService().isOnlineState.value = true;
             },
-            child: const Text('Se connecter'),
+            child: const Text(actionGoOnline),
           ),
         ],
       );

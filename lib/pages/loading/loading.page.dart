@@ -1,3 +1,4 @@
+import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/pages/home/home.page.dart';
 import 'package:apex_vigne/pages/login/login.page.dart';
 import 'package:apex_vigne/services/isar.service.dart';
@@ -15,7 +16,7 @@ class LoadingPage extends StatefulWidget {
 }
 
 class _LoadingPageState extends State<LoadingPage> {
-  String _stepLoadingText = 'Chargement...';
+  String _stepLoadingText = infoLoading;
 
   @override
   void initState() {
@@ -27,24 +28,24 @@ class _LoadingPageState extends State<LoadingPage> {
   Future<void> _initializeApp() async {
     if (!context.mounted) return;
 
-    _updateStepLoadingText('Vérification de l\'utilisateur...');
+    _updateStepLoadingText(infoCheckUser);
     await AuthenticationService().checkToken();
 
     if (AuthenticationService().authenticationState.value) {
-      _updateStepLoadingText('Connexion au serveur...');
+      _updateStepLoadingText(infoConnectServer);
       final bool isConnected =
           await AuthenticationService().checkConnection(context);
       if (isConnected) {
         await _sendOfflineData();
         await _fetchDataServer();
       } else {
-        _updateStepLoadingText('Lancemenent en mode déconnecté...');
+        _updateStepLoadingText(infoOfflineMode);
       }
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => const HomePage(),
       ));
     } else {
-      _updateStepLoadingText('Authentification requise...');
+      _updateStepLoadingText(infoAuthRequired);
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => const LoginPage(),
       ));
@@ -58,11 +59,11 @@ class _LoadingPageState extends State<LoadingPage> {
   }
 
   Future<void> _fetchDataServer() async {
-    _updateStepLoadingText('Chargement des données utilisateur...');
+    _updateStepLoadingText(infoUserProfileLoading);
     await AuthenticationService().getCurrentUserProfile();
-    _updateStepLoadingText('Chargement des parcelles...');
+    _updateStepLoadingText(infoParcelsLoading);
     await ParcelsApiService().getAuthorizedParcels();
-    _updateStepLoadingText('Chargement des sessions...');
+    _updateStepLoadingText(infoSessionsLoading);
     await SessionsApiService().getAuthorizedSessions();
   }
 
@@ -71,13 +72,13 @@ class _LoadingPageState extends State<LoadingPage> {
     final offlineSessions = await IsarService().offlineSessions;
 
     if (offlineParcels.isNotEmpty) {
-      _updateStepLoadingText('Envoi des parcelles au serveur...');
+      _updateStepLoadingText(infoSendParcelServer);
       for (final parcel in offlineParcels) {
         await ParcelsApiService().addParcel(parcel, offlineParcel: true);
       }
     }
     if (offlineSessions.isNotEmpty) {
-      _updateStepLoadingText('Envoi des sessions au serveur...');
+      _updateStepLoadingText(infoSendSessionServer);
       for (final session in offlineSessions) {
         await SessionsApiService().addSession(session, offlineSession: true);
       }

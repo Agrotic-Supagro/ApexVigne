@@ -1,5 +1,6 @@
 import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/constants.dart';
+import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/pages/create_and_update_session/widgets/card_apex_button.widget.dart';
 import 'package:apex_vigne/pages/stade_pheno/stade_pheno.dart';
 import 'package:apex_vigne/services/auth.service.dart';
@@ -85,21 +86,21 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Quitter la session'),
-          content: const Text('La session ne sera pas sauvegardée'),
+          title: const Text(titleLeaveSession),
+          content: const Text(infoExitSession),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close dialog
               },
-              child: const Text('Annuler'),
+              child: const Text(actionCancel),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close dialog
                 Navigator.of(context).pop(); // Close the page
               },
-              child: const Text('Confirmer'),
+              child: const Text(actionConfirm),
             ),
           ],
         );
@@ -202,7 +203,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
               },
               child: Text(
                 _stadeId == -1
-                    ? 'Choix du stade'
+                    ? infoChoiceStade
                     : stadesPheno[_stadeId]['name'],
                 style: const TextStyle(overflow: TextOverflow.ellipsis),
               ),
@@ -233,7 +234,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Éditer le nombre'),
+            title: const Text(titleEditNumber),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -241,7 +242,9 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
                   controller: countController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                      labelText: 'Nombre', border: InputBorder.none),
+                    labelText: infoNumber,
+                    border: InputBorder.none,
+                  ),
                 ),
               ],
             ),
@@ -250,7 +253,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('Annuler'),
+                child: const Text(actionCancel),
               ),
               TextButton(
                 onPressed: () {
@@ -262,7 +265,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
                   }
                   Navigator.of(context).pop();
                 },
-                child: const Text('Sauvegarder'),
+                child: const Text(actionSave),
               ),
             ],
           );
@@ -276,7 +279,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         children: <Widget>[
           CardApexButton(
             imgPath: 'assets/images/full_growth.jpg',
-            text: 'Pleine croissance',
+            text: actionFullGrowth,
             onPressed: () async {
               incrementCount(0);
               Vibration.vibrate(duration: 300);
@@ -289,7 +292,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
           const SizedBox(height: 10),
           CardApexButton(
             imgPath: 'assets/images/slower_growth.jpg',
-            text: 'Croissance ralentie',
+            text: actionSlowerGrowth,
             onPressed: () async {
               incrementCount(1);
               Vibration.vibrate(duration: 150);
@@ -302,7 +305,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
           const SizedBox(height: 10),
           CardApexButton(
             imgPath: 'assets/images/stunted_growth.jpg',
-            text: 'Arrêt de croissance',
+            text: actionStuntedGrowth,
             onPressed: () async {
               incrementCount(2);
               Vibration.vibrate(duration: 40);
@@ -326,7 +329,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Notes'),
+            title: const Text(titleNotes),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -334,7 +337,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
                   controller: notesController,
                   maxLines: null,
                   decoration: const InputDecoration(
-                      hintText: 'Écrivez ici...', border: InputBorder.none),
+                      hintText: hintWriteHere, border: InputBorder.none),
                 ),
               ],
             ),
@@ -343,14 +346,14 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('Annuler'),
+                child: const Text(actionCancel),
               ),
               TextButton(
                 onPressed: () {
                   _notesText = notesController.text;
                   Navigator.of(context).pop();
                 },
-                child: const Text('Sauvegarder'),
+                child: const Text(actionSave),
               ),
             ],
           );
@@ -430,7 +433,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
               ),
               const SizedBox(width: 10),
               ElevatedApexButton(
-                text: 'Terminer la session',
+                text: actionValidateSession,
                 callback: _counts.reduce((firstValue, secondValue) =>
                             firstValue + secondValue) <
                         50

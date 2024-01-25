@@ -1,3 +1,4 @@
+import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class _ContactPageState extends State<ContactPage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        title: const Text('Nous contacter'),
+        title: const Text(titleContact),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -46,7 +47,7 @@ class _ContactPageState extends State<ContactPage> {
           maxLines: null,
           decoration: const InputDecoration(
             border: OutlineInputBorder(borderSide: BorderSide.none),
-            hintText: 'Écrivez votre message ici...',
+            hintText: hintWriteMessage,
           ),
           style: Theme.of(context)
               .textTheme
@@ -74,7 +75,7 @@ class SendButton extends StatelessWidget {
           // @param email The email of the user
           // @param message The message to send
         },
-        text: 'Envoyer',
+        text: actionSend,
       ),
     );
   }

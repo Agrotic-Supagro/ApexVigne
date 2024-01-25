@@ -1,6 +1,3 @@
-const String aboutDescription =
-    'L\'application ApeX Vigne a été conçue par l\'équipe d\'Eneo pour le compte d\'AgroTIC de Montpellier SupAgro, bénéficiant du soutien de la région Occitanie. Cette initiative s\'inscrit dans le cadre de recherches approfondies menées depuis plusieurs années sur la viticulture de précision. Le projet est réalisé en collaboration avec l\'Institut Français de la Vigne et du Vin (IFV) ainsi que la chambre d\'agriculture de l\'Hérault.';
-
 /* Local IP address */
 // const String apiBaseUrl = 'http://192.168.1.13';
 const String apiBaseUrl = 'http://172.17.0.1';

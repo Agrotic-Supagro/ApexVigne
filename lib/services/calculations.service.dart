@@ -1,3 +1,5 @@
+import 'package:apex_vigne/constants_language.dart';
+
 double calculateIcApex(
     int apexFullGrowth, int apexSlowerGrowth, int apexStuntedGrowth) {
   int sumApex = apexFullGrowth + apexSlowerGrowth + apexStuntedGrowth;
@@ -14,14 +16,14 @@ String calculateHydricConstraint(int apexFullGrowth, int apexSlowerGrowth,
   double tauxApexStuntedGrowth = apexStuntedGrowth / sumApex * 100;
 
   if (isPruned) {
-    return 'Écimée';
+    return infoPruned;
   }
   if (icApex >= 0.75) {
-    return 'Absente';
+    return infoAbsent;
   } else if (tauxApexFullGrowth >= 5) {
-    return 'Modérée';
+    return infoModerate;
   } else if (tauxApexStuntedGrowth <= 90) {
-    return 'Faible';
+    return infoLow;
   }
-  return 'Sévère';
+  return infoSevere;
 }

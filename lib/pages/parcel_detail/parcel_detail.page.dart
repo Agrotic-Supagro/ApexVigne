@@ -1,5 +1,6 @@
 import 'package:apex_vigne/collections/parcel.collection.dart';
 import 'package:apex_vigne/collections/session.collection.dart';
+import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/pages/create_and_update_session/create_and_update_session.page.dart';
 import 'package:apex_vigne/pages/parcel_detail/widgets/ic_apex_cell.widget.dart';
 import 'package:apex_vigne/services/auth.service.dart';
@@ -18,8 +19,11 @@ class ParcelDetailPage extends StatefulWidget {
   final Parcel parcel;
   final List<Session>? sessions;
 
-  const ParcelDetailPage(
-      {super.key, required this.parcel, required this.sessions});
+  const ParcelDetailPage({
+    super.key,
+    required this.parcel,
+    required this.sessions,
+  });
 
   @override
   State<ParcelDetailPage> createState() => _ParcelDetailPageState();
@@ -47,7 +51,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                 _buildSessionsBoard(context),
               if (widget.sessions?.isEmpty ?? false)
                 Text(
-                  'Aucune session pour cette parcelle...',
+                  infoNoSessionParcels,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         color: Colors.grey,
                         fontWeight: FontWeight.w500,
@@ -79,8 +83,13 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         if (!AuthenticationService().isOnlineState.value)
           Hero(
             tag: 'offline',
-            flightShuttleBuilder: (flightContext, animation, flightDirection,
-                fromHeroContext, toHeroContext) {
+            flightShuttleBuilder: (
+              flightContext,
+              animation,
+              flightDirection,
+              fromHeroContext,
+              toHeroContext,
+            ) {
               return const Icon(
                 Icons.cloud_off,
                 color: Colors.white,
@@ -108,14 +117,14 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Notes'),
+            title: const Text(titleNotes),
             content: Text(notes),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('Fermer'),
+                child: const Text(actionClose),
               ),
             ],
           );
@@ -138,8 +147,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                 Icon(Symbols.cloud_off, color: Colors.white),
                 SizedBox(width: 20),
                 Expanded(
-                  child: Text(
-                      'Vous devez être connecté pour modifier une session.'),
+                  child: Text(infoHaveToRequired),
                 ),
               ],
             ),
@@ -150,11 +158,13 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
       }
       final Session? sessionUpdated = await Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => CreateUpdateSession(
-            title: 'Modification de la session',
-            parcelId: widget.parcel.id!,
-            session: session,
-          ),
+          builder: (context) {
+            return CreateUpdateSession(
+              title: titleEditSession,
+              parcelId: widget.parcel.id!,
+              session: session,
+            );
+          },
         ),
       );
 
@@ -175,10 +185,11 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
       ),
       child: DataTable(
         columns: [
-          const DataColumn(label: Text('Date')),
-          const DataColumn(label: Text('iC-Apex')),
+          const DataColumn(label: Text(infoDate)),
+          const DataColumn(label: Text(infoIcApex)),
           const DataColumn(
-              label: Text('C.H.'), tooltip: 'Contrainte hydrique (C.H.)'),
+              label: Text(infoHydricConstraint),
+              tooltip: tooltipHydricConstraint),
           DataColumn(
             label: Container(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
@@ -188,14 +199,15 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
               ),
               child: Text(
                 widget.sessions!.length > 1
-                    ? '${widget.sessions!.length} sessions'
-                    : '1 session',
+                    ? '${widget.sessions!.length} $infoSessions'
+                    : infoOneSession,
                 style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onPrimary
-                        .withOpacity(0.8)),
+                      fontWeight: FontWeight.w700,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onPrimary
+                          .withOpacity(0.8),
+                    ),
               ),
             ),
           ),
@@ -246,15 +258,14 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Écimer la parcelle'),
-            content:
-                const Text('Êtes-vous sûr de vouloir écimer la parcelle ?'),
+            title: const Text(titlePrunedParcel),
+            content: const Text(infoConfirmPrunedParcel),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('Annuler'),
+                child: const Text(actionCancel),
               ),
               TextButton(
                 onPressed: () async {
@@ -280,7 +291,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                     Navigator.of(context).pop();
                   }
                 },
-                child: const Text('Confirmer'),
+                child: const Text(actionConfirm),
               ),
             ],
           );
@@ -300,14 +311,16 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         ),
         const SizedBox(width: 20),
         ElevatedApexButton(
-          text: 'Nouvelle Session',
+          text: actionNewSession,
           callback: () async {
             final Session? session = await Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => CreateUpdateSession(
-                  title: 'Nouvelle session',
-                  parcelId: widget.parcel.id!,
-                ),
+                builder: (context) {
+                  return CreateUpdateSession(
+                    title: titleNewSession,
+                    parcelId: widget.parcel.id!,
+                  );
+                },
               ),
             );
             if (session != null) {

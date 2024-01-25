@@ -8,7 +8,7 @@ class ListTileInfo extends StatelessWidget {
   });
 
   final String text;
-  final String? info;
+  final String info;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class ListTileInfo extends StatelessWidget {
             .copyWith(letterSpacing: 1.2, fontWeight: FontWeight.w400),
       ),
       trailing: Text(
-        info ?? 'N/A',
+        info,
         style: Theme.of(context)
             .textTheme
             .labelMedium!

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/services/parcels_api.service.dart';
 import 'package:apex_vigne/services/sessions_api.service.dart';
@@ -47,9 +48,7 @@ class AuthenticationService {
     if (context.mounted && isOnlineState.value != switchState) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(switchState
-              ? 'Vous êtes connecté'
-              : 'Échec de la connection, vous êtes déconnecté'),
+          content: Text(switchState ? infoConnected : infoErrorDisconnected),
           duration: const Duration(seconds: 2),
           backgroundColor:
               switchState ? Colors.green.shade700 : Colors.red.shade700,
@@ -96,7 +95,7 @@ class AuthenticationService {
         content: const Row(
           children: [
             Icon(Symbols.sync, color: Colors.white),
-            Expanded(child: Text('Synchronisation des données...')),
+            Expanded(child: Text(infoSyncData)),
           ],
         ),
         backgroundColor: Theme.of(context).primaryColor,
@@ -133,7 +132,7 @@ class AuthenticationService {
     if (response.statusCode == 200) {
       final Map<String, dynamic> res = json.decode(response.body);
       if (res['token'] == null) {
-        return 'Email ou mot de passe invalide';
+        return infoInvalidEmailOrPassword;
       }
       final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -141,7 +140,7 @@ class AuthenticationService {
       authenticationState.value = true;
       return null;
     } else {
-      return 'Erreur de connexion';
+      return infoErrorLogin;
     }
   }
 

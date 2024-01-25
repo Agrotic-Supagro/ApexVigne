@@ -1,5 +1,6 @@
 import 'package:apex_vigne/collections/parcel.collection.dart';
 import 'package:apex_vigne/collections/session.collection.dart';
+import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/pages/home/widgets/drawer_apex_vigne.widget.dart';
 import 'package:apex_vigne/pages/parcel_detail/parcel_detail.page.dart';
 import 'package:apex_vigne/services/auth.service.dart';
@@ -21,7 +22,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String _sortingOption = 'Du plus récent au plus ancien';
+  String _sortingOption = sortByMostRecent;
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +50,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
       title: const Center(
-        child: Text(
-          'ApeX Vigne',
-          style: TextStyle(fontWeight: FontWeight.w200),
-        ),
+        child: Text(appName, style: TextStyle(fontWeight: FontWeight.w200)),
       ),
       actions: <Widget>[
         if (!AuthenticationService().isOnlineState.value)
@@ -89,10 +87,10 @@ class _HomePageState extends State<HomePage> {
           },
           itemBuilder: (BuildContext context) {
             return [
-              'Du plus récent au plus ancien',
-              'Du plus ancien au plus récent',
-              'Par ordre alphabétique',
-              'Par ordre alphabétique inversé',
+              sortByMostRecent,
+              sortByOldest,
+              sortAZ,
+              sortZA,
             ].map((String choice) {
               return PopupMenuItem(
                 value: choice,
@@ -109,15 +107,15 @@ class _HomePageState extends State<HomePage> {
     /* Sort parcels */
     List<Parcel> sortParcels(List<Parcel> parcels, List<Session> sessions) {
       switch (_sortingOption) {
-        case 'Par ordre alphabétique':
+        case sortAZ:
           parcels.sort(
               (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
           break;
-        case 'Par ordre alphabétique inversé':
+        case sortZA:
           parcels.sort(
               (a, b) => b.name.toLowerCase().compareTo(a.name.toLowerCase()));
           break;
-        case 'Du plus récent au plus ancien':
+        case sortByMostRecent:
           parcels.sort((a, b) {
             final aSessions =
                 sessions.where((session) => session.parcelId == a.id).toList();
@@ -146,7 +144,7 @@ class _HomePageState extends State<HomePage> {
             return bDate.compareTo(aDate);
           });
           break;
-        case 'Du plus ancien au plus récent':
+        case sortByOldest:
           parcels.sort((a, b) {
             final aSessions =
                 sessions.where((session) => session.parcelId == a.id).toList();
@@ -192,7 +190,7 @@ class _HomePageState extends State<HomePage> {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else if (!snapshot.hasData) {
-            return const Text('No parcel data available');
+            return const Text(infoNoParcels);
           }
 
           final List<dynamic> results = snapshot.data!;
@@ -220,12 +218,15 @@ class _HomePageState extends State<HomePage> {
                 return bDate.compareTo(aDate);
               });
               if (currentSessionsParcel.isNotEmpty) {
-                lastSession =
-                    'Dernière observation le ${formatDate(currentSessionsParcel.first.sessionAt, explicit: true)}';
+                lastSession = '$infoLastSessionDate${formatDate(
+                  currentSessionsParcel.first.sessionAt,
+                  explicit: true,
+                )}';
                 icApex = calculateIcApex(
-                    currentSessionsParcel.first.apexFullGrowth,
-                    currentSessionsParcel.first.apexSlowerGrowth,
-                    currentSessionsParcel.first.apexStuntedGrowth);
+                  currentSessionsParcel.first.apexFullGrowth,
+                  currentSessionsParcel.first.apexSlowerGrowth,
+                  currentSessionsParcel.first.apexStuntedGrowth,
+                );
               }
 
               bool isOnline = currentParcel.id != null;
@@ -243,8 +244,7 @@ class _HomePageState extends State<HomePage> {
 
               if (isOnline == false) {
                 color = Colors.grey.shade400;
-                subtitle =
-                    'Vous ne pouvez pas créer de session car la parcelle n\'a pas été sauvegardée';
+                subtitle = subtitleNoSaveParcelOfflineMode;
                 trailing = Icon(
                   Symbols.cloud_off,
                   color: Colors.grey.shade400,
@@ -313,18 +313,18 @@ class _HomePageState extends State<HomePage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Ajouter une parcelle'),
+            title: const Text(titleAddParcel),
             content: Form(
               key: formKey,
               child: TextFormField(
                 controller: parcelNameController,
                 decoration: const InputDecoration(
-                  hintText: 'Nom de la parcelle',
+                  hintText: hintParcelName,
                   border: InputBorder.none,
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Veuillez entrer un nom de parcelle';
+                    return validatorParcelName;
                   }
                   return null;
                 },
@@ -335,7 +335,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('Annuler'),
+                child: const Text(actionCancel),
               ),
               TextButton(
                 onPressed: () async {
@@ -356,7 +356,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.of(context).pop();
                   }
                 },
-                child: const Text('Ajouter'),
+                child: const Text(actionAdd),
               ),
             ],
           );

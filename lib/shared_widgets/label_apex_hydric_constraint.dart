@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:apex_vigne/constants_language.dart';
 
 class LabelApexHydricConstraint extends StatefulWidget {
   const LabelApexHydricConstraint({super.key, required this.text});
@@ -16,23 +17,23 @@ class _LabelApexHydricConstraintState extends State<LabelApexHydricConstraint> {
 
   void determineHydricConstraintStyle() {
     switch (widget.text) {
-      case 'Écimée':
+      case infoPruned:
         textColor = const Color(0xFF707070);
         bgColor = const Color(0xFFE8E8E8);
         break;
-      case 'Sévère':
+      case infoSevere:
         textColor = const Color(0xFFCC5E52);
         bgColor = const Color(0xFFFAEAE8);
         break;
-      case 'Modérée':
+      case infoModerate:
         textColor = const Color(0xFFCCB152);
         bgColor = const Color(0xFFFAF6E8);
         break;
-      case 'Faible':
+      case infoLow:
         textColor = const Color(0xFFCCC852);
         bgColor = const Color(0xFFFAF9E8);
         break;
-      case 'Absente':
+      case infoAbsent:
         textColor = const Color(0xFFA7CC52);
         bgColor = const Color(0xFFF5FAE8);
         break;

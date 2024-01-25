@@ -1,3 +1,4 @@
+import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/pages/loading/loading.page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
@@ -16,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
-      title: 'ApeX Vigne',
+      title: appName,
       titleTag: 'title',
       logo: 'assets/images/logos/logo_apex_vigne_transparent.png',
       logoTag: 'logo',
@@ -56,9 +57,9 @@ class _LoginPageState extends State<LoginPage> {
       hideForgotPasswordButton: true,
       messages: LoginMessages(
         /* Login */
-        userHint: 'Email',
-        passwordHint: 'Mot de passe',
-        loginButton: 'Se connecter',
+        userHint: hintEmail,
+        passwordHint: hintPassword,
+        loginButton: actionLogin,
       ),
     );
   }

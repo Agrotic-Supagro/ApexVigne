@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:apex_vigne/constants_language.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
@@ -38,7 +39,7 @@ class _CardApexButtonState extends State<CardApexButton> {
   void initialTutorial() async {
     prefs = await SharedPreferences.getInstance();
     bool isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
-    if (widget.text == "Pleine croissance" && isFirstLaunch) {
+    if (widget.text == actionFullGrowth && isFirstLaunch) {
       createTutorial();
       Future.delayed(Duration.zero, showTutorial);
       prefs.setBool('isFirstLaunch', false);
@@ -59,7 +60,7 @@ class _CardApexButtonState extends State<CardApexButton> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Changer le nombre à tout moment !!",
+                    titleTutoEditNumber,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -69,7 +70,7 @@ class _CardApexButtonState extends State<CardApexButton> {
                     height: 10.0,
                   ),
                   Text(
-                    "Vous pouvez éditer le nombre d'observations en maintenant le compteur",
+                    infoTutoEditNumber,
                     style: TextStyle(color: Colors.white),
                   ),
                 ],
@@ -81,7 +82,7 @@ class _CardApexButtonState extends State<CardApexButton> {
           color: Colors.black,
         ),
       ],
-      textSkip: "J'ai compris !",
+      textSkip: actionUnderstand,
       colorShadow: Colors.black,
       paddingFocus: 10,
       opacityShadow: 0.5,

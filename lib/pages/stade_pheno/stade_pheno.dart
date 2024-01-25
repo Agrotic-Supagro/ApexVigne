@@ -1,3 +1,4 @@
+import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/pages/stade_pheno/widgets/tile_apex_button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/constants.dart';
@@ -48,7 +49,7 @@ class _StadePhenoState extends State<StadePheno> {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
-      title: const Text('Stades phénologiques'),
+      title: const Text(titleStadePheno),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
