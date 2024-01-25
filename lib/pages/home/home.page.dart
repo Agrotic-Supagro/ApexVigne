@@ -13,6 +13,7 @@ import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -49,8 +50,11 @@ class _HomePageState extends State<HomePage> {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
-      title: const Center(
-        child: Text(appName, style: TextStyle(fontWeight: FontWeight.w200)),
+      title: Center(
+        child: Text(
+          AppLocalizations.of(context)!.appName,
+          style: const TextStyle(fontWeight: FontWeight.w200),
+        ),
       ),
       actions: <Widget>[
         if (!AuthenticationService().isOnlineState.value)

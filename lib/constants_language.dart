@@ -45,17 +45,17 @@ const infoSessionsLoading = 'Chargement des sessions...';
 const infoSendParcelServer = 'Envoi des parcelles au serveur...';
 const infoSendSessionServer = 'Envoi des sessions au serveur...';
 // Home Page
-const infoLastSessionDate = 'Dernière session le ';
+const infoLastSessionDate = 'Dernière session le '; // Use DateTyme type
 const infoNoParcels = 'Aucune parcelle...';
 // Parcel Details Page
-const infoNoSessionParcels = 'Aucune session pour cette parcelle...';
+const infoNoSessionInParcel = 'Aucune session pour cette parcelle...';
 const infoHaveToRequired =
     'Vous devez être connecté pour modifier une session.';
 const infoDate = 'Date';
 const infoIcApex = 'iC-Apex';
 const infoHydricConstraint = 'C.H.';
-const infoSessions = 'sessions';
-const infoOneSession = '1 session';
+const infoSessions = 'sessions'; // Use plural
+const infoOneSession = '1 session'; // TODO: Remove when plural is implemented
 const infoConfirmPrunedParcel = 'Êtes-vous sûr de vouloir écimer la parcelle ?';
 // Create Update Session Page
 const infoExitSession = 'La session ne sera pas sauvegardée';

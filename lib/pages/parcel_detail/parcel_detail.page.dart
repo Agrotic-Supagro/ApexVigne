@@ -51,7 +51,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                 _buildSessionsBoard(context),
               if (widget.sessions?.isEmpty ?? false)
                 Text(
-                  infoNoSessionParcels,
+                  infoNoSessionInParcel,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         color: Colors.grey,
                         fontWeight: FontWeight.w500,
