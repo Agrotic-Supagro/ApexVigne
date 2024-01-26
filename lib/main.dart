@@ -39,7 +39,13 @@ class ApexVigneApp extends StatefulWidget {
 }
 
 class _ApexVigneAppState extends State<ApexVigneApp> {
-  Locale _locale = AppLocalizations.supportedLocales.first;
+  late Locale _locale;
+
+  @override
+  void initState() {
+    super.initState();
+    _locale = widget.locale;
+  }
 
   void changeLanguage(Locale locale) {
     setState(() {
@@ -60,7 +66,7 @@ class _ApexVigneAppState extends State<ApexVigneApp> {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate
       ],
-      locale: widget.locale,
+      locale: _locale,
       supportedLocales: const [
         Locale('fr'),
         Locale('en'),

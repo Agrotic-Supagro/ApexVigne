@@ -248,7 +248,7 @@
         "description": ""
     },
 
-    "infoAccount": "Information du compte",
+    "infoAccount": "Account informations",
     "@infoAccount": {
         "description": ""
     },
@@ -258,12 +258,12 @@
         "description": ""
     },
 
-    "infoFirstname": "Prénom",
+    "infoFirstname": "Firstname",
     "@infoFirstname": {
         "description": ""
     },
 
-    "infoLastname": "Nom",
+    "infoLastname": "Lastname",
     "@infoLastname": {
         "description": ""
     },
@@ -348,39 +348,54 @@
         "description": ""
     },
 
+    "infoLocationRequired": "Il faut autoriser la localisation pour pouvoir créer une session",
+    "@infoLocationRequired": {
+        "description": ""
+    },
+
+    "infoEnableLocationSystem": "Il faut autoriser la localisation dans les paramètres de votre téléphone pour pouvoir créer une session",
+    "@infoEnableLocationSystem": {
+        "description": ""
+    },
+
+    "infoLocationDisabled": "La localisation sur votre téléphone n'est pas activé",
+    "@infoLocationDisabled": {
+        "description": ""
+    },
 
 
-    "actionCancel": "Annuler",
+
+    "actionCancel": "Cancel",
     "@actionCancel": {
         "description": ""
     },
 
-    "actionClose": "Fermer",
+    "actionClose": "Close",
     "@actionClose": {
         "description": ""
     },
 
-    "actionAdd": "Ajouter",
+    "actionAdd": "Add",
     "@actionAdd": {
         "description": ""
     },
 
-    "actionLogin": "Se connecter",
+    "actionLogin": "Login",
     "@actionLogin": {
         "description": ""
     },
 
-    "actionConfirm": "Confirmer",
+    "actionConfirm": "Confirm",
     "@actionConfirm": {
         "description": ""
     },
 
-    "actionNewSession": "Nouvelle Session",
+    "actionNewSession": "New Session",
     "@actionNewSession": {
         "description": ""
     },
 
-    "actionLogout": "Se déconnecter",
+    "actionLogout": "Logout",
     "@actionLogout": {
         "description": ""
     },
@@ -395,12 +410,12 @@
         "description": ""
     },
 
-    "actionSend": "Envoyer",
+    "actionSend": "Send",
     "@actionSend": {
         "description": ""
     },
 
-    "actionSave": "Sauvegarder",
+    "actionSave": "Save",
     "@actionSave": {
         "description": ""
     },

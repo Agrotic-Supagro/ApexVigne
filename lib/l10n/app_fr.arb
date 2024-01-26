@@ -348,6 +348,21 @@
         "description": ""
     },
 
+    "infoLocationRequired": "Il faut autoriser la localisation pour pouvoir créer une session",
+    "@infoLocationRequired": {
+        "description": ""
+    },
+
+    "infoEnableLocationSystem": "Il faut autoriser la localisation dans les paramètres de votre téléphone pour pouvoir créer une session",
+    "@infoEnableLocationSystem": {
+        "description": ""
+    },
+
+    "infoLocationDisabled": "La localisation sur votre téléphone n'est pas activé",
+    "@infoLocationDisabled": {
+        "description": ""
+    },
+
 
 
     "actionCancel": "Annuler",

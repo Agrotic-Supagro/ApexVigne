@@ -58,7 +58,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
   }
 
   void _checkLocation() async {
-    await determinePosition().then((value) {
+    await determinePosition(context).then((value) {
       _position = value;
     }).catchError((error) {
       if (context.mounted) {
