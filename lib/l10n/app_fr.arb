@@ -212,8 +212,8 @@
         "description": ""
     },
 
-    "infoSessions": "{count, plural, =0{0 sessions} =1{1 session} other{{count} sessions}}",
-    "@infoSessions": {
+    "infoNbSessions": "{count, plural, =0{0 sessions} =1{1 session} other{{count} sessions}}",
+    "@infoNbSessions": {
         "description": "Le nombre de sessions",
         "placeholders": {
             "count": {

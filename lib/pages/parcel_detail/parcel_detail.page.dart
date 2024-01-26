@@ -199,7 +199,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
               ),
               child: Text(
                 AppLocalizations.of(context)!
-                    .infoSessions(widget.sessions!.length),
+                    .infoNbSessions(widget.sessions!.length),
                 style: Theme.of(context).textTheme.labelSmall!.copyWith(
                       fontWeight: FontWeight.w700,
                       color: Theme.of(context)
