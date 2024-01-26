@@ -6,8 +6,8 @@
 
 
 
-    "tooltipHydricConestraint": "Contrainte hydrique (C.H.)",
-    "@tooltipHydricConestraint": {
+    "tooltipHydricConstraint": "Contrainte hydrique (C.H.)",
+    "@tooltipHydricConstraint": {
         "description": ""
     },
 
@@ -171,9 +171,15 @@
         "description": ""
     },
 
-    "infoLastSessionDate": "Dernière session le '; //TODO: Use DateTyme",
+    "infoLastSessionDate": "Dernière session le {sessionDate}",
     "@infoLastSessionDate": {
-        "description": ""
+        "description": "",
+        "placeholders": {
+            "sessionDate": {
+              "type": "String",
+              "example": "20 mai"
+            }
+          }
     },
 
     "infoNoParcels": "Aucune parcelle...",
@@ -186,7 +192,7 @@
         "description": ""
     },
 
-    "infoHaveToRequired": "Vous devez remplir tous les champs obligatoires",
+    "infoHaveToRequired": "Vous devez être connecté pour modifier une session",
     "@infoHaveToRequired": {
         "description": ""
     },
@@ -201,19 +207,20 @@
         "description": ""
     },
 
-    "infoHydricConestraint": "C.H.",
-    "@infoHydricConestraint": {
+    "infoHydricConstraint": "C.H.",
+    "@infoHydricConstraint": {
         "description": ""
     },
 
-    "infoSessions": "sessions'; //TODO: Use plural",
+    "infoSessions": "{count, plural, =0{0 sessions} =1{1 session} other{{count} sessions}}",
     "@infoSessions": {
-        "description": ""
-    },
-
-    "infoOneSession": "1 session'; //TODO: Remove when plural is implement",
-    "@infoOneSession": {
-        "description": ""
+        "description": "Le nombre de sessions",
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
     },
 
     "infoConfirmPrunedParcel": "Êtes-vous sûr de vouloir écimer la parcelle ?",

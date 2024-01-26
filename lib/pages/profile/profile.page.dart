@@ -1,5 +1,5 @@
 import 'package:apex_vigne/collections/user.collection.dart';
-import 'package:apex_vigne/constants_language.dart';
+import 'package:apex_vigne/main.dart';
 import 'package:apex_vigne/pages/login/login.page.dart';
 import 'package:apex_vigne/pages/profile/widgets/list_tile.widget.dart';
 import 'package:apex_vigne/services/isar.service.dart';
@@ -8,6 +8,7 @@ import 'package:apex_vigne/shared_widgets/offline_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfilPage extends StatefulWidget {
   const ProfilPage({super.key});
@@ -25,30 +26,11 @@ class _ProfilPageState extends State<ProfilPage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        title: const Text(titleProfile),
+        title: Text(AppLocalizations.of(context)!.titleProfile),
         actions: [
           if (!AuthenticationService().isOnlineState.value)
-            Hero(
-              tag: 'offline',
-              flightShuttleBuilder: (flightContext, animation, flightDirection,
-                  fromHeroContext, toHeroContext) {
-                return const Icon(
-                  Icons.cloud_off,
-                  color: Colors.white,
-                  size: 28.0,
-                );
-              },
-              child: IconButton(
-                icon: const Icon(
-                  Symbols.cloud_off,
-                  weight: 350,
-                  size: 28.0,
-                ),
-                onPressed: () {
-                  offlineDialog(context);
-                },
-              ),
-            ),
+            _buildOfflineButton(context),
+          _buildLanguageButton(context),
         ],
       ),
       body: Padding(
@@ -57,7 +39,7 @@ class _ProfilPageState extends State<ProfilPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              infoAccount,
+              AppLocalizations.of(context)!.infoAccount,
               style: Theme.of(context)
                   .textTheme
                   .labelMedium!
@@ -69,6 +51,55 @@ class _ProfilPageState extends State<ProfilPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Hero _buildOfflineButton(BuildContext context) {
+    return Hero(
+      tag: 'offline',
+      flightShuttleBuilder: (flightContext, animation, flightDirection,
+          fromHeroContext, toHeroContext) {
+        return const Icon(
+          Icons.cloud_off,
+          color: Colors.white,
+          size: 28.0,
+        );
+      },
+      child: IconButton(
+        icon: const Icon(
+          Symbols.cloud_off,
+          weight: 350,
+          size: 28.0,
+        ),
+        onPressed: () {
+          offlineDialog(context);
+        },
+      ),
+    );
+  }
+
+  Widget _buildLanguageButton(BuildContext context) {
+    return PopupMenuButton<String>(
+      icon: const Icon(Symbols.language),
+      onSelected: (String selectedLanguage) {
+        if (selectedLanguage == 'Français') {
+          ApexVigneApp.of(context)?.changeLanguage(const Locale('fr'));
+        } else if (selectedLanguage == 'English') {
+          ApexVigneApp.of(context)?.changeLanguage(const Locale('en'));
+        }
+      },
+      itemBuilder: (BuildContext context) {
+        return [
+          'Français', // Remplacez-le par la langue que vous utilisez
+          'English', // Remplacez-le par la langue que vous utilisez
+          // Ajoutez d'autres langues selon vos besoins
+        ].map((String language) {
+          return PopupMenuItem<String>(
+            value: language,
+            child: Text(language),
+          );
+        }).toList();
+      },
     );
   }
 
@@ -84,7 +115,7 @@ class _ProfilPageState extends State<ProfilPage> {
             if (snapshot.hasError || snapshot.data == null) {
               return Center(
                 child: Text(
-                  infoErrorProfileInfo,
+                  AppLocalizations.of(context)!.infoErrorProfileInfo,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               );
@@ -94,22 +125,22 @@ class _ProfilPageState extends State<ProfilPage> {
             return ListView(
               children: <Widget>[
                 ListTileInfo(
-                  text: infoFirstname,
+                  text: AppLocalizations.of(context)!.infoFirstname,
                   info: currentUserProfile.firstname,
                 ),
                 Divider(color: Colors.grey[200]),
                 ListTileInfo(
-                  text: infoLastname,
+                  text: AppLocalizations.of(context)!.infoLastname,
                   info: currentUserProfile.lastname,
                 ),
                 Divider(color: Colors.grey[200]),
                 ListTileInfo(
-                  text: infoEmail,
+                  text: AppLocalizations.of(context)!.infoEmail,
                   info: currentUserProfile.email,
                 ),
                 Divider(color: Colors.grey[200]),
                 ListTileInfo(
-                  text: infoStructure,
+                  text: AppLocalizations.of(context)!.infoStructure,
                   info: currentUserProfile.structure,
                 ),
               ],
@@ -140,7 +171,7 @@ class LogoutButton extends StatelessWidget {
             ));
           });
         },
-        text: actionLogout,
+        text: AppLocalizations.of(context)!.actionLogout,
       ),
     );
   }

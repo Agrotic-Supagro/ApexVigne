@@ -1,6 +1,5 @@
 import 'package:apex_vigne/collections/parcel.collection.dart';
 import 'package:apex_vigne/collections/session.collection.dart';
-import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/pages/create_and_update_session/create_and_update_session.page.dart';
 import 'package:apex_vigne/pages/parcel_detail/widgets/ic_apex_cell.widget.dart';
 import 'package:apex_vigne/services/auth.service.dart';
@@ -14,6 +13,7 @@ import 'package:apex_vigne/shared_widgets/offline_dialog.dart';
 import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ParcelDetailPage extends StatefulWidget {
   final Parcel parcel;
@@ -51,7 +51,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                 _buildSessionsBoard(context),
               if (widget.sessions?.isEmpty ?? false)
                 Text(
-                  infoNoSessionInParcel,
+                  AppLocalizations.of(context)!.infoNoSessionInParcel,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         color: Colors.grey,
                         fontWeight: FontWeight.w500,
@@ -117,14 +117,14 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text(titleNotes),
+            title: Text(AppLocalizations.of(context)!.titleNotes),
             content: Text(notes),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text(actionClose),
+                child: Text(AppLocalizations.of(context)!.actionClose),
               ),
             ],
           );
@@ -141,17 +141,17 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
       }
       if (!isConnected) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Row(
               children: [
-                Icon(Symbols.cloud_off, color: Colors.white),
-                SizedBox(width: 20),
+                const Icon(Symbols.cloud_off, color: Colors.white),
+                const SizedBox(width: 20),
                 Expanded(
-                  child: Text(infoHaveToRequired),
+                  child: Text(AppLocalizations.of(context)!.infoHaveToRequired),
                 ),
               ],
             ),
-            backgroundColor: Color(0xFFCCB152),
+            backgroundColor: const Color(0xFFCCB152),
           ),
         );
         return;
@@ -160,7 +160,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         MaterialPageRoute(
           builder: (context) {
             return CreateUpdateSession(
-              title: titleEditSession,
+              title: AppLocalizations.of(context)!.titleEditSession,
               parcelId: widget.parcel.id!,
               session: session,
             );
@@ -185,11 +185,11 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
       ),
       child: DataTable(
         columns: [
-          const DataColumn(label: Text(infoDate)),
-          const DataColumn(label: Text(infoIcApex)),
-          const DataColumn(
-              label: Text(infoHydricConstraint),
-              tooltip: tooltipHydricConstraint),
+          DataColumn(label: Text(AppLocalizations.of(context)!.infoDate)),
+          DataColumn(label: Text(AppLocalizations.of(context)!.infoIcApex)),
+          DataColumn(
+              label: Text(AppLocalizations.of(context)!.infoHydricConstraint),
+              tooltip: AppLocalizations.of(context)!.tooltipHydricConstraint),
           DataColumn(
             label: Container(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
@@ -198,9 +198,8 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                 color: Theme.of(context).colorScheme.primary,
               ),
               child: Text(
-                widget.sessions!.length > 1
-                    ? '${widget.sessions!.length} $infoSessions'
-                    : infoOneSession,
+                AppLocalizations.of(context)!
+                    .infoSessions(widget.sessions!.length),
                 style: Theme.of(context).textTheme.labelSmall!.copyWith(
                       fontWeight: FontWeight.w700,
                       color: Theme.of(context)
@@ -230,10 +229,12 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                   DataCell(
                     LabelApexHydricConstraint(
                       text: calculateHydricConstraint(
-                          session.apexFullGrowth,
-                          session.apexSlowerGrowth,
-                          session.apexStuntedGrowth,
-                          icApex),
+                        session.apexFullGrowth,
+                        session.apexSlowerGrowth,
+                        session.apexStuntedGrowth,
+                        icApex,
+                        context,
+                      ),
                     ),
                   ),
                   DataCell(
@@ -258,14 +259,15 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text(titlePrunedParcel),
-            content: const Text(infoConfirmPrunedParcel),
+            title: Text(AppLocalizations.of(context)!.titlePrunedParcel),
+            content:
+                Text(AppLocalizations.of(context)!.infoConfirmPrunedParcel),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text(actionCancel),
+                child: Text(AppLocalizations.of(context)!.actionCancel),
               ),
               TextButton(
                 onPressed: () async {
@@ -291,7 +293,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                     Navigator.of(context).pop();
                   }
                 },
-                child: const Text(actionConfirm),
+                child: Text(AppLocalizations.of(context)!.actionConfirm),
               ),
             ],
           );
@@ -311,13 +313,13 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         ),
         const SizedBox(width: 20),
         ElevatedApexButton(
-          text: actionNewSession,
+          text: AppLocalizations.of(context)!.actionNewSession,
           callback: () async {
             final Session? session = await Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
                   return CreateUpdateSession(
-                    title: titleNewSession,
+                    title: AppLocalizations.of(context)!.titleNewSession,
                     parcelId: widget.parcel.id!,
                   );
                 },

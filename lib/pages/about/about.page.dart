@@ -1,5 +1,5 @@
-import 'package:apex_vigne/constants_language.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AboutPage extends StatefulWidget {
   const AboutPage({super.key});
@@ -20,7 +20,7 @@ class _AboutPageState extends State<AboutPage> {
           children: <Widget>[
             /* First section */
             Text(
-              infoSectionApp,
+              AppLocalizations.of(context)!.infoSectionApp,
               style: Theme.of(context)
                   .textTheme
                   .labelMedium!
@@ -34,7 +34,7 @@ class _AboutPageState extends State<AboutPage> {
                 color: Color(0xFFF5F5F5),
               ),
               child: Text(
-                infoAboutDescription,
+                AppLocalizations.of(context)!.infoAboutDescription,
                 style: Theme.of(context)
                     .textTheme
                     .labelMedium!
@@ -44,7 +44,7 @@ class _AboutPageState extends State<AboutPage> {
             const SizedBox(height: 20),
             /* Second section */
             Text(
-              infoSectionPartners,
+              AppLocalizations.of(context)!.infoSectionPartners,
               style: Theme.of(context)
                   .textTheme
                   .labelMedium!
@@ -97,7 +97,7 @@ class _AboutPageState extends State<AboutPage> {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
-      title: const Text(titleAbout),
+      title: Text(AppLocalizations.of(context)!.titleAbout),
     );
   }
 }

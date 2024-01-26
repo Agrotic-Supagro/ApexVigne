@@ -1,6 +1,5 @@
 import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/constants.dart';
-import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/pages/create_and_update_session/widgets/card_apex_button.widget.dart';
 import 'package:apex_vigne/pages/stade_pheno/stade_pheno.dart';
 import 'package:apex_vigne/services/auth.service.dart';
@@ -13,6 +12,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:vibration/vibration.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateUpdateSession extends StatefulWidget {
   const CreateUpdateSession({
@@ -86,21 +86,21 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text(titleLeaveSession),
-          content: const Text(infoExitSession),
+          title: Text(AppLocalizations.of(context)!.titleLeaveSession),
+          content: Text(AppLocalizations.of(context)!.infoExitSession),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close dialog
               },
-              child: const Text(actionCancel),
+              child: Text(AppLocalizations.of(context)!.actionCancel),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close dialog
                 Navigator.of(context).pop(); // Close the page
               },
-              child: const Text(actionConfirm),
+              child: Text(AppLocalizations.of(context)!.actionConfirm),
             ),
           ],
         );
@@ -203,7 +203,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
               },
               child: Text(
                 _stadeId == -1
-                    ? infoChoiceStade
+                    ? AppLocalizations.of(context)!.infoChoiceStade
                     : stadesPheno[_stadeId]['name'],
                 style: const TextStyle(overflow: TextOverflow.ellipsis),
               ),
@@ -234,15 +234,15 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text(titleEditNumber),
+            title: Text(AppLocalizations.of(context)!.titleEditNumber),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 TextField(
                   controller: countController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: infoNumber,
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.infoNumber,
                     border: InputBorder.none,
                   ),
                 ),
@@ -253,7 +253,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text(actionCancel),
+                child: Text(AppLocalizations.of(context)!.actionCancel),
               ),
               TextButton(
                 onPressed: () {
@@ -265,7 +265,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
                   }
                   Navigator.of(context).pop();
                 },
-                child: const Text(actionSave),
+                child: Text(AppLocalizations.of(context)!.actionSave),
               ),
             ],
           );
@@ -279,7 +279,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         children: <Widget>[
           CardApexButton(
             imgPath: 'assets/images/full_growth.jpg',
-            text: actionFullGrowth,
+            text: AppLocalizations.of(context)!.actionFullGrowth,
             onPressed: () async {
               incrementCount(0);
               Vibration.vibrate(duration: 300);
@@ -292,7 +292,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
           const SizedBox(height: 10),
           CardApexButton(
             imgPath: 'assets/images/slower_growth.jpg',
-            text: actionSlowerGrowth,
+            text: AppLocalizations.of(context)!.actionSlowerGrowth,
             onPressed: () async {
               incrementCount(1);
               Vibration.vibrate(duration: 150);
@@ -305,7 +305,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
           const SizedBox(height: 10),
           CardApexButton(
             imgPath: 'assets/images/stunted_growth.jpg',
-            text: actionStuntedGrowth,
+            text: AppLocalizations.of(context)!.actionStuntedGrowth,
             onPressed: () async {
               incrementCount(2);
               Vibration.vibrate(duration: 40);
@@ -329,15 +329,16 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text(titleNotes),
+            title: Text(AppLocalizations.of(context)!.titleNotes),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 TextField(
                   controller: notesController,
                   maxLines: null,
-                  decoration: const InputDecoration(
-                      hintText: hintWriteHere, border: InputBorder.none),
+                  decoration: InputDecoration(
+                      hintText: AppLocalizations.of(context)!.hintWriteHere,
+                      border: InputBorder.none),
                 ),
               ],
             ),
@@ -346,14 +347,14 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text(actionCancel),
+                child: Text(AppLocalizations.of(context)!.actionCancel),
               ),
               TextButton(
                 onPressed: () {
                   _notesText = notesController.text;
                   Navigator.of(context).pop();
                 },
-                child: const Text(actionSave),
+                child: Text(AppLocalizations.of(context)!.actionSave),
               ),
             ],
           );
@@ -433,7 +434,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
               ),
               const SizedBox(width: 10),
               ElevatedApexButton(
-                text: actionValidateSession,
+                text: AppLocalizations.of(context)!.actionValidateSession,
                 callback: _counts.reduce((firstValue, secondValue) =>
                             firstValue + secondValue) <
                         50

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:apex_vigne/constants_language.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LabelApexHydricConstraint extends StatefulWidget {
   const LabelApexHydricConstraint({super.key, required this.text});
@@ -15,34 +15,28 @@ class _LabelApexHydricConstraintState extends State<LabelApexHydricConstraint> {
   Color bgColor = Colors.grey.shade500;
   Color textColor = Colors.grey.shade300;
 
-  void determineHydricConstraintStyle() {
-    switch (widget.text) {
-      case infoPruned:
-        textColor = const Color(0xFF707070);
-        bgColor = const Color(0xFFE8E8E8);
-        break;
-      case infoSevere:
-        textColor = const Color(0xFFCC5E52);
-        bgColor = const Color(0xFFFAEAE8);
-        break;
-      case infoModerate:
-        textColor = const Color(0xFFCCB152);
-        bgColor = const Color(0xFFFAF6E8);
-        break;
-      case infoLow:
-        textColor = const Color(0xFFCCC852);
-        bgColor = const Color(0xFFFAF9E8);
-        break;
-      case infoAbsent:
-        textColor = const Color(0xFFA7CC52);
-        bgColor = const Color(0xFFF5FAE8);
-        break;
+  void determineHydricConstraintStyle(BuildContext context) {
+    if (widget.text == AppLocalizations.of(context)!.infoPruned) {
+      textColor = const Color(0xFF707070);
+      bgColor = const Color(0xFFE8E8E8);
+    } else if (widget.text == AppLocalizations.of(context)!.infoSevere) {
+      textColor = const Color(0xFFCC5E52);
+      bgColor = const Color(0xFFFAEAE8);
+    } else if (widget.text == AppLocalizations.of(context)!.infoModerate) {
+      textColor = const Color(0xFFCCB152);
+      bgColor = const Color(0xFFFAF6E8);
+    } else if (widget.text == AppLocalizations.of(context)!.infoLow) {
+      textColor = const Color(0xFFCCC852);
+      bgColor = const Color(0xFFFAF9E8);
+    } else if (widget.text == AppLocalizations.of(context)!.infoAbsent) {
+      textColor = const Color(0xFFA7CC52);
+      bgColor = const Color(0xFFF5FAE8);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    determineHydricConstraintStyle();
+    determineHydricConstraintStyle(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(

@@ -1,23 +1,21 @@
-import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/pages/loading/loading.page.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<dynamic> offlineDialog(BuildContext context) {
   return showDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Text(titleDisconnected),
-        content: const Text(
-          infoWhyOffline,
-        ),
+        title: Text(AppLocalizations.of(context)!.titleDisconnected),
+        content: Text(AppLocalizations.of(context)!.infoWhyOffline),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text(actionStayOffline),
+            child: Text(AppLocalizations.of(context)!.actionStayOffline),
           ),
           TextButton(
             onPressed: () {
@@ -27,7 +25,7 @@ Future<dynamic> offlineDialog(BuildContext context) {
               ));
               AuthenticationService().isOnlineState.value = true;
             },
-            child: const Text(actionGoOnline),
+            child: Text(AppLocalizations.of(context)!.actionGoOnline),
           ),
         ],
       );

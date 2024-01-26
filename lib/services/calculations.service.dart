@@ -1,4 +1,5 @@
-import 'package:apex_vigne/constants_language.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 double calculateIcApex(
     int apexFullGrowth, int apexSlowerGrowth, int apexStuntedGrowth) {
@@ -8,7 +9,7 @@ double calculateIcApex(
 }
 
 String calculateHydricConstraint(int apexFullGrowth, int apexSlowerGrowth,
-    int apexStuntedGrowth, double icApex) {
+    int apexStuntedGrowth, double icApex, BuildContext context) {
   bool isPruned =
       apexFullGrowth == 0 && apexSlowerGrowth == 0 && apexStuntedGrowth == 0;
   int sumApex = apexFullGrowth + apexSlowerGrowth + apexStuntedGrowth;
@@ -16,14 +17,14 @@ String calculateHydricConstraint(int apexFullGrowth, int apexSlowerGrowth,
   double tauxApexStuntedGrowth = apexStuntedGrowth / sumApex * 100;
 
   if (isPruned) {
-    return infoPruned;
+    return AppLocalizations.of(context)!.infoPruned;
   }
   if (icApex >= 0.75) {
-    return infoAbsent;
+    return AppLocalizations.of(context)!.infoAbsent;
   } else if (tauxApexFullGrowth >= 5) {
-    return infoModerate;
+    return AppLocalizations.of(context)!.infoModerate;
   } else if (tauxApexStuntedGrowth <= 90) {
-    return infoLow;
+    return AppLocalizations.of(context)!.infoLow;
   }
-  return infoSevere;
+  return AppLocalizations.of(context)!.infoSevere;
 }

@@ -1,8 +1,8 @@
-import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/pages/loading/loading.page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:apex_vigne/services/auth.service.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
-      title: appName,
+      title: AppLocalizations.of(context)!.appName,
       titleTag: 'title',
       logo: 'assets/images/logos/logo_apex_vigne_transparent.png',
       logoTag: 'logo',
@@ -57,9 +57,9 @@ class _LoginPageState extends State<LoginPage> {
       hideForgotPasswordButton: true,
       messages: LoginMessages(
         /* Login */
-        userHint: hintEmail,
-        passwordHint: hintPassword,
-        loginButton: actionLogin,
+        userHint: AppLocalizations.of(context)!.hintEmail,
+        passwordHint: AppLocalizations.of(context)!.hintPassword,
+        loginButton: AppLocalizations.of(context)!.actionLogin,
       ),
     );
   }

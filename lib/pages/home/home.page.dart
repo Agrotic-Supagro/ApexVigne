@@ -1,11 +1,11 @@
 import 'package:apex_vigne/collections/parcel.collection.dart';
 import 'package:apex_vigne/collections/session.collection.dart';
-import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/pages/home/widgets/drawer_apex_vigne.widget.dart';
 import 'package:apex_vigne/pages/parcel_detail/parcel_detail.page.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:apex_vigne/services/calculations.service.dart';
 import 'package:apex_vigne/services/isar.service.dart';
+import 'package:apex_vigne/services/navigation.service.dart';
 import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
 import 'package:apex_vigne/services/parcels_api.service.dart';
 import 'package:apex_vigne/shared_widgets/offline_dialog.dart';
@@ -23,7 +23,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String _sortingOption = sortByMostRecent;
+  String _sortingOption =
+      AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+          .sortByMostRecent;
 
   @override
   Widget build(BuildContext context) {
@@ -91,10 +93,10 @@ class _HomePageState extends State<HomePage> {
           },
           itemBuilder: (BuildContext context) {
             return [
-              sortByMostRecent,
-              sortByOldest,
-              sortAZ,
-              sortZA,
+              AppLocalizations.of(context)!.sortByMostRecent,
+              AppLocalizations.of(context)!.sortByOldest,
+              AppLocalizations.of(context)!.sortAZ,
+              AppLocalizations.of(context)!.sortZA,
             ].map((String choice) {
               return PopupMenuItem(
                 value: choice,
@@ -110,75 +112,69 @@ class _HomePageState extends State<HomePage> {
   Center _buildParcelsList() {
     /* Sort parcels */
     List<Parcel> sortParcels(List<Parcel> parcels, List<Session> sessions) {
-      switch (_sortingOption) {
-        case sortAZ:
-          parcels.sort(
-              (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
-          break;
-        case sortZA:
-          parcels.sort(
-              (a, b) => b.name.toLowerCase().compareTo(a.name.toLowerCase()));
-          break;
-        case sortByMostRecent:
-          parcels.sort((a, b) {
-            final aSessions =
-                sessions.where((session) => session.parcelId == a.id).toList();
-            final bSessions =
-                sessions.where((session) => session.parcelId == b.id).toList();
+      if (_sortingOption == AppLocalizations.of(context)!.sortAZ) {
+        parcels.sort(
+            (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+      } else if (_sortingOption == AppLocalizations.of(context)!.sortZA) {
+        parcels.sort(
+            (a, b) => b.name.toLowerCase().compareTo(a.name.toLowerCase()));
+      } else if (_sortingOption ==
+          AppLocalizations.of(context)!.sortByMostRecent) {
+        parcels.sort((a, b) {
+          final aSessions =
+              sessions.where((session) => session.parcelId == a.id).toList();
+          final bSessions =
+              sessions.where((session) => session.parcelId == b.id).toList();
 
-            if ((aSessions.isEmpty) && (bSessions.isEmpty)) {
-              return 0;
-            } else if (aSessions.isEmpty) {
-              return 1;
-            } else if (bSessions.isEmpty) {
-              return -1;
-            }
+          if ((aSessions.isEmpty) && (bSessions.isEmpty)) {
+            return 0;
+          } else if (aSessions.isEmpty) {
+            return 1;
+          } else if (bSessions.isEmpty) {
+            return -1;
+          }
 
-            final aDate = aSessions
-                .map((session) => session.sessionAt.isNotEmpty
-                    ? DateTime.parse(session.sessionAt)
-                    : DateTime(0))
-                .reduce((max, element) => max.isAfter(element) ? max : element);
-            final bDate = bSessions
-                .map((session) => session.sessionAt.isNotEmpty
-                    ? DateTime.parse(session.sessionAt)
-                    : DateTime(0))
-                .reduce((max, element) => max.isAfter(element) ? max : element);
+          final aDate = aSessions
+              .map((session) => session.sessionAt.isNotEmpty
+                  ? DateTime.parse(session.sessionAt)
+                  : DateTime(0))
+              .reduce((max, element) => max.isAfter(element) ? max : element);
+          final bDate = bSessions
+              .map((session) => session.sessionAt.isNotEmpty
+                  ? DateTime.parse(session.sessionAt)
+                  : DateTime(0))
+              .reduce((max, element) => max.isAfter(element) ? max : element);
 
-            return bDate.compareTo(aDate);
-          });
-          break;
-        case sortByOldest:
-          parcels.sort((a, b) {
-            final aSessions =
-                sessions.where((session) => session.parcelId == a.id).toList();
-            final bSessions =
-                sessions.where((session) => session.parcelId == b.id).toList();
+          return bDate.compareTo(aDate);
+        });
+      } else if (_sortingOption == AppLocalizations.of(context)!.sortByOldest) {
+        parcels.sort((a, b) {
+          final aSessions =
+              sessions.where((session) => session.parcelId == a.id).toList();
+          final bSessions =
+              sessions.where((session) => session.parcelId == b.id).toList();
 
-            if (aSessions.isEmpty && bSessions.isEmpty) {
-              return 0;
-            } else if (aSessions.isEmpty) {
-              return 1;
-            } else if (bSessions.isEmpty) {
-              return -1;
-            }
+          if (aSessions.isEmpty && bSessions.isEmpty) {
+            return 0;
+          } else if (aSessions.isEmpty) {
+            return 1;
+          } else if (bSessions.isEmpty) {
+            return -1;
+          }
 
-            final aDate = aSessions
-                .map((session) => session.sessionAt.isNotEmpty
-                    ? DateTime.parse(session.sessionAt)
-                    : DateTime(0))
-                .reduce(
-                    (min, element) => min.isBefore(element) ? min : element);
-            final bDate = bSessions
-                .map((session) => session.sessionAt.isNotEmpty
-                    ? DateTime.parse(session.sessionAt)
-                    : DateTime(0))
-                .reduce(
-                    (min, element) => min.isBefore(element) ? min : element);
+          final aDate = aSessions
+              .map((session) => session.sessionAt.isNotEmpty
+                  ? DateTime.parse(session.sessionAt)
+                  : DateTime(0))
+              .reduce((min, element) => min.isBefore(element) ? min : element);
+          final bDate = bSessions
+              .map((session) => session.sessionAt.isNotEmpty
+                  ? DateTime.parse(session.sessionAt)
+                  : DateTime(0))
+              .reduce((min, element) => min.isBefore(element) ? min : element);
 
-            return aDate.compareTo(bDate);
-          });
-          break;
+          return aDate.compareTo(bDate);
+        });
       }
       return parcels;
     }
@@ -194,7 +190,7 @@ class _HomePageState extends State<HomePage> {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else if (!snapshot.hasData) {
-            return const Text(infoNoParcels);
+            return Text(AppLocalizations.of(context)!.infoNoParcels);
           }
 
           final List<dynamic> results = snapshot.data!;
@@ -222,10 +218,12 @@ class _HomePageState extends State<HomePage> {
                 return bDate.compareTo(aDate);
               });
               if (currentSessionsParcel.isNotEmpty) {
-                lastSession = '$infoLastSessionDate${formatDate(
-                  currentSessionsParcel.first.sessionAt,
-                  explicit: true,
-                )}';
+                lastSession = AppLocalizations.of(context)!.infoLastSessionDate(
+                  formatDate(
+                    currentSessionsParcel.first.sessionAt,
+                    explicit: true,
+                  ),
+                );
                 icApex = calculateIcApex(
                   currentSessionsParcel.first.apexFullGrowth,
                   currentSessionsParcel.first.apexSlowerGrowth,
@@ -239,16 +237,19 @@ class _HomePageState extends State<HomePage> {
               dynamic trailing = lastSession.isNotEmpty
                   ? LabelApexHydricConstraint(
                       text: calculateHydricConstraint(
-                          currentSessionsParcel.first.apexFullGrowth,
-                          currentSessionsParcel.first.apexSlowerGrowth,
-                          currentSessionsParcel.first.apexStuntedGrowth,
-                          icApex),
+                        currentSessionsParcel.first.apexFullGrowth,
+                        currentSessionsParcel.first.apexSlowerGrowth,
+                        currentSessionsParcel.first.apexStuntedGrowth,
+                        icApex,
+                        context,
+                      ),
                     )
                   : null;
 
               if (isOnline == false) {
                 color = Colors.grey.shade400;
-                subtitle = subtitleNoSaveParcelOfflineMode;
+                subtitle = AppLocalizations.of(context)!
+                    .subtitleNoSaveParcelOfflineMode;
                 trailing = Icon(
                   Symbols.cloud_off,
                   color: Colors.grey.shade400,
@@ -317,18 +318,18 @@ class _HomePageState extends State<HomePage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text(titleAddParcel),
+            title: Text(AppLocalizations.of(context)!.titleAddParcel),
             content: Form(
               key: formKey,
               child: TextFormField(
                 controller: parcelNameController,
-                decoration: const InputDecoration(
-                  hintText: hintParcelName,
+                decoration: InputDecoration(
+                  hintText: AppLocalizations.of(context)!.hintParcelName,
                   border: InputBorder.none,
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return validatorParcelName;
+                    return AppLocalizations.of(context)!.validatorParcelName;
                   }
                   return null;
                 },
@@ -339,7 +340,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text(actionCancel),
+                child: Text(AppLocalizations.of(context)!.actionCancel),
               ),
               TextButton(
                 onPressed: () async {
@@ -360,7 +361,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.of(context).pop();
                   }
                 },
-                child: const Text(actionAdd),
+                child: Text(AppLocalizations.of(context)!.actionAdd),
               ),
             ],
           );

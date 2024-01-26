@@ -1,9 +1,8 @@
 import 'dart:ui';
-
-import 'package:apex_vigne/constants_language.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CardApexButton extends StatefulWidget {
   const CardApexButton({
@@ -37,9 +36,12 @@ class _CardApexButtonState extends State<CardApexButton> {
   }
 
   void initialTutorial() async {
+    if (!context.mounted) return;
+
     prefs = await SharedPreferences.getInstance();
     bool isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
-    if (widget.text == actionFullGrowth && isFirstLaunch) {
+    if (widget.text == AppLocalizations.of(context)!.actionFullGrowth &&
+        isFirstLaunch) {
       createTutorial();
       Future.delayed(Duration.zero, showTutorial);
       prefs.setBool('isFirstLaunch', false);
@@ -55,23 +57,23 @@ class _CardApexButtonState extends State<CardApexButton> {
           contents: [
             TargetContent(
               align: ContentAlign.bottom,
-              child: const Column(
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    titleTutoEditNumber,
-                    style: TextStyle(
+                    AppLocalizations.of(context)!.titleTutoEditNumber,
+                    style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         fontSize: 20.0),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10.0,
                   ),
                   Text(
-                    infoTutoEditNumber,
-                    style: TextStyle(color: Colors.white),
+                    AppLocalizations.of(context)!.infoTutoEditNumber,
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ],
               ),
@@ -82,7 +84,7 @@ class _CardApexButtonState extends State<CardApexButton> {
           color: Colors.black,
         ),
       ],
-      textSkip: actionUnderstand,
+      textSkip: AppLocalizations.of(context)!.actionUnderstand,
       colorShadow: Colors.black,
       paddingFocus: 10,
       opacityShadow: 0.5,

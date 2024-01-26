@@ -1,12 +1,13 @@
-import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/pages/home/home.page.dart';
 import 'package:apex_vigne/pages/login/login.page.dart';
 import 'package:apex_vigne/services/isar.service.dart';
+import 'package:apex_vigne/services/navigation.service.dart';
 import 'package:apex_vigne/services/parcels_api.service.dart';
 import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({super.key});
@@ -16,7 +17,9 @@ class LoadingPage extends StatefulWidget {
 }
 
 class _LoadingPageState extends State<LoadingPage> {
-  String _stepLoadingText = infoLoading;
+  String _stepLoadingText =
+      AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+          .infoLoading;
 
   @override
   void initState() {
@@ -28,24 +31,36 @@ class _LoadingPageState extends State<LoadingPage> {
   Future<void> _initializeApp() async {
     if (!context.mounted) return;
 
-    _updateStepLoadingText(infoCheckUser);
+    _updateStepLoadingText(
+      AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+          .infoCheckUser,
+    );
     await AuthenticationService().checkToken();
 
     if (AuthenticationService().authenticationState.value) {
-      _updateStepLoadingText(infoConnectServer);
+      _updateStepLoadingText(
+        AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+            .infoConnectServer,
+      );
       final bool isConnected =
           await AuthenticationService().checkConnection(context);
       if (isConnected) {
         await _sendOfflineData();
         await _fetchDataServer();
       } else {
-        _updateStepLoadingText(infoOfflineMode);
+        _updateStepLoadingText(
+          AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+              .infoOfflineMode,
+        );
       }
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => const HomePage(),
       ));
     } else {
-      _updateStepLoadingText(infoAuthRequired);
+      _updateStepLoadingText(
+        AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+            .infoAuthRequired,
+      );
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => const LoginPage(),
       ));
@@ -59,11 +74,17 @@ class _LoadingPageState extends State<LoadingPage> {
   }
 
   Future<void> _fetchDataServer() async {
-    _updateStepLoadingText(infoUserProfileLoading);
+    _updateStepLoadingText(
+      AppLocalizations.of(context)!.infoUserProfileLoading,
+    );
     await AuthenticationService().getCurrentUserProfile();
-    _updateStepLoadingText(infoParcelsLoading);
+    _updateStepLoadingText(
+      AppLocalizations.of(context)!.infoParcelsLoading,
+    );
     await ParcelsApiService().getAuthorizedParcels();
-    _updateStepLoadingText(infoSessionsLoading);
+    _updateStepLoadingText(
+      AppLocalizations.of(context)!.infoSessionsLoading,
+    );
     await SessionsApiService().getAuthorizedSessions();
   }
 
@@ -72,13 +93,17 @@ class _LoadingPageState extends State<LoadingPage> {
     final offlineSessions = await IsarService().offlineSessions;
 
     if (offlineParcels.isNotEmpty) {
-      _updateStepLoadingText(infoSendParcelServer);
+      _updateStepLoadingText(
+        AppLocalizations.of(context)!.infoSendParcelServer,
+      );
       for (final parcel in offlineParcels) {
         await ParcelsApiService().addParcel(parcel, offlineParcel: true);
       }
     }
     if (offlineSessions.isNotEmpty) {
-      _updateStepLoadingText(infoSendSessionServer);
+      _updateStepLoadingText(
+        AppLocalizations.of(context)!.infoSendSessionServer,
+      );
       for (final session in offlineSessions) {
         await SessionsApiService().addSession(session, offlineSession: true);
       }

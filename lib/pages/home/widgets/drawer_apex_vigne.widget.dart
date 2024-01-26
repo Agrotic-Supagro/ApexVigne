@@ -3,6 +3,7 @@ import 'package:apex_vigne/pages/profile/profile.page.dart';
 import 'package:apex_vigne/utils/launch_mail.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DrawerApexVigne extends StatelessWidget {
   const DrawerApexVigne({
@@ -37,7 +38,7 @@ class DrawerApexVigne extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text('Profil'),
+            title: Text(AppLocalizations.of(context)!.titleProfile),
             trailing: Icon(Symbols.chevron_right, color: Colors.grey.shade400),
             onTap: () {
               Navigator.pop(context);
@@ -55,7 +56,7 @@ class DrawerApexVigne extends StatelessWidget {
             height: 10.0,
           ),
           ListTile(
-            title: const Text('Nous contacter'),
+            title: Text(AppLocalizations.of(context)!.titleContact),
             trailing: Icon(Symbols.open_in_new, color: Colors.grey.shade400),
             onTap: () {
               launchMail();
@@ -68,7 +69,7 @@ class DrawerApexVigne extends StatelessWidget {
             height: 10.0,
           ),
           ListTile(
-            title: const Text('À propos'),
+            title: Text(AppLocalizations.of(context)!.titleAbout),
             trailing: Icon(Symbols.chevron_right, color: Colors.grey.shade400),
             onTap: () {
               Navigator.pop(context);

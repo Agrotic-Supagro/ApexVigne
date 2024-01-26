@@ -1,6 +1,6 @@
-import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({super.key});
@@ -16,7 +16,7 @@ class _ContactPageState extends State<ContactPage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        title: const Text(titleContact),
+        title: Text(AppLocalizations.of(context)!.titleContact),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -45,9 +45,9 @@ class _ContactPageState extends State<ContactPage> {
           autofocus: true,
           keyboardType: TextInputType.multiline,
           maxLines: null,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(borderSide: BorderSide.none),
-            hintText: hintWriteMessage,
+          decoration: InputDecoration(
+            border: const OutlineInputBorder(borderSide: BorderSide.none),
+            hintText: AppLocalizations.of(context)!.hintWriteMessage,
           ),
           style: Theme.of(context)
               .textTheme
@@ -75,7 +75,7 @@ class SendButton extends StatelessWidget {
           // @param email The email of the user
           // @param message The message to send
         },
-        text: actionSend,
+        text: AppLocalizations.of(context)!.actionSend,
       ),
     );
   }

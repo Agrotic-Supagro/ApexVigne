@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:apex_vigne/constants_language.dart';
 import 'package:apex_vigne/services/isar.service.dart';
+import 'package:apex_vigne/services/navigation.service.dart';
 import 'package:apex_vigne/services/parcels_api.service.dart';
 import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:apex_vigne/constants.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AuthenticationService {
   static final AuthenticationService _instance =
@@ -48,7 +49,11 @@ class AuthenticationService {
     if (context.mounted && isOnlineState.value != switchState) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(switchState ? infoConnected : infoErrorDisconnected),
+          content: Text(
+            switchState
+                ? AppLocalizations.of(context)!.infoConnected
+                : AppLocalizations.of(context)!.infoErrorDisconnected,
+          ),
           duration: const Duration(seconds: 2),
           backgroundColor:
               switchState ? Colors.green.shade700 : Colors.red.shade700,
@@ -92,10 +97,10 @@ class AuthenticationService {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Row(
+        content: Row(
           children: [
-            Icon(Symbols.sync, color: Colors.white),
-            Expanded(child: Text(infoSyncData)),
+            const Icon(Symbols.sync, color: Colors.white),
+            Expanded(child: Text(AppLocalizations.of(context)!.infoSyncData)),
           ],
         ),
         backgroundColor: Theme.of(context).primaryColor,
@@ -132,7 +137,10 @@ class AuthenticationService {
     if (response.statusCode == 200) {
       final Map<String, dynamic> res = json.decode(response.body);
       if (res['token'] == null) {
-        return infoInvalidEmailOrPassword;
+        return AppLocalizations.of(
+          NavigationService.navigatorKey.currentContext!,
+        )!
+            .infoInvalidEmailOrPassword;
       }
       final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -140,7 +148,10 @@ class AuthenticationService {
       authenticationState.value = true;
       return null;
     } else {
-      return infoErrorLogin;
+      return AppLocalizations.of(
+        NavigationService.navigatorKey.currentContext!,
+      )!
+          .infoErrorLogin;
     }
   }
 
