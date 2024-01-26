@@ -50,7 +50,7 @@ const SessionSchema = CollectionSchema(
     r'inField': PropertySchema(
       id: 6,
       name: r'inField',
-      type: IsarType.bool,
+      type: IsarType.long,
     ),
     r'latitude': PropertySchema(
       id: 7,
@@ -85,7 +85,7 @@ const SessionSchema = CollectionSchema(
     r'stadePhenoId': PropertySchema(
       id: 13,
       name: r'stadePhenoId',
-      type: IsarType.long,
+      type: IsarType.string,
     )
   },
   estimateSize: _sessionEstimateSize,
@@ -122,15 +122,30 @@ int _sessionEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  bytesCount += 3 + object.deviceHardware.length * 3;
-  bytesCount += 3 + object.deviceSoftware.length * 3;
+  {
+    final value = object.deviceHardware;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.deviceSoftware;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   {
     final value = object.id;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
-  bytesCount += 3 + object.notes.length * 3;
+  {
+    final value = object.notes;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   {
     final value = object.observerId;
     if (value != null) {
@@ -139,6 +154,12 @@ int _sessionEstimateSize(
   }
   bytesCount += 3 + object.parcelId.length * 3;
   bytesCount += 3 + object.sessionAt.length * 3;
+  {
+    final value = object.stadePhenoId;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   return bytesCount;
 }
 
@@ -154,14 +175,14 @@ void _sessionSerialize(
   writer.writeString(offsets[3], object.deviceHardware);
   writer.writeString(offsets[4], object.deviceSoftware);
   writer.writeString(offsets[5], object.id);
-  writer.writeBool(offsets[6], object.inField);
+  writer.writeLong(offsets[6], object.inField);
   writer.writeDouble(offsets[7], object.latitude);
   writer.writeDouble(offsets[8], object.longitude);
   writer.writeString(offsets[9], object.notes);
   writer.writeString(offsets[10], object.observerId);
   writer.writeString(offsets[11], object.parcelId);
   writer.writeString(offsets[12], object.sessionAt);
-  writer.writeLong(offsets[13], object.stadePhenoId);
+  writer.writeString(offsets[13], object.stadePhenoId);
 }
 
 Session _sessionDeserialize(
@@ -174,18 +195,18 @@ Session _sessionDeserialize(
   object.apexFullGrowth = reader.readLong(offsets[0]);
   object.apexSlowerGrowth = reader.readLong(offsets[1]);
   object.apexStuntedGrowth = reader.readLong(offsets[2]);
-  object.deviceHardware = reader.readString(offsets[3]);
-  object.deviceSoftware = reader.readString(offsets[4]);
+  object.deviceHardware = reader.readStringOrNull(offsets[3]);
+  object.deviceSoftware = reader.readStringOrNull(offsets[4]);
   object.id = reader.readStringOrNull(offsets[5]);
-  object.inField = reader.readBool(offsets[6]);
+  object.inField = reader.readLong(offsets[6]);
   object.isarId = id;
-  object.latitude = reader.readDouble(offsets[7]);
-  object.longitude = reader.readDouble(offsets[8]);
-  object.notes = reader.readString(offsets[9]);
+  object.latitude = reader.readDoubleOrNull(offsets[7]);
+  object.longitude = reader.readDoubleOrNull(offsets[8]);
+  object.notes = reader.readStringOrNull(offsets[9]);
   object.observerId = reader.readStringOrNull(offsets[10]);
   object.parcelId = reader.readString(offsets[11]);
   object.sessionAt = reader.readString(offsets[12]);
-  object.stadePhenoId = reader.readLong(offsets[13]);
+  object.stadePhenoId = reader.readStringOrNull(offsets[13]);
   return object;
 }
 
@@ -203,19 +224,19 @@ P _sessionDeserializeProp<P>(
     case 2:
       return (reader.readLong(offset)) as P;
     case 3:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 4:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
-      return (reader.readBool(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 7:
-      return (reader.readDouble(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 8:
-      return (reader.readDouble(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 9:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 10:
       return (reader.readStringOrNull(offset)) as P;
     case 11:
@@ -223,7 +244,7 @@ P _sessionDeserializeProp<P>(
     case 12:
       return (reader.readString(offset)) as P;
     case 13:
-      return (reader.readLong(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -547,8 +568,25 @@ extension SessionQueryFilter
     });
   }
 
+  QueryBuilder<Session, Session, QAfterFilterCondition> deviceHardwareIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'deviceHardware',
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition>
+      deviceHardwareIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'deviceHardware',
+      ));
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterFilterCondition> deviceHardwareEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -562,7 +600,7 @@ extension SessionQueryFilter
 
   QueryBuilder<Session, Session, QAfterFilterCondition>
       deviceHardwareGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -577,7 +615,7 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> deviceHardwareLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -592,8 +630,8 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> deviceHardwareBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -681,8 +719,25 @@ extension SessionQueryFilter
     });
   }
 
+  QueryBuilder<Session, Session, QAfterFilterCondition> deviceSoftwareIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'deviceSoftware',
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition>
+      deviceSoftwareIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'deviceSoftware',
+      ));
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterFilterCondition> deviceSoftwareEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -696,7 +751,7 @@ extension SessionQueryFilter
 
   QueryBuilder<Session, Session, QAfterFilterCondition>
       deviceSoftwareGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -711,7 +766,7 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> deviceSoftwareLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -726,8 +781,8 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> deviceSoftwareBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -961,11 +1016,54 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> inFieldEqualTo(
-      bool value) {
+      int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'inField',
         value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> inFieldGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'inField',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> inFieldLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'inField',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> inFieldBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'inField',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
       ));
     });
   }
@@ -1023,8 +1121,24 @@ extension SessionQueryFilter
     });
   }
 
+  QueryBuilder<Session, Session, QAfterFilterCondition> latitudeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'latitude',
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> latitudeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'latitude',
+      ));
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterFilterCondition> latitudeEqualTo(
-    double value, {
+    double? value, {
     double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -1037,7 +1151,7 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> latitudeGreaterThan(
-    double value, {
+    double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
   }) {
@@ -1052,7 +1166,7 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> latitudeLessThan(
-    double value, {
+    double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
   }) {
@@ -1067,8 +1181,8 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> latitudeBetween(
-    double lower,
-    double upper, {
+    double? lower,
+    double? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     double epsilon = Query.epsilon,
@@ -1085,8 +1199,24 @@ extension SessionQueryFilter
     });
   }
 
+  QueryBuilder<Session, Session, QAfterFilterCondition> longitudeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'longitude',
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> longitudeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'longitude',
+      ));
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterFilterCondition> longitudeEqualTo(
-    double value, {
+    double? value, {
     double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -1099,7 +1229,7 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> longitudeGreaterThan(
-    double value, {
+    double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
   }) {
@@ -1114,7 +1244,7 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> longitudeLessThan(
-    double value, {
+    double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
   }) {
@@ -1129,8 +1259,8 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> longitudeBetween(
-    double lower,
-    double upper, {
+    double? lower,
+    double? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     double epsilon = Query.epsilon,
@@ -1147,8 +1277,24 @@ extension SessionQueryFilter
     });
   }
 
+  QueryBuilder<Session, Session, QAfterFilterCondition> notesIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'notes',
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> notesIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'notes',
+      ));
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterFilterCondition> notesEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -1161,7 +1307,7 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> notesGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -1176,7 +1322,7 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> notesLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -1191,8 +1337,8 @@ extension SessionQueryFilter
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> notesBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -1683,47 +1829,72 @@ extension SessionQueryFilter
     });
   }
 
+  QueryBuilder<Session, Session, QAfterFilterCondition> stadePhenoIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'stadePhenoId',
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition>
+      stadePhenoIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'stadePhenoId',
+      ));
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterFilterCondition> stadePhenoIdEqualTo(
-      int value) {
+    String? value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'stadePhenoId',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> stadePhenoIdGreaterThan(
-    int value, {
+    String? value, {
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'stadePhenoId',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> stadePhenoIdLessThan(
-    int value, {
+    String? value, {
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'stadePhenoId',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Session, Session, QAfterFilterCondition> stadePhenoIdBetween(
-    int lower,
-    int upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -1732,6 +1903,76 @@ extension SessionQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> stadePhenoIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'stadePhenoId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> stadePhenoIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'stadePhenoId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> stadePhenoIdContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'stadePhenoId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> stadePhenoIdMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'stadePhenoId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> stadePhenoIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'stadePhenoId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition>
+      stadePhenoIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'stadePhenoId',
+        value: '',
       ));
     });
   }
@@ -2185,9 +2426,10 @@ extension SessionQueryWhereDistinct
     });
   }
 
-  QueryBuilder<Session, Session, QDistinct> distinctByStadePhenoId() {
+  QueryBuilder<Session, Session, QDistinct> distinctByStadePhenoId(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'stadePhenoId');
+      return query.addDistinctBy(r'stadePhenoId', caseSensitive: caseSensitive);
     });
   }
 }
@@ -2218,13 +2460,13 @@ extension SessionQueryProperty
     });
   }
 
-  QueryBuilder<Session, String, QQueryOperations> deviceHardwareProperty() {
+  QueryBuilder<Session, String?, QQueryOperations> deviceHardwareProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'deviceHardware');
     });
   }
 
-  QueryBuilder<Session, String, QQueryOperations> deviceSoftwareProperty() {
+  QueryBuilder<Session, String?, QQueryOperations> deviceSoftwareProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'deviceSoftware');
     });
@@ -2236,25 +2478,25 @@ extension SessionQueryProperty
     });
   }
 
-  QueryBuilder<Session, bool, QQueryOperations> inFieldProperty() {
+  QueryBuilder<Session, int, QQueryOperations> inFieldProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'inField');
     });
   }
 
-  QueryBuilder<Session, double, QQueryOperations> latitudeProperty() {
+  QueryBuilder<Session, double?, QQueryOperations> latitudeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'latitude');
     });
   }
 
-  QueryBuilder<Session, double, QQueryOperations> longitudeProperty() {
+  QueryBuilder<Session, double?, QQueryOperations> longitudeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'longitude');
     });
   }
 
-  QueryBuilder<Session, String, QQueryOperations> notesProperty() {
+  QueryBuilder<Session, String?, QQueryOperations> notesProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'notes');
     });
@@ -2278,7 +2520,7 @@ extension SessionQueryProperty
     });
   }
 
-  QueryBuilder<Session, int, QQueryOperations> stadePhenoIdProperty() {
+  QueryBuilder<Session, String?, QQueryOperations> stadePhenoIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'stadePhenoId');
     });

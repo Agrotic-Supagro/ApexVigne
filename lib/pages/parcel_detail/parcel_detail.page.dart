@@ -240,9 +240,9 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                   DataCell(
                     ElevatedApexButton(
                       icon: Icons.article_outlined,
-                      callback: session.notes.isEmpty
+                      callback: session.notes == null && session.notes!.isEmpty
                           ? null
-                          : () => notesDialog(context, session.notes),
+                          : () => notesDialog(context, session.notes!),
                     ),
                   ),
                 ],

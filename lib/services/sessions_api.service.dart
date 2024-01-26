@@ -52,7 +52,7 @@ class SessionsApiService {
           'apexStuntedGrowth': session.apexStuntedGrowth,
           'parcelId': session.parcelId,
           'notes': session.notes,
-          'stadePhenoId': session.stadePhenoId,
+          // 'stadePhenoId': session.stadePhenoId, TODO: Wait if we keep this value in database
           'latitude': session.latitude,
           'longitude': session.longitude,
           'deviceHardware': session.deviceHardware,

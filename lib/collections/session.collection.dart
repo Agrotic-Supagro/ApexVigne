@@ -21,17 +21,17 @@ class Session {
 
   late String parcelId;
 
-  late String notes;
+  String? notes;
 
-  late int stadePhenoId;
+  String? stadePhenoId;
 
-  late double latitude;
+  double? latitude;
 
-  late double longitude;
+  double? longitude;
 
-  late bool inField;
+  late int inField;
 
-  late String deviceHardware;
+  String? deviceHardware;
 
-  late String deviceSoftware;
+  String? deviceSoftware;
 }

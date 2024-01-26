@@ -51,7 +51,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
     if (widget.session != null) {
       // _stadeId = widget.session!.stadePhenoId; // TODO: Wait when we'll have the stadePhenoId in database
       _selectedDate = DateTime.parse(widget.session!.sessionAt);
-      _notesText = widget.session!.notes;
+      _notesText = widget.session?.notes ?? '';
       _counts[0] = widget.session!.apexFullGrowth;
       _counts[1] = widget.session!.apexSlowerGrowth;
       _counts[2] = widget.session!.apexStuntedGrowth;
@@ -382,17 +382,17 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         ..apexStuntedGrowth = _counts[2]
         ..parcelId = widget.parcelId
         ..notes = _notesText
-        ..stadePhenoId = _stadeId
+        ..stadePhenoId = _stadeId.toString()
         ..deviceHardware = deviceInfo[0]
         ..deviceSoftware = deviceInfo[1];
       if (_positionSaved) {
         session.latitude = _position.latitude;
         session.longitude = _position.longitude;
-        session.inField = true;
+        session.inField = 1;
       } else {
         session.latitude = 0;
         session.longitude = 0;
-        session.inField = false;
+        session.inField = 0;
       }
       final bool isConnected =
           await AuthenticationService().checkConnection(context);
