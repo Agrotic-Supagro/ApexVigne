@@ -32,43 +32,58 @@ const SessionSchema = CollectionSchema(
       name: r'apexStuntedGrowth',
       type: IsarType.long,
     ),
-    r'id': PropertySchema(
+    r'deviceHardware': PropertySchema(
       id: 3,
+      name: r'deviceHardware',
+      type: IsarType.string,
+    ),
+    r'deviceSoftware': PropertySchema(
+      id: 4,
+      name: r'deviceSoftware',
+      type: IsarType.string,
+    ),
+    r'id': PropertySchema(
+      id: 5,
       name: r'id',
       type: IsarType.string,
     ),
+    r'inField': PropertySchema(
+      id: 6,
+      name: r'inField',
+      type: IsarType.bool,
+    ),
     r'latitude': PropertySchema(
-      id: 4,
+      id: 7,
       name: r'latitude',
       type: IsarType.double,
     ),
     r'longitude': PropertySchema(
-      id: 5,
+      id: 8,
       name: r'longitude',
       type: IsarType.double,
     ),
     r'notes': PropertySchema(
-      id: 6,
+      id: 9,
       name: r'notes',
       type: IsarType.string,
     ),
     r'observerId': PropertySchema(
-      id: 7,
+      id: 10,
       name: r'observerId',
       type: IsarType.string,
     ),
     r'parcelId': PropertySchema(
-      id: 8,
+      id: 11,
       name: r'parcelId',
       type: IsarType.string,
     ),
     r'sessionAt': PropertySchema(
-      id: 9,
+      id: 12,
       name: r'sessionAt',
       type: IsarType.string,
     ),
     r'stadePhenoId': PropertySchema(
-      id: 10,
+      id: 13,
       name: r'stadePhenoId',
       type: IsarType.long,
     )
@@ -107,6 +122,8 @@ int _sessionEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  bytesCount += 3 + object.deviceHardware.length * 3;
+  bytesCount += 3 + object.deviceSoftware.length * 3;
   {
     final value = object.id;
     if (value != null) {
@@ -134,14 +151,17 @@ void _sessionSerialize(
   writer.writeLong(offsets[0], object.apexFullGrowth);
   writer.writeLong(offsets[1], object.apexSlowerGrowth);
   writer.writeLong(offsets[2], object.apexStuntedGrowth);
-  writer.writeString(offsets[3], object.id);
-  writer.writeDouble(offsets[4], object.latitude);
-  writer.writeDouble(offsets[5], object.longitude);
-  writer.writeString(offsets[6], object.notes);
-  writer.writeString(offsets[7], object.observerId);
-  writer.writeString(offsets[8], object.parcelId);
-  writer.writeString(offsets[9], object.sessionAt);
-  writer.writeLong(offsets[10], object.stadePhenoId);
+  writer.writeString(offsets[3], object.deviceHardware);
+  writer.writeString(offsets[4], object.deviceSoftware);
+  writer.writeString(offsets[5], object.id);
+  writer.writeBool(offsets[6], object.inField);
+  writer.writeDouble(offsets[7], object.latitude);
+  writer.writeDouble(offsets[8], object.longitude);
+  writer.writeString(offsets[9], object.notes);
+  writer.writeString(offsets[10], object.observerId);
+  writer.writeString(offsets[11], object.parcelId);
+  writer.writeString(offsets[12], object.sessionAt);
+  writer.writeLong(offsets[13], object.stadePhenoId);
 }
 
 Session _sessionDeserialize(
@@ -154,15 +174,18 @@ Session _sessionDeserialize(
   object.apexFullGrowth = reader.readLong(offsets[0]);
   object.apexSlowerGrowth = reader.readLong(offsets[1]);
   object.apexStuntedGrowth = reader.readLong(offsets[2]);
-  object.id = reader.readStringOrNull(offsets[3]);
+  object.deviceHardware = reader.readString(offsets[3]);
+  object.deviceSoftware = reader.readString(offsets[4]);
+  object.id = reader.readStringOrNull(offsets[5]);
+  object.inField = reader.readBool(offsets[6]);
   object.isarId = id;
-  object.latitude = reader.readDouble(offsets[4]);
-  object.longitude = reader.readDouble(offsets[5]);
-  object.notes = reader.readString(offsets[6]);
-  object.observerId = reader.readStringOrNull(offsets[7]);
-  object.parcelId = reader.readString(offsets[8]);
-  object.sessionAt = reader.readString(offsets[9]);
-  object.stadePhenoId = reader.readLong(offsets[10]);
+  object.latitude = reader.readDouble(offsets[7]);
+  object.longitude = reader.readDouble(offsets[8]);
+  object.notes = reader.readString(offsets[9]);
+  object.observerId = reader.readStringOrNull(offsets[10]);
+  object.parcelId = reader.readString(offsets[11]);
+  object.sessionAt = reader.readString(offsets[12]);
+  object.stadePhenoId = reader.readLong(offsets[13]);
   return object;
 }
 
@@ -180,20 +203,26 @@ P _sessionDeserializeProp<P>(
     case 2:
       return (reader.readLong(offset)) as P;
     case 3:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 4:
-      return (reader.readDouble(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 5:
-      return (reader.readDouble(offset)) as P;
-    case 6:
-      return (reader.readString(offset)) as P;
-    case 7:
       return (reader.readStringOrNull(offset)) as P;
+    case 6:
+      return (reader.readBool(offset)) as P;
+    case 7:
+      return (reader.readDouble(offset)) as P;
     case 8:
-      return (reader.readString(offset)) as P;
+      return (reader.readDouble(offset)) as P;
     case 9:
       return (reader.readString(offset)) as P;
     case 10:
+      return (reader.readStringOrNull(offset)) as P;
+    case 11:
+      return (reader.readString(offset)) as P;
+    case 12:
+      return (reader.readString(offset)) as P;
+    case 13:
       return (reader.readLong(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -518,6 +547,274 @@ extension SessionQueryFilter
     });
   }
 
+  QueryBuilder<Session, Session, QAfterFilterCondition> deviceHardwareEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'deviceHardware',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition>
+      deviceHardwareGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'deviceHardware',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> deviceHardwareLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'deviceHardware',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> deviceHardwareBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'deviceHardware',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition>
+      deviceHardwareStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'deviceHardware',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> deviceHardwareEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'deviceHardware',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> deviceHardwareContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'deviceHardware',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> deviceHardwareMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'deviceHardware',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition>
+      deviceHardwareIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'deviceHardware',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition>
+      deviceHardwareIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'deviceHardware',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> deviceSoftwareEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'deviceSoftware',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition>
+      deviceSoftwareGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'deviceSoftware',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> deviceSoftwareLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'deviceSoftware',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> deviceSoftwareBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'deviceSoftware',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition>
+      deviceSoftwareStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'deviceSoftware',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> deviceSoftwareEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'deviceSoftware',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> deviceSoftwareContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'deviceSoftware',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> deviceSoftwareMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'deviceSoftware',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition>
+      deviceSoftwareIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'deviceSoftware',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition>
+      deviceSoftwareIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'deviceSoftware',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterFilterCondition> idIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -659,6 +956,16 @@ extension SessionQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'id',
         value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterFilterCondition> inFieldEqualTo(
+      bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'inField',
+        value: value,
       ));
     });
   }
@@ -1473,6 +1780,30 @@ extension SessionQuerySortBy on QueryBuilder<Session, Session, QSortBy> {
     });
   }
 
+  QueryBuilder<Session, Session, QAfterSortBy> sortByDeviceHardware() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deviceHardware', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> sortByDeviceHardwareDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deviceHardware', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> sortByDeviceSoftware() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deviceSoftware', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> sortByDeviceSoftwareDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deviceSoftware', Sort.desc);
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterSortBy> sortById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -1482,6 +1813,18 @@ extension SessionQuerySortBy on QueryBuilder<Session, Session, QSortBy> {
   QueryBuilder<Session, Session, QAfterSortBy> sortByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> sortByInField() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'inField', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> sortByInFieldDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'inField', Sort.desc);
     });
   }
 
@@ -1608,6 +1951,30 @@ extension SessionQuerySortThenBy
     });
   }
 
+  QueryBuilder<Session, Session, QAfterSortBy> thenByDeviceHardware() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deviceHardware', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> thenByDeviceHardwareDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deviceHardware', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> thenByDeviceSoftware() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deviceSoftware', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> thenByDeviceSoftwareDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deviceSoftware', Sort.desc);
+    });
+  }
+
   QueryBuilder<Session, Session, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -1617,6 +1984,18 @@ extension SessionQuerySortThenBy
   QueryBuilder<Session, Session, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> thenByInField() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'inField', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Session, Session, QAfterSortBy> thenByInFieldDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'inField', Sort.desc);
     });
   }
 
@@ -1737,10 +2116,32 @@ extension SessionQueryWhereDistinct
     });
   }
 
+  QueryBuilder<Session, Session, QDistinct> distinctByDeviceHardware(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'deviceHardware',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Session, Session, QDistinct> distinctByDeviceSoftware(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'deviceSoftware',
+          caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<Session, Session, QDistinct> distinctById(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'id', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Session, Session, QDistinct> distinctByInField() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'inField');
     });
   }
 
@@ -1817,9 +2218,27 @@ extension SessionQueryProperty
     });
   }
 
+  QueryBuilder<Session, String, QQueryOperations> deviceHardwareProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'deviceHardware');
+    });
+  }
+
+  QueryBuilder<Session, String, QQueryOperations> deviceSoftwareProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'deviceSoftware');
+    });
+  }
+
   QueryBuilder<Session, String?, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<Session, bool, QQueryOperations> inFieldProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'inField');
     });
   }
 

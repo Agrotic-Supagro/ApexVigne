@@ -51,6 +51,12 @@ class SessionsApiService {
           'apexSlowerGrowth': session.apexSlowerGrowth,
           'apexStuntedGrowth': session.apexStuntedGrowth,
           'parcelId': session.parcelId,
+          'notes': session.notes,
+          'stadePhenoId': session.stadePhenoId,
+          'latitude': session.latitude,
+          'longitude': session.longitude,
+          'deviceHardware': session.deviceHardware,
+          'deviceSoftware': session.deviceSoftware,
         }));
 
     if (response.statusCode == 201) {

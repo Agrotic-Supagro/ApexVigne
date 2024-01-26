@@ -28,4 +28,10 @@ class Session {
   late double latitude;
 
   late double longitude;
+
+  late bool inField;
+
+  late String deviceHardware;
+
+  late String deviceSoftware;
 }

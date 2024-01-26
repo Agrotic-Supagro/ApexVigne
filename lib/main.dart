@@ -11,11 +11,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await IsarService().initIsar();
-  SharedPreferences _sharedPreferences = await SharedPreferences.getInstance();
-  if (_sharedPreferences.getString('language') == null) {
-    _sharedPreferences.setString('language', 'en');
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  if (sharedPreferences.getString('language') == null) {
+    sharedPreferences.setString('language', 'en');
   }
-  Locale locale = Locale(_sharedPreferences.getString('language')!);
+  Locale locale = Locale(sharedPreferences.getString('language')!);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,

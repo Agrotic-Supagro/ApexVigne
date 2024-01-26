@@ -6,6 +6,7 @@ import 'package:apex_vigne/services/auth.service.dart';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
+import 'package:apex_vigne/utils/determine_device_info.dart';
 import 'package:apex_vigne/utils/determine_position.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -373,6 +374,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
     }
 
     void addSession() async {
+      final List<String> deviceInfo = await determineDeviceInfo();
       final session = Session()
         ..sessionAt = _selectedDate.toIso8601String()
         ..apexFullGrowth = _counts[0]
@@ -380,13 +382,17 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         ..apexStuntedGrowth = _counts[2]
         ..parcelId = widget.parcelId
         ..notes = _notesText
-        ..stadePhenoId = _stadeId;
+        ..stadePhenoId = _stadeId
+        ..deviceHardware = deviceInfo[0]
+        ..deviceSoftware = deviceInfo[1];
       if (_positionSaved) {
         session.latitude = _position.latitude;
         session.longitude = _position.longitude;
+        session.inField = true;
       } else {
         session.latitude = 0;
         session.longitude = 0;
+        session.inField = false;
       }
       final bool isConnected =
           await AuthenticationService().checkConnection(context);

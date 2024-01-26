@@ -12,4 +12,8 @@ class Parcel {
   late String name;
 
   String? ownerId;
+
+  double? latitude;
+
+  double? longitude;
 }
