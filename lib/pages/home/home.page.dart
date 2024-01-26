@@ -9,8 +9,10 @@ import 'package:apex_vigne/services/navigation.service.dart';
 import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
 import 'package:apex_vigne/services/parcels_api.service.dart';
 import 'package:apex_vigne/shared_widgets/offline_dialog.dart';
+import 'package:apex_vigne/utils/determine_position.dart';
 import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -26,6 +28,37 @@ class _HomePageState extends State<HomePage> {
   String _sortingOption =
       AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
           .sortByMostRecent;
+  Position? _position;
+
+  @override
+  void initState() {
+    _checkLocation();
+    super.initState();
+  }
+
+  void _checkLocation() async {
+    await determinePosition(context).then((value) {
+      _position = value;
+    }).catchError((error) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Symbols.location_off, color: Colors.white),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: Text(error),
+                ),
+              ],
+            ),
+            backgroundColor: const Color(0xFFCCB152),
+          ),
+        );
+        Navigator.of(context).pop();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +126,7 @@ class _HomePageState extends State<HomePage> {
           },
           itemBuilder: (BuildContext context) {
             return [
+              AppLocalizations.of(context)!.sortByNearest,
               AppLocalizations.of(context)!.sortByMostRecent,
               AppLocalizations.of(context)!.sortByOldest,
               AppLocalizations.of(context)!.sortAZ,
@@ -112,7 +146,34 @@ class _HomePageState extends State<HomePage> {
   Center _buildParcelsList() {
     /* Sort parcels */
     List<Parcel> sortParcels(List<Parcel> parcels, List<Session> sessions) {
-      if (_sortingOption == AppLocalizations.of(context)!.sortAZ) {
+      if (_sortingOption == AppLocalizations.of(context)!.sortByNearest) {
+        _checkLocation();
+        parcels.sort((a, b) {
+          if (a.latitude == null || a.longitude == null) {
+            return 0;
+          } else if (b.latitude == null || b.longitude == null) {
+            return 0;
+          } else if (_position == null) {
+            return 0;
+          }
+
+          final aDistance = Geolocator.distanceBetween(
+            _position!.latitude,
+            _position!.longitude,
+            a.latitude!,
+            a.longitude!,
+          );
+
+          final bDistance = Geolocator.distanceBetween(
+            _position!.latitude,
+            _position!.longitude,
+            b.latitude!,
+            b.longitude!,
+          );
+
+          return aDistance.compareTo(bDistance);
+        });
+      } else if (_sortingOption == AppLocalizations.of(context)!.sortAZ) {
         parcels.sort(
             (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
       } else if (_sortingOption == AppLocalizations.of(context)!.sortZA) {

@@ -464,5 +464,10 @@
     "sortZA": "Par ordre alphabétique inversé",
     "@sortZA": {
         "description": ""
+    },
+
+    "sortByNearest": "Position la plus proche",
+    "@sortByNearest": {
+        "description": ""
     }
 }
