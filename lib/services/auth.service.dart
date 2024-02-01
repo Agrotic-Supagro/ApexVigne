@@ -127,6 +127,7 @@ class AuthenticationService {
   }
 
   Future<String?> login(LoginData data) async {
+    // TODO : mettre un délai si ça ne marche pas
     final response = await http.post(Uri.parse('$apiBaseUrl/login'),
         headers: {"Content-Type": "application/json"},
         body: json.encode({

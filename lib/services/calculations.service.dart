@@ -4,8 +4,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 double calculateIcApex(
     int apexFullGrowth, int apexSlowerGrowth, int apexStuntedGrowth) {
   int sumApex = apexFullGrowth + apexSlowerGrowth + apexStuntedGrowth;
-  sumApex = sumApex == 0 ? 1 : sumApex;
-  return (apexFullGrowth + (apexSlowerGrowth / 2)) / sumApex;
+  if (sumApex == 0){
+    return 0;
+  } else {
+    return (apexFullGrowth + (apexSlowerGrowth / 2)) / sumApex;
+  }
 }
 
 String calculateHydricConstraint(int apexFullGrowth, int apexSlowerGrowth,

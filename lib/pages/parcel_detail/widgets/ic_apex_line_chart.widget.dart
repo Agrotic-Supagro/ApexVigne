@@ -3,6 +3,7 @@ import 'package:apex_vigne/services/calculations.service.dart';
 import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:intl/intl.dart';
 
 class IcApexLineChart extends StatelessWidget {
   final List<Session> sessions;
@@ -12,12 +13,14 @@ class IcApexLineChart extends StatelessWidget {
     required this.sessions,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
+
     List<FlSpot> spots = sessions
         .map(
           (session) => FlSpot(
-            sessions.indexOf(session).toDouble(),
+            DateFormat('yyyy-MM-dd').parse(session.sessionAt).millisecondsSinceEpoch.toDouble(),
             calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth,
                 session.apexStuntedGrowth),
           ),
@@ -26,17 +29,18 @@ class IcApexLineChart extends StatelessWidget {
 
     return LineChart(
       LineChartData(
-        titlesData: titlesData,
+        titlesData: titlesData(spots),
         gridData: const FlGridData(
-          horizontalInterval: 0.15,
+          horizontalInterval: 0.10,
+          drawVerticalLine: false
         ),
         borderData: FlBorderData(
-          show: false,
+          show: true,
         ),
         minY: 0,
         maxY: 1,
-        minX: 0,
-        maxX: sessions.length.toDouble() - 1,
+        minX: spots.first.x - 50000000,
+        maxX: spots.last.x + 50000000,
         lineBarsData: [
           LineChartBarData(
             spots: spots,
@@ -64,48 +68,51 @@ class IcApexLineChart extends StatelessWidget {
     );
   }
 
-  FlTitlesData get titlesData => FlTitlesData(
-        bottomTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            reservedSize: 40,
-            getTitlesWidget: (value, meta) {
-              String text = '';
-              if (value == 0) {
-                text = formatDate(sessions.first.sessionAt);
-              } else if (value + 0.1 >= sessions.length - 1) {
-                text = formatDate(sessions.last.sessionAt);
-              }
-              return SideTitleWidget(
-                axisSide: meta.axisSide,
-                fitInside: const SideTitleFitInsideData(
-                    enabled: true,
-                    axisPosition: 1,
-                    distanceFromEdge: 0,
-                    parentAxisSize: 2),
-                child: Text(
-                  text,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                  ),
+  FlTitlesData titlesData (List<FlSpot> spots) {
+    List<double> spotsDates = spots.map((e) => e.x).toList();
+
+    return FlTitlesData(
+      bottomTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 40,
+          interval: 100000,
+          getTitlesWidget: (value, meta) {
+            String text = '';
+            if (spotsDates.contains(value)) {
+              text = formatGraphDate(value);
+            }
+            return SideTitleWidget(
+              axisSide: meta.axisSide,
+              fitInside: const SideTitleFitInsideData(
+                  enabled: true,
+                  axisPosition: 1,
+                  distanceFromEdge: 0,
+                  parentAxisSize: 2),
+              child: Text(
+                text,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
-        rightTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
+      ),
+      rightTitles: const AxisTitles(
+        sideTitles: SideTitles(showTitles: false),
+      ),
+      topTitles: const AxisTitles(
+        sideTitles: SideTitles(showTitles: false),
+      ),
+      leftTitles: const AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          interval: 0.1,
+          reservedSize: 30,
         ),
-        topTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        leftTitles: const AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            interval: 0.5,
-            reservedSize: 30,
-          ),
-        ),
-      );
+      ),
+    );
+  }
 }

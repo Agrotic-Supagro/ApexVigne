@@ -238,11 +238,14 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                     ),
                   ),
                   DataCell(
-                    ElevatedApexButton(
-                      icon: Icons.article_outlined,
-                      callback: session.notes == null && session.notes!.isEmpty
-                          ? null
-                          : () => notesDialog(context, session.notes!),
+                    Visibility(
+                      visible: session.notes != null && session.notes!.isNotEmpty,
+                      child: ElevatedApexButton(
+                          icon: Icons.article_outlined,
+                          callback: session.notes == null || session.notes!.isEmpty
+                              ? null
+                              : () => notesDialog(context, session.notes!),
+                        ),
                     ),
                   ),
                 ],

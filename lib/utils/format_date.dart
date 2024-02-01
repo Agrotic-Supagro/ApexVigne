@@ -19,3 +19,9 @@ String formatDate(String? timestamp, {bool explicit = false}) {
               .localeName)
       .format(date);
 }
+
+// Fonction pour formater les étiquettes de l'axe des abscisses en format de date
+String formatGraphDate(double timestamp) {
+  DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp.toInt());
+  return "${dateTime.day}/${dateTime.month}";
+}

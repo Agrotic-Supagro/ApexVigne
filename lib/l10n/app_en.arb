@@ -456,12 +456,12 @@
         "description": ""
     },
 
-    "sortAZ": "Par ordre alphabétique",
+    "sortAZ": "A -> Z",
     "@sortAZ": {
         "description": ""
     },
 
-    "sortZA": "Par ordre alphabétique inversé",
+    "sortZA": "Z -> A",
     "@sortZA": {
         "description": ""
     },
