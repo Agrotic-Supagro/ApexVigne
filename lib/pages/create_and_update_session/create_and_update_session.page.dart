@@ -391,8 +391,8 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         session.longitude = _position.longitude;
         session.inField = 1;
       } else {
-        session.latitude = 0;
-        session.longitude = 0;
+        session.latitude = null;
+        session.longitude = null;
         session.inField = 0;
       }
       final bool isConnected =
