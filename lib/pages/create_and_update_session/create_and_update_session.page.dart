@@ -242,6 +242,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
               children: <Widget>[
                 TextField(
                   controller: countController,
+                  autofocus: true,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     labelText: AppLocalizations.of(context)!.infoNumber,
@@ -337,6 +338,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
               children: <Widget>[
                 TextField(
                   controller: notesController,
+                  autofocus: true,
                   maxLines: null,
                   decoration: InputDecoration(
                       hintText: AppLocalizations.of(context)!.hintWriteHere,
@@ -375,6 +377,10 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
     }
 
     void addSession() async {
+      if (!context.mounted) {
+        return;
+      }
+
       final List<String> deviceInfo = await determineDeviceInfo();
       final session = Session()
         ..sessionAt = _selectedDate.toIso8601String()
@@ -410,9 +416,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
       } else {
         await IsarService().saveSession(session);
       }
-      if (context.mounted) {
-        Navigator.of(context).pop(session);
-      }
+      Navigator.of(context).pop(session);
     }
 
     /* Build */
