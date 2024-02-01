@@ -131,68 +131,68 @@
         "description": ""
     },
 
-    "infoConnectServer": "Connexion au serveur...",
+    "infoConnectServer": "Connection to the server...",
     "@infoConnectServer": {
         "description": ""
     },
 
-    "infoOfflineMode": "Lancemenent en mode déconnecté...",
+    "infoOfflineMode": "Launch in disconnected mode...",
     "@infoOfflineMode": {
         "description": ""
     },
 
-    "infoAuthRequired": "Authentification requise...",
+    "infoAuthRequired": "Authentication required...",
     "@infoAuthRequired": {
         "description": ""
     },
 
-    "infoUserProfileLoading": "Chargement des données utilisateur...",
+    "infoUserProfileLoading": "Loading user profil...",
     "@infoUserProfileLoading": {
         "description": ""
     },
 
-    "infoParcelsLoading": "Chargement des parcelles...",
+    "infoParcelsLoading": "Loading parcels...",
     "@infoParcelsLoading": {
         "description": ""
     },
 
-    "infoSessionsLoading": "Chargement des sessions...",
+    "infoSessionsLoading": "Loading sessions...",
     "@infoSessionsLoading": {
         "description": ""
     },
 
-    "infoSendParcelServer": "Envoi des parcelles au serveur...",
+    "infoSendParcelServer": "Sending parcels to the server...",
     "@infoSendParcelServer": {
         "description": ""
     },
 
-    "infoSendSessionServer": "Envoi des sessions au serveur...",
+    "infoSendSessionServer": "Sending sessions to the server...",
     "@infoSendSessionServer": {
         "description": ""
     },
 
-    "infoLastSessionDate": "Dernière session le {sessionDate}",
+    "infoLastSessionDate": "Last session on {sessionDate}",
     "@infoLastSessionDate": {
         "description": "",
         "placeholders": {
             "sessionDate": {
               "type": "String",
-              "example": "20 mai"
+              "example": "May 20"
             }
           }
     },
 
-    "infoNoParcels": "Aucune parcelle...",
+    "infoNoParcels": "No parcels...",
     "@infoNoParcels": {
         "description": ""
     },
 
-    "infoNoSessionInParcel": "Aucune session pour cette parcelle...",
+    "infoNoSessionInParcel": "No session for this parcel...",
     "@infoNoSessionInParcel": {
         "description": ""
     },
 
-    "infoHaveToRequired": "Vous devez être connecté pour modifier une session",
+    "infoHaveToRequired": "You must be logged in to modify a session",
     "@infoHaveToRequired": {
         "description": ""
     },
@@ -207,14 +207,14 @@
         "description": ""
     },
 
-    "infoHydricConstraint": "C.H.",
+    "infoHydricConstraint": "H.C.",
     "@infoHydricConstraint": {
         "description": ""
     },
 
     "infoNbSessions": "{count, plural, =0{0 sessions} =1{1 session} other{{count} sessions}}",
     "@infoNbSessions": {
-        "description": "Le nombre de sessions",
+        "description": "The number of sessions",
         "placeholders": {
             "count": {
                 "type": "num",
@@ -223,27 +223,27 @@
         }
     },
 
-    "infoConfirmPrunedParcel": "Êtes-vous sûr de vouloir écimer la parcelle ?",
+    "infoConfirmPrunedParcel": "Are you sure you want to topkill the parcel ?",
     "@infoConfirmPrunedParcel": {
         "description": ""
     },
 
-    "infoExitSession": "La session ne sera pas sauvegardée",
+    "infoExitSession": "The session will not be saved",
     "@infoExitSession": {
         "description": ""
     },
 
-    "infoChoiceStade": "Choix du stade",
+    "infoChoiceStade": "Choice of stade",
     "@infoChoiceStade": {
         "description": ""
     },
 
-    "infoNumber": "Nombre",
+    "infoNumber": "Number",
     "@infoNumber": {
         "description": ""
     },
 
-    "infoTutoEditNumber": "Vous pouvez éditer le nombre d'observations en maintenant le compteur",
+    "infoTutoEditNumber": "You can edit the number of observations by holding down the counter",
     "@infoTutoEditNumber": {
         "description": ""
     },
@@ -253,7 +253,7 @@
         "description": ""
     },
 
-    "infoErrorProfileInfo": "Une erreur est survenue lors de la récupération de vos informations",
+    "infoErrorProfileInfo": "An error has occurred while retrieving your information",
     "@infoErrorProfileInfo": {
         "description": ""
     },
@@ -288,77 +288,77 @@
         "description": ""
     },
 
-    "infoSectionPartners": "Partenaires",
+    "infoSectionPartners": "Partners",
     "@infoSectionPartners": {
         "description": ""
     },
 
-    "infoConnected": "Vous êtes connecté",
+    "infoConnected": "You are connected",
     "@infoConnected": {
         "description": ""
     },
 
-    "infoErrorDisconnected": "Échec de la connection, vous êtes déconnecté",
+    "infoErrorDisconnected": "Connection failed, you are disconnected",
     "@infoErrorDisconnected": {
         "description": ""
     },
 
-    "infoSyncData": "Synchronisation des données...",
+    "infoSyncData": "Synchronising data...",
     "@infoSyncData": {
         "description": ""
     },
 
-    "infoInvalidEmailOrPassword": "Email ou mot de passe invalide",
+    "infoInvalidEmailOrPassword": "Invalid email or password",
     "@infoInvalidEmailOrPassword": {
         "description": ""
     },
 
-    "infoErrorLogin": "Erreur de connexion",
+    "infoErrorLogin": "Connection error",
     "@infoErrorLogin": {
         "description": ""
     },
 
-    "infoPruned": "Écimée",
+    "infoPruned": "Pruned",
     "@infoPruned": {
         "description": ""
     },
 
-    "infoAbsent": "Absente",
+    "infoAbsent": "Absent",
     "@infoAbsent": {
         "description": ""
     },
 
-    "infoModerate": "Modérée",
+    "infoModerate": "Moderate",
     "@infoModerate": {
         "description": ""
     },
 
-    "infoLow": "Faible",
+    "infoLow": "Low",
     "@infoLow": {
         "description": ""
     },
 
-    "infoSevere": "Sévère",
+    "infoSevere": "Severe",
     "@infoSevere": {
         "description": ""
     },
 
-    "infoWhyOffline": "Celà peut être dû à une mauvaise connexion internet ou à une maintenance du serveur.",
+    "infoWhyOffline": "This may be due to a poor internet connection or server maintenance.",
     "@infoWhyOffline": {
         "description": ""
     },
 
-    "infoLocationRequired": "Il faut autoriser la localisation pour pouvoir créer une session",
+    "infoLocationRequired": "You need to authorise localisation to be able to create a session",
     "@infoLocationRequired": {
         "description": ""
     },
 
-    "infoEnableLocationSystem": "Il faut autoriser la localisation dans les paramètres de votre téléphone pour pouvoir créer une session",
+    "infoEnableLocationSystem": "You need to authorise location in your phone settings to be able to create a session",
     "@infoEnableLocationSystem": {
         "description": ""
     },
 
-    "infoLocationDisabled": "La localisation sur votre téléphone n'est pas activé",
+    "infoLocationDisabled": "The location on your phone is not enabled",
     "@infoLocationDisabled": {
         "description": ""
     },
@@ -400,12 +400,12 @@
         "description": ""
     },
 
-    "actionStayOffline": "Rester déconnecté",
+    "actionStayOffline": "Staying disconnected",
     "@actionStayOffline": {
         "description": ""
     },
 
-    "actionGoOnline": "Se connecter",
+    "actionGoOnline": "Try to connect",
     "@actionGoOnline": {
         "description": ""
     },
@@ -420,38 +420,38 @@
         "description": ""
     },
 
-    "actionFullGrowth": "Pleine croissance",
+    "actionFullGrowth": "Full growth",
     "@actionFullGrowth": {
         "description": ""
     },
 
-    "actionSlowerGrowth": "Croissance ralentie",
+    "actionSlowerGrowth": "Slower growth",
     "@actionSlowerGrowth": {
         "description": ""
     },
 
-    "actionStuntedGrowth": "Arrêt de croissance",
+    "actionStuntedGrowth": "Stunted growth",
     "@actionStuntedGrowth": {
         "description": ""
     },
 
-    "actionValidateSession": "Terminer la session",
+    "actionValidateSession": "End session",
     "@actionValidateSession": {
         "description": ""
     },
 
-    "actionUnderstand": "J''ai compris !",
+    "actionUnderstand": "I''ve got it !",
     "@actionUnderstand": {
         "description": ""
     }
 
 ,
-    "sortByMostRecent": "Du plus récent au plus ancien",
+    "sortByMostRecent": "From the most recent to the oldest",
     "@sortByMostRecent": {
         "description": ""
     },
 
-    "sortByOldest": "Du plus ancien au plus récent",
+    "sortByOldest": "From the oldest to the most recent",
     "@sortByOldest": {
         "description": ""
     },
@@ -466,7 +466,7 @@
         "description": ""
     },
 
-    "sortByNearest": "Position la plus proche",
+    "sortByNearest": "Nearest position",
     "@sortByNearest": {
         "description": ""
     }
