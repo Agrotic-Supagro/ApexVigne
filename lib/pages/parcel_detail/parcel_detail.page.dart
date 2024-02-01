@@ -173,11 +173,10 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         setState(() {
           widget.sessions!.remove(session);
           widget.sessions!.add(sessionUpdated);
-          widget.sessions!.sort((a, b) => DateFormat(
-                  'EEE, dd MMM yyyy HH:mm:ss')
-              .parse(b.sessionAt)
-              .compareTo(
-                  DateFormat('EEE, dd MMM yyyy HH:mm:ss').parse(a.sessionAt)));
+          widget.sessions!.sort((a, b) =>
+              DateFormat('EEE, dd MMM yyyy HH:mm:ss')
+                  .parse(b.sessionAt)
+                  .compareTo(DateTime.parse(a.sessionAt)));
         });
       }
     }
@@ -295,11 +294,8 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                   }
                   setState(() {
                     widget.sessions!.add(session);
-                    widget.sessions!.sort((a, b) =>
-                        DateFormat('EEE, dd MMM yyyy HH:mm:ss')
-                            .parse(b.sessionAt)
-                            .compareTo(DateFormat('EEE, dd MMM yyyy HH:mm:ss')
-                                .parse(a.sessionAt)));
+                    widget.sessions!.sort((a, b) => DateTime.parse(b.sessionAt)
+                        .compareTo(DateTime.parse(a.sessionAt)));
                   });
                   if (context.mounted) {
                     Navigator.of(context).pop();
@@ -340,11 +336,8 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
             if (session != null) {
               setState(() {
                 widget.sessions!.add(session);
-                widget.sessions!.sort((a, b) =>
-                    DateFormat('EEE, dd MMM yyyy HH:mm:ss')
-                        .parse(b.sessionAt)
-                        .compareTo(DateFormat('EEE, dd MMM yyyy HH:mm:ss')
-                            .parse(a.sessionAt)));
+                widget.sessions!.sort((a, b) => DateTime.parse(b.sessionAt)
+                    .compareTo(DateTime.parse(a.sessionAt)));
               });
             }
           },

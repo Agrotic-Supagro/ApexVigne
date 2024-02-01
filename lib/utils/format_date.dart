@@ -6,7 +6,7 @@ String formatDate(String? timestamp, {bool explicit = false}) {
   if (timestamp == null || timestamp.isEmpty) {
     return '';
   }
-  final date = DateFormat('EEE, dd MMM yyyy HH:mm:ss').parse(timestamp);
+  final date = DateTime.parse(timestamp);
   if (explicit) {
     return DateFormat.MMMMd(
             AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!

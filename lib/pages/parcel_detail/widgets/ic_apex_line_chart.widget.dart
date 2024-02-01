@@ -3,7 +3,6 @@ import 'package:apex_vigne/services/calculations.service.dart';
 import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:intl/intl.dart';
 
 class IcApexLineChart extends StatelessWidget {
   final List<Session> sessions;
@@ -13,14 +12,12 @@ class IcApexLineChart extends StatelessWidget {
     required this.sessions,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
-
     List<FlSpot> spots = sessions
         .map(
           (session) => FlSpot(
-            DateFormat('yyyy-MM-dd').parse(session.sessionAt).millisecondsSinceEpoch.toDouble(),
+            DateTime.parse(session.sessionAt).millisecondsSinceEpoch.toDouble(),
             calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth,
                 session.apexStuntedGrowth),
           ),
@@ -30,12 +27,20 @@ class IcApexLineChart extends StatelessWidget {
     return LineChart(
       LineChartData(
         titlesData: titlesData(spots),
-        gridData: const FlGridData(
-          horizontalInterval: 0.10,
-          drawVerticalLine: false
-        ),
+        gridData:
+            const FlGridData(horizontalInterval: 0.10, drawVerticalLine: false),
         borderData: FlBorderData(
           show: true,
+          border: const Border(
+            bottom: BorderSide(
+              color: Color.fromARGB(255, 200, 200, 200),
+              width: 1,
+            ),
+            left: BorderSide(
+              color: Color.fromARGB(255, 200, 200, 200),
+              width: 1,
+            ),
+          ),
         ),
         minY: 0,
         maxY: 1,
@@ -68,7 +73,7 @@ class IcApexLineChart extends StatelessWidget {
     );
   }
 
-  FlTitlesData titlesData (List<FlSpot> spots) {
+  FlTitlesData titlesData(List<FlSpot> spots) {
     List<double> spotsDates = spots.map((e) => e.x).toList();
 
     return FlTitlesData(

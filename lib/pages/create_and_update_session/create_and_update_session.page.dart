@@ -51,8 +51,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
     if (widget.session != null) {
       _stadeIndex = stadesPheno.indexWhere(
           (element) => element['id'] == widget.session!.stadePhenoId);
-      _selectedDate = DateFormat('EEE, dd MMM yyyy HH:mm:ss')
-          .parse(widget.session!.sessionAt);
+      _selectedDate = DateTime.parse(widget.session!.sessionAt);
       _notesText = widget.session?.notes ?? '';
       _counts[0] = widget.session!.apexFullGrowth;
       _counts[1] = widget.session!.apexSlowerGrowth;
