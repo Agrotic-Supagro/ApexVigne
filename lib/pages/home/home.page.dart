@@ -197,12 +197,15 @@ class _HomePageState extends State<HomePage> {
 
           final aDate = aSessions
               .map((session) => session.sessionAt.isNotEmpty
-                  ? DateTime.parse(session.sessionAt)
+                  ? DateFormat('EEE, dd MMM yyyy HH:mm:ss')
+                      .parse(session.sessionAt)
                   : DateTime(0))
               .reduce((max, element) => max.isAfter(element) ? max : element);
+
           final bDate = bSessions
               .map((session) => session.sessionAt.isNotEmpty
-                  ? DateTime.parse(session.sessionAt)
+                  ? DateFormat('EEE, dd MMM yyyy HH:mm:ss')
+                      .parse(session.sessionAt)
                   : DateTime(0))
               .reduce((max, element) => max.isAfter(element) ? max : element);
 
@@ -225,12 +228,14 @@ class _HomePageState extends State<HomePage> {
 
           final aDate = aSessions
               .map((session) => session.sessionAt.isNotEmpty
-                  ? DateTime.parse(session.sessionAt)
+                  ? DateFormat('EEE, dd MMM yyyy HH:mm:ss')
+                      .parse(session.sessionAt)
                   : DateTime(0))
               .reduce((min, element) => min.isBefore(element) ? min : element);
           final bDate = bSessions
               .map((session) => session.sessionAt.isNotEmpty
-                  ? DateTime.parse(session.sessionAt)
+                  ? DateFormat('EEE, dd MMM yyyy HH:mm:ss')
+                      .parse(session.sessionAt)
                   : DateTime(0))
               .reduce((min, element) => min.isBefore(element) ? min : element);
 
@@ -274,8 +279,10 @@ class _HomePageState extends State<HomePage> {
                 if (a.sessionAt.isEmpty || b.sessionAt.isEmpty) {
                   return 0;
                 }
-                final aDate = DateTime.parse(a.sessionAt);
-                final bDate = DateTime.parse(b.sessionAt);
+                final aDate =
+                    DateFormat('EEE, dd MMM yyyy HH:mm:ss').parse(a.sessionAt);
+                final bDate =
+                    DateFormat('EEE, dd MMM yyyy HH:mm:ss').parse(b.sessionAt);
                 return bDate.compareTo(aDate);
               });
               if (currentSessionsParcel.isNotEmpty) {

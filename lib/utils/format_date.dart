@@ -6,7 +6,7 @@ String formatDate(String? timestamp, {bool explicit = false}) {
   if (timestamp == null || timestamp.isEmpty) {
     return '';
   }
-  final date = DateTime.parse(timestamp);
+  final date = DateFormat('EEE, dd MMM yyyy HH:mm:ss').parse(timestamp);
   if (explicit) {
     return DateFormat.MMMMd(
             AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
@@ -20,8 +20,12 @@ String formatDate(String? timestamp, {bool explicit = false}) {
       .format(date);
 }
 
-// Fonction pour formater les étiquettes de l'axe des abscisses en format de date
+/* Fonction pour formater les étiquettes de l'axe des abscisses en format de date */
 String formatGraphDate(double timestamp) {
-  DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp.toInt());
-  return "${dateTime.day}/${dateTime.month}";
+  DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp.toInt());
+
+  return DateFormat.Md(
+          AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+              .localeName)
+      .format(date);
 }

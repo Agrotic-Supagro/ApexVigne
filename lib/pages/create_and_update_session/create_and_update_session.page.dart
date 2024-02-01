@@ -38,7 +38,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
   bool _positionSaved = false;
   DateTime _selectedDate = DateTime.now();
   String _notesText = '';
-  int _stadeId = -1;
+  int _stadeIndex = -1;
 
   @override
   void initState() {
@@ -49,8 +49,10 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
 
   void _initSessionEditing() {
     if (widget.session != null) {
-      // _stadeId = widget.session!.stadePhenoId; // TODO: Wait when we'll have the stadePhenoId in database
-      _selectedDate = DateTime.parse(widget.session!.sessionAt);
+      _stadeIndex = stadesPheno.indexWhere(
+          (element) => element['id'] == widget.session!.stadePhenoId);
+      _selectedDate = DateFormat('EEE, dd MMM yyyy HH:mm:ss')
+          .parse(widget.session!.sessionAt);
       _notesText = widget.session?.notes ?? '';
       _counts[0] = widget.session!.apexFullGrowth;
       _counts[1] = widget.session!.apexSlowerGrowth;
@@ -198,14 +200,14 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
                 );
                 if (selectedStadeId != null) {
                   setState(() {
-                    _stadeId = selectedStadeId;
+                    _stadeIndex = selectedStadeId;
                   });
                 }
               },
               child: Text(
-                _stadeId == -1
+                _stadeIndex == -1
                     ? AppLocalizations.of(context)!.infoChoiceStade
-                    : stadesPheno[_stadeId]['name'],
+                    : stadesPheno[_stadeIndex]['name'],
                 style: const TextStyle(overflow: TextOverflow.ellipsis),
               ),
             ),
@@ -382,7 +384,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         ..apexStuntedGrowth = _counts[2]
         ..parcelId = widget.parcelId
         ..notes = _notesText
-        ..stadePhenoId = _stadeId.toString()
+        ..stadePhenoId = stadesPheno[_stadeIndex]['id']
         ..deviceHardware = deviceInfo[0]
         ..deviceSoftware = deviceInfo[1];
       if (_positionSaved) {

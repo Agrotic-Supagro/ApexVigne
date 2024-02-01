@@ -440,7 +440,7 @@
         "description": ""
     },
 
-    "actionUnderstand": "J''ai compris !'",
+    "actionUnderstand": "J''ai compris !",
     "@actionUnderstand": {
         "description": ""
     }

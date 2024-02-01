@@ -12,6 +12,7 @@ import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
 import 'package:apex_vigne/shared_widgets/offline_dialog.dart';
 import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -172,8 +173,11 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         setState(() {
           widget.sessions!.remove(session);
           widget.sessions!.add(sessionUpdated);
-          widget.sessions!.sort((a, b) => DateTime.parse(b.sessionAt)
-              .compareTo(DateTime.parse(a.sessionAt)));
+          widget.sessions!.sort((a, b) => DateFormat(
+                  'EEE, dd MMM yyyy HH:mm:ss')
+              .parse(b.sessionAt)
+              .compareTo(
+                  DateFormat('EEE, dd MMM yyyy HH:mm:ss').parse(a.sessionAt)));
         });
       }
     }
@@ -239,13 +243,15 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                   ),
                   DataCell(
                     Visibility(
-                      visible: session.notes != null && session.notes!.isNotEmpty,
+                      visible:
+                          session.notes != null && session.notes!.isNotEmpty,
                       child: ElevatedApexButton(
-                          icon: Icons.article_outlined,
-                          callback: session.notes == null || session.notes!.isEmpty
-                              ? null
-                              : () => notesDialog(context, session.notes!),
-                        ),
+                        icon: Icons.article_outlined,
+                        callback:
+                            session.notes == null || session.notes!.isEmpty
+                                ? null
+                                : () => notesDialog(context, session.notes!),
+                      ),
                     ),
                   ),
                 ],
@@ -289,8 +295,11 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                   }
                   setState(() {
                     widget.sessions!.add(session);
-                    widget.sessions!.sort((a, b) => DateTime.parse(b.sessionAt)
-                        .compareTo(DateTime.parse(a.sessionAt)));
+                    widget.sessions!.sort((a, b) =>
+                        DateFormat('EEE, dd MMM yyyy HH:mm:ss')
+                            .parse(b.sessionAt)
+                            .compareTo(DateFormat('EEE, dd MMM yyyy HH:mm:ss')
+                                .parse(a.sessionAt)));
                   });
                   if (context.mounted) {
                     Navigator.of(context).pop();
@@ -331,8 +340,11 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
             if (session != null) {
               setState(() {
                 widget.sessions!.add(session);
-                widget.sessions!.sort((a, b) => DateTime.parse(b.sessionAt)
-                    .compareTo(DateTime.parse(a.sessionAt)));
+                widget.sessions!.sort((a, b) =>
+                    DateFormat('EEE, dd MMM yyyy HH:mm:ss')
+                        .parse(b.sessionAt)
+                        .compareTo(DateFormat('EEE, dd MMM yyyy HH:mm:ss')
+                            .parse(a.sessionAt)));
               });
             }
           },

@@ -31,7 +31,8 @@ class SessionsApiService {
           'apexFullGrowth': session.apexFullGrowth,
           'apexSlowerGrowth': session.apexSlowerGrowth,
           'apexStuntedGrowth': session.apexStuntedGrowth,
-          'parcelId': session.parcelId,
+          'stadePhenoId': session.stadePhenoId,
+          'notes': session.notes,
         }));
 
     if (response.statusCode == 204) {
@@ -52,11 +53,12 @@ class SessionsApiService {
           'apexStuntedGrowth': session.apexStuntedGrowth,
           'parcelId': session.parcelId,
           'notes': session.notes,
-          // 'stadePhenoId': session.stadePhenoId, TODO: Wait if we keep this value in database
-          'latitude': session.latitude,
-          'longitude': session.longitude,
           'deviceHardware': session.deviceHardware,
           'deviceSoftware': session.deviceSoftware,
+          'stadePhenoId': session.stadePhenoId,
+          'inField': session.inField,
+          'latitude': session.latitude,
+          'longitude': session.longitude,
         }));
 
     if (response.statusCode == 201) {

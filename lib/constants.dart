@@ -10,6 +10,7 @@ const String apiBaseUrl = 'http://172.17.0.1';
 
 final List<Map<String, dynamic>> stadesPheno = [
   {
+    "id": "st-A-00-03",
     "name": "Bourgeon d'hiver",
     "stade": "Stade A (BBCH 00 à 02)",
     "description":
@@ -17,6 +18,7 @@ final List<Map<String, dynamic>> stadesPheno = [
     "imgPath": "assets/images/stades_phenologique/stade_a.jpg"
   },
   {
+    "id": "st-B-05-05",
     "name": "Bourgeon dans le coton",
     "stade": "Stade B (BBCH 05)",
     "description":
@@ -24,12 +26,14 @@ final List<Map<String, dynamic>> stadesPheno = [
     "imgPath": "assets/images/stades_phenologique/stade_b.jpg"
   },
   {
+    "id": "st-C-09-09",
     "name": "Pointe verte",
     "stade": "Stade C (BBCH 09)",
     "description": "L'extrémité verte de la pousse devient visible.",
     "imgPath": "assets/images/stades_phenologique/stade_c.jpg"
   },
   {
+    "id": "st-D-10-10",
     "name": "Sortie des feuilles",
     "stade": "Stade D (BBCH 10)",
     "description":
@@ -37,6 +41,7 @@ final List<Map<String, dynamic>> stadesPheno = [
     "imgPath": "assets/images/stades_phenologique/stade_d.jpg"
   },
   {
+    "id": "st-E-11-19",
     "name": "2 à 3 feuilles étalées",
     "stade": "Stade E (BBCH 11 à 19)",
     "description":
@@ -44,6 +49,7 @@ final List<Map<String, dynamic>> stadesPheno = [
     "imgPath": "assets/images/stades_phenologique/stade_e.jpg"
   },
   {
+    "id": "st-F-53-53",
     "name": "Grappes visibles",
     "stade": "Stade F (BBCH 53)",
     "description":
@@ -51,6 +57,7 @@ final List<Map<String, dynamic>> stadesPheno = [
     "imgPath": "assets/images/stades_phenologique/stade_f.jpg"
   },
   {
+    "id": "st-G-55-55",
     "name": "Boutons floraux agglomérées",
     "stade": "Stade G (BBCH 55)",
     "description":
@@ -58,6 +65,7 @@ final List<Map<String, dynamic>> stadesPheno = [
     "imgPath": "assets/images/stades_phenologique/stade_g.jpg"
   },
   {
+    "id": "st-H-57-57",
     "name": "Boutons floraux séparés",
     "stade": "Stade H (BBCH 57)",
     "description":
@@ -65,6 +73,7 @@ final List<Map<String, dynamic>> stadesPheno = [
     "imgPath": "assets/images/stades_phenologique/stade_h.jpg"
   },
   {
+    "id": "st-I-60-69",
     "name": "Floraison",
     "stade": "Stade I (BBCH 60 à 69)",
     "description":
@@ -72,6 +81,7 @@ final List<Map<String, dynamic>> stadesPheno = [
     "imgPath": "assets/images/stades_phenologique/stade_i.jpg"
   },
   {
+    "id": "st-J-71-71",
     "name": "Nouaison",
     "stade": "Stade J (BBCH 71)",
     "description":
@@ -79,6 +89,7 @@ final List<Map<String, dynamic>> stadesPheno = [
     "imgPath": "assets/images/stades_phenologique/stade_j.jpg"
   },
   {
+    "id": "st-K-75-75",
     "name": "Petits pois",
     "stade": "Stade K (BBCH 75)",
     "description":
@@ -86,6 +97,7 @@ final List<Map<String, dynamic>> stadesPheno = [
     "imgPath": "assets/images/stades_phenologique/stade_k.jpg"
   },
   {
+    "id": "st-L-77-77",
     "name": "Fermeture de la grappe",
     "stade": "Stade L (BBCH 77)",
     "description":
@@ -93,6 +105,7 @@ final List<Map<String, dynamic>> stadesPheno = [
     "imgPath": "assets/images/stades_phenologique/stade_l.jpg"
   },
   {
+    "id": "st-M-81-85",
     "name": "Véraison",
     "stade": "Stade M (BBCH 81 à 85)",
     "description":
@@ -100,12 +113,14 @@ final List<Map<String, dynamic>> stadesPheno = [
     "imgPath": "assets/images/stades_phenologique/stade_m.jpg"
   },
   {
+    "id": "st-N-89-89",
     "name": "Maturité",
     "stade": "Stade N (BBCH 89)",
     "description": "Les baies ont atteint leur maturité pour la vendange.",
     "imgPath": "assets/images/stades_phenologique/stade_n.jpg"
   },
   {
+    "id": "st-O-91-91",
     "name": "Fin aoûtement du bois",
     "stade": "Stade O (BBCH 91)",
     "description":
@@ -113,6 +128,7 @@ final List<Map<String, dynamic>> stadesPheno = [
     "imgPath": "assets/images/stades_phenologique/stade_o.jpg"
   },
   {
+    "id": "st-P-92-97",
     "name": "Chute des feuilles",
     "stade": "Stade P (BBCH 92 à 97)",
     "description":
