@@ -77,9 +77,9 @@ const SessionSchema = CollectionSchema(
       name: r'parcelId',
       type: IsarType.string,
     ),
-    r'sessionAt': PropertySchema(
+    r'sessionDate': PropertySchema(
       id: 12,
-      name: r'sessionAt',
+      name: r'sessionDate',
       type: IsarType.string,
     ),
     r'stadePhenoId': PropertySchema(
@@ -153,7 +153,7 @@ int _sessionEstimateSize(
     }
   }
   bytesCount += 3 + object.parcelId.length * 3;
-  bytesCount += 3 + object.sessionAt.length * 3;
+  bytesCount += 3 + object.sessionDate.length * 3;
   {
     final value = object.stadePhenoId;
     if (value != null) {
@@ -181,7 +181,7 @@ void _sessionSerialize(
   writer.writeString(offsets[9], object.notes);
   writer.writeString(offsets[10], object.observerId);
   writer.writeString(offsets[11], object.parcelId);
-  writer.writeString(offsets[12], object.sessionAt);
+  writer.writeString(offsets[12], object.sessionDate);
   writer.writeString(offsets[13], object.stadePhenoId);
 }
 
@@ -205,7 +205,7 @@ Session _sessionDeserialize(
   object.notes = reader.readStringOrNull(offsets[9]);
   object.observerId = reader.readStringOrNull(offsets[10]);
   object.parcelId = reader.readString(offsets[11]);
-  object.sessionAt = reader.readString(offsets[12]);
+  object.sessionDate = reader.readString(offsets[12]);
   object.stadePhenoId = reader.readStringOrNull(offsets[13]);
   return object;
 }
@@ -1699,20 +1699,20 @@ extension SessionQueryFilter
     });
   }
 
-  QueryBuilder<Session, Session, QAfterFilterCondition> sessionAtEqualTo(
+  QueryBuilder<Session, Session, QAfterFilterCondition> sessionDateEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'sessionAt',
+        property: r'sessionDate',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Session, Session, QAfterFilterCondition> sessionAtGreaterThan(
+  QueryBuilder<Session, Session, QAfterFilterCondition> sessionDateGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1720,14 +1720,14 @@ extension SessionQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'sessionAt',
+        property: r'sessionDate',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Session, Session, QAfterFilterCondition> sessionAtLessThan(
+  QueryBuilder<Session, Session, QAfterFilterCondition> sessionDateLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1735,14 +1735,14 @@ extension SessionQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'sessionAt',
+        property: r'sessionDate',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Session, Session, QAfterFilterCondition> sessionAtBetween(
+  QueryBuilder<Session, Session, QAfterFilterCondition> sessionDateBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -1751,7 +1751,7 @@ extension SessionQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'sessionAt',
+        property: r'sessionDate',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1761,69 +1761,70 @@ extension SessionQueryFilter
     });
   }
 
-  QueryBuilder<Session, Session, QAfterFilterCondition> sessionAtStartsWith(
+  QueryBuilder<Session, Session, QAfterFilterCondition> sessionDateStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'sessionAt',
+        property: r'sessionDate',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Session, Session, QAfterFilterCondition> sessionAtEndsWith(
+  QueryBuilder<Session, Session, QAfterFilterCondition> sessionDateEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'sessionAt',
+        property: r'sessionDate',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Session, Session, QAfterFilterCondition> sessionAtContains(
+  QueryBuilder<Session, Session, QAfterFilterCondition> sessionDateContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'sessionAt',
+        property: r'sessionDate',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Session, Session, QAfterFilterCondition> sessionAtMatches(
+  QueryBuilder<Session, Session, QAfterFilterCondition> sessionDateMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'sessionAt',
+        property: r'sessionDate',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Session, Session, QAfterFilterCondition> sessionAtIsEmpty() {
+  QueryBuilder<Session, Session, QAfterFilterCondition> sessionDateIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'sessionAt',
+        property: r'sessionDate',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<Session, Session, QAfterFilterCondition> sessionAtIsNotEmpty() {
+  QueryBuilder<Session, Session, QAfterFilterCondition>
+      sessionDateIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'sessionAt',
+        property: r'sessionDate',
         value: '',
       ));
     });
@@ -2129,15 +2130,15 @@ extension SessionQuerySortBy on QueryBuilder<Session, Session, QSortBy> {
     });
   }
 
-  QueryBuilder<Session, Session, QAfterSortBy> sortBySessionAt() {
+  QueryBuilder<Session, Session, QAfterSortBy> sortBySessionDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sessionAt', Sort.asc);
+      return query.addSortBy(r'sessionDate', Sort.asc);
     });
   }
 
-  QueryBuilder<Session, Session, QAfterSortBy> sortBySessionAtDesc() {
+  QueryBuilder<Session, Session, QAfterSortBy> sortBySessionDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sessionAt', Sort.desc);
+      return query.addSortBy(r'sessionDate', Sort.desc);
     });
   }
 
@@ -2312,15 +2313,15 @@ extension SessionQuerySortThenBy
     });
   }
 
-  QueryBuilder<Session, Session, QAfterSortBy> thenBySessionAt() {
+  QueryBuilder<Session, Session, QAfterSortBy> thenBySessionDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sessionAt', Sort.asc);
+      return query.addSortBy(r'sessionDate', Sort.asc);
     });
   }
 
-  QueryBuilder<Session, Session, QAfterSortBy> thenBySessionAtDesc() {
+  QueryBuilder<Session, Session, QAfterSortBy> thenBySessionDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sessionAt', Sort.desc);
+      return query.addSortBy(r'sessionDate', Sort.desc);
     });
   }
 
@@ -2419,10 +2420,10 @@ extension SessionQueryWhereDistinct
     });
   }
 
-  QueryBuilder<Session, Session, QDistinct> distinctBySessionAt(
+  QueryBuilder<Session, Session, QDistinct> distinctBySessionDate(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'sessionAt', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'sessionDate', caseSensitive: caseSensitive);
     });
   }
 
@@ -2514,9 +2515,9 @@ extension SessionQueryProperty
     });
   }
 
-  QueryBuilder<Session, String, QQueryOperations> sessionAtProperty() {
+  QueryBuilder<Session, String, QQueryOperations> sessionDateProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'sessionAt');
+      return query.addPropertyName(r'sessionDate');
     });
   }
 
