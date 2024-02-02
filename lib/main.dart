@@ -70,6 +70,8 @@ class _ApexVigneAppState extends State<ApexVigneApp> {
       supportedLocales: const [
         Locale('fr'),
         Locale('en'),
+        Locale('it'),
+        Locale('es'),
       ],
       title: 'ApeX Vigne',
       theme: ThemeData(

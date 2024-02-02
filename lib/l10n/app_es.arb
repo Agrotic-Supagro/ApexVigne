@@ -1,0 +1,473 @@
+{
+    "appName": "ApeX Vigne",
+    "@appName": {
+        "description": ""
+    },
+
+
+
+    "tooltipHydricConstraint": "Water stress (W.S.)",
+    "@tooltipHydricConstraint": {
+        "description": ""
+    },
+
+
+
+    "titleAddParcel": "Add a parcel",
+    "@titleAddParcel": {
+        "description": ""
+    },
+
+    "titleNotes": "Notes",
+    "@titleNotes": {
+        "description": ""
+    },
+
+    "titleEditSession": "Editing the session",
+    "@titleEditSession": {
+        "description": ""
+    },
+
+    "titlePrunedParcel": "Pruned the parcel",
+    "@titlePrunedParcel": {
+        "description": ""
+    },
+
+    "titleNewSession": "New session",
+    "@titleNewSession": {
+        "description": ""
+    },
+
+    "titleProfile": "Profile",
+    "@titleProfile": {
+        "description": ""
+    },
+
+    "titleStadePheno": "Phenological stages",
+    "@titleStadePheno": {
+        "description": ""
+    },
+
+    "titleDisconnected": "You are disconnected",
+    "@titleDisconnected": {
+        "description": ""
+    },
+
+    "titleAbout": "About us",
+    "@titleAbout": {
+        "description": ""
+    },
+
+    "titleContact": "Contact us",
+    "@titleContact": {
+        "description": ""
+    },
+
+    "titleLeaveSession": "Leave the session",
+    "@titleLeaveSession": {
+        "description": ""
+    },
+
+    "titleEditNumber": "Edit number",
+    "@titleEditNumber": {
+        "description": ""
+    },
+
+    "titleTutoEditNumber": "Change the number at any time !!",
+    "@titleTutoEditNumber": {
+        "description": ""
+    },
+
+
+
+    "subtitleNoSaveParcelOfflineMode": "You cannot create a parcel because you are in disconnected mode",
+    "@subtitleNoSaveParcelOfflineMode": {
+        "description": ""
+    },
+
+
+
+    "hintParcelName": "Parcel name",
+    "@hintParcelName": {
+        "description": ""
+    },
+
+    "hintEmail": "Email",
+    "@hintEmail": {
+        "description": ""
+    },
+
+    "hintPassword": "Password",
+    "@hintPassword": {
+        "description": ""
+    },
+
+    "hintWriteMessage": "Write your message here...",
+    "@hintWriteMessage": {
+        "description": ""
+    },
+
+    "hintWriteHere": "Write here...",
+    "@hintWriteHere": {
+        "description": ""
+    },
+
+
+
+    "validatorParcelName": "Please enter a parcel name",
+    "@validatorParcelName": {
+        "description": ""
+    },
+
+
+
+    "infoLoading": "Loading...",
+    "@infoLoading": {
+        "description": ""
+    },
+
+    "infoCheckUser": "Vérification de l''utilisateur...",
+    "@infoCheckUser": {
+        "description": ""
+    },
+
+    "infoConnectServer": "Connection to the server...",
+    "@infoConnectServer": {
+        "description": ""
+    },
+
+    "infoOfflineMode": "Launch in disconnected mode...",
+    "@infoOfflineMode": {
+        "description": ""
+    },
+
+    "infoAuthRequired": "Authentication required...",
+    "@infoAuthRequired": {
+        "description": ""
+    },
+
+    "infoUserProfileLoading": "Loading user profil...",
+    "@infoUserProfileLoading": {
+        "description": ""
+    },
+
+    "infoParcelsLoading": "Loading parcels...",
+    "@infoParcelsLoading": {
+        "description": ""
+    },
+
+    "infoSessionsLoading": "Loading sessions...",
+    "@infoSessionsLoading": {
+        "description": ""
+    },
+
+    "infoSendParcelServer": "Sending parcels to the server...",
+    "@infoSendParcelServer": {
+        "description": ""
+    },
+
+    "infoSendSessionServer": "Sending sessions to the server...",
+    "@infoSendSessionServer": {
+        "description": ""
+    },
+
+    "infoLastSessionDate": "Last session on {sessionDate}",
+    "@infoLastSessionDate": {
+        "description": "",
+        "placeholders": {
+            "sessionDate": {
+              "type": "String",
+              "example": "May 20"
+            }
+          }
+    },
+
+    "infoNoParcels": "No parcels...",
+    "@infoNoParcels": {
+        "description": ""
+    },
+
+    "infoNoSessionInParcel": "No session for this parcel...",
+    "@infoNoSessionInParcel": {
+        "description": ""
+    },
+
+    "infoHaveToRequired": "You must be logged in to modify a session",
+    "@infoHaveToRequired": {
+        "description": ""
+    },
+
+    "infoDate": "Date",
+    "@infoDate": {
+        "description": ""
+    },
+
+    "infoIcApex": "iC-Apex",
+    "@infoIcApex": {
+        "description": ""
+    },
+
+    "infoHydricConstraint": "W.S.",
+    "@infoHydricConstraint": {
+        "description": ""
+    },
+
+    "infoNbSessions": "{count, plural, =0{0 sessions} =1{1 session} other{{count} sessions}}",
+    "@infoNbSessions": {
+        "description": "The number of sessions",
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+
+    "infoConfirmPrunedParcel": "Are you sure you want to topkill the parcel ?",
+    "@infoConfirmPrunedParcel": {
+        "description": ""
+    },
+
+    "infoExitSession": "The session will not be saved",
+    "@infoExitSession": {
+        "description": ""
+    },
+
+    "infoChoiceStade": "Choice of stade",
+    "@infoChoiceStade": {
+        "description": ""
+    },
+
+    "infoNumber": "Number",
+    "@infoNumber": {
+        "description": ""
+    },
+
+    "infoTutoEditNumber": "You can edit the number of observations by holding down the counter",
+    "@infoTutoEditNumber": {
+        "description": ""
+    },
+
+    "infoAccount": "Account informations",
+    "@infoAccount": {
+        "description": ""
+    },
+
+    "infoErrorProfileInfo": "An error has occurred while retrieving your information",
+    "@infoErrorProfileInfo": {
+        "description": ""
+    },
+
+    "infoFirstname": "Firstname",
+    "@infoFirstname": {
+        "description": ""
+    },
+
+    "infoLastname": "Lastname",
+    "@infoLastname": {
+        "description": ""
+    },
+
+    "infoEmail": "Email",
+    "@infoEmail": {
+        "description": ""
+    },
+
+    "infoStructure": "Structure",
+    "@infoStructure": {
+        "description": ""
+    },
+
+    "infoAboutDescription": "L''application ApeX Vigne a été conçue par l''équipe d''Eneo pour le compte d''AgroTIC de Montpellier SupAgro, bénéficiant du soutien de la région Occitanie. Cette initiative s''inscrit dans le cadre de recherches approfondies menées depuis plusieurs années sur la viticulture de précision. Le projet est réalisé en collaboration avec l''Institut Français de la Vigne et du Vin (IFV) ainsi que la chambre d''agriculture de l''Hérault.",
+    "@infoAboutDescription": {
+        "description": ""
+    },
+
+    "infoSectionApp": "Application ApeX Vigne",
+    "@infoSectionApp": {
+        "description": ""
+    },
+
+    "infoSectionPartners": "Partners",
+    "@infoSectionPartners": {
+        "description": ""
+    },
+
+    "infoConnected": "You are connected",
+    "@infoConnected": {
+        "description": ""
+    },
+
+    "infoErrorDisconnected": "Connection failed, you are disconnected",
+    "@infoErrorDisconnected": {
+        "description": ""
+    },
+
+    "infoSyncData": "Synchronising data...",
+    "@infoSyncData": {
+        "description": ""
+    },
+
+    "infoInvalidEmailOrPassword": "Invalid email or password",
+    "@infoInvalidEmailOrPassword": {
+        "description": ""
+    },
+
+    "infoErrorLogin": "Connection error",
+    "@infoErrorLogin": {
+        "description": ""
+    },
+
+    "infoPruned": "Pruned",
+    "@infoPruned": {
+        "description": ""
+    },
+
+    "infoAbsent": "Absent",
+    "@infoAbsent": {
+        "description": ""
+    },
+
+    "infoModerate": "Moderate",
+    "@infoModerate": {
+        "description": ""
+    },
+
+    "infoLow": "Low",
+    "@infoLow": {
+        "description": ""
+    },
+
+    "infoSevere": "Severe",
+    "@infoSevere": {
+        "description": ""
+    },
+
+    "infoWhyOffline": "This may be due to a poor internet connection or server maintenance.",
+    "@infoWhyOffline": {
+        "description": ""
+    },
+
+    "infoLocationRequired": "You need to authorise localisation to be able to create a session",
+    "@infoLocationRequired": {
+        "description": ""
+    },
+
+    "infoEnableLocationSystem": "You need to authorise location in your phone settings to be able to create a session",
+    "@infoEnableLocationSystem": {
+        "description": ""
+    },
+
+    "infoLocationDisabled": "The location on your phone is not enabled",
+    "@infoLocationDisabled": {
+        "description": ""
+    },
+
+
+
+    "actionCancel": "Cancel",
+    "@actionCancel": {
+        "description": ""
+    },
+
+    "actionClose": "Close",
+    "@actionClose": {
+        "description": ""
+    },
+
+    "actionAdd": "Add",
+    "@actionAdd": {
+        "description": ""
+    },
+
+    "actionLogin": "Login",
+    "@actionLogin": {
+        "description": ""
+    },
+
+    "actionConfirm": "Confirm",
+    "@actionConfirm": {
+        "description": ""
+    },
+
+    "actionNewSession": "New Session",
+    "@actionNewSession": {
+        "description": ""
+    },
+
+    "actionLogout": "Logout",
+    "@actionLogout": {
+        "description": ""
+    },
+
+    "actionStayOffline": "Staying disconnected",
+    "@actionStayOffline": {
+        "description": ""
+    },
+
+    "actionGoOnline": "Try to connect",
+    "@actionGoOnline": {
+        "description": ""
+    },
+
+    "actionSend": "Send",
+    "@actionSend": {
+        "description": ""
+    },
+
+    "actionSave": "Save",
+    "@actionSave": {
+        "description": ""
+    },
+
+    "actionFullGrowth": "Full growth",
+    "@actionFullGrowth": {
+        "description": ""
+    },
+
+    "actionSlowerGrowth": "Slower growth",
+    "@actionSlowerGrowth": {
+        "description": ""
+    },
+
+    "actionStuntedGrowth": "Stunted growth",
+    "@actionStuntedGrowth": {
+        "description": ""
+    },
+
+    "actionValidateSession": "End session",
+    "@actionValidateSession": {
+        "description": ""
+    },
+
+    "actionUnderstand": "I''ve got it !",
+    "@actionUnderstand": {
+        "description": ""
+    }
+
+,
+    "sortByMostRecent": "From the most recent to the oldest",
+    "@sortByMostRecent": {
+        "description": ""
+    },
+
+    "sortByOldest": "From the oldest to the most recent",
+    "@sortByOldest": {
+        "description": ""
+    },
+
+    "sortAZ": "A -> Z",
+    "@sortAZ": {
+        "description": ""
+    },
+
+    "sortZA": "Z -> A",
+    "@sortZA": {
+        "description": ""
+    },
+
+    "sortByNearest": "Nearest position",
+    "@sortByNearest": {
+        "description": ""
+    }
+}
