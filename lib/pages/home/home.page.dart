@@ -86,8 +86,8 @@ class _HomePageState extends State<HomePage> {
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
       title: Center(
         child: Text(
-          AppLocalizations.of(context)!.appName,
-          style: const TextStyle(fontWeight: FontWeight.w200),
+          AppLocalizations.of(context)!.titleHome,
+          //style: const TextStyle(fontWeight: FontWeight.w200),
         ),
       ),
       actions: <Widget>[
@@ -261,7 +261,7 @@ class _HomePageState extends State<HomePage> {
           final List<Parcel> sortedParcels = sortParcels(parcels, sessions);
 
           return ListView.builder(
-            padding: const EdgeInsets.symmetric(vertical: 35.0),
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
             itemCount: parcels.length,
             itemBuilder: (context, index) {
               final currentParcel = sortedParcels[index];
@@ -324,7 +324,7 @@ class _HomePageState extends State<HomePage> {
                   ListTile(
                     enabled: isOnline,
                     contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 30.0),
+                        const EdgeInsets.symmetric(horizontal: 20.0),
                     title: Text(
                       currentParcel.name,
                       style:
@@ -358,7 +358,7 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.grey.shade100,
                       indent: 30.0,
                       endIndent: 30.0,
-                      height: 10.0,
+                      height: 0.0,
                     ),
                 ],
               );

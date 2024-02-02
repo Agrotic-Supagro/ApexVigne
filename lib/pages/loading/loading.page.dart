@@ -129,7 +129,7 @@ class _LoadingPageState extends State<LoadingPage> {
                       image: AssetImage(
                           'assets/images/logos/logo_apex_vigne_transparent.png'),
                       fit: BoxFit.cover,
-                      width: 180),
+                      width: 100),
                 ),
                 /* Title */
                 const Hero(
@@ -137,11 +137,11 @@ class _LoadingPageState extends State<LoadingPage> {
                   child: Text(
                     'ApeX Vigne',
                     style: TextStyle(
-                      color: Colors.white60,
-                      fontFamily: 'Inter',
+                      color: Colors.white,
+                      //fontFamily: 'Inter',
                       fontSize: 38,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 6.4,
+                      //fontWeight: FontWeight.w700,
+                      //letterSpacing: 6.4,
                     ),
                   ),
                 ),
@@ -157,8 +157,9 @@ class _LoadingPageState extends State<LoadingPage> {
                       _stepLoadingText,
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           color: Colors.white,
-                          letterSpacing: 1.2,
-                          fontWeight: FontWeight.bold),
+                          //letterSpacing: 1.2,
+                          //fontWeight: FontWeight.bold
+                          ),
                     ),
                   ],
                 ),
@@ -182,18 +183,18 @@ class _LoadingPageState extends State<LoadingPage> {
   Padding _buildBottomSectionLogos() {
     /* Build */
     return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 50),
+      padding: EdgeInsets.symmetric(vertical: 40),
       child: Column(
         children: [
           Image(
               image: AssetImage('assets/images/logos/logo_ifv.png'),
               fit: BoxFit.cover,
-              height: 75),
-          SizedBox(height: 50),
+              height: 40),
+          SizedBox(height: 20),
           Image(
               image: AssetImage('assets/images/logos/logo_iam.png'),
               fit: BoxFit.cover,
-              height: 75),
+              height: 40),
         ],
       ),
     );

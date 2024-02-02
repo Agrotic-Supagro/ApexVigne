@@ -40,12 +40,32 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         child: Center(
           child: Column(
             children: [
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
+              if (widget.sessions?.isNotEmpty ?? false)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Theme.of(context).colorScheme.surface,
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context)!
+                        .infoNbSessions(widget.sessions!.length),
+                    style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withOpacity(0.8),
+                        ),
+                  ),
+                ),
+              const SizedBox(height: 20),
               if (widget.sessions?.isNotEmpty ?? false)
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   width: double.infinity,
-                  height: 350,
+                  height: 250,
                   child: IcApexLineChart(
                     sessions: widget.sessions!.reversed.toList(),
                   ),
@@ -189,36 +209,17 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
       ),
       child: DataTable(
         columns: [
-          DataColumn(label: Text(AppLocalizations.of(context)!.infoDate)),
-          DataColumn(label: Text(AppLocalizations.of(context)!.infoIcApex)),
+          DataColumn(label: Expanded(child: Center(child: Text(AppLocalizations.of(context)!.infoDate, textAlign: TextAlign.center)))),
+          DataColumn(label: Expanded(child: Center(child: Text(AppLocalizations.of(context)!.infoIcApex, textAlign: TextAlign.center)))),
           DataColumn(
-              label: Text(AppLocalizations.of(context)!.infoHydricConstraint),
+              label: Expanded(child: Center(child: Text(AppLocalizations.of(context)!.infoHydricConstraint, textAlign: TextAlign.center))),
               tooltip: AppLocalizations.of(context)!.tooltipHydricConstraint),
-          DataColumn(
-            label: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              child: Text(
-                AppLocalizations.of(context)!
-                    .infoNbSessions(widget.sessions!.length),
-                style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withOpacity(0.8),
-                    ),
-              ),
-            ),
-          ),
+          DataColumn(label: Expanded(child: Center(child: Text(AppLocalizations.of(context)!.titleNotes, textAlign: TextAlign.center)))),
         ],
         dividerThickness: 0.0,
-        columnSpacing: 15.0,
+        columnSpacing: 5.0,
         dataRowMinHeight: 50.0,
-        dataRowMaxHeight: 80.0,
+        dataRowMaxHeight: 60.0,
         rows: widget.sessions?.map<DataRow>((session) {
               final double icApex = calculateIcApex(session.apexFullGrowth,
                   session.apexSlowerGrowth, session.apexStuntedGrowth);
@@ -353,6 +354,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         const SizedBox(width: 20),
         ElevatedApexButton(
           text: AppLocalizations.of(context)!.actionNewSession,
+          mainButton: true,
           callback: () async {
             if (!await checkLocation()) {
               return;

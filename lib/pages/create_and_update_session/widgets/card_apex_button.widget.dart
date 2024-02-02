@@ -135,6 +135,7 @@ class _CardApexButtonState extends State<CardApexButton> {
                       .titleLarge!
                       .copyWith(fontWeight: FontWeight.bold),
                   maxLines: 2,
+                  wrapWords: false,
                 ),
               ),
               Expanded(

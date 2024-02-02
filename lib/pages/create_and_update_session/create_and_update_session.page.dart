@@ -126,14 +126,14 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
       child: Scaffold(
         appBar: _buildAppBar(context),
         body: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 _buildOutlinedButtons(),
-                const SizedBox(height: 30),
+                const SizedBox(height: 10),
                 _buildCardApexButtons(),
-                const SizedBox(height: 15),
+                const SizedBox(height: 10),
                 _buildBottomSection(),
               ]),
         ),
@@ -161,8 +161,8 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
       final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: _selectedDate,
-        firstDate: DateTime(2000),
-        lastDate: DateTime(2101),
+        firstDate: DateTime(2020),
+        lastDate: _selectedDate,
       );
       if (picked != null && picked != _selectedDate) {
         setState(() {
@@ -420,23 +420,28 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
       Navigator.of(context).pop(session);
     }
 
+    bool conditionFullfilled(){
+      return _counts.reduce((firstValue, secondValue) =>
+                            firstValue + secondValue) >= 50;
+    }
+
     /* Build */
     return Expanded(
       flex: 0,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: Colors.grey.shade100),
-            child: Text(
-              '${_counts.reduce((firstValue, secondValue) => firstValue + secondValue)}/50',
-              style: const TextStyle(letterSpacing: 1.5),
-            ),
-          ),
-          const SizedBox(height: 10),
+          // Container(
+          //   padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+          //   decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(16),
+          //       color: Colors.grey.shade100),
+          //   child: Text(
+          //     '${_counts.reduce((firstValue, secondValue) => firstValue + secondValue)}/50',
+          //     style: const TextStyle(letterSpacing: 1.5),
+          //   ),
+          // ),
+          // const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -445,13 +450,16 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
                 callback: _countsHistory.isEmpty ? null : undoLastAction,
               ),
               const SizedBox(width: 10),
-              ElevatedApexButton(
-                text: AppLocalizations.of(context)!.actionValidateSession,
-                callback: _counts.reduce((firstValue, secondValue) =>
-                            firstValue + secondValue) <
-                        50
-                    ? null
-                    : addSession,
+              Expanded(
+                child: ElevatedApexButton(
+                  text: conditionFullfilled() ? 
+                    AppLocalizations.of(context)!.actionValidateSession : 
+                    '${_counts.reduce((firstValue, secondValue) => firstValue + secondValue)}/50',
+                  callback: conditionFullfilled()
+                      ? addSession
+                      : null,
+                  mainButton: true,
+                ),
               ),
               const SizedBox(width: 10),
               ElevatedApexButton(

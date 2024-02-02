@@ -20,19 +20,21 @@ class DrawerApexVigne extends StatelessWidget {
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary,
             ),
-            child: const Padding(
+            child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
               child: Column(
                 children: [
-                  Image(
-                      image: AssetImage('assets/images/logos/logo_ifv.png'),
+                  const Image(
+                      image: AssetImage('assets/images/logos/logo_apex_vigne_transparent.png'),
                       fit: BoxFit.cover,
-                      height: 40),
-                  SizedBox(height: 20),
-                  Image(
-                      image: AssetImage('assets/images/logos/logo_iam.png'),
-                      fit: BoxFit.cover,
-                      height: 40),
+                      height: 70),
+                  Text(AppLocalizations.of(context)!.appName,
+                    style: const TextStyle(color: Colors.white))
+                  // SizedBox(height: 20),
+                  // Image(
+                  //     image: AssetImage('assets/images/logos/logo_iam.png'),
+                  //     fit: BoxFit.cover,
+                  //     height: 40),
                 ],
               ),
             ),

@@ -12,6 +12,10 @@
     },
 
 
+    "titleHome": "Parcelles",
+    "@titleHome": {
+        "description": ""
+    },
 
     "titleAddParcel": "Ajouter une parcelle",
     "@titleAddParcel": {
@@ -390,7 +394,7 @@
         "description": ""
     },
 
-    "actionNewSession": "Nouvelle Session",
+    "actionNewSession": "Nouvelle session",
     "@actionNewSession": {
         "description": ""
     },
@@ -435,7 +439,7 @@
         "description": ""
     },
 
-    "actionValidateSession": "Terminer la session",
+    "actionValidateSession": "Terminer",
     "@actionValidateSession": {
         "description": ""
     },

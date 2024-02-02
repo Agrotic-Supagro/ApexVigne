@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
     return FlutterLogin(
       title: AppLocalizations.of(context)!.appName,
       titleTag: 'title',
-      logo: 'assets/images/logos/logo_apex_vigne_transparent.png',
+      logo: const AssetImage('assets/images/logos/logo_apex_vigne_transparent.png'),
       logoTag: 'logo',
       onLogin: auth.login,
       onSubmitAnimationCompleted: () {
@@ -32,11 +32,11 @@ class _LoginPageState extends State<LoginPage> {
       ),
       theme: LoginTheme(
         titleStyle: const TextStyle(
-          color: Colors.white60,
-          fontFamily: 'Inter',
+          color: Colors.white,
+          //fontFamily: 'Inter',
           fontSize: 38,
-          fontWeight: FontWeight.w700,
-          letterSpacing: 6.4,
+          //fontWeight: FontWeight.w700,
+          //letterSpacing: 6.4,
         ),
         inputTheme: InputDecorationTheme(
           border: OutlineInputBorder(

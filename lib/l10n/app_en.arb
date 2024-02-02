@@ -12,6 +12,10 @@
     },
 
 
+    "titleHome": "Parcels",
+    "@titleHome": {
+        "description": ""
+    },
 
     "titleAddParcel": "Add a parcel",
     "@titleAddParcel": {
@@ -435,7 +439,7 @@
         "description": ""
     },
 
-    "actionValidateSession": "End session",
+    "actionValidateSession": "Finish",
     "@actionValidateSession": {
         "description": ""
     },
