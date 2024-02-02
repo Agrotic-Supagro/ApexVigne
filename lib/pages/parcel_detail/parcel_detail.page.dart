@@ -12,6 +12,7 @@ import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
 import 'package:apex_vigne/shared_widgets/offline_dialog.dart';
 import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -279,7 +280,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
               TextButton(
                 onPressed: () async {
                   final session = Session()
-                    ..sessionDate = DateTime.now().toIso8601String()
+                    ..sessionDate = DateFormat('yyyy-MM-dd').format(DateTime.now())
                     ..apexFullGrowth = 0
                     ..apexSlowerGrowth = 0
                     ..apexStuntedGrowth = 0

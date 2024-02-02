@@ -383,7 +383,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
 
       final List<String> deviceInfo = await determineDeviceInfo();
       final session = Session()
-        ..sessionDate = _selectedDate.toIso8601String()
+        ..sessionDate = DateFormat('yyyy-MM-dd').format(_selectedDate)
         ..apexFullGrowth = _counts[0]
         ..apexSlowerGrowth = _counts[1]
         ..apexStuntedGrowth = _counts[2]
