@@ -86,13 +86,18 @@ class _ProfilPageState extends State<ProfilPage> {
           ApexVigneApp.of(context)?.changeLanguage(const Locale('fr'));
         } else if (selectedLanguage == 'English') {
           ApexVigneApp.of(context)?.changeLanguage(const Locale('en'));
+        } else if (selectedLanguage == 'Italiano') {
+          ApexVigneApp.of(context)?.changeLanguage(const Locale('it'));
+        } else if (selectedLanguage == 'Española') {
+          ApexVigneApp.of(context)?.changeLanguage(const Locale('es'));
         }
       },
       itemBuilder: (BuildContext context) {
         return [
-          'Français', // Remplacez-le par la langue que vous utilisez
-          'English', // Remplacez-le par la langue que vous utilisez
-          // Ajoutez d'autres langues selon vos besoins
+          'Français',
+          'English',
+          'Italiano',
+          'Española',
         ].map((String language) {
           return PopupMenuItem<String>(
             value: language,
