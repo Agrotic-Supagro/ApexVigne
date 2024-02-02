@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
@@ -127,7 +128,7 @@ class _CardApexButtonState extends State<CardApexButton> {
               const SizedBox(width: 10),
               Expanded(
                 flex: 5,
-                child: Text(
+                child: AutoSizeText(
                   widget.text,
                   style: Theme.of(context)
                       .textTheme
