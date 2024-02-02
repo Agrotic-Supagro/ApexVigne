@@ -20,9 +20,11 @@ String formatDate(String? timestamp, {bool explicit = false}) {
       .format(date);
 }
 
-/* Fonction pour formater les étiquettes de l'axe des abscisses en format de date */
-String formatGraphDate(double timestamp) {
-  DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp.toInt());
+/// Fonction pour formater les étiquettes de l'axe des abscisses en format de date
+/// en entrée la date est de format double 20240113.0
+String formatGraphDate(double dateDouble) {
+  String dateString = dateDouble.toStringAsFixed(0);
+  DateTime date = DateTime.parse(dateString);
 
   return DateFormat.Md(
           AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!

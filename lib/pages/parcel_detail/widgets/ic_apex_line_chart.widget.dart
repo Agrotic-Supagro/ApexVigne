@@ -17,7 +17,8 @@ class IcApexLineChart extends StatelessWidget {
     List<FlSpot> spots = sessions
         .map(
           (session) => FlSpot(
-            DateTime.parse(session.sessionAt).millisecondsSinceEpoch.toDouble(),
+            // transforme les dates de type "2024-01-13" en double 20240113.0
+            double.parse(session.sessionAt.replaceAll("-", "")),
             calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth,
                 session.apexStuntedGrowth),
           ),
@@ -44,8 +45,8 @@ class IcApexLineChart extends StatelessWidget {
         ),
         minY: 0,
         maxY: 1,
-        minX: spots.first.x - 50000000,
-        maxX: spots.last.x + 50000000,
+        minX: spots.first.x,
+        maxX: spots.last.x,
         lineBarsData: [
           LineChartBarData(
             spots: spots,
@@ -81,7 +82,7 @@ class IcApexLineChart extends StatelessWidget {
         sideTitles: SideTitles(
           showTitles: true,
           reservedSize: 40,
-          interval: 100000,
+          interval: 1,
           getTitlesWidget: (value, meta) {
             String text = '';
             if (spotsDates.contains(value)) {
