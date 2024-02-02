@@ -389,7 +389,8 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         ..apexStuntedGrowth = _counts[2]
         ..parcelId = widget.parcelId
         ..notes = _notesText
-        ..stadePhenoId = stadesPheno[_stadeIndex]['id']
+        ..stadePhenoId =
+            _stadeIndex != -1 ? stadesPheno[_stadeIndex]['id'] : null
         ..deviceHardware = deviceInfo[0]
         ..deviceSoftware = deviceInfo[1];
       if (_positionSaved) {

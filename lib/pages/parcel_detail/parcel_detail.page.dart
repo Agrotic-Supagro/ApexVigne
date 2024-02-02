@@ -286,7 +286,10 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                     ..apexFullGrowth = 0
                     ..apexSlowerGrowth = 0
                     ..apexStuntedGrowth = 0
-                    ..parcelId = widget.parcel.id!;
+                    ..parcelId = widget.parcel.id!
+                    ..inField = 0
+                    ..latitude = null
+                    ..longitude = null;
                   final bool isConnected =
                       await AuthenticationService().checkConnection(context);
                   if (isConnected) {
