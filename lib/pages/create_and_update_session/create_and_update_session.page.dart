@@ -43,7 +43,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
   @override
   void initState() {
     _initSessionEditing();
-    _checkLocation();
+    _checkAndGetLocation();
     super.initState();
   }
 
@@ -59,7 +59,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
     }
   }
 
-  void _checkLocation() async {
+  void _checkAndGetLocation() async {
     await determinePosition(context).then((value) {
       _position = value;
     }).catchError((error) {
@@ -383,13 +383,14 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
 
       final List<String> deviceInfo = await determineDeviceInfo();
       final session = Session()
-        ..sessionDate = DateFormat('yyyy-MM-dd').format(_selectedDate)
+        ..sessionDate = _selectedDate.toIso8601String()
         ..apexFullGrowth = _counts[0]
         ..apexSlowerGrowth = _counts[1]
         ..apexStuntedGrowth = _counts[2]
         ..parcelId = widget.parcelId
         ..notes = _notesText
-        ..stadePhenoId = stadesPheno[_stadeIndex]['id']
+        ..stadePhenoId =
+            _stadeIndex != -1 ? stadesPheno[_stadeIndex]['id'] : null
         ..deviceHardware = deviceInfo[0]
         ..deviceSoftware = deviceInfo[1];
       if (_positionSaved) {

@@ -10,6 +10,7 @@ import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:apex_vigne/pages/parcel_detail/widgets/ic_apex_line_chart.widget.dart';
 import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
 import 'package:apex_vigne/shared_widgets/offline_dialog.dart';
+import 'package:apex_vigne/utils/determine_position.dart';
 import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -280,11 +281,15 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
               TextButton(
                 onPressed: () async {
                   final session = Session()
-                    ..sessionDate = DateFormat('yyyy-MM-dd').format(DateTime.now())
+                    ..sessionDate =
+                        DateFormat('yyyy-MM-dd').format(DateTime.now())
                     ..apexFullGrowth = 0
                     ..apexSlowerGrowth = 0
                     ..apexStuntedGrowth = 0
-                    ..parcelId = widget.parcel.id!;
+                    ..parcelId = widget.parcel.id!
+                    ..inField = 0
+                    ..latitude = null
+                    ..longitude = null;
                   final bool isConnected =
                       await AuthenticationService().checkConnection(context);
                   if (isConnected) {
@@ -294,8 +299,9 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                   }
                   setState(() {
                     widget.sessions!.add(session);
-                    widget.sessions!.sort((a, b) => DateTime.parse(b.sessionDate)
-                        .compareTo(DateTime.parse(a.sessionDate)));
+                    widget.sessions!.sort((a, b) =>
+                        DateTime.parse(b.sessionDate)
+                            .compareTo(DateTime.parse(a.sessionDate)));
                   });
                   if (context.mounted) {
                     Navigator.of(context).pop();
@@ -307,6 +313,31 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
           );
         },
       );
+    }
+
+    Future<bool> checkLocation() async {
+      bool isSuccess = true;
+
+      await checkLocationPermission(context).catchError((error) {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Row(
+                children: [
+                  const Icon(Symbols.location_off, color: Colors.white),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: Text(error),
+                  ),
+                ],
+              ),
+              backgroundColor: const Color(0xFFCCB152),
+            ),
+          );
+        }
+        isSuccess = false;
+      });
+      return isSuccess;
     }
 
     /* Build */
@@ -323,6 +354,9 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         ElevatedApexButton(
           text: AppLocalizations.of(context)!.actionNewSession,
           callback: () async {
+            if (!await checkLocation()) {
+              return;
+            }
             final Session? session = await Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
