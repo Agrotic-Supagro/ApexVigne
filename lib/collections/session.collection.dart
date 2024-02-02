@@ -9,7 +9,7 @@ class Session {
 
   Id isarId = Isar.autoIncrement;
 
-  late String sessionAt;
+  late String sessionDate;
 
   late int apexFullGrowth;
 

@@ -27,7 +27,7 @@ class SessionsApiService {
     final response = await http.put(Uri.parse('$url/${session.id}'),
         headers: await headers,
         body: jsonEncode(<String, dynamic>{
-          'sessionAt': session.sessionAt,
+          'sessionDate': session.sessionDate,
           'apexFullGrowth': session.apexFullGrowth,
           'apexSlowerGrowth': session.apexSlowerGrowth,
           'apexStuntedGrowth': session.apexStuntedGrowth,
@@ -47,7 +47,7 @@ class SessionsApiService {
     final response = await http.post(url,
         headers: await headers,
         body: jsonEncode(<String, dynamic>{
-          'sessionAt': session.sessionAt,
+          'sessionDate': session.sessionDate,
           'apexFullGrowth': session.apexFullGrowth,
           'apexSlowerGrowth': session.apexSlowerGrowth,
           'apexStuntedGrowth': session.apexStuntedGrowth,

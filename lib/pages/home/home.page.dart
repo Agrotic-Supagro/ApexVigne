@@ -196,14 +196,14 @@ class _HomePageState extends State<HomePage> {
           }
 
           final aDate = aSessions
-              .map((session) => session.sessionAt.isNotEmpty
-                  ? DateTime.parse(session.sessionAt)
+              .map((session) => session.sessionDate.isNotEmpty
+                  ? DateTime.parse(session.sessionDate)
                   : DateTime(0))
               .reduce((max, element) => max.isAfter(element) ? max : element);
 
           final bDate = bSessions
-              .map((session) => session.sessionAt.isNotEmpty
-                  ? DateTime.parse(session.sessionAt)
+              .map((session) => session.sessionDate.isNotEmpty
+                  ? DateTime.parse(session.sessionDate)
                   : DateTime(0))
               .reduce((max, element) => max.isAfter(element) ? max : element);
 
@@ -225,13 +225,13 @@ class _HomePageState extends State<HomePage> {
           }
 
           final aDate = aSessions
-              .map((session) => session.sessionAt.isNotEmpty
-                  ? DateTime.parse(session.sessionAt)
+              .map((session) => session.sessionDate.isNotEmpty
+                  ? DateTime.parse(session.sessionDate)
                   : DateTime(0))
               .reduce((min, element) => min.isBefore(element) ? min : element);
           final bDate = bSessions
-              .map((session) => session.sessionAt.isNotEmpty
-                  ? DateTime.parse(session.sessionAt)
+              .map((session) => session.sessionDate.isNotEmpty
+                  ? DateTime.parse(session.sessionDate)
                   : DateTime(0))
               .reduce((min, element) => min.isBefore(element) ? min : element);
 
@@ -272,17 +272,17 @@ class _HomePageState extends State<HomePage> {
               String lastSession = '';
               double icApex = 0;
               currentSessionsParcel.sort((a, b) {
-                if (a.sessionAt.isEmpty || b.sessionAt.isEmpty) {
+                if (a.sessionDate.isEmpty || b.sessionDate.isEmpty) {
                   return 0;
                 }
-                final aDate = DateTime.parse(a.sessionAt);
-                final bDate = DateTime.parse(b.sessionAt);
+                final aDate = DateTime.parse(a.sessionDate);
+                final bDate = DateTime.parse(b.sessionDate);
                 return bDate.compareTo(aDate);
               });
               if (currentSessionsParcel.isNotEmpty) {
                 lastSession = AppLocalizations.of(context)!.infoLastSessionDate(
                   formatDate(
-                    currentSessionsParcel.first.sessionAt,
+                    currentSessionsParcel.first.sessionDate,
                     explicit: true,
                   ),
                 );

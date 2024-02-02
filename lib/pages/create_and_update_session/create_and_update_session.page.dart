@@ -51,7 +51,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
     if (widget.session != null) {
       _stadeIndex = stadesPheno.indexWhere(
           (element) => element['id'] == widget.session!.stadePhenoId);
-      _selectedDate = DateTime.parse(widget.session!.sessionAt);
+      _selectedDate = DateTime.parse(widget.session!.sessionDate);
       _notesText = widget.session?.notes ?? '';
       _counts[0] = widget.session!.apexFullGrowth;
       _counts[1] = widget.session!.apexSlowerGrowth;
@@ -383,7 +383,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
 
       final List<String> deviceInfo = await determineDeviceInfo();
       final session = Session()
-        ..sessionAt = _selectedDate.toIso8601String()
+        ..sessionDate = _selectedDate.toIso8601String()
         ..apexFullGrowth = _counts[0]
         ..apexSlowerGrowth = _counts[1]
         ..apexStuntedGrowth = _counts[2]

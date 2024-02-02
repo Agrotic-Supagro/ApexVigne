@@ -18,7 +18,7 @@ class IcApexLineChart extends StatelessWidget {
         .map(
           (session) => FlSpot(
             // transforme les dates de type "2024-01-13" en double 20240113.0
-            double.parse(session.sessionAt.replaceAll("-", "")),
+            double.parse(session.sessionDate.replaceAll("-", "")),
             calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth,
                 session.apexStuntedGrowth),
           ),

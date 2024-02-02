@@ -174,8 +174,8 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         setState(() {
           widget.sessions!.remove(session);
           widget.sessions!.add(sessionUpdated);
-          widget.sessions!.sort((a, b) => DateTime.parse(b.sessionAt)
-              .compareTo(DateTime.parse(a.sessionAt)));
+          widget.sessions!.sort((a, b) => DateTime.parse(b.sessionDate)
+              .compareTo(DateTime.parse(a.sessionDate)));
         });
       }
     }
@@ -224,7 +224,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                 onLongPress: () => updateSession(context, session),
                 cells: [
                   DataCell(
-                    Text(formatDate(session.sessionAt, explicit: true),
+                    Text(formatDate(session.sessionDate, explicit: true),
                         overflow: TextOverflow.ellipsis),
                   ),
                   DataCell(IcApexCell(icApex: icApex)),
@@ -279,7 +279,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
               TextButton(
                 onPressed: () async {
                   final session = Session()
-                    ..sessionAt = DateTime.now().toIso8601String()
+                    ..sessionDate = DateTime.now().toIso8601String()
                     ..apexFullGrowth = 0
                     ..apexSlowerGrowth = 0
                     ..apexStuntedGrowth = 0
@@ -293,8 +293,8 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                   }
                   setState(() {
                     widget.sessions!.add(session);
-                    widget.sessions!.sort((a, b) => DateTime.parse(b.sessionAt)
-                        .compareTo(DateTime.parse(a.sessionAt)));
+                    widget.sessions!.sort((a, b) => DateTime.parse(b.sessionDate)
+                        .compareTo(DateTime.parse(a.sessionDate)));
                   });
                   if (context.mounted) {
                     Navigator.of(context).pop();
@@ -335,8 +335,8 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
             if (session != null) {
               setState(() {
                 widget.sessions!.add(session);
-                widget.sessions!.sort((a, b) => DateTime.parse(b.sessionAt)
-                    .compareTo(DateTime.parse(a.sessionAt)));
+                widget.sessions!.sort((a, b) => DateTime.parse(b.sessionDate)
+                    .compareTo(DateTime.parse(a.sessionDate)));
               });
             }
           },
