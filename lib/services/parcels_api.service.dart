@@ -19,7 +19,7 @@ class ParcelsApiService {
       final List<dynamic> data = json.decode(response.body);
       await IsarService().saveDataServer('parcels', data);
     } else {
-      throw Exception('Failed to retrieve user data');
+      throw Exception('Failed to retrieve user data : ${response.body}');
     }
   }
 
@@ -36,7 +36,7 @@ class ParcelsApiService {
         await IsarService().saveParcel(parcel);
       }
     } else {
-      throw Exception('Failed to add parcel');
+      throw Exception('Failed to add parcel : ${response.body}');
     }
   }
 }

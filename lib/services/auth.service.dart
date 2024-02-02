@@ -184,7 +184,7 @@ class AuthenticationService {
       listData.add(data);
       await IsarService().saveDataServer('me', listData);
     } else {
-      throw Exception('Failed to retrieve user data');
+      throw Exception('Failed to retrieve user data : ${response.body}');
     }
   }
 }

@@ -19,7 +19,7 @@ class SessionsApiService {
       final List<dynamic> data = json.decode(response.body);
       await IsarService().saveDataServer('sessions', data);
     } else {
-      throw Exception('Failed to retrieve user data');
+      throw Exception('Failed to retrieve user data : ${response.body}');
     }
   }
 
@@ -38,7 +38,7 @@ class SessionsApiService {
     if (response.statusCode == 204) {
       await IsarService().updateSession(session);
     } else {
-      throw Exception('Failed to update session');
+      throw Exception('Failed to update session : ${response.body}');
     }
   }
 
@@ -67,7 +67,7 @@ class SessionsApiService {
         await IsarService().saveSession(session);
       }
     } else {
-      throw Exception('Failed to add session');
+      throw Exception('Failed to add session : ${response.body}');
     }
   }
 }

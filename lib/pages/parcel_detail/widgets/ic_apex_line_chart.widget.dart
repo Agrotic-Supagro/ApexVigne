@@ -4,7 +4,7 @@ import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
-class IcApexLineChart extends StatelessWidget {
+class IcApexLineChart extends StatefulWidget {
   final List<Session> sessions;
 
   const IcApexLineChart({
@@ -13,12 +13,26 @@ class IcApexLineChart extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<IcApexLineChart> createState() => _IcApexLineChartState();
+}
+
+class _IcApexLineChartState extends State<IcApexLineChart> {
+  DateTime firstDate = DateTime.now();
+
+  @override
   Widget build(BuildContext context) {
-    List<FlSpot> spots = sessions
+    firstDate = DateTime.parse(widget.sessions[0].sessionDate);
+
+    List<FlSpot> spots = widget.sessions
         .map(
           (session) => FlSpot(
-            // transforme les dates de type "2024-01-13" en double 20240113.0
-            double.parse(session.sessionDate.replaceAll("-", "")),
+            // transforme les dates en nb de jours depuis le début d'année
+            //DateTime.parse(session.sessionAt).getDayOfYear.toDouble(),
+
+            // transforme les dates de type "2024-01-13" en integer 20240113
+            //double.parse(session.sessionDate.replaceAll("-", "")),
+
+            DateTime.parse(session.sessionDate).difference(firstDate).inDays.toDouble(),
             calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth,
                 session.apexStuntedGrowth),
           ),
@@ -76,6 +90,7 @@ class IcApexLineChart extends StatelessWidget {
 
   FlTitlesData titlesData(List<FlSpot> spots) {
     List<double> spotsDates = spots.map((e) => e.x).toList();
+    //int yearInMillisecondsSinceEpoch = DateTime((DateTime.parse(sessions[0].sessionDate).year)).millisecondsSinceEpoch;
 
     return FlTitlesData(
       bottomTitles: AxisTitles(
@@ -86,7 +101,8 @@ class IcApexLineChart extends StatelessWidget {
           getTitlesWidget: (value, meta) {
             String text = '';
             if (spotsDates.contains(value)) {
-              text = formatGraphDate(value);
+              //text = formatGraphDate(value, yearInMillisecondsSinceEpoch);
+              text = formatGraphDate(value, firstDate);
             }
             return SideTitleWidget(
               axisSide: meta.axisSide,
