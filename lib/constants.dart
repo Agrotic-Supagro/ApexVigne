@@ -16,7 +16,7 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-A-00-03",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeA,
-    "stade": "Stade A (BBCH 00 à 02)",
+    "stade": "Stade A (BBCH 00 à 03)",
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeA,
