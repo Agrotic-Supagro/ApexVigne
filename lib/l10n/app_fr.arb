@@ -469,5 +469,169 @@
     "sortByNearest": "Position la plus proche",
     "@sortByNearest": {
         "description": ""
+    },
+
+
+
+    "nameStadeA": "Bourgeon d'hiver",
+    "@nameStadeA": {
+        "description": ""
+    },
+
+    "nameStadeB": "Bourgeon dans le coton",
+    "@nameStadeB": {
+        "description": ""
+    },
+
+    "nameStadeC": "Pointe verte",
+    "@nameStadeC": {
+        "description": ""
+    },
+
+    "nameStadeD": "Sortie des feuilles",
+    "@nameStadeD": {
+        "description": ""
+    },
+
+    "nameStadeE": "2 à 3 feuilles étalées",
+    "@nameStadeE": {
+        "description": ""
+    },
+
+    "nameStadeF": "Grappes visibles",
+    "@nameStadeF": {
+        "description": ""
+    },
+
+    "nameStadeG": "Boutons floraux agglomérées",
+    "@nameStadeG": {
+        "description": ""
+    },
+
+    "nameStadeH": "Boutons floraux séparés",
+    "@nameStadeH": {
+        "description": ""
+    },
+
+    "nameStadeI": "Floraison",
+    "@nameStadeI": {
+        "description": ""
+    },
+
+    "nameStadeJ": "Nouaison",
+    "@nameStadeJ": {
+        "description": ""
+    },
+
+    "nameStadeK": "Petits pois",
+    "@nameStadeK": {
+        "description": ""
+    },
+
+    "nameStadeL": "Fermeture de la grappe",
+    "@nameStadeL": {
+        "description": ""
+    },
+
+    "nameStadeM": "Véraison",
+    "@nameStadeM": {
+        "description": ""
+    },
+
+    "nameStadeN": "Maturité",
+    "@nameStadeN": {
+        "description": ""
+    },
+
+    "nameStadeO": "Fin aoûtement du bois",
+    "@nameStadeO": {
+        "description": ""
+    },
+
+    "nameStadeP": "Chute des feuilles",
+    "@nameStadeP": {
+        "description": ""
+    },
+
+
+
+    "descriptionStadeA": "Début du gonflement du bourgeon et de la reprise de la végétation.",
+    "@descriptionStadeA": {
+        "description": ""
+    },
+
+    "descriptionStadeB": "Les écailles s'écartent, la protection cotonneuse ou bourre devient visible.",
+    "@descriptionStadeB": {
+        "description": ""
+    },
+
+    "descriptionStadeC": "L'extrémité verte de la pousse devient visible.",
+    "@descriptionStadeC": {
+        "description": ""
+    },
+
+    "descriptionStadeD": "Les feuilles rudimentaires sont rassemblées en rosette. Leur base est protégée par la bourre qui est rejetée à pas hors des écailles.",
+    "@descriptionStadeD": {
+        "description": ""
+    },
+
+    "descriptionStadeE": "Les feuilles se dégagent l'une après l'autre et se développent. Les premières caractéristiques propres au cépage.",
+    "@descriptionStadeE": {
+        "description": ""
+    },
+
+    "descriptionStadeF": "La grappe rudimentaire est visible à l'extrémité de la pousse. Quatre à six feuilles sont étalées.",
+    "@descriptionStadeF": {
+        "description": ""
+    },
+
+    "descriptionStadeG": "La grappe se développe. Les boutons floraux restent agglomérés.",
+    "@descriptionStadeG": {
+        "description": ""
+    },
+
+    "descriptionStadeH": "La grappe est bien développée. Les boutons floraux sont nettement séparés.",
+    "@descriptionStadeH": {
+        "description": ""
+    },
+
+    "descriptionStadeI": "Les capuchons floraux se détachent puis tombent. Les étamines et le pistil sont visibles.",
+    "@descriptionStadeI": {
+        "description": ""
+    },
+
+    "descriptionStadeJ": "Les baies commencent à se développer. les pièces florales chutent.",
+    "@descriptionStadeJ": {
+        "description": ""
+    },
+
+    "descriptionStadeK": "Les baies ont la taille d'un petit pois. Les grappes s'inclinent vers le bas et gagnent leur position finale.",
+    "@descriptionStadeK": {
+        "description": ""
+    },
+
+    "descriptionStadeL": "Dans la grappe, les baies sont suffisament grosses pour qu'elles se touchent.",
+    "@descriptionStadeL": {
+        "description": ""
+    },
+
+    "descriptionStadeM": "Pour les cépages blancs, les baies deviennent légèrement translucides, et pour les cépages noirs, elles prennent une coloration violettes.",
+    "@descriptionStadeM": {
+        "description": ""
+    },
+
+    "descriptionStadeN": "Les baies ont atteint leur maturité pour la vendange.",
+    "@descriptionStadeN": {
+        "description": ""
+    },
+
+    "descriptionStadeO": "L'aoûtement du bois est amorcé lorsque la véraison arrive à son terme.",
+    "@descriptionStadeO": {
+        "description": ""
+    },
+
+    "descriptionStadeP": "Les feuilles se colorent puis tombent. La vigne entre en repos végétatif.",
+    "@descriptionStadeP": {
+        "description": ""
     }
 }
