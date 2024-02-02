@@ -385,6 +385,7 @@ class _HomePageState extends State<HomePage> {
               key: formKey,
               child: TextFormField(
                 controller: parcelNameController,
+                autofocus: true,
                 decoration: InputDecoration(
                   hintText: AppLocalizations.of(context)!.hintParcelName,
                   border: InputBorder.none,

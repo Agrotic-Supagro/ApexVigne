@@ -41,11 +41,13 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
               const SizedBox(height: 50),
               if (widget.sessions?.isNotEmpty ?? false)
                 Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    width: double.infinity,
-                    height: 350,
-                    child: IcApexLineChart(
-                        sessions: widget.sessions!.reversed.toList())),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  width: double.infinity,
+                  height: 350,
+                  child: IcApexLineChart(
+                    sessions: widget.sessions!.reversed.toList(),
+                  ),
+                ),
               const SizedBox(height: 20),
               if (widget.sessions?.isNotEmpty ?? false)
                 _buildSessionsBoard(context),

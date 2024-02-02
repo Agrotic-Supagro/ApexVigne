@@ -6,14 +6,14 @@
 
 
 
-    "tooltipHydricConstraint": "Contrainte hydrique (C.H.)",
+    "tooltipHydricConstraint": "Water stress (W.S.)",
     "@tooltipHydricConstraint": {
         "description": ""
     },
 
 
 
-    "titleAddParcel": "Ajouter une parcelle",
+    "titleAddParcel": "Add a parcel",
     "@titleAddParcel": {
         "description": ""
     },
@@ -23,71 +23,71 @@
         "description": ""
     },
 
-    "titleEditSession": "Modification de la session",
+    "titleEditSession": "Editing the session",
     "@titleEditSession": {
         "description": ""
     },
 
-    "titlePrunedParcel": "Écimer la parcelle",
+    "titlePrunedParcel": "Pruned the parcel",
     "@titlePrunedParcel": {
         "description": ""
     },
 
-    "titleNewSession": "Nouvelle session",
+    "titleNewSession": "New session",
     "@titleNewSession": {
         "description": ""
     },
 
-    "titleProfile": "Profil",
+    "titleProfile": "Profile",
     "@titleProfile": {
         "description": ""
     },
 
-    "titleStadePheno": "Stades phénologiques",
+    "titleStadePheno": "Phenological stages",
     "@titleStadePheno": {
         "description": ""
     },
 
-    "titleDisconnected": "Vous êtes déconnecté",
+    "titleDisconnected": "You are disconnected",
     "@titleDisconnected": {
         "description": ""
     },
 
-    "titleAbout": "À propos",
+    "titleAbout": "About us",
     "@titleAbout": {
         "description": ""
     },
 
-    "titleContact": "Nous contacter",
+    "titleContact": "Contact us",
     "@titleContact": {
         "description": ""
     },
 
-    "titleLeaveSession": "Quitter la session",
+    "titleLeaveSession": "Leave the session",
     "@titleLeaveSession": {
         "description": ""
     },
 
-    "titleEditNumber": "Éditer le nombre",
+    "titleEditNumber": "Edit number",
     "@titleEditNumber": {
         "description": ""
     },
 
-    "titleTutoEditNumber": "Changer le nombre à tout moment !!",
+    "titleTutoEditNumber": "Change the number at any time !!",
     "@titleTutoEditNumber": {
         "description": ""
     },
 
 
 
-    "subtitleNoSaveParcelOfflineMode": "Vous ne pouvez pas créer de parcelle car vous êtes en mode déconnecté",
+    "subtitleNoSaveParcelOfflineMode": "You cannot create a parcel because you are in disconnected mode",
     "@subtitleNoSaveParcelOfflineMode": {
         "description": ""
     },
 
 
 
-    "hintParcelName": "Nom de la parcelle",
+    "hintParcelName": "Parcel name",
     "@hintParcelName": {
         "description": ""
     },
@@ -97,31 +97,31 @@
         "description": ""
     },
 
-    "hintPassword": "Mot de passe",
+    "hintPassword": "Password",
     "@hintPassword": {
         "description": ""
     },
 
-    "hintWriteMessage": "Écrivez votre message ici...",
+    "hintWriteMessage": "Write your message here...",
     "@hintWriteMessage": {
         "description": ""
     },
 
-    "hintWriteHere": "Écrivez ici...",
+    "hintWriteHere": "Write here...",
     "@hintWriteHere": {
         "description": ""
     },
 
 
 
-    "validatorParcelName": "Veuillez entrer un nom de parcelle",
+    "validatorParcelName": "Please enter a parcel name",
     "@validatorParcelName": {
         "description": ""
     },
 
 
 
-    "infoLoading": "Chargement...",
+    "infoLoading": "Loading...",
     "@infoLoading": {
         "description": ""
     },
@@ -207,7 +207,7 @@
         "description": ""
     },
 
-    "infoHydricConstraint": "H.C.",
+    "infoHydricConstraint": "W.S.",
     "@infoHydricConstraint": {
         "description": ""
     },
