@@ -6,6 +6,7 @@ import 'package:apex_vigne/services/parcels_api.service.dart';
 import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/services/auth.service.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -113,89 +114,77 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // change colot status bar
-      appBar: _buildAppBar(context),
-      body: SafeArea(
-        child: Container(
-          color: Theme.of(context).colorScheme.primary,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                /* Logo */
-                const Hero(
-                  tag: 'logo',
-                  child: Image(
-                      image: AssetImage(
-                          'assets/images/logos/logo_apex_vigne_transparent.png'),
-                      fit: BoxFit.cover,
-                      width: 100),
-                ),
-                /* Title */
-                const Hero(
-                  tag: 'title',
-                  child: Text(
-                    'ApeX Vigne',
-                    style: TextStyle(
-                      color: Colors.white,
-                      //fontFamily: 'Inter',
-                      fontSize: 38,
-                      //fontWeight: FontWeight.w700,
-                      //letterSpacing: 6.4,
-                    ),
-                  ),
-                ),
-                /* Loading section */
-                Column(
-                  children: [
-                    const SizedBox(height: 50),
-                    const CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                    ),
-                    const SizedBox(height: 30),
-                    Text(
-                      _stepLoadingText,
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Colors.white,
-                          //letterSpacing: 1.2,
-                          //fontWeight: FontWeight.bold
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+         value: SystemUiOverlayStyle.light.copyWith(statusBarColor: Theme.of(context).primaryColor,),                
+         child: SafeArea(
+          child: Container(
+            color: Theme.of(context).colorScheme.primary,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  /* Logo */
+                  const Column(
+                    children: [
+                      Hero(
+                        tag: 'logo',
+                        child: Image(
+                            image: AssetImage(
+                                'assets/images/logos/logo_apex_vigne_transparent.png'),
+                            fit: BoxFit.cover,
+                            width: 100),
+                      ),
+                      /* Title */
+                      Hero(
+                        tag: 'title',
+                        child: Text(
+                          'ApeX Vigne',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 38,
+                            fontWeight: FontWeight.w500,
                           ),
-                    ),
-                  ],
-                ),
-                _buildBottomSectionLogos(),
-              ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  
+                  /* Loading section */
+                  Column(
+                    children: [
+                      const CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        _stepLoadingText,
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            color: Colors.white,
+                            ),
+                      ),
+                    ],
+                  ),
+
+                  /* Logos section */
+                  const Column(
+                    children: [
+                      Image(
+                          image: AssetImage('assets/images/logos/logo_ifv.png'),
+                          fit: BoxFit.cover,
+                          height: 40),
+                      SizedBox(height: 20),
+                      Image(
+                          image: AssetImage('assets/images/logos/logo_iam.png'),
+                          fit: BoxFit.cover,
+                          height: 40),
+                      SizedBox(height: 20),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  AppBar _buildAppBar(BuildContext context) {
-    /* Build */
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: Theme.of(context).colorScheme.primary,
-    );
-  }
-
-  Padding _buildBottomSectionLogos() {
-    /* Build */
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 40),
-      child: Column(
-        children: [
-          Image(
-              image: AssetImage('assets/images/logos/logo_ifv.png'),
-              fit: BoxFit.cover,
-              height: 40),
-          SizedBox(height: 20),
-          Image(
-              image: AssetImage('assets/images/logos/logo_iam.png'),
-              fit: BoxFit.cover,
-              height: 40),
-        ],
       ),
     );
   }

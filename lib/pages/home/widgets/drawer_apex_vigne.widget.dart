@@ -21,7 +21,7 @@ class DrawerApexVigne extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
             ),
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: Column(
                 children: [
                   const Image(

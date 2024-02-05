@@ -18,9 +18,9 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return FlutterLogin(
       title: AppLocalizations.of(context)!.appName,
-      titleTag: 'title',
+      //titleTag: 'title',
       logo: const AssetImage('assets/images/logos/logo_apex_vigne_transparent.png'),
-      logoTag: 'logo',
+      //logoTag: 'logo',
       onLogin: auth.login,
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -33,9 +33,8 @@ class _LoginPageState extends State<LoginPage> {
       theme: LoginTheme(
         titleStyle: const TextStyle(
           color: Colors.white,
-          //fontFamily: 'Inter',
           fontSize: 38,
-          //fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w500,
           //letterSpacing: 6.4,
         ),
         inputTheme: InputDecorationTheme(
@@ -45,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           filled: true,
         ),
+        cardTopPosition: 200.0,
         buttonTheme: const LoginButtonTheme(
           elevation: 0,
           shape: RoundedRectangleBorder(

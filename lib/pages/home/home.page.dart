@@ -87,7 +87,6 @@ class _HomePageState extends State<HomePage> {
       title: Center(
         child: Text(
           AppLocalizations.of(context)!.titleHome,
-          //style: const TextStyle(fontWeight: FontWeight.w200),
         ),
       ),
       actions: <Widget>[
