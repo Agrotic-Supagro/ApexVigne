@@ -70,6 +70,11 @@ class AuthenticationService {
       final response = await http.get(url, headers: {
         'Authorization': 'Bearer ${await token}',
         'Content-Type': 'application/json',
+      }).timeout(const Duration(seconds: 20), onTimeout: () {
+        return http.Response(
+          json.encode({'token': null}),
+          408,
+        );
       });
       if (response.statusCode == 200) {
         displayStateSnackBar(context, true);
@@ -127,14 +132,19 @@ class AuthenticationService {
   }
 
   Future<String?> login(LoginData data) async {
-    // TODO : mettre un délai si ça ne marche pas
-    final response = await http.post(Uri.parse('$apiBaseUrl/login'),
-        headers: {"Content-Type": "application/json"},
-        body: json.encode({
-          'email': data.name,
-          'password': data.password,
-        }));
-
+    final response = await http
+        .post(Uri.parse('$apiBaseUrl/login'),
+            headers: {"Content-Type": "application/json"},
+            body: json.encode({
+              'email': data.name,
+              'password': data.password,
+            }))
+        .timeout(const Duration(seconds: 20), onTimeout: () {
+      return http.Response(
+        json.encode({'token': null}),
+        408,
+      );
+    });
     if (response.statusCode == 200) {
       final Map<String, dynamic> res = json.decode(response.body);
       if (res['token'] == null) {
