@@ -130,7 +130,7 @@
         "description": ""
     },
 
-    "infoCheckUser": "Vérification de l''utilisateur...",
+    "infoCheckUser": "Vérification de l'utilisateur...",
     "@infoCheckUser": {
         "description": ""
     },
@@ -282,7 +282,7 @@
         "description": ""
     },
 
-    "infoAboutDescription": "L''application ApeX Vigne a été conçue par l''équipe d''Eneo pour le compte d''AgroTIC de Montpellier SupAgro, bénéficiant du soutien de la région Occitanie. Cette initiative s''inscrit dans le cadre de recherches approfondies menées depuis plusieurs années sur la viticulture de précision. Le projet est réalisé en collaboration avec l''Institut Français de la Vigne et du Vin (IFV) ainsi que la chambre d''agriculture de l''Hérault.",
+    "infoAboutDescription": "L'application ApeX Vigne a été conçue par l'équipe d'Eneo pour le compte d'AgroTIC de Montpellier SupAgro, bénéficiant du soutien de la région Occitanie. Cette initiative s'inscrit dans le cadre de recherches approfondies menées depuis plusieurs années sur la viticulture de précision. Le projet est réalisé en collaboration avec l'Institut Français de la Vigne et du Vin (IFV) ainsi que la chambre d'agriculture de l'Hérault.",
     "@infoAboutDescription": {
         "description": ""
     },
@@ -444,7 +444,7 @@
         "description": ""
     },
 
-    "actionUnderstand": "J''ai compris !",
+    "actionUnderstand": "J'ai compris !",
     "@actionUnderstand": {
         "description": ""
     }
