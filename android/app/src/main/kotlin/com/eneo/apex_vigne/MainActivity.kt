@@ -1,4 +1,4 @@
-package com.eneo.apex_vigne
+package ag.GB.apex
 
 import io.flutter.embedding.android.FlutterActivity
 
