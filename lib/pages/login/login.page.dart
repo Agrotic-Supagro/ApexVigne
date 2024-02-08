@@ -22,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
       logo: const AssetImage('assets/images/logos/logo_apex_vigne_transparent.png'),
       //logoTag: 'logo',
       onLogin: auth.login,
+      onSignup: auth.signup,
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => const LoadingPage(),
@@ -35,7 +36,6 @@ class _LoginPageState extends State<LoginPage> {
           color: Colors.white,
           fontSize: 38,
           fontWeight: FontWeight.w500,
-          //letterSpacing: 6.4,
         ),
         inputTheme: InputDecorationTheme(
           border: OutlineInputBorder(
@@ -55,11 +55,54 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
       hideForgotPasswordButton: true,
+      loginAfterSignUp: true,
+      additionalSignupFields: <UserFormField>[
+        UserFormField(
+          keyName: 'firstname',
+          displayName: AppLocalizations.of(context)!.infoFirstname,
+          fieldValidator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Entrez votre prénom';
+            }
+            return null;
+          },
+          userType: LoginUserType.firstName,
+        ),
+        UserFormField(
+          keyName: 'lastname',
+          displayName: AppLocalizations.of(context)!.infoLastname,
+          fieldValidator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Entrez votre nom';
+            }
+            return null;
+          },
+          userType: LoginUserType.lastName,
+        ),
+        UserFormField(
+          keyName: 'structure',
+          displayName: AppLocalizations.of(context)!.infoStructure,
+          icon: const Icon(Icons.domain),
+          fieldValidator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Entrez votre structure';
+            }
+            return null;
+          },
+          userType: LoginUserType.text,
+        ),
+      ],
       messages: LoginMessages(
-        /* Login */
         userHint: AppLocalizations.of(context)!.hintEmail,
         passwordHint: AppLocalizations.of(context)!.hintPassword,
+        confirmPasswordHint: AppLocalizations.of(context)!.hintConfirmPassword,
+        confirmPasswordError: AppLocalizations.of(context)!.infoConfirmPasswordError,
         loginButton: AppLocalizations.of(context)!.actionLogin,
+        forgotPasswordButton: AppLocalizations.of(context)!.actionForgotPassword,
+        signupButton: AppLocalizations.of(context)!.actionSignup,
+        goBackButton: AppLocalizations.of(context)!.actionGoBack,
+        additionalSignUpFormDescription: AppLocalizations.of(context)!.infoSignUpFormDescription,
+        additionalSignUpSubmitButton: AppLocalizations.of(context)!.actionConfirm,
       ),
     );
   }

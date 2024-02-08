@@ -257,6 +257,10 @@ class _HomePageState extends State<HomePage> {
           final List<Parcel> parcels = results[0];
           final List<Session> sessions = results[1];
 
+          if (parcels.isEmpty) {
+            return Text(AppLocalizations.of(context)!.infoNoParcels);
+          }
+
           final List<Parcel> sortedParcels = sortParcels(parcels, sessions);
 
           return ListView.builder(

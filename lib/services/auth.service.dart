@@ -197,4 +197,40 @@ class AuthenticationService {
       throw Exception('Failed to retrieve user data : ${response.body}');
     }
   }
+
+  Future<String?> signup(SignupData data) async {
+    var jsonData = {
+      'email': data.name,
+      'password': data.password,
+    };
+    data.additionalSignupData?.forEach((key, value) {
+      jsonData[key] = value;
+    });
+    final response = await http
+        .post(Uri.parse('$apiBaseUrl/signup'),
+            headers: {"Content-Type": "application/json"},
+            body: json.encode(jsonData))
+        .timeout(const Duration(seconds: 20), onTimeout: () {
+      return http.Response(
+        json.encode({'message': 'timeout'}),
+        408,
+      );
+    });
+    final Map<String, dynamic> res = json.decode(response.body);
+    if (response.statusCode == 200) {
+      if (res['token'] == null) {
+        return AppLocalizations.of(
+          NavigationService.navigatorKey.currentContext!,
+        )!
+            .infoInvalidEmailOrPassword;
+      }
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      prefs.setString('token', res['token']);
+      authenticationState.value = true;
+      return null;
+    } else {
+      return res['message'];
+    }
+  }
 }

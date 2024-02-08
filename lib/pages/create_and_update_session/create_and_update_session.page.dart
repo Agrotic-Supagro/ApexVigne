@@ -431,17 +431,6 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
-          // Container(
-          //   padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-          //   decoration: BoxDecoration(
-          //       borderRadius: BorderRadius.circular(16),
-          //       color: Colors.grey.shade100),
-          //   child: Text(
-          //     '${_counts.reduce((firstValue, secondValue) => firstValue + secondValue)}/50',
-          //     style: const TextStyle(letterSpacing: 1.5),
-          //   ),
-          // ),
-          // const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

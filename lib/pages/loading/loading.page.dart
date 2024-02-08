@@ -121,7 +121,7 @@ class _LoadingPageState extends State<LoadingPage> {
             color: Theme.of(context).colorScheme.primary,
             child: Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   /* Logo */
                   const Column(
@@ -152,6 +152,7 @@ class _LoadingPageState extends State<LoadingPage> {
                   /* Loading section */
                   Column(
                     children: [
+                      const SizedBox(height: 150),
                       const CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       ),
@@ -166,7 +167,7 @@ class _LoadingPageState extends State<LoadingPage> {
                   ),
 
                   /* Logos section */
-                  const Column(
+                  /*const Column(
                     children: [
                       Image(
                           image: AssetImage('assets/images/logos/logo_ifv.png'),
@@ -179,7 +180,7 @@ class _LoadingPageState extends State<LoadingPage> {
                           height: 40),
                       SizedBox(height: 20),
                     ],
-                  ),
+                  ),*/
                 ],
               ),
             ),
