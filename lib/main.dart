@@ -7,21 +7,21 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'color_schemes.g.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'dart:io' show Platform;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await IsarService().initIsar();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  if (sharedPreferences.getString('language') == null) {
-    sharedPreferences.setString('language', 'en');
-  }
-  Locale locale = Locale(sharedPreferences.getString('language')!);
+  Locale locale = Locale(sharedPreferences.getString('language') ?? 'en');
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-
   runApp(ApexVigneApp(locale: locale));
+  if (sharedPreferences.getString('language') == null) {
+    sharedPreferences.setString('language', Platform.localeName.split('_')[0]);
+  }
 }
 
 class ApexVigneApp extends StatefulWidget {
