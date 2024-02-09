@@ -12,15 +12,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await IsarService().initIsar();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  if (sharedPreferences.getString('language') == null) {
-    sharedPreferences.setString('language', 'en');
-  }
-  Locale locale = Locale(sharedPreferences.getString('language')!);
+  final String? languageCode = sharedPreferences.getString('language');
+  Locale? locale = languageCode != null ? Locale(languageCode) : null;
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-
   runApp(ApexVigneApp(locale: locale));
 }
 
@@ -33,13 +30,13 @@ class ApexVigneApp extends StatefulWidget {
   @override
   State<ApexVigneApp> createState() => _ApexVigneAppState();
 
-  final Locale locale;
+  final Locale? locale;
   static _ApexVigneAppState? of(BuildContext context) =>
       context.findAncestorStateOfType<_ApexVigneAppState>();
 }
 
 class _ApexVigneAppState extends State<ApexVigneApp> {
-  late Locale _locale;
+  late Locale? _locale;
 
   @override
   void initState() {
