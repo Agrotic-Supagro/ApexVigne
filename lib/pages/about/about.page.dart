@@ -64,26 +64,29 @@ class _AboutPageState extends State<AboutPage> {
                   runSpacing: 20,
                   children: [
                     Image(
-                        image: AssetImage('assets/images/logos/logo_ifv.png'),
-                        width: 145),
+                      image: AssetImage('assets/images/logos/logo_ifv.png'),
+                      width: 145,
+                    ),
                     SizedBox(width: 20),
                     Image(
-                        image: AssetImage('assets/images/logos/logo_agrotic.png'),
-                        width: 145),
+                      image: AssetImage('assets/images/logos/logo_agrotic.png'),
+                      width: 145,
+                    ),
                     SizedBox(width: 20),
                     Image(
-                        image: AssetImage('assets/images/logos/logo_iam.png'),
-                        height: 50),
+                      image: AssetImage('assets/images/logos/logo_iam.png'),
+                      height: 50,
+                    ),
                     SizedBox(width: 20),
                     Image(
-                        image:
-                            AssetImage('assets/images/logos/logo_occitanie.png'),
-                        width: 145),
+                      image: AssetImage('assets/images/logos/logo_occitanie.png'),
+                      width: 145,
+                    ),
                     SizedBox(width: 20),
                     Image(
-                        image: AssetImage(
-                            'assets/images/logos/logo_agricultures_territoires.png'),
-                        width: 145),
+                      image: AssetImage('assets/images/logos/logo_agricultures_territoires.png'),
+                      width: 145,
+                    ),
                   ],
                 ),
               ),
