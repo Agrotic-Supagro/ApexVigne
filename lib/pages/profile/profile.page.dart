@@ -88,7 +88,7 @@ class _ProfilPageState extends State<ProfilPage> {
           ApexVigneApp.of(context)?.changeLanguage(const Locale('en'));
         } else if (selectedLanguage == 'Italiano') {
           ApexVigneApp.of(context)?.changeLanguage(const Locale('it'));
-        } else if (selectedLanguage == 'Española') {
+        } else if (selectedLanguage == 'Español') {
           ApexVigneApp.of(context)?.changeLanguage(const Locale('es'));
         }
       },
