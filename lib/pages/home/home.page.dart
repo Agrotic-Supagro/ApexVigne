@@ -64,17 +64,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       drawer: const DrawerApexVigne(),
       appBar: _buildAppBar(context),
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(
-              'assets/images/background_vine.png',
-              fit: BoxFit.cover,
-            ),
-          ),
-          _buildParcelsList(),
-        ],
-      ),
+      body: _buildParcelsList(),
       floatingActionButton: _buildFloatingActionButton(context),
     );
   }
