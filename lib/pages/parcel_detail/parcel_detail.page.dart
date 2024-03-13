@@ -210,10 +210,14 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
       child: DataTable(
         columns: [
           DataColumn(label: Expanded(child: Center(child: Text(AppLocalizations.of(context)!.infoDate, textAlign: TextAlign.center)))),
-          DataColumn(label: Expanded(child: Center(child: Text(AppLocalizations.of(context)!.infoIcApex, textAlign: TextAlign.center)))),
+          DataColumn(
+            label: Expanded(child: Center(child: Text(AppLocalizations.of(context)!.infoIcApex, textAlign: TextAlign.center))),
+            tooltip: AppLocalizations.of(context)!.tooltipIcApex,
+          ),
           DataColumn(
               label: Expanded(child: Center(child: Text(AppLocalizations.of(context)!.infoHydricConstraint, textAlign: TextAlign.center))),
-              tooltip: AppLocalizations.of(context)!.tooltipHydricConstraint),
+              tooltip: AppLocalizations.of(context)!.tooltipHydricConstraint,
+          ),
           DataColumn(label: Expanded(child: Center(child: Text(AppLocalizations.of(context)!.titleNotes, textAlign: TextAlign.center)))),
         ],
         dividerThickness: 0.0,

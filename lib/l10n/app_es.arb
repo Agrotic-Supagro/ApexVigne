@@ -6,6 +6,8 @@
 
 
 
+    "tooltipIcApex": "iC-Apex est l'indice de croissance végétatif. Il varie entre 1 (pleine croissance) et 0 (croissance arrêtée)",
+
     "tooltipHydricConstraint": "Water stress (W.S.)",
     "@tooltipHydricConstraint": {
         "description": ""
