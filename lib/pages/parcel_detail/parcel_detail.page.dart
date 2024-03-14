@@ -215,7 +215,10 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
             tooltip: AppLocalizations.of(context)!.tooltipIcApex,
           ),
           DataColumn(
-            label: Expanded(child: Center(child: Text(AppLocalizations.of(context)!.tooltipHydricConstraint, textAlign: TextAlign.center, overflow: TextOverflow.fade))),
+            label: Expanded(child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+              child: Center(child: Text(AppLocalizations.of(context)!.tooltipHydricConstraint, textAlign: TextAlign.center, overflow: TextOverflow.fade)),
+            )),
             tooltip: AppLocalizations.of(context)!.tooltipHydricConstraint,
           ),
           DataColumn(label: Expanded(child: Center(child: Text(AppLocalizations.of(context)!.titleNotes, textAlign: TextAlign.center)))),

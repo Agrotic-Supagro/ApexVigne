@@ -11,11 +11,13 @@ import 'package:apex_vigne/services/parcels_api.service.dart';
 import 'package:apex_vigne/shared_widgets/offline_dialog.dart';
 import 'package:apex_vigne/utils/determine_position.dart';
 import 'package:apex_vigne/utils/format_date.dart';
+import 'package:apex_vigne/utils/is_pruned.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:collection/collection.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -130,7 +132,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   Center _buildParcelsList() {
-    /* Sort parcels */
+    Iterable<DateTime> transformSessionsToDates(List<Session> sessions) {
+      return sessions.map((session) {
+        return session.sessionDate.isNotEmpty && !isPruned(session)
+            ? DateTime.parse(session.sessionDate)
+            : DateTime(0);
+      });
+    }
+
     List<Parcel> sortParcels(List<Parcel> parcels, List<Session> sessions) {
       if (_sortingOption == AppLocalizations.of(context)!.sortByNearest) {
         _checkLocation();
@@ -174,7 +183,7 @@ class _HomePageState extends State<HomePage> {
           final bSessions =
               sessions.where((session) => session.parcelId == b.id).toList();
 
-          if ((aSessions.isEmpty) && (bSessions.isEmpty)) {
+          if (aSessions.isEmpty && bSessions.isEmpty) {
             return a.name.toLowerCase().compareTo(b.name.toLowerCase());
           } else if (aSessions.isEmpty) {
             return 1;
@@ -182,17 +191,8 @@ class _HomePageState extends State<HomePage> {
             return -1;
           }
 
-          final aDate = aSessions
-              .map((session) => session.sessionDate.isNotEmpty
-                  ? DateTime.parse(session.sessionDate)
-                  : DateTime(0))
-              .reduce((max, element) => max.isAfter(element) ? max : element);
-
-          final bDate = bSessions
-              .map((session) => session.sessionDate.isNotEmpty
-                  ? DateTime.parse(session.sessionDate)
-                  : DateTime(0))
-              .reduce((max, element) => max.isAfter(element) ? max : element);
+          final aDate = transformSessionsToDates(aSessions).reduce((max, element) => max.isAfter(element) ? max : element);
+          final bDate = transformSessionsToDates(bSessions).reduce((max, element) => max.isAfter(element) ? max : element);
 
           return bDate.compareTo(aDate);
         });
@@ -211,16 +211,8 @@ class _HomePageState extends State<HomePage> {
             return -1;
           }
 
-          final aDate = aSessions
-              .map((session) => session.sessionDate.isNotEmpty
-                  ? DateTime.parse(session.sessionDate)
-                  : DateTime(0))
-              .reduce((min, element) => min.isBefore(element) ? min : element);
-          final bDate = bSessions
-              .map((session) => session.sessionDate.isNotEmpty
-                  ? DateTime.parse(session.sessionDate)
-                  : DateTime(0))
-              .reduce((min, element) => min.isBefore(element) ? min : element);
+          final aDate = transformSessionsToDates(aSessions).reduce((min, element) => min.isBefore(element) ? min : element);
+          final bDate = transformSessionsToDates(bSessions).reduce((min, element) => min.isBefore(element) ? min : element);
 
           return aDate.compareTo(bDate);
         });
@@ -289,11 +281,10 @@ class _HomePageState extends State<HomePage> {
                   itemCount: parcels.length,
                   itemBuilder: (context, index) {
                     final currentParcel = sortedParcels[index];
-                    final currentSessionsParcel = sessions
-                        .where((session) => session.parcelId == currentParcel.id)
-                        .toList();
+                    final currentSessionsParcel = sessions.where((session) => session.parcelId == currentParcel.id).toList();
                     String lastSession = '';
                     double icApex = 0;
+                    String hydricConstraint = '';
                     currentSessionsParcel.sort((a, b) {
                       if (a.sessionDate.isEmpty || b.sessionDate.isEmpty) {
                         return 0;
@@ -302,35 +293,38 @@ class _HomePageState extends State<HomePage> {
                       final bDate = DateTime.parse(b.sessionDate);
                       return bDate.compareTo(aDate);
                     });
-                    if (currentSessionsParcel.isNotEmpty) {
+                    Session? firstSessionNotPruned = currentSessionsParcel.firstWhereOrNull((session) => !isPruned(session));
+
+                    if (firstSessionNotPruned != null) {
                       lastSession = AppLocalizations.of(context)!.infoLastSessionDate(
                         formatDate(
-                          currentSessionsParcel.first.sessionDate,
+                          firstSessionNotPruned.sessionDate,
                           explicit: true,
                         ),
                       );
                       icApex = calculateIcApex(
-                        currentSessionsParcel.first.apexFullGrowth,
-                        currentSessionsParcel.first.apexSlowerGrowth,
-                        currentSessionsParcel.first.apexStuntedGrowth,
+                        firstSessionNotPruned.apexFullGrowth,
+                        firstSessionNotPruned.apexSlowerGrowth,
+                        firstSessionNotPruned.apexStuntedGrowth,
+                      );
+                      hydricConstraint = calculateHydricConstraint(
+                        firstSessionNotPruned.apexFullGrowth,
+                        firstSessionNotPruned.apexSlowerGrowth,
+                        firstSessionNotPruned.apexStuntedGrowth,
+                        icApex,
+                        context,
                       );
                     }
-                
+
                     bool isOnline = currentParcel.id != null;
                     Color color = Theme.of(context).colorScheme.primary;
                     String subtitle = lastSession;
                     dynamic trailing = lastSession.isNotEmpty
                         ? LabelApexHydricConstraint(
-                            text: calculateHydricConstraint(
-                              currentSessionsParcel.first.apexFullGrowth,
-                              currentSessionsParcel.first.apexSlowerGrowth,
-                              currentSessionsParcel.first.apexStuntedGrowth,
-                              icApex,
-                              context,
-                            ),
+                            text: hydricConstraint,
                           )
                         : null;
-                
+
                     if (isOnline == false) {
                       color = Colors.grey.shade400;
                       subtitle = AppLocalizations.of(context)!
@@ -342,7 +336,7 @@ class _HomePageState extends State<HomePage> {
                         size: 28.0,
                       );
                     }
-                
+
                     return Column(
                       children: [
                         ListTile(

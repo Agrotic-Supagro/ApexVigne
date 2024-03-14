@@ -11,10 +11,8 @@ double calculateIcApex(
   }
 }
 
-String calculateHydricConstraint(int apexFullGrowth, int apexSlowerGrowth,
-    int apexStuntedGrowth, double icApex, BuildContext context) {
-  bool isPruned =
-      apexFullGrowth == 0 && apexSlowerGrowth == 0 && apexStuntedGrowth == 0;
+String calculateHydricConstraint(int apexFullGrowth, int apexSlowerGrowth, int apexStuntedGrowth, double icApex, BuildContext context) {
+  bool isPruned = apexFullGrowth == 0 && apexSlowerGrowth == 0 && apexStuntedGrowth == 0;
   int sumApex = apexFullGrowth + apexSlowerGrowth + apexStuntedGrowth;
   double tauxApexFullGrowth = apexFullGrowth / sumApex * 100;
   double tauxApexStuntedGrowth = apexStuntedGrowth / sumApex * 100;
