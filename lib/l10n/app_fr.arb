@@ -234,7 +234,7 @@
         }
     },
 
-    "infoConfirmPrunedParcel": "Êtes-vous sûr de vouloir écimer la parcelle ?",
+    "infoConfirmPrunedParcel": "Êtes-vous sûr de vouloir noter la parcelle comme étant écimée ?",
     "@infoConfirmPrunedParcel": {
         "description": ""
     },

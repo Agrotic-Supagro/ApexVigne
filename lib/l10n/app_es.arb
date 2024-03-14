@@ -234,7 +234,7 @@
         }
     },
 
-    "infoConfirmPrunedParcel": "Are you sure you want to topkill the parcel ?",
+    "infoConfirmPrunedParcel": "Are you sure you want to mark the parcel as pruned ?",
     "@infoConfirmPrunedParcel": {
         "description": ""
     },
