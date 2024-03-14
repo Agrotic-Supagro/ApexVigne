@@ -252,109 +252,144 @@ class _HomePageState extends State<HomePage> {
 
           final List<Parcel> sortedParcels = sortParcels(parcels, sessions);
 
-          return ListView.builder(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            itemCount: parcels.length,
-            itemBuilder: (context, index) {
-              final currentParcel = sortedParcels[index];
-              final currentSessionsParcel = sessions
-                  .where((session) => session.parcelId == currentParcel.id)
-                  .toList();
-              String lastSession = '';
-              double icApex = 0;
-              currentSessionsParcel.sort((a, b) {
-                if (a.sessionDate.isEmpty || b.sessionDate.isEmpty) {
-                  return 0;
-                }
-                final aDate = DateTime.parse(a.sessionDate);
-                final bDate = DateTime.parse(b.sessionDate);
-                return bDate.compareTo(aDate);
-              });
-              if (currentSessionsParcel.isNotEmpty) {
-                lastSession = AppLocalizations.of(context)!.infoLastSessionDate(
-                  formatDate(
-                    currentSessionsParcel.first.sessionDate,
-                    explicit: true,
-                  ),
-                );
-                icApex = calculateIcApex(
-                  currentSessionsParcel.first.apexFullGrowth,
-                  currentSessionsParcel.first.apexSlowerGrowth,
-                  currentSessionsParcel.first.apexStuntedGrowth,
-                );
-              }
-
-              bool isOnline = currentParcel.id != null;
-              Color color = Theme.of(context).colorScheme.primary;
-              String subtitle = lastSession;
-              dynamic trailing = lastSession.isNotEmpty
-                  ? LabelApexHydricConstraint(
-                      text: calculateHydricConstraint(
+          return Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade400.withOpacity(0.5),
+                      spreadRadius: 1.0,
+                    ),
+                  ],
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.infoParcelName,
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.infoHydricConstraint,
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  itemCount: parcels.length,
+                  itemBuilder: (context, index) {
+                    final currentParcel = sortedParcels[index];
+                    final currentSessionsParcel = sessions
+                        .where((session) => session.parcelId == currentParcel.id)
+                        .toList();
+                    String lastSession = '';
+                    double icApex = 0;
+                    currentSessionsParcel.sort((a, b) {
+                      if (a.sessionDate.isEmpty || b.sessionDate.isEmpty) {
+                        return 0;
+                      }
+                      final aDate = DateTime.parse(a.sessionDate);
+                      final bDate = DateTime.parse(b.sessionDate);
+                      return bDate.compareTo(aDate);
+                    });
+                    if (currentSessionsParcel.isNotEmpty) {
+                      lastSession = AppLocalizations.of(context)!.infoLastSessionDate(
+                        formatDate(
+                          currentSessionsParcel.first.sessionDate,
+                          explicit: true,
+                        ),
+                      );
+                      icApex = calculateIcApex(
                         currentSessionsParcel.first.apexFullGrowth,
                         currentSessionsParcel.first.apexSlowerGrowth,
                         currentSessionsParcel.first.apexStuntedGrowth,
-                        icApex,
-                        context,
-                      ),
-                    )
-                  : null;
-
-              if (isOnline == false) {
-                color = Colors.grey.shade400;
-                subtitle = AppLocalizations.of(context)!
-                    .subtitleNoSaveParcelOfflineMode;
-                trailing = Icon(
-                  Symbols.cloud_off,
-                  color: Colors.grey.shade400,
-                  weight: 350,
-                  size: 28.0,
-                );
-              }
-
-              return Column(
-                children: [
-                  ListTile(
-                    enabled: isOnline,
-                    contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 20.0),
-                    title: Text(
-                      currentParcel.name,
-                      style:
-                          TextStyle(color: color, fontWeight: FontWeight.w600),
-                    ),
-                    subtitle: Text(
-                      subtitle,
-                      style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                          color: color,
-                          fontStyle: isOnline ? null : FontStyle.italic),
-                    ),
-                    trailing: trailing,
-                    onTap: () async {
-                      await Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return ParcelDetailPage(
-                              parcel: currentParcel,
-                              sessions: currentSessionsParcel,
+                      );
+                    }
+                
+                    bool isOnline = currentParcel.id != null;
+                    Color color = Theme.of(context).colorScheme.primary;
+                    String subtitle = lastSession;
+                    dynamic trailing = lastSession.isNotEmpty
+                        ? LabelApexHydricConstraint(
+                            text: calculateHydricConstraint(
+                              currentSessionsParcel.first.apexFullGrowth,
+                              currentSessionsParcel.first.apexSlowerGrowth,
+                              currentSessionsParcel.first.apexStuntedGrowth,
+                              icApex,
+                              context,
+                            ),
+                          )
+                        : null;
+                
+                    if (isOnline == false) {
+                      color = Colors.grey.shade400;
+                      subtitle = AppLocalizations.of(context)!
+                          .subtitleNoSaveParcelOfflineMode;
+                      trailing = Icon(
+                        Symbols.cloud_off,
+                        color: Colors.grey.shade400,
+                        weight: 350,
+                        size: 28.0,
+                      );
+                    }
+                
+                    return Column(
+                      children: [
+                        ListTile(
+                          enabled: isOnline,
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 20.0),
+                          title: Text(
+                            currentParcel.name,
+                            style:
+                                TextStyle(color: color, fontWeight: FontWeight.w600),
+                          ),
+                          subtitle: Text(
+                            subtitle,
+                            style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                                color: color,
+                                fontStyle: isOnline ? null : FontStyle.italic),
+                          ),
+                          trailing: trailing,
+                          onTap: () async {
+                            await Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return ParcelDetailPage(
+                                    parcel: currentParcel,
+                                    sessions: currentSessionsParcel,
+                                  );
+                                },
+                              ),
                             );
+                            setState(() {
+                              IsarService().allSessions;
+                            });
                           },
                         ),
-                      );
-                      setState(() {
-                        IsarService().allSessions;
-                      });
-                    },
-                  ),
-                  if (index != parcels.length - 1)
-                    Divider(
-                      color: Colors.grey.shade100,
-                      indent: 30.0,
-                      endIndent: 30.0,
-                      height: 0.0,
-                    ),
-                ],
-              );
-            },
+                        if (index != parcels.length - 1)
+                          Divider(
+                            color: Colors.grey.shade100,
+                            indent: 30.0,
+                            endIndent: 30.0,
+                            height: 0.0,
+                          ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ],
           );
         },
       ),

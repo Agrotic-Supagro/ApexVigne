@@ -7,11 +7,15 @@
 
 
     "tooltipIcApex": "iC-Apex est l'indice de croissance végétatif. Il varie entre 1 (pleine croissance) et 0 (croissance arrêtée)",
+    "@tooltipIcApex": {
+        "description": ""
+    },
 
     "tooltipHydricConstraint": "Contrainte hydrique (C.H.)",
     "@tooltipHydricConstraint": {
         "description": ""
     },
+
 
 
     "titleHome": "Parcelles",
@@ -386,6 +390,16 @@
 
     "infoConfirmPasswordError": "Les mots de passe ne sont pas identiques.",
     "@infoConfirmPasswordError": {
+        "description": ""
+    },
+
+    "infoParcelName": "Nom de la parcelle",
+    "@infoParcelName": {
+        "description": ""
+    },
+
+    "infoHydricConstraint": "Contrainte hydrique",
+    "@infoHydricConstraint": {
         "description": ""
     },
 
