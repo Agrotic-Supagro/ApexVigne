@@ -7,11 +7,15 @@
 
 
     "tooltipIcApex": "iC-Apex est l'indice de croissance végétatif. Il varie entre 1 (pleine croissance) et 0 (croissance arrêtée)",
+    "@tooltipIcApex": {
+        "description": ""
+    },
 
-    "tooltipHydricConstraint": "Water stress (W.S.)",
+    "tooltipHydricConstraint": "Water stress",
     "@tooltipHydricConstraint": {
         "description": ""
     },
+
 
 
     "titleHome": "Parcels",
@@ -386,6 +390,16 @@
 
     "infoConfirmPasswordError": "Passwords don't match",
     "@infoConfirmPasswordError": {
+        "description": ""
+    },
+
+    "infoParcelName": "Parcel name",
+    "@infoParcelName": {
+        "description": ""
+    },
+
+    "infoHydricConstraint": "Water stress",
+    "@infoHydricConstraint": {
         "description": ""
     },
 

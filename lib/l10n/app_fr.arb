@@ -11,7 +11,7 @@
         "description": ""
     },
 
-    "tooltipHydricConstraint": "Contrainte hydrique (C.H.)",
+    "tooltipHydricConstraint": "Contrainte hydrique",
     "@tooltipHydricConstraint": {
         "description": ""
     },

@@ -11,7 +11,7 @@
         "description": ""
     },
 
-    "tooltipHydricConstraint": "Water stress (W.S.)",
+    "tooltipHydricConstraint": "Water stress",
     "@tooltipHydricConstraint": {
         "description": ""
     },
