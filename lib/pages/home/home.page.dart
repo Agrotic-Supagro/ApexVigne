@@ -25,9 +25,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String _sortingOption =
-      AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
-          .sortByMostRecent;
+  String _sortingOption = AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!.sortByMostRecent;
   Position? _position;
 
   @override
@@ -163,12 +161,13 @@ class _HomePageState extends State<HomePage> {
         });
       } else if (_sortingOption == AppLocalizations.of(context)!.sortAZ) {
         parcels.sort(
-            (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+          (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()),
+        );
       } else if (_sortingOption == AppLocalizations.of(context)!.sortZA) {
         parcels.sort(
-            (a, b) => b.name.toLowerCase().compareTo(a.name.toLowerCase()));
-      } else if (_sortingOption ==
-          AppLocalizations.of(context)!.sortByMostRecent) {
+          (a, b) => b.name.toLowerCase().compareTo(a.name.toLowerCase()),
+        );
+      } else if (_sortingOption == AppLocalizations.of(context)!.sortByMostRecent) {
         parcels.sort((a, b) {
           final aSessions =
               sessions.where((session) => session.parcelId == a.id).toList();
@@ -176,7 +175,7 @@ class _HomePageState extends State<HomePage> {
               sessions.where((session) => session.parcelId == b.id).toList();
 
           if ((aSessions.isEmpty) && (bSessions.isEmpty)) {
-            return 0;
+            return a.name.toLowerCase().compareTo(b.name.toLowerCase());
           } else if (aSessions.isEmpty) {
             return 1;
           } else if (bSessions.isEmpty) {
@@ -205,7 +204,7 @@ class _HomePageState extends State<HomePage> {
               sessions.where((session) => session.parcelId == b.id).toList();
 
           if (aSessions.isEmpty && bSessions.isEmpty) {
-            return 0;
+            return a.name.toLowerCase().compareTo(b.name.toLowerCase());
           } else if (aSessions.isEmpty) {
             return 1;
           } else if (bSessions.isEmpty) {
