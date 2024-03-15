@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:apex_vigne/collections/parcel.collection.dart';
 import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/pages/create_and_update_session/create_and_update_session.page.dart';
@@ -16,6 +18,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class ParcelDetailPage extends StatefulWidget {
   final Parcel parcel;
@@ -32,6 +36,81 @@ class ParcelDetailPage extends StatefulWidget {
 }
 
 class _ParcelDetailPageState extends State<ParcelDetailPage> {
+  late TutorialCoachMark tutorialCoachMark;
+  late SharedPreferences prefs;
+  GlobalKey keyTable = GlobalKey();
+
+  @override
+  void initState() {
+    initialTutorial();
+    super.initState();
+  }
+
+  void initialTutorial() async {
+    if (!context.mounted) return;
+
+    prefs = await SharedPreferences.getInstance();
+    bool tutorialLongPressEditSession = prefs.getBool('tutorialLongPressEditSession') ?? true;
+    if ((widget.sessions?.isNotEmpty ?? false) && tutorialLongPressEditSession) {
+      createTutorial();
+      Future.delayed(Duration.zero, showTutorial);
+      prefs.setBool('tutorialLongPressEditSession', false);
+    }
+  }
+
+  void createTutorial() {
+    tutorialCoachMark = TutorialCoachMark(
+      targets: [
+        TargetFocus(
+          identify: "Table",
+          keyTarget: keyTable,
+          contents: [
+            TargetContent(
+              align: ContentAlign.top,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.titleTutoEditSession,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  Text(
+                    AppLocalizations.of(context)!.infoTutoEditSession,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            )
+          ],
+          shape: ShapeLightFocus.RRect,
+          radius: 5,
+          color: Colors.black,
+        ),
+      ],
+      textSkip: AppLocalizations.of(context)!.actionUnderstand,
+      alignSkip: Alignment.topRight,
+      colorShadow: Colors.black,
+      paddingFocus: 10,
+      opacityShadow: 0.5,
+      imageFilter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+      onSkip: () {
+        return true;
+      },
+    );
+  }
+
+  void showTutorial() {
+    tutorialCoachMark.show(context: context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,12 +236,12 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
     }
 
     void updateSession(BuildContext context, Session session) async {
-      final bool isConnected =
-          await AuthenticationService().checkConnection(context);
+      final bool isConnected = await AuthenticationService().checkConnection(context);
 
       if (!context.mounted) {
         return;
       }
+
       if (!isConnected) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -208,6 +287,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         dividerColor: Colors.transparent,
       ),
       child: DataTable(
+        key: keyTable,
         columns: [
           DataColumn(label: Expanded(child: Center(child: Text(AppLocalizations.of(context)!.infoDate, textAlign: TextAlign.center)))),
           DataColumn(

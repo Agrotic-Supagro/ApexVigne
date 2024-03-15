@@ -88,6 +88,11 @@
         "description": ""
     },
 
+    "titleTutoEditSession": "You can edit any sessions !",
+    "@titleTutoEditSession": {
+        "description": ""
+    },
+
 
 
     "subtitleNoSaveParcelOfflineMode": "You cannot create a parcel because you are in disconnected mode",
@@ -260,6 +265,11 @@
 
     "infoTutoEditNumber": "You can edit the number of observations by holding down the counter",
     "@infoTutoEditNumber": {
+        "description": ""
+    },
+
+    "infoTutoEditSession": "By long pressing on one of the sessions in the table, you can modify it",
+    "@infoTutoEditSession": {
         "description": ""
     },
 

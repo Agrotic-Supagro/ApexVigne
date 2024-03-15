@@ -40,12 +40,11 @@ class _CardApexButtonState extends State<CardApexButton> {
     if (!context.mounted) return;
 
     prefs = await SharedPreferences.getInstance();
-    bool isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
-    if (widget.text == AppLocalizations.of(context)!.actionFullGrowth &&
-        isFirstLaunch) {
+    bool tutorialLongPressEditNumber = prefs.getBool('tutorialLongPressEditNumber') ?? true;
+    if (widget.text == AppLocalizations.of(context)!.actionFullGrowth && tutorialLongPressEditNumber) {
       createTutorial();
       Future.delayed(Duration.zero, showTutorial);
-      prefs.setBool('isFirstLaunch', false);
+      prefs.setBool('tutorialLongPressEditNumber', false);
     }
   }
 

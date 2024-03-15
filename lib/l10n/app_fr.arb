@@ -88,6 +88,11 @@
         "description": ""
     },
 
+    "titleTutoEditSession": "Vous pouvez éditer n'importe quelles sessions !",
+    "@titleTutoEditSession": {
+        "description": ""
+    },
+
 
 
     "subtitleNoSaveParcelOfflineMode": "Vous ne pouvez pas créer de parcelle car vous êtes en mode déconnecté",
@@ -260,6 +265,11 @@
 
     "infoTutoEditNumber": "Vous pouvez éditer le nombre d'observations en maintenant le compteur",
     "@infoTutoEditNumber": {
+        "description": ""
+    },
+
+    "infoTutoEditSession": "En appuyant longuement sur une des sessions présentes dans le tableau, vous pouvez la modifier",
+    "@infoTutoEditSession": {
         "description": ""
     },
 
