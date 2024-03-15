@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-double calculateIcApex(
-    int apexFullGrowth, int apexSlowerGrowth, int apexStuntedGrowth) {
+double calculateIcApex(int apexFullGrowth, int apexSlowerGrowth, int apexStuntedGrowth) {
   int sumApex = apexFullGrowth + apexSlowerGrowth + apexStuntedGrowth;
   if (sumApex == 0){
     return 0;

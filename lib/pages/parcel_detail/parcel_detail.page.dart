@@ -228,8 +228,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         dataRowMinHeight: 50.0,
         dataRowMaxHeight: 60.0,
         rows: widget.sessions?.map<DataRow>((session) {
-              final double icApex = calculateIcApex(session.apexFullGrowth,
-                  session.apexSlowerGrowth, session.apexStuntedGrowth);
+              final double icApex = calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth, session.apexStuntedGrowth);
               return DataRow(
                 onLongPress: () => updateSession(context, session),
                 cells: [

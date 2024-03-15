@@ -33,11 +33,12 @@ class _IcApexLineChartState extends State<IcApexLineChart> {
             //double.parse(session.sessionDate.replaceAll("-", "")),
 
             DateTime.parse(session.sessionDate).difference(firstDate).inDays.toDouble(),
-            calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth,
-                session.apexStuntedGrowth),
+            calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth, session.apexStuntedGrowth),
           ),
-        )
-        .toList();
+        ).toList();
+
+      /* Remove parcels mark as pruned */
+      spots.removeWhere((element) => element.y == 0);
 
     return LineChart(
       LineChartData(
