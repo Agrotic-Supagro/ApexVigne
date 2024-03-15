@@ -3,6 +3,7 @@ import 'package:apex_vigne/services/calculations.service.dart';
 import 'package:apex_vigne/utils/format_date.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class IcApexLineChart extends StatefulWidget {
   final List<Session> sessions;
@@ -126,8 +127,15 @@ class _IcApexLineChartState extends State<IcApexLineChart> {
       rightTitles: const AxisTitles(
         sideTitles: SideTitles(showTitles: false),
       ),
-      topTitles: const AxisTitles(
-        sideTitles: SideTitles(showTitles: false),
+      topTitles: AxisTitles(
+        sideTitles: const SideTitles(showTitles: false),
+        axisNameWidget: Align(
+          alignment: Alignment.topLeft,
+          child: Text(
+            AppLocalizations.of(context)!.infoIcApex,
+          ),
+        ),
+        axisNameSize: 30,
       ),
       leftTitles: const AxisTitles(
         sideTitles: SideTitles(

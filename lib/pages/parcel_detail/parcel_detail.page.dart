@@ -65,7 +65,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   width: double.infinity,
-                  height: 250,
+                  height: 280,
                   child: IcApexLineChart(
                     sessions: widget.sessions!.reversed.toList(),
                   ),
