@@ -1,22 +1,23 @@
+import 'package:apex_vigne/collections/session.collection.dart';
+import 'package:apex_vigne/utils/is_pruned.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-double calculateIcApex(int apexFullGrowth, int apexSlowerGrowth, int apexStuntedGrowth) {
-  int sumApex = apexFullGrowth + apexSlowerGrowth + apexStuntedGrowth;
+double calculateIcApex(Session s) {
+  int sumApex = s.apexFullGrowth + s.apexSlowerGrowth + s.apexStuntedGrowth;
   if (sumApex == 0){
     return 0;
   } else {
-    return (apexFullGrowth + (apexSlowerGrowth / 2)) / sumApex;
+    return (s.apexFullGrowth + (s.apexSlowerGrowth / 2)) / sumApex;
   }
 }
 
-String calculateHydricConstraint(int apexFullGrowth, int apexSlowerGrowth, int apexStuntedGrowth, double icApex, BuildContext context) {
-  bool isPruned = apexFullGrowth == 0 && apexSlowerGrowth == 0 && apexStuntedGrowth == 0;
-  int sumApex = apexFullGrowth + apexSlowerGrowth + apexStuntedGrowth;
-  double tauxApexFullGrowth = apexFullGrowth / sumApex * 100;
-  double tauxApexStuntedGrowth = apexStuntedGrowth / sumApex * 100;
+String calculateHydricConstraint(Session s, double icApex, BuildContext context) {
+  int sumApex = s.apexFullGrowth + s.apexSlowerGrowth + s.apexStuntedGrowth;
+  double tauxApexFullGrowth = s.apexFullGrowth / sumApex * 100;
+  double tauxApexStuntedGrowth = s.apexStuntedGrowth / sumApex * 100;
 
-  if (isPruned) {
+  if (isPruned(s)) {
     return AppLocalizations.of(context)!.infoPruned;
   }
   if (icApex >= 0.75) {

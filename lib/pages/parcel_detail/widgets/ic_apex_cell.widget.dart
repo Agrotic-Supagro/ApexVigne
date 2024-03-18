@@ -4,9 +4,11 @@ class IcApexCell extends StatelessWidget {
   const IcApexCell({
     super.key,
     required this.icApex,
+    required this.isPruned
   });
 
   final double icApex;
+  final bool isPruned;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class IcApexCell extends StatelessWidget {
         color: Colors.grey.shade200,
       ),
       child: Text(
-        icApex == 0 ? 'N/A' : icApex.toStringAsFixed(2),
+        isPruned ? 'N/A' : icApex.toStringAsFixed(2),
         style: TextStyle(
           color: Colors.grey.shade600,
           fontWeight: FontWeight.bold,

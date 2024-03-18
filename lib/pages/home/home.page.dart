@@ -302,18 +302,8 @@ class _HomePageState extends State<HomePage> {
                           explicit: true,
                         ),
                       );
-                      icApex = calculateIcApex(
-                        firstSessionNotPruned.apexFullGrowth,
-                        firstSessionNotPruned.apexSlowerGrowth,
-                        firstSessionNotPruned.apexStuntedGrowth,
-                      );
-                      hydricConstraint = calculateHydricConstraint(
-                        firstSessionNotPruned.apexFullGrowth,
-                        firstSessionNotPruned.apexSlowerGrowth,
-                        firstSessionNotPruned.apexStuntedGrowth,
-                        icApex,
-                        context,
-                      );
+                      icApex = calculateIcApex(firstSessionNotPruned);
+                      hydricConstraint = calculateHydricConstraint(firstSessionNotPruned, icApex, context);
                     }
 
                     bool isOnline = currentParcel.id != null;

@@ -14,6 +14,7 @@ import 'package:apex_vigne/shared_widgets/label_apex_hydric_constraint.dart';
 import 'package:apex_vigne/shared_widgets/offline_dialog.dart';
 import 'package:apex_vigne/utils/determine_position.dart';
 import 'package:apex_vigne/utils/format_date.dart';
+import 'package:apex_vigne/utils/is_pruned.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -141,13 +142,8 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                 ),
               const SizedBox(height: 20),
               if (widget.sessions?.isNotEmpty ?? false)
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  width: double.infinity,
-                  height: 280,
-                  child: IcApexLineChart(
-                    sessions: widget.sessions!.reversed.toList(),
-                  ),
+                IcApexLineChart(
+                  sessions: widget.sessions!.reversed.where((element) => !isPruned(element)).toList(),
                 ),
               const SizedBox(height: 20),
               if (widget.sessions?.isNotEmpty ?? false)
@@ -308,30 +304,22 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
         dataRowMinHeight: 50.0,
         dataRowMaxHeight: 60.0,
         rows: widget.sessions?.map<DataRow>((session) {
-              final double icApex = calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth, session.apexStuntedGrowth);
+              final double icApex = calculateIcApex(session);
               return DataRow(
                 onLongPress: () => updateSession(context, session),
                 cells: [
                   DataCell(
-                    Text(formatDate(session.sessionDate, explicit: true),
-                        overflow: TextOverflow.ellipsis),
+                    Text(formatDate(session.sessionDate, explicit: true), overflow: TextOverflow.ellipsis),
                   ),
-                  DataCell(IcApexCell(icApex: icApex)),
+                  DataCell(IcApexCell(icApex: icApex, isPruned: isPruned(session))),
                   DataCell(
                     LabelApexHydricConstraint(
-                      text: calculateHydricConstraint(
-                        session.apexFullGrowth,
-                        session.apexSlowerGrowth,
-                        session.apexStuntedGrowth,
-                        icApex,
-                        context,
-                      ),
+                      text: calculateHydricConstraint(session, icApex, context),
                     ),
                   ),
                   DataCell(
                     Visibility(
-                      visible:
-                          session.notes != null && session.notes!.isNotEmpty,
+                      visible: session.notes != null && session.notes!.isNotEmpty,
                       child: ElevatedApexButton(
                         icon: Icons.article_outlined,
                         callback:

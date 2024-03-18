@@ -22,6 +22,9 @@ class _IcApexLineChartState extends State<IcApexLineChart> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.sessions.isEmpty) {
+      return const Center();
+    }
     firstDate = DateTime.parse(widget.sessions[0].sessionDate);
 
     List<FlSpot> spots = widget.sessions
@@ -34,59 +37,61 @@ class _IcApexLineChartState extends State<IcApexLineChart> {
             //double.parse(session.sessionDate.replaceAll("-", "")),
 
             DateTime.parse(session.sessionDate).difference(firstDate).inDays.toDouble(),
-            calculateIcApex(session.apexFullGrowth, session.apexSlowerGrowth, session.apexStuntedGrowth),
+            calculateIcApex(session),
           ),
         ).toList();
 
-      /* Remove parcels mark as pruned */
-      spots.removeWhere((element) => element.y == 0);
-
-    return LineChart(
-      LineChartData(
-        titlesData: titlesData(spots),
-        gridData:
-            const FlGridData(horizontalInterval: 0.10, drawVerticalLine: false),
-        borderData: FlBorderData(
-          show: true,
-          border: const Border(
-            bottom: BorderSide(
-              color: Color.fromARGB(255, 200, 200, 200),
-              width: 1,
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      width: double.infinity,
+      height: 280,
+      child: LineChart(
+        LineChartData(
+          titlesData: titlesData(spots),
+          gridData:
+              const FlGridData(horizontalInterval: 0.10, drawVerticalLine: false),
+          borderData: FlBorderData(
+            show: true,
+            border: const Border(
+              bottom: BorderSide(
+                color: Color.fromARGB(255, 200, 200, 200),
+                width: 1,
+              ),
+              left: BorderSide(
+                color: Color.fromARGB(255, 200, 200, 200),
+                width: 1,
+              ),
             ),
-            left: BorderSide(
-              color: Color.fromARGB(255, 200, 200, 200),
-              width: 1,
+          ),
+          minY: 0,
+          maxY: 1,
+          minX: spots.first.x,
+          maxX: spots.last.x,
+          lineBarsData: [
+            LineChartBarData(
+              spots: spots,
+              color: Theme.of(context).colorScheme.primary,
+              barWidth: 2,
+              isStrokeCapRound: true,
+            ),
+          ],
+          lineTouchData: LineTouchData(
+            enabled: true,
+            touchTooltipData: LineTouchTooltipData(
+              tooltipBgColor: Theme.of(context).colorScheme.primary,
+              getTooltipItems: (touchedSpots) {
+                return touchedSpots.map((LineBarSpot touchedSpot) {
+                  return LineTooltipItem(
+                    touchedSpot.y.toStringAsFixed(2),
+                    const TextStyle(color: Colors.white),
+                  );
+                }).toList();
+              },
             ),
           ),
         ),
-        minY: 0,
-        maxY: 1,
-        minX: spots.first.x,
-        maxX: spots.last.x,
-        lineBarsData: [
-          LineChartBarData(
-            spots: spots,
-            color: Theme.of(context).colorScheme.primary,
-            barWidth: 2,
-            isStrokeCapRound: true,
-          ),
-        ],
-        lineTouchData: LineTouchData(
-          enabled: true,
-          touchTooltipData: LineTouchTooltipData(
-            tooltipBgColor: Theme.of(context).colorScheme.primary,
-            getTooltipItems: (touchedSpots) {
-              return touchedSpots.map((LineBarSpot touchedSpot) {
-                return LineTooltipItem(
-                  touchedSpot.y.toStringAsFixed(2),
-                  const TextStyle(color: Colors.white),
-                );
-              }).toList();
-            },
-          ),
-        ),
+        duration: const Duration(milliseconds: 250),
       ),
-      duration: const Duration(milliseconds: 250),
     );
   }
 

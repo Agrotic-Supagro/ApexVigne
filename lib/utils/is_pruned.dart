@@ -1,5 +1,5 @@
 import 'package:apex_vigne/collections/session.collection.dart';
 
-bool isPruned(Session session) {
-  return session.apexFullGrowth == 0 && session.apexSlowerGrowth == 0 && session.apexStuntedGrowth == 0;
+bool isPruned(Session s) {
+  return s.apexFullGrowth == 0 && s.apexSlowerGrowth == 0 && s.apexStuntedGrowth == 0;
 }
