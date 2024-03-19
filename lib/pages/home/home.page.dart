@@ -418,20 +418,30 @@ class _HomePageState extends State<HomePage> {
               TextButton(
                 onPressed: () async {
                   if (formKey.currentState!.validate()) {
-                    parcelNameController.text =
-                        toBeginningOfSentenceCase(parcelNameController.text)!;
+                    parcelNameController.text = toBeginningOfSentenceCase(parcelNameController.text)!;
                     final parcel = Parcel()..name = parcelNameController.text;
                     final bool isConnected =
                         await AuthenticationService().checkConnection(context);
                     if (isConnected) {
                       await ParcelsApiService().addParcel(parcel);
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return ParcelDetailPage(
+                              parcel: parcel,
+                              sessions: [],
+                            );
+                          },
+                        ),
+                      );
                     } else {
                       await IsarService().saveParcel(parcel);
+                      Navigator.of(context).pop();
                     }
                     setState(() {
                       IsarService().allParcels;
                     });
-                    Navigator.of(context).pop();
                   }
                 },
                 child: Text(AppLocalizations.of(context)!.actionAdd),
