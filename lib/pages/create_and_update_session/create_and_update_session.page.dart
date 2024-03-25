@@ -35,7 +35,9 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
   final List<int> _counts = [0, 0, 0];
   final List<int> _countsHistory = [];
   late Position _position;
-  bool _positionSaved = false;
+  final int _observationsNeeded = 50;
+  int get _observationsTotal => _counts.reduce((firstValue, secondValue) => firstValue + secondValue);
+  bool get _observationsReached => _observationsTotal >= _observationsNeeded;
   DateTime _selectedDate = DateTime.now();
   String _notesText = '';
   int _stadeIndex = -1;
@@ -217,14 +219,23 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
   }
 
   Expanded _buildCardApexButtons() {
+    bool observationReachedOnce = false;
+
+    void vibrateWhenObservationsIsReached() {
+      if (_observationsReached && !observationReachedOnce) {
+        Vibration.vibrate(duration: 100);
+        observationReachedOnce = true;
+      } else if (!_observationsReached && observationReachedOnce) {
+        observationReachedOnce = false;
+      }
+    }
+
     void incrementCount(int buttonIndex) {
       setState(() {
         _counts[buttonIndex]++;
         _countsHistory.add(buttonIndex);
-        if (_countsHistory.length > 14 && !_positionSaved) {
-          _positionSaved = true;
-        }
       });
+      vibrateWhenObservationsIsReached();
     }
 
     void editCount(int buttonIndex) {
@@ -265,6 +276,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
                     setState(() {
                       _counts[buttonIndex] = newCount;
                     });
+                    vibrateWhenObservationsIsReached();
                   }
                   Navigator.of(context).pop();
                 },
@@ -392,18 +404,11 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         ..stadePhenoId =
             _stadeIndex != -1 ? stadesPheno[_stadeIndex]['id'] : null
         ..deviceHardware = deviceInfo[0]
-        ..deviceSoftware = deviceInfo[1];
-      if (_positionSaved) {
-        session.latitude = _position.latitude;
-        session.longitude = _position.longitude;
-        session.inField = 1;
-      } else {
-        session.latitude = null;
-        session.longitude = null;
-        session.inField = 0;
-      }
-      final bool isConnected =
-          await AuthenticationService().checkConnection(context);
+        ..deviceSoftware = deviceInfo[1]
+        ..latitude = _position.latitude
+        ..longitude = _position.longitude
+        ..inField = 1;
+      final bool isConnected = await AuthenticationService().checkConnection(context);
       if (isConnected) {
         if (widget.session != null) {
           session.id = widget.session!.id;
@@ -418,11 +423,6 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         await IsarService().saveSession(session);
       }
       Navigator.of(context).pop(session);
-    }
-
-    bool conditionFullfilled(){
-      return _counts.reduce((firstValue, secondValue) =>
-                            firstValue + secondValue) >= 50;
     }
 
     /* Build */
@@ -441,10 +441,10 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
               const SizedBox(width: 10),
               Expanded(
                 child: ElevatedApexButton(
-                  text: conditionFullfilled() ? 
-                    AppLocalizations.of(context)!.actionValidateSession : 
-                    '${_counts.reduce((firstValue, secondValue) => firstValue + secondValue)}/50',
-                  callback: conditionFullfilled()
+                  text: _observationsReached
+                      ? AppLocalizations.of(context)!.actionValidateSession
+                      : '$_observationsTotal/$_observationsNeeded',
+                  callback: _observationsReached
                       ? addSession
                       : null,
                   mainButton: true,
