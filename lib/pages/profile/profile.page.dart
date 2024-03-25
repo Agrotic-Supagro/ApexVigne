@@ -32,7 +32,7 @@ class _ProfilPageState extends State<ProfilPage> {
         actions: [
           if (!AuthenticationService().isOnlineState.value)
             _buildOfflineButton(context),
-          _buildShareButton(context),
+          _buildExportButton(context),
           _buildLanguageButton(context),
         ],
       ),
@@ -81,9 +81,9 @@ class _ProfilPageState extends State<ProfilPage> {
     );
   }
 
-  Widget _buildShareButton(BuildContext context) {
+  Widget _buildExportButton(BuildContext context) {
     return IconButton(
-      icon: const Icon(Symbols.share),
+      icon: const Icon(Symbols.download),
       onPressed: () async {
         await sessionsApiService.exportSessions(context);
       },
@@ -159,6 +159,11 @@ class _ProfilPageState extends State<ProfilPage> {
                 ListTileInfo(
                   text: AppLocalizations.of(context)!.infoStructure,
                   info: currentUserProfile.structure,
+                ),
+                Divider(color: Colors.grey[200]),
+                ListTileInfo(
+                  text: AppLocalizations.of(context)!.infoNbObsMin,
+                  info: currentUserProfile.nbObsMin.toString(),
                 ),
               ],
             );

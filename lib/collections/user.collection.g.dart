@@ -32,15 +32,15 @@ const UserSchema = CollectionSchema(
       name: r'id',
       type: IsarType.string,
     ),
-    r'ifvModel': PropertySchema(
-      id: 3,
-      name: r'ifvModel',
-      type: IsarType.long,
-    ),
     r'lastname': PropertySchema(
-      id: 4,
+      id: 3,
       name: r'lastname',
       type: IsarType.string,
+    ),
+    r'nbObsMin': PropertySchema(
+      id: 4,
+      name: r'nbObsMin',
+      type: IsarType.long,
     ),
     r'structure': PropertySchema(
       id: 5,
@@ -99,8 +99,8 @@ void _userSerialize(
   writer.writeString(offsets[0], object.email);
   writer.writeString(offsets[1], object.firstname);
   writer.writeString(offsets[2], object.id);
-  writer.writeLong(offsets[3], object.ifvModel);
-  writer.writeString(offsets[4], object.lastname);
+  writer.writeString(offsets[3], object.lastname);
+  writer.writeLong(offsets[4], object.nbObsMin);
   writer.writeString(offsets[5], object.structure);
 }
 
@@ -114,9 +114,9 @@ User _userDeserialize(
   object.email = reader.readString(offsets[0]);
   object.firstname = reader.readString(offsets[1]);
   object.id = reader.readString(offsets[2]);
-  object.ifvModel = reader.readLong(offsets[3]);
   object.isarId = id;
-  object.lastname = reader.readString(offsets[4]);
+  object.lastname = reader.readString(offsets[3]);
+  object.nbObsMin = reader.readLong(offsets[4]);
   object.structure = reader.readString(offsets[5]);
   return object;
 }
@@ -135,9 +135,9 @@ P _userDeserializeProp<P>(
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
-      return (reader.readLong(offset)) as P;
-    case 4:
       return (reader.readString(offset)) as P;
+    case 4:
+      return (reader.readLong(offset)) as P;
     case 5:
       return (reader.readString(offset)) as P;
     default:
@@ -716,58 +716,6 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     });
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> ifvModelEqualTo(int value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'ifvModel',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<User, User, QAfterFilterCondition> ifvModelGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'ifvModel',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<User, User, QAfterFilterCondition> ifvModelLessThan(
-    int value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'ifvModel',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<User, User, QAfterFilterCondition> ifvModelBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'ifvModel',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
   QueryBuilder<User, User, QAfterFilterCondition> isarIdEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -949,6 +897,58 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     });
   }
 
+  QueryBuilder<User, User, QAfterFilterCondition> nbObsMinEqualTo(int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'nbObsMin',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> nbObsMinGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'nbObsMin',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> nbObsMinLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'nbObsMin',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<User, User, QAfterFilterCondition> nbObsMinBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'nbObsMin',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
   QueryBuilder<User, User, QAfterFilterCondition> structureEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -1121,18 +1121,6 @@ extension UserQuerySortBy on QueryBuilder<User, User, QSortBy> {
     });
   }
 
-  QueryBuilder<User, User, QAfterSortBy> sortByIfvModel() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'ifvModel', Sort.asc);
-    });
-  }
-
-  QueryBuilder<User, User, QAfterSortBy> sortByIfvModelDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'ifvModel', Sort.desc);
-    });
-  }
-
   QueryBuilder<User, User, QAfterSortBy> sortByLastname() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'lastname', Sort.asc);
@@ -1142,6 +1130,18 @@ extension UserQuerySortBy on QueryBuilder<User, User, QSortBy> {
   QueryBuilder<User, User, QAfterSortBy> sortByLastnameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'lastname', Sort.desc);
+    });
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByNbObsMin() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'nbObsMin', Sort.asc);
+    });
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> sortByNbObsMinDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'nbObsMin', Sort.desc);
     });
   }
 
@@ -1195,18 +1195,6 @@ extension UserQuerySortThenBy on QueryBuilder<User, User, QSortThenBy> {
     });
   }
 
-  QueryBuilder<User, User, QAfterSortBy> thenByIfvModel() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'ifvModel', Sort.asc);
-    });
-  }
-
-  QueryBuilder<User, User, QAfterSortBy> thenByIfvModelDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'ifvModel', Sort.desc);
-    });
-  }
-
   QueryBuilder<User, User, QAfterSortBy> thenByIsarId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isarId', Sort.asc);
@@ -1228,6 +1216,18 @@ extension UserQuerySortThenBy on QueryBuilder<User, User, QSortThenBy> {
   QueryBuilder<User, User, QAfterSortBy> thenByLastnameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'lastname', Sort.desc);
+    });
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByNbObsMin() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'nbObsMin', Sort.asc);
+    });
+  }
+
+  QueryBuilder<User, User, QAfterSortBy> thenByNbObsMinDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'nbObsMin', Sort.desc);
     });
   }
 
@@ -1266,16 +1266,16 @@ extension UserQueryWhereDistinct on QueryBuilder<User, User, QDistinct> {
     });
   }
 
-  QueryBuilder<User, User, QDistinct> distinctByIfvModel() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'ifvModel');
-    });
-  }
-
   QueryBuilder<User, User, QDistinct> distinctByLastname(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'lastname', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<User, User, QDistinct> distinctByNbObsMin() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'nbObsMin');
     });
   }
 
@@ -1312,15 +1312,15 @@ extension UserQueryProperty on QueryBuilder<User, User, QQueryProperty> {
     });
   }
 
-  QueryBuilder<User, int, QQueryOperations> ifvModelProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'ifvModel');
-    });
-  }
-
   QueryBuilder<User, String, QQueryOperations> lastnameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'lastname');
+    });
+  }
+
+  QueryBuilder<User, int, QQueryOperations> nbObsMinProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'nbObsMin');
     });
   }
 

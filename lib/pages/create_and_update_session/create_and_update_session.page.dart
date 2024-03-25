@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vibration/vibration.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -35,7 +36,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
   final List<int> _counts = [0, 0, 0];
   final List<int> _countsHistory = [];
   late Position _position;
-  final int _observationsNeeded = 50;
+  late int _observationsNeeded = 50;
   int get _observationsTotal => _counts.reduce((firstValue, secondValue) => firstValue + secondValue);
   bool get _observationsReached => _observationsTotal >= _observationsNeeded;
   DateTime _selectedDate = DateTime.now();
@@ -45,9 +46,15 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
 
   @override
   void initState() {
+    _getNbObsMin();
     _initSessionEditing();
     _checkAndGetLocation();
     super.initState();
+  }
+
+  void _getNbObsMin() async {
+    final prefs = await SharedPreferences.getInstance();
+    _observationsNeeded = prefs.getInt('nbObsMin') ?? 50;
   }
 
   void _initSessionEditing() {

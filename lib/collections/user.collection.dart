@@ -18,5 +18,7 @@ class User {
 
   late String structure;
 
-  late int ifvModel;
+  //late int ifvModel;
+
+  late int nbObsMin;
 }

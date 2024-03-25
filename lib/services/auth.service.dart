@@ -192,6 +192,9 @@ class AuthenticationService {
       final dynamic data = json.decode(response.body);
       final List<dynamic> listData = [];
       listData.add(data);
+      final prefs = await SharedPreferences.getInstance();
+      final nbObsMin = listData[0]['nbObsMin'] ?? 50;
+      prefs.setInt('nbObsMin', nbObsMin);
       await IsarService().saveDataServer('me', listData);
     } else {
       throw Exception('Failed to retrieve user data : ${response.body}');
