@@ -41,6 +41,7 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
   DateTime _selectedDate = DateTime.now();
   String _notesText = '';
   int _stadeIndex = -1;
+  int _inField = 0;
 
   @override
   void initState() {
@@ -235,6 +236,9 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         _counts[buttonIndex]++;
         _countsHistory.add(buttonIndex);
       });
+      if (_countsHistory.length >= 15) {
+        _inField = 1;
+      }
       vibrateWhenObservationsIsReached();
     }
 
@@ -401,13 +405,12 @@ class _CreateUpdateSessionState extends State<CreateUpdateSession> {
         ..apexStuntedGrowth = _counts[2]
         ..parcelId = widget.parcelId
         ..notes = _notesText
-        ..stadePhenoId =
-            _stadeIndex != -1 ? stadesPheno[_stadeIndex]['id'] : null
+        ..stadePhenoId = _stadeIndex != -1 ? stadesPheno[_stadeIndex]['id'] : null
         ..deviceHardware = deviceInfo[0]
         ..deviceSoftware = deviceInfo[1]
         ..latitude = _position.latitude
         ..longitude = _position.longitude
-        ..inField = 1;
+        ..inField = _inField;
       final bool isConnected = await AuthenticationService().checkConnection(context);
       if (isConnected) {
         if (widget.session != null) {

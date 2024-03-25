@@ -227,11 +227,6 @@
         "description": ""
     },
 
-    "infoHydricConstraint": "C.H.",
-    "@infoHydricConstraint": {
-        "description": ""
-    },
-
     "infoNbSessions": "{count, plural, =0{0 sessions} =1{1 session} other{{count} sessions}}",
     "@infoNbSessions": {
         "description": "Le nombre de sessions",
@@ -410,6 +405,16 @@
 
     "infoHydricConstraint": "Contrainte hydrique",
     "@infoHydricConstraint": {
+        "description": ""
+    },
+
+    "infoExportSessionsSuccess": "Les sessions ont été exportées avec succès par email",
+    "@infoExportSessions": {
+        "description": ""
+    },
+
+    "infoExportSessionsFailed": "Une erreur est survenue lors de l'exportation des sessions",
+    "@infoExportSessionsFailed": {
         "description": ""
     },
 

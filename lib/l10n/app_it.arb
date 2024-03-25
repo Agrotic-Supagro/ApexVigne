@@ -227,11 +227,6 @@
         "description": ""
     },
 
-    "infoHydricConstraint": "W.S.",
-    "@infoHydricConstraint": {
-        "description": ""
-    },
-
     "infoNbSessions": "{count, plural, =0{0 sessions} =1{1 session} other{{count} sessions}}",
     "@infoNbSessions": {
         "description": "The number of sessions",
@@ -410,6 +405,15 @@
 
     "infoHydricConstraint": "Water stress",
     "@infoHydricConstraint": {
+        "description": ""
+    },
+
+    "infoExportSessionsSuccess": "The sessions have been successfully exported by email",
+    "@infoExportSessions": {
+        "description": ""
+    },
+    "infoExportSessionsFailed": "An error occurred while exporting the sessions",
+    "@infoExportSessionsFailed": {
         "description": ""
     },
 

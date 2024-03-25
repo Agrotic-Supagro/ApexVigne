@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:apex_vigne/services/isar.service.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:apex_vigne/constants.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SessionsApiService {
   final url = Uri.parse('$apiBaseUrl/sessions');
@@ -42,8 +45,7 @@ class SessionsApiService {
     }
   }
 
-  Future<void> addSession(Session session,
-      {bool offlineSession = false}) async {
+  Future<void> addSession(Session session, {bool offlineSession = false}) async {
     final response = await http.post(url,
         headers: await headers,
         body: jsonEncode(<String, dynamic>{
@@ -68,6 +70,39 @@ class SessionsApiService {
       }
     } else {
       throw Exception('Failed to add session : ${response.body}');
+    }
+  }
+
+  Future<void> exportSessions(BuildContext context) async {
+    final response = await http.get(Uri.parse('$url/export'), headers: await headers);
+
+    if (response.statusCode == 200) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              const Icon(Symbols.check, color: Colors.white),
+              Expanded(child: Text(AppLocalizations.of(context)!.infoExportSessionsSuccess, style: const TextStyle(color: Colors.white))),
+            ],
+          ),
+          backgroundColor: Theme.of(context).primaryColor,
+        ),
+      );
+    } else {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              const Icon(Symbols.error, color: Colors.white),
+              Expanded(child: Text(AppLocalizations.of(context)!.infoExportSessionsFailed, style: const TextStyle(color: Colors.white))),
+            ],
+          ),
+          backgroundColor: Colors.red.shade700,
+        ),
+      );
+      throw Exception('Failed to export sessions : ${response.body}');
     }
   }
 }
