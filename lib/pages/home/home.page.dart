@@ -267,7 +267,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Text(
-                      AppLocalizations.of(context)!.infoHydricConstraint,
+                      AppLocalizations.of(context)!.infoIcApex,
                       style: Theme.of(context).textTheme.labelLarge!.copyWith(
                         color: Theme.of(context).colorScheme.primary,
                       ),

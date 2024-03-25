@@ -48,7 +48,7 @@ class _LabelApexHydricConstraintState extends State<LabelApexHydricConstraint> {
         borderRadius: BorderRadius.circular(10),
         color: bgColor,
       ),
-      child: Text(widget.icApex != null ? widget.icApex! : widget.text, style: TextStyle(color: textColor)),
+      child: Text(widget.icApex != null ? widget.icApex! : widget.text, style: TextStyle(color: textColor, fontWeight: FontWeight.bold)),
     );
   }
 }
