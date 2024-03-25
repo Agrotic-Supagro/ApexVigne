@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LabelApexHydricConstraint extends StatefulWidget {
-  const LabelApexHydricConstraint({super.key, required this.text});
+  const LabelApexHydricConstraint({
+    super.key,
+    required this.text,
+    this.icApex
+  });
 
   final String text;
+  final String? icApex;
 
   @override
   State<LabelApexHydricConstraint> createState() =>
@@ -43,7 +48,7 @@ class _LabelApexHydricConstraintState extends State<LabelApexHydricConstraint> {
         borderRadius: BorderRadius.circular(10),
         color: bgColor,
       ),
-      child: Text(widget.text, style: TextStyle(color: textColor)),
+      child: Text(widget.icApex != null ? widget.icApex! : widget.text, style: TextStyle(color: textColor)),
     );
   }
 }

@@ -312,6 +312,7 @@ class _HomePageState extends State<HomePage> {
                     dynamic trailing = lastSession.isNotEmpty
                         ? LabelApexHydricConstraint(
                             text: hydricConstraint,
+                            icApex: icApex.toStringAsFixed(2),
                           )
                         : null;
 
