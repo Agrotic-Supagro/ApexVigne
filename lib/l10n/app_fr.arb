@@ -323,7 +323,7 @@
         "description": ""
     },
 
-    "infoErrorDisconnected": "Échec de la connection, vous êtes déconnecté",
+    "infoErrorDisconnected": "Échec de la connexion, vous êtes déconnecté",
     "@infoErrorDisconnected": {
         "description": ""
     },
@@ -472,6 +472,21 @@
 
     "actionLogout": "Se déconnecter",
     "@actionLogout": {
+        "description": ""
+    },
+
+    "actionDeleteAccount": "Demander la suppression du compte",
+    "@actionDeleteAccount": {
+        "description": ""
+    },
+
+    "actionDeleteAccountSubject": "Apex Vigne - Demande de suppression de compte",
+    "@actionDeleteAccountSubject": {
+        "description": ""
+    },
+
+    "actionDeleteAccountBody": "Merci de supprimer mon compte svp.",
+    "@actionDeleteAccountBody": {
         "description": ""
     },
 

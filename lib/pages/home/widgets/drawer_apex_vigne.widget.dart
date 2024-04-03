@@ -65,7 +65,7 @@ class DrawerApexVigne extends StatelessWidget {
                   title: Text(AppLocalizations.of(context)!.titleContact),
                   trailing: Icon(Symbols.open_in_new, color: Colors.grey.shade400),
                   onTap: () {
-                    launchMail();
+                    launchMail(subject: 'Apex Vigne');
                   },
                 ),
                 Divider(

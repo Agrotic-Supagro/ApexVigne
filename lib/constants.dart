@@ -2,11 +2,11 @@ import 'package:apex_vigne/services/navigation.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /* Local IP address */
-// const String apiBaseUrl = 'http://192.168.1.118';
+ const String apiBaseUrl = 'http://192.168.1.118';
 // const String apiBaseUrl = 'http://172.17.0.1';
 
 /* Pre Prod */
-const String apiBaseUrl = 'http://veneo5.servadmin.fr:81';
+// const String apiBaseUrl = 'http://veneo5.servadmin.fr:81';
 
 /* Prod */
 // const String apiBaseUrl = '';

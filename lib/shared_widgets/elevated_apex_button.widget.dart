@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 class ElevatedApexButton extends StatelessWidget {
   const ElevatedApexButton(
-      {super.key, this.icon, this.text, this.callback, this.mainButton = false});
+      {super.key, this.icon, this.text, this.callback, this.mainButton = false, this.alertButton = false});
 
   final IconData? icon;
   final String? text;
   final VoidCallback? callback;
   final bool mainButton;
+  final bool alertButton;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,8 @@ class ElevatedApexButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-        backgroundColor: mainButton ? Theme.of(context).colorScheme.primary : null,
-        foregroundColor: mainButton ? Theme.of(context).colorScheme.onPrimary : null
+        backgroundColor: mainButton ? Theme.of(context).colorScheme.primary : (alertButton ? Theme.of(context).colorScheme.error : null),
+        foregroundColor: mainButton ? Theme.of(context).colorScheme.onPrimary : (alertButton ? Theme.of(context).colorScheme.onError : null),
       ),
       child: Builder(
         builder: (context) {

@@ -6,6 +6,7 @@ import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:apex_vigne/shared_widgets/offline_dialog.dart';
+import 'package:apex_vigne/utils/launch_mail.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -21,6 +22,7 @@ class ProfilPage extends StatefulWidget {
 class _ProfilPageState extends State<ProfilPage> {
   final AuthenticationService auth = AuthenticationService();
   final SessionsApiService sessionsApiService = SessionsApiService();
+  late String userEmail;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,35 @@ class _ProfilPageState extends State<ProfilPage> {
             ),
             const SizedBox(height: 20),
             _buildProfilInfo(),
-            LogoutButton(auth: auth),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: ElevatedApexButton(
+                callback: () {
+                  auth.logout(() {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    ));
+                  });
+                },
+                text: AppLocalizations.of(context)!.actionLogout,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: ElevatedApexButton(
+                callback: () {
+                  launchMail(
+                    subject: AppLocalizations.of(context)!.actionDeleteAccountSubject,
+                    body: '${AppLocalizations.of(context)!.actionDeleteAccountBody} : $userEmail',
+                  );
+                },
+                text: AppLocalizations.of(context)!.actionDeleteAccount,
+                alertButton: true,
+              ),
+            ),
           ],
         ),
       ),
@@ -129,6 +159,7 @@ class _ProfilPageState extends State<ProfilPage> {
               );
             }
             final currentUserProfile = snapshot.data!;
+            userEmail = currentUserProfile.email;
 
             return ListView(
               children: <Widget>[
@@ -159,33 +190,6 @@ class _ProfilPageState extends State<ProfilPage> {
               ],
             );
           }),
-    );
-  }
-}
-
-class LogoutButton extends StatelessWidget {
-  const LogoutButton({
-    super.key,
-    required this.auth,
-  });
-
-  final AuthenticationService auth;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: ElevatedApexButton(
-        callback: () {
-          auth.logout(() {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => const LoginPage(),
-            ));
-          });
-        },
-        text: AppLocalizations.of(context)!.actionLogout,
-      ),
     );
   }
 }

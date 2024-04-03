@@ -474,6 +474,21 @@
         "description": ""
     },
 
+    "actionDeleteAccount": "Ask for account deletion",
+    "@actionDeleteAccount": {
+        "description": ""
+    },
+
+    "actionDeleteAccountSubject": "Apex Vigne - Ask for account deletion",
+    "@actionDeleteAccountSubject": {
+        "description": ""
+    },
+
+    "actionDeleteAccountBody": "Could you please delete my account ?",
+    "@actionDeleteAccountBody": {
+        "description": ""
+    },
+
     "actionExport": "Export sessions",
     "@actionExport": {
         "description": ""
