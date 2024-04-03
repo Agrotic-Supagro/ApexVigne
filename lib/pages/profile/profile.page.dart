@@ -32,7 +32,6 @@ class _ProfilPageState extends State<ProfilPage> {
         actions: [
           if (!AuthenticationService().isOnlineState.value)
             _buildOfflineButton(context),
-          _buildExportButton(context),
           _buildLanguageButton(context),
         ],
       ),
@@ -81,15 +80,6 @@ class _ProfilPageState extends State<ProfilPage> {
     );
   }
 
-  Widget _buildExportButton(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Symbols.download),
-      onPressed: () async {
-        await sessionsApiService.exportSessions(context);
-      },
-    );
-  }
-
   Widget _buildLanguageButton(BuildContext context) {
     return PopupMenuButton<String>(
       icon: const Icon(Symbols.language),
@@ -98,18 +88,19 @@ class _ProfilPageState extends State<ProfilPage> {
           ApexVigneApp.of(context)?.changeLanguage(const Locale('fr'));
         } else if (selectedLanguage == 'English') {
           ApexVigneApp.of(context)?.changeLanguage(const Locale('en'));
-        } else if (selectedLanguage == 'Italiano') {
-          ApexVigneApp.of(context)?.changeLanguage(const Locale('it'));
-        } else if (selectedLanguage == 'Español') {
-          ApexVigneApp.of(context)?.changeLanguage(const Locale('es'));
         }
+        // } else if (selectedLanguage == 'Italiano') {
+        //   ApexVigneApp.of(context)?.changeLanguage(const Locale('it'));
+        // } else if (selectedLanguage == 'Español') {
+        //   ApexVigneApp.of(context)?.changeLanguage(const Locale('es'));
+        // }
       },
       itemBuilder: (BuildContext context) {
         return [
           'Français',
           'English',
-          'Italiano',
-          'Española',
+          // 'Italiano',
+          // 'Español',
         ].map((String language) {
           return PopupMenuItem<String>(
             value: language,

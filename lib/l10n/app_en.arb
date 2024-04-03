@@ -474,6 +474,11 @@
         "description": ""
     },
 
+    "actionExport": "Export sessions",
+    "@actionExport": {
+        "description": ""
+    },
+
     "actionStayOffline": "Staying disconnected",
     "@actionStayOffline": {
         "description": ""

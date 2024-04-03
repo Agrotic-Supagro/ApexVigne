@@ -74,6 +74,24 @@ class SessionsApiService {
   }
 
   Future<void> exportSessions(BuildContext context) async {
+    final bool isConnected = await AuthenticationService().checkConnection(context);
+
+    if (!isConnected) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              const Icon(Symbols.error, color: Colors.white),
+              Expanded(child: Text(AppLocalizations.of(context)!.infoOfflineMode, style: const TextStyle(color: Colors.white))),
+            ],
+          ),
+          backgroundColor: Colors.red.shade700,
+        )
+      );
+      return;
+    }
+
     final response = await http.get(Uri.parse('$url/export'), headers: await headers);
 
     if (response.statusCode == 200) {

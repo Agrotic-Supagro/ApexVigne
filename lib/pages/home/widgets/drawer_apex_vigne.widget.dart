@@ -1,5 +1,8 @@
 import 'package:apex_vigne/pages/about/about.page.dart';
 import 'package:apex_vigne/pages/profile/profile.page.dart';
+import 'package:apex_vigne/services/auth.service.dart';
+import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
+import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:apex_vigne/utils/launch_mail.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -83,6 +86,23 @@ class DrawerApexVigne extends StatelessWidget {
                     );
                   },
                 ),
+                Divider(
+                  color: Colors.grey.shade300,
+                  indent: 10.0,
+                  endIndent: 30.0,
+                  height: 10.0,
+                ),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: ElevatedApexButton(
+                    callback: () async {
+                      final SessionsApiService sessionsApiService = SessionsApiService();
+                      await sessionsApiService.exportSessions(context);
+                    },
+                    text: AppLocalizations.of(context)!.actionExport,
+                  )
+                )
               ],
             ),
           ),

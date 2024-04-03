@@ -475,6 +475,11 @@
         "description": ""
     },
 
+    "actionExport": "Exporter les sessions",
+    "@actionExport": {
+        "description": ""
+    },
+
     "actionStayOffline": "Rester déconnecté",
     "@actionStayOffline": {
         "description": ""
