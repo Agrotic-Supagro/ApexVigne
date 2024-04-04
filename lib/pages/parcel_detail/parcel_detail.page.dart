@@ -451,6 +451,7 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
                 widget.sessions!.add(session);
                 widget.sessions!.sort((a, b) => DateTime.parse(b.sessionDate)
                     .compareTo(DateTime.parse(a.sessionDate)));
+                initialTutorial();
               });
             }
           },
