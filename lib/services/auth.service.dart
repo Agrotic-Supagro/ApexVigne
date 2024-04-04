@@ -133,7 +133,7 @@ class AuthenticationService {
 
   Future<String?> login(LoginData data) async {
     final response = await http
-        .post(Uri.parse('$AppConfig.apiBaseUrl/login'),
+        .post(Uri.parse('${AppConfig.apiBaseUrl}/login'),
             headers: {"Content-Type": "application/json"},
             body: json.encode({
               'email': data.name,
@@ -182,7 +182,7 @@ class AuthenticationService {
   }
 
   Future<void> getCurrentUserProfile() async {
-    final url = Uri.parse('$AppConfig.apiBaseUrl/me');
+    final url = Uri.parse('${AppConfig.apiBaseUrl}/me');
     final response = await http.get(url, headers: {
       'Authorization': 'Bearer ${await token}',
       'Content-Type': 'application/json',
@@ -210,7 +210,7 @@ class AuthenticationService {
       jsonData[key] = value;
     });
     final response = await http
-        .post(Uri.parse('$AppConfig.apiBaseUrl/signup'),
+        .post(Uri.parse('${AppConfig.apiBaseUrl}/signup'),
             headers: {"Content-Type": "application/json"},
             body: json.encode(jsonData))
         .timeout(const Duration(seconds: 20), onTimeout: () {

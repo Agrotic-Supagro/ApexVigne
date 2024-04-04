@@ -6,7 +6,7 @@ import 'package:apex_vigne/services/isar.service.dart';
 import 'package:http/http.dart' as http;
 
 class ParcelsApiService {
-  final url = Uri.parse('$AppConfig.apiBaseUrl/parcels');
+  final url = Uri.parse('${AppConfig.apiBaseUrl}/parcels');
   Future<Map<String, String>> get headers async => {
         'Authorization': 'Bearer ${await AuthenticationService().token}',
         'Content-Type': 'application/json',

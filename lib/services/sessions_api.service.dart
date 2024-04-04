@@ -9,7 +9,7 @@ import 'package:material_symbols_icons/symbols.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SessionsApiService {
-  final url = Uri.parse('$AppConfig.apiBaseUrl/sessions');
+  final url = Uri.parse('${AppConfig.apiBaseUrl}/sessions');
   Future<Map<String, String>> get headers async => {
         'Authorization': 'Bearer ${await AuthenticationService().token}',
         'Content-Type': 'application/json',
