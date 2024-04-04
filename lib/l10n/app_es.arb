@@ -6,24 +6,24 @@
 
 
 
-    "tooltipIcApex": "iC-Apex est l'indice de croissance végétatif. Il varie entre 1 (pleine croissance) et 0 (croissance arrêtée)",
+    "tooltipIcApex": "iC-Apex est l'indice de croissance végétatif. Il varie entre 1 (pleine croissance) et 0 (croissance arrêtée).",
     "@tooltipIcApex": {
         "description": ""
     },
 
-    "tooltipHydricConstraint": "Water stress",
+    "tooltipHydricConstraint": "Contrainte hydrique",
     "@tooltipHydricConstraint": {
         "description": ""
     },
 
 
 
-    "titleHome": "Parcels",
+    "titleHome": "Parcelles",
     "@titleHome": {
         "description": ""
     },
 
-    "titleAddParcel": "Add a parcel",
+    "titleAddParcel": "Ajouter une parcelle",
     "@titleAddParcel": {
         "description": ""
     },
@@ -33,76 +33,76 @@
         "description": ""
     },
 
-    "titleEditSession": "Editing the session",
+    "titleEditSession": "Modification de la session",
     "@titleEditSession": {
         "description": ""
     },
 
-    "titlePrunedParcel": "Pruned the parcel",
+    "titlePrunedParcel": "Écimer la parcelle",
     "@titlePrunedParcel": {
         "description": ""
     },
 
-    "titleNewSession": "New session",
+    "titleNewSession": "Nouvelle session",
     "@titleNewSession": {
         "description": ""
     },
 
-    "titleProfile": "Profile",
+    "titleProfile": "Profil",
     "@titleProfile": {
         "description": ""
     },
 
-    "titleStadePheno": "Phenological stages",
+    "titleStadePheno": "Stades phénologiques",
     "@titleStadePheno": {
         "description": ""
     },
 
-    "titleDisconnected": "You are disconnected",
+    "titleDisconnected": "Vous êtes déconnecté",
     "@titleDisconnected": {
         "description": ""
     },
 
-    "titleAbout": "About us",
+    "titleAbout": "À propos",
     "@titleAbout": {
         "description": ""
     },
 
-    "titleContact": "Contact us",
+    "titleContact": "Nous contacter",
     "@titleContact": {
         "description": ""
     },
 
-    "titleLeaveSession": "Leave the session",
+    "titleLeaveSession": "Quitter la session",
     "@titleLeaveSession": {
         "description": ""
     },
 
-    "titleEditNumber": "Edit number",
+    "titleEditNumber": "Éditer le nombre",
     "@titleEditNumber": {
         "description": ""
     },
 
-    "titleTutoEditNumber": "Change the number at any time !!",
+    "titleTutoEditNumber": "Changer le nombre à tout moment !",
     "@titleTutoEditNumber": {
         "description": ""
     },
 
-    "titleTutoEditSession": "You can edit any sessions !",
+    "titleTutoEditSession": "Vous pouvez éditer n'importe quelles sessions !",
     "@titleTutoEditSession": {
         "description": ""
     },
 
 
 
-    "subtitleNoSaveParcelOfflineMode": "You cannot create a parcel because you are in disconnected mode",
+    "subtitleNoSaveParcelOfflineMode": "Vous ne pouvez pas créer de parcelle car vous êtes en mode déconnecté.",
     "@subtitleNoSaveParcelOfflineMode": {
         "description": ""
     },
 
 
 
-    "hintParcelName": "Parcel name",
+    "hintParcelName": "Nom de la parcelle",
     "@hintParcelName": {
         "description": ""
     },
@@ -112,36 +112,36 @@
         "description": ""
     },
 
-    "hintPassword": "Password",
+    "hintPassword": "Mot de passe",
     "@hintPassword": {
         "description": ""
     },
 
-    "hintConfirmPassword": "Confirm password",
+    "hintConfirmPassword": "Confirmer le mot de passe",
     "@hintConfirmPassword": {
         "description": ""
     },
 
-    "hintWriteMessage": "Write your message here...",
+    "hintWriteMessage": "Écrivez votre message ici...",
     "@hintWriteMessage": {
         "description": ""
     },
 
-    "hintWriteHere": "Write here...",
+    "hintWriteHere": "Écrivez ici...",
     "@hintWriteHere": {
         "description": ""
     },
 
 
 
-    "validatorParcelName": "Please enter a parcel name",
+    "validatorParcelName": "Veuillez entrer un nom de parcelle",
     "@validatorParcelName": {
         "description": ""
     },
 
 
 
-    "infoLoading": "Loading...",
+    "infoLoading": "Chargement...",
     "@infoLoading": {
         "description": ""
     },
@@ -151,68 +151,68 @@
         "description": ""
     },
 
-    "infoConnectServer": "Connection to the server...",
+    "infoConnectServer": "Connexion au serveur...",
     "@infoConnectServer": {
         "description": ""
     },
 
-    "infoOfflineMode": "Launch in disconnected mode...",
+    "infoOfflineMode": "Lancemenent en mode déconnecté...",
     "@infoOfflineMode": {
         "description": ""
     },
 
-    "infoAuthRequired": "Authentication required...",
+    "infoAuthRequired": "Authentification requise...",
     "@infoAuthRequired": {
         "description": ""
     },
 
-    "infoUserProfileLoading": "Loading user profil...",
+    "infoUserProfileLoading": "Chargement des données utilisateur...",
     "@infoUserProfileLoading": {
         "description": ""
     },
 
-    "infoParcelsLoading": "Loading parcels...",
+    "infoParcelsLoading": "Chargement des parcelles...",
     "@infoParcelsLoading": {
         "description": ""
     },
 
-    "infoSessionsLoading": "Loading sessions...",
+    "infoSessionsLoading": "Chargement des sessions...",
     "@infoSessionsLoading": {
         "description": ""
     },
 
-    "infoSendParcelServer": "Sending parcels to the server...",
+    "infoSendParcelServer": "Envoi des parcelles au serveur...",
     "@infoSendParcelServer": {
         "description": ""
     },
 
-    "infoSendSessionServer": "Sending sessions to the server...",
+    "infoSendSessionServer": "Envoi des sessions au serveur...",
     "@infoSendSessionServer": {
         "description": ""
     },
 
-    "infoLastSessionDate": "Last session on {sessionDate}",
+    "infoLastSessionDate": "Dernière session le {sessionDate}",
     "@infoLastSessionDate": {
         "description": "",
         "placeholders": {
             "sessionDate": {
               "type": "String",
-              "example": "May 20"
+              "example": "20 mai"
             }
           }
     },
 
-    "infoNoParcels": "No parcels...",
+    "infoNoParcels": "Aucune parcelle...",
     "@infoNoParcels": {
         "description": ""
     },
 
-    "infoNoSessionInParcel": "No session for this parcel...",
+    "infoNoSessionInParcel": "Aucune session pour cette parcelle...",
     "@infoNoSessionInParcel": {
         "description": ""
     },
 
-    "infoHaveToRequired": "You must be logged in to modify a session",
+    "infoHaveToRequired": "Vous devez être connecté pour modifier une session",
     "@infoHaveToRequired": {
         "description": ""
     },
@@ -229,7 +229,7 @@
 
     "infoNbSessions": "{count, plural, =0{0 sessions} =1{1 session} other{{count} sessions}}",
     "@infoNbSessions": {
-        "description": "The number of sessions",
+        "description": "Le nombre de sessions",
         "placeholders": {
             "count": {
                 "type": "num",
@@ -238,52 +238,52 @@
         }
     },
 
-    "infoConfirmPrunedParcel": "Are you sure you want to mark the parcel as pruned ?",
+    "infoConfirmPrunedParcel": "Êtes-vous sûr de vouloir noter la parcelle comme étant écimée ?",
     "@infoConfirmPrunedParcel": {
         "description": ""
     },
 
-    "infoExitSession": "The session will not be saved",
+    "infoExitSession": "La session ne sera pas sauvegardée",
     "@infoExitSession": {
         "description": ""
     },
 
-    "infoChoiceStade": "Choice of stade",
+    "infoChoiceStade": "Choix du stade",
     "@infoChoiceStade": {
         "description": ""
     },
 
-    "infoNumber": "Number",
+    "infoNumber": "Nombre",
     "@infoNumber": {
         "description": ""
     },
 
-    "infoTutoEditNumber": "You can edit the number of observations by holding down the counter",
+    "infoTutoEditNumber": "Vous pouvez éditer le nombre d'observations en maintenant le compteur",
     "@infoTutoEditNumber": {
         "description": ""
     },
 
-    "infoTutoEditSession": "By long pressing on one of the sessions in the table, you can modify it",
+    "infoTutoEditSession": "En appuyant longuement sur une des sessions présentes dans le tableau, vous pouvez la modifier",
     "@infoTutoEditSession": {
         "description": ""
     },
 
-    "infoAccount": "Account informations",
+    "infoAccount": "Information du compte",
     "@infoAccount": {
         "description": ""
     },
 
-    "infoErrorProfileInfo": "An error has occurred while retrieving your information",
+    "infoErrorProfileInfo": "Une erreur est survenue lors de la récupération de vos informations",
     "@infoErrorProfileInfo": {
         "description": ""
     },
 
-    "infoFirstname": "Firstname",
+    "infoFirstname": "Prénom",
     "@infoFirstname": {
         "description": ""
     },
 
-    "infoLastname": "Lastname",
+    "infoLastname": "Nom",
     "@infoLastname": {
         "description": ""
     },
@@ -313,239 +313,240 @@
         "description": ""
     },
 
-    "infoSectionPartners": "Partners",
+    "infoSectionPartners": "Partenaires",
     "@infoSectionPartners": {
         "description": ""
     },
 
-    "infoConnected": "You are connected",
+    "infoConnected": "Vous êtes connecté",
     "@infoConnected": {
         "description": ""
     },
 
-    "infoErrorDisconnected": "Connection failed, you are disconnected",
+    "infoErrorDisconnected": "Échec de la connexion, vous êtes déconnecté",
     "@infoErrorDisconnected": {
         "description": ""
     },
 
-    "infoSyncData": "Synchronising data...",
+    "infoSyncData": "Synchronisation des données...",
     "@infoSyncData": {
         "description": ""
     },
 
-    "infoInvalidEmailOrPassword": "Invalid email or password",
+    "infoInvalidEmailOrPassword": "Email ou mot de passe invalide",
     "@infoInvalidEmailOrPassword": {
         "description": ""
     },
 
-    "infoErrorLogin": "Connection error",
+    "infoErrorLogin": "Erreur de connexion",
     "@infoErrorLogin": {
         "description": ""
     },
 
-    "infoErrorSignup": "Signup error",
+    "infoErrorSignup": "Erreur lors de la création du compte",
     "@infoErrorSignup": {
         "description": ""
     },
 
-    "infoPruned": "Pruned",
+    "infoPruned": "Écimée",
     "@infoPruned": {
         "description": ""
     },
 
-    "infoAbsent": "Absent",
-    "@infoAbsent": {
+    "infoIFV0": "Absente",
+    "@infoIFV0": {
         "description": ""
     },
 
-    "infoModerate": "Moderate",
-    "@infoModerate": {
+    "infoIFV1": "Modérée",
+    "@infoIFV1": {
         "description": ""
     },
 
-    "infoLow": "Low",
-    "@infoLow": {
+    "infoIFV2": "Forte",
+    "@infoIFV2": {
         "description": ""
     },
 
-    "infoSevere": "Severe",
-    "@infoSevere": {
+    "infoIFV3": "Sévère",
+    "@infoIFV3": {
         "description": ""
     },
 
-    "infoWhyOffline": "This may be due to a poor internet connection or server maintenance.",
+    "infoWhyOffline": "Celà peut être dû à une mauvaise connexion internet ou à une maintenance du serveur.",
     "@infoWhyOffline": {
         "description": ""
     },
 
-    "infoLocationRequired": "You need to authorise localisation to be able to create a session",
+    "infoLocationRequired": "Il faut autoriser la localisation pour pouvoir créer une session",
     "@infoLocationRequired": {
         "description": ""
     },
 
-    "infoEnableLocationSystem": "You need to authorise location in your phone settings to be able to create a session",
+    "infoEnableLocationSystem": "Il faut autoriser la localisation dans les paramètres de votre téléphone pour pouvoir créer une session",
     "@infoEnableLocationSystem": {
         "description": ""
     },
 
-    "infoLocationDisabled": "The location on your phone is not enabled",
+    "infoLocationDisabled": "La localisation sur votre téléphone n'est pas activé",
     "@infoLocationDisabled": {
         "description": ""
     },
 
-    "infoSignUpFormDescription": "Please fill in this form to complete the signup",
+    "infoSignUpFormDescription": "Merci de compléter ce formulaire pour confirmer la création du compte",
     "@infoSignUpFormDescription": {
         "description": ""
     },
 
-    "infoConfirmPasswordError": "Passwords don't match",
+    "infoConfirmPasswordError": "Les mots de passe ne sont pas identiques.",
     "@infoConfirmPasswordError": {
         "description": ""
     },
 
-    "infoParcelName": "Parcel name",
+    "infoParcelName": "Nom de la parcelle",
     "@infoParcelName": {
         "description": ""
     },
 
-    "infoHydricConstraint": "Water stress",
+    "infoHydricConstraint": "Contrainte hydrique",
     "@infoHydricConstraint": {
         "description": ""
     },
 
-    "infoExportSessionsSuccess": "The sessions have been successfully exported by email",
+    "infoExportSessionsSuccess": "Les sessions ont été exportées avec succès par email",
     "@infoExportSessions": {
         "description": ""
     },
-    "infoExportSessionsFailed": "An error occurred while exporting the sessions",
+
+    "infoExportSessionsFailed": "Une erreur est survenue lors de l'exportation des sessions",
     "@infoExportSessionsFailed": {
         "description": ""
     },
 
 
 
-    "actionCancel": "Cancel",
+    "actionCancel": "Annuler",
     "@actionCancel": {
         "description": ""
     },
 
-    "actionClose": "Close",
+    "actionClose": "Fermer",
     "@actionClose": {
         "description": ""
     },
 
-    "actionAdd": "Add",
+    "actionAdd": "Ajouter",
     "@actionAdd": {
         "description": ""
     },
 
-    "actionLogin": "Login",
+    "actionLogin": "Se connecter",
     "@actionLogin": {
         "description": ""
     },
 
-    "actionSignup": "Signup",
+    "actionSignup": "Créer un compte",
     "@actionSignup": {
         "description": ""
     },
 
-    "actionForgotPassword": "Forgot password",
+    "actionForgotPassword": "Mot de passe oublié",
     "@actionForgotPassword": {
         "description": ""
     },
 
-    "actionConfirm": "Confirm",
+    "actionConfirm": "Confirmer",
     "@actionConfirm": {
         "description": ""
     },
 
-    "actionGoBack": "Go back",
+    "actionGoBack": "Retour",
     "@actionGoBack": {
         "description": ""
     },
 
-    "actionNewSession": "New Session",
+    "actionNewSession": "Nouvelle session",
     "@actionNewSession": {
         "description": ""
     },
 
-    "actionLogout": "Logout",
+    "actionLogout": "Se déconnecter",
     "@actionLogout": {
         "description": ""
     },
 
-    "actionDeleteAccount": "Ask for account deletion",
+    "actionDeleteAccount": "Demander la suppression du compte",
     "@actionDeleteAccount": {
         "description": ""
     },
 
-    "actionDeleteAccountSubject": "Apex Vigne - Ask for account deletion",
+    "actionDeleteAccountSubject": "Apex Vigne - Demande de suppression de compte",
     "@actionDeleteAccountSubject": {
         "description": ""
     },
 
-    "actionDeleteAccountBody": "Could you please delete my account ?",
+    "actionDeleteAccountBody": "Merci de supprimer mon compte svp.",
     "@actionDeleteAccountBody": {
         "description": ""
     },
 
-    "actionExport": "Export sessions",
+    "actionExport": "Exporter les sessions",
     "@actionExport": {
         "description": ""
     },
 
-    "actionStayOffline": "Staying disconnected",
+    "actionStayOffline": "Rester déconnecté",
     "@actionStayOffline": {
         "description": ""
     },
 
-    "actionGoOnline": "Try to connect",
+    "actionGoOnline": "Se connecter",
     "@actionGoOnline": {
         "description": ""
     },
 
-    "actionSend": "Send",
+    "actionSend": "Envoyer",
     "@actionSend": {
         "description": ""
     },
 
-    "actionSave": "Save",
+    "actionSave": "Sauvegarder",
     "@actionSave": {
         "description": ""
     },
 
-    "actionFullGrowth": "Full growth",
+    "actionFullGrowth": "Pleine croissance",
     "@actionFullGrowth": {
         "description": ""
     },
 
-    "actionSlowerGrowth": "Slower growth",
+    "actionSlowerGrowth": "Croissance ralentie",
     "@actionSlowerGrowth": {
         "description": ""
     },
 
-    "actionStuntedGrowth": "Stunted growth",
+    "actionStuntedGrowth": "Arrêt de croissance",
     "@actionStuntedGrowth": {
         "description": ""
     },
 
-    "actionValidateSession": "Finish",
+    "actionValidateSession": "Terminer",
     "@actionValidateSession": {
         "description": ""
     },
 
-    "actionUnderstand": "I've got it !",
+    "actionUnderstand": "J'ai compris !",
     "@actionUnderstand": {
         "description": ""
     }
 
 ,
-    "sortByMostRecent": "From the most recent to the oldest",
+    "sortByMostRecent": "Du plus récent au plus ancien",
     "@sortByMostRecent": {
         "description": ""
     },
 
-    "sortByOldest": "From the oldest to the most recent",
+    "sortByOldest": "Du plus ancien au plus récent",
     "@sortByOldest": {
         "description": ""
     },
@@ -560,7 +561,7 @@
         "description": ""
     },
 
-    "sortByNearest": "Nearest position",
+    "sortByNearest": "Position la plus proche",
     "@sortByNearest": {
         "description": ""
     },

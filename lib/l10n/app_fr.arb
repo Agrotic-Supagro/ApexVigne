@@ -6,7 +6,7 @@
 
 
 
-    "tooltipIcApex": "iC-Apex est l'indice de croissance végétatif. Il varie entre 1 (pleine croissance) et 0 (croissance arrêtée)",
+    "tooltipIcApex": "iC-Apex est l'indice de croissance végétatif. Il varie entre 1 (pleine croissance) et 0 (croissance arrêtée).",
     "@tooltipIcApex": {
         "description": ""
     },
@@ -83,7 +83,7 @@
         "description": ""
     },
 
-    "titleTutoEditNumber": "Changer le nombre à tout moment !!",
+    "titleTutoEditNumber": "Changer le nombre à tout moment !",
     "@titleTutoEditNumber": {
         "description": ""
     },
@@ -95,7 +95,7 @@
 
 
 
-    "subtitleNoSaveParcelOfflineMode": "Vous ne pouvez pas créer de parcelle car vous êtes en mode déconnecté",
+    "subtitleNoSaveParcelOfflineMode": "Vous ne pouvez pas créer de parcelle car vous êtes en mode déconnecté.",
     "@subtitleNoSaveParcelOfflineMode": {
         "description": ""
     },
@@ -353,23 +353,23 @@
         "description": ""
     },
 
-    "infoAbsent": "Absente",
-    "@infoAbsent": {
+    "infoIFV0": "Absente",
+    "@infoIFV0": {
         "description": ""
     },
 
-    "infoModerate": "Modérée",
-    "@infoModerate": {
+    "infoIFV1": "Modérée",
+    "@infoIFV1": {
         "description": ""
     },
 
-    "infoLow": "Faible",
-    "@infoLow": {
+    "infoIFV2": "Forte",
+    "@infoIFV2": {
         "description": ""
     },
 
-    "infoSevere": "Sévère",
-    "@infoSevere": {
+    "infoIFV3": "Sévère",
+    "@infoIFV3": {
         "description": ""
     },
 

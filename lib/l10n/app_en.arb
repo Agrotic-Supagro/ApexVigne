@@ -18,12 +18,12 @@
 
 
 
-    "titleHome": "Parcels",
+    "titleHome": "Plots",
     "@titleHome": {
         "description": ""
     },
 
-    "titleAddParcel": "Add a parcel",
+    "titleAddParcel": "Add a plot",
     "@titleAddParcel": {
         "description": ""
     },
@@ -38,7 +38,7 @@
         "description": ""
     },
 
-    "titlePrunedParcel": "Pruned the parcel",
+    "titlePrunedParcel": "Pruned the plot",
     "@titlePrunedParcel": {
         "description": ""
     },
@@ -83,7 +83,7 @@
         "description": ""
     },
 
-    "titleTutoEditNumber": "Change the number at any time !!",
+    "titleTutoEditNumber": "Change the number at any time !",
     "@titleTutoEditNumber": {
         "description": ""
     },
@@ -95,14 +95,14 @@
 
 
 
-    "subtitleNoSaveParcelOfflineMode": "You cannot create a parcel because you are in disconnected mode",
+    "subtitleNoSaveParcelOfflineMode": "You cannot create a plot because you are in disconnected mode",
     "@subtitleNoSaveParcelOfflineMode": {
         "description": ""
     },
 
 
 
-    "hintParcelName": "Parcel name",
+    "hintParcelName": "Plot name",
     "@hintParcelName": {
         "description": ""
     },
@@ -134,7 +134,7 @@
 
 
 
-    "validatorParcelName": "Please enter a parcel name",
+    "validatorParcelName": "Please enter a plot name",
     "@validatorParcelName": {
         "description": ""
     },
@@ -171,7 +171,7 @@
         "description": ""
     },
 
-    "infoParcelsLoading": "Loading parcels...",
+    "infoParcelsLoading": "Loading plots...",
     "@infoParcelsLoading": {
         "description": ""
     },
@@ -181,7 +181,7 @@
         "description": ""
     },
 
-    "infoSendParcelServer": "Sending parcels to the server...",
+    "infoSendParcelServer": "Sending plots to the server...",
     "@infoSendParcelServer": {
         "description": ""
     },
@@ -202,12 +202,12 @@
           }
     },
 
-    "infoNoParcels": "No parcels...",
+    "infoNoParcels": "No plots...",
     "@infoNoParcels": {
         "description": ""
     },
 
-    "infoNoSessionInParcel": "No session for this parcel...",
+    "infoNoSessionInParcel": "No session for this plot...",
     "@infoNoSessionInParcel": {
         "description": ""
     },
@@ -238,7 +238,7 @@
         }
     },
 
-    "infoConfirmPrunedParcel": "Are you sure you want to mark the parcel as pruned ?",
+    "infoConfirmPrunedParcel": "Are you sure you want to mark the plot as pruned ?",
     "@infoConfirmPrunedParcel": {
         "description": ""
     },
@@ -353,23 +353,23 @@
         "description": ""
     },
 
-    "infoAbsent": "Absent",
-    "@infoAbsent": {
+    "infoIFV0": "Absent",
+    "@infoIFV0": {
         "description": ""
     },
 
-    "infoModerate": "Moderate",
-    "@infoModerate": {
+    "infoIFV1": "Moderate",
+    "@infoIFV1": {
         "description": ""
     },
 
-    "infoLow": "Low",
-    "@infoLow": {
+    "infoIFV2": "Strong",
+    "@infoIFV2": {
         "description": ""
     },
 
-    "infoSevere": "Severe",
-    "@infoSevere": {
+    "infoIFV3": "Strict",
+    "@infoIFV3": {
         "description": ""
     },
 
@@ -403,7 +403,7 @@
         "description": ""
     },
 
-    "infoParcelName": "Parcel name",
+    "infoParcelName": "Plot name",
     "@infoParcelName": {
         "description": ""
     },

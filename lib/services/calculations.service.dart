@@ -20,12 +20,13 @@ String calculateHydricConstraint(Session s, double icApex, BuildContext context)
   if (isPruned(s)) {
     return AppLocalizations.of(context)!.infoPruned;
   }
-  if (icApex >= 0.75) {
-    return AppLocalizations.of(context)!.infoAbsent;
-  } else if (tauxApexFullGrowth >= 5) {
-    return AppLocalizations.of(context)!.infoModerate;
-  } else if (tauxApexStuntedGrowth <= 90) {
-    return AppLocalizations.of(context)!.infoLow;
+  if (icApex > 0.75) {
+    return AppLocalizations.of(context)!.infoIFV0;
+  } else if (tauxApexFullGrowth > 5) {
+    return AppLocalizations.of(context)!.infoIFV1;
+  } else if (tauxApexStuntedGrowth < 90) {
+    return AppLocalizations.of(context)!.infoIFV2;
+  } else {
+    return AppLocalizations.of(context)!.infoIFV3;
   }
-  return AppLocalizations.of(context)!.infoSevere;
 }

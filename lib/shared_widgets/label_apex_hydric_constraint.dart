@@ -24,16 +24,16 @@ class _LabelApexHydricConstraintState extends State<LabelApexHydricConstraint> {
     if (widget.text == AppLocalizations.of(context)!.infoPruned) {
       textColor = const Color(0xFF707070);
       bgColor = const Color(0xFFE8E8E8);
-    } else if (widget.text == AppLocalizations.of(context)!.infoSevere) {
+    } else if (widget.text == AppLocalizations.of(context)!.infoIFV3) {
       textColor = const Color(0xFFCC5E52);
       bgColor = const Color(0xFFFAEAE8);
-    } else if (widget.text == AppLocalizations.of(context)!.infoModerate) {
+    } else if (widget.text == AppLocalizations.of(context)!.infoIFV2) {
       textColor = const Color(0xFFCCB152);
       bgColor = const Color(0xFFFAF6E8);
-    } else if (widget.text == AppLocalizations.of(context)!.infoLow) {
+    } else if (widget.text == AppLocalizations.of(context)!.infoIFV1) {
       textColor = const Color(0xFFCCC852);
       bgColor = const Color(0xFFFAF9E8);
-    } else if (widget.text == AppLocalizations.of(context)!.infoAbsent) {
+    } else if (widget.text == AppLocalizations.of(context)!.infoIFV0) {
       textColor = const Color(0xFFA7CC52);
       bgColor = const Color(0xFFF5FAE8);
     }
