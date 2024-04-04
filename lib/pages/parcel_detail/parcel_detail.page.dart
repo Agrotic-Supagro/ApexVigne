@@ -282,57 +282,60 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
       data: Theme.of(context).copyWith(
         dividerColor: Colors.transparent,
       ),
-      child: DataTable(
-        key: keyTable,
-        columns: [
-          DataColumn(label: Expanded(child: Center(child: Text(AppLocalizations.of(context)!.infoDate, textAlign: TextAlign.center)))),
-          DataColumn(
-            label: Expanded(child: Center(child: Text(AppLocalizations.of(context)!.infoIcApex, textAlign: TextAlign.center))),
-            tooltip: AppLocalizations.of(context)!.tooltipIcApex,
-          ),
-          DataColumn(
-            label: Expanded(child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5.0),
-              child: Center(child: Text(AppLocalizations.of(context)!.tooltipHydricConstraint, textAlign: TextAlign.center, overflow: TextOverflow.fade)),
-            )),
-            tooltip: AppLocalizations.of(context)!.tooltipHydricConstraint,
-          ),
-          DataColumn(label: Expanded(child: Center(child: Text(AppLocalizations.of(context)!.titleNotes, textAlign: TextAlign.center)))),
-        ],
-        dividerThickness: 0.0,
-        columnSpacing: 5.0,
-        dataRowMinHeight: 50.0,
-        dataRowMaxHeight: 60.0,
-        rows: widget.sessions?.map<DataRow>((session) {
-              final double icApex = calculateIcApex(session);
-              return DataRow(
-                onLongPress: () => updateSession(context, session),
-                cells: [
-                  DataCell(
-                    Text(formatDate(session.sessionDate, explicit: true), overflow: TextOverflow.ellipsis),
-                  ),
-                  DataCell(IcApexCell(icApex: icApex, isPruned: isPruned(session))),
-                  DataCell(
-                    LabelApexHydricConstraint(
-                      text: calculateHydricConstraint(session, icApex, context),
+      child: SizedBox(
+        width: double.infinity,
+        child: DataTable(
+          key: keyTable,
+          columns: [
+            DataColumn(label: Expanded(child: Text(AppLocalizations.of(context)!.infoDate, textAlign: TextAlign.left))),
+            DataColumn(
+              label: Expanded(child: Text(AppLocalizations.of(context)!.infoIcApex, textAlign: TextAlign.left)),
+              tooltip: AppLocalizations.of(context)!.tooltipIcApex,
+            ),
+            DataColumn(
+              label: Expanded(child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                child: Text(AppLocalizations.of(context)!.tooltipHydricConstraint, textAlign: TextAlign.left, overflow: TextOverflow.fade),
+              )),
+              tooltip: AppLocalizations.of(context)!.tooltipHydricConstraint,
+            ),
+            DataColumn(label: Expanded(child: Text(AppLocalizations.of(context)!.titleNotes, textAlign: TextAlign.left))),
+          ],
+          dividerThickness: 0.0,
+          columnSpacing: 5.0,
+          dataRowMinHeight: 50.0,
+          dataRowMaxHeight: 60.0,
+          rows: widget.sessions?.map<DataRow>((session) {
+                final double icApex = calculateIcApex(session);
+                return DataRow(
+                  onLongPress: () => updateSession(context, session),
+                  cells: [
+                    DataCell(
+                      Text(formatDate(session.sessionDate, explicit: true), overflow: TextOverflow.ellipsis),
                     ),
-                  ),
-                  DataCell(
-                    Visibility(
-                      visible: session.notes != null && session.notes!.isNotEmpty,
-                      child: ElevatedApexButton(
-                        icon: Icons.article_outlined,
-                        callback:
-                            session.notes == null || session.notes!.isEmpty
-                                ? null
-                                : () => notesDialog(context, session.notes!),
+                    DataCell(IcApexCell(icApex: icApex, isPruned: isPruned(session))),
+                    DataCell(
+                      LabelApexHydricConstraint(
+                        text: calculateHydricConstraint(session, icApex, context),
                       ),
                     ),
-                  ),
-                ],
-              );
-            }).toList() ??
-            [],
+                    DataCell(
+                      Visibility(
+                        visible: session.notes != null && session.notes!.isNotEmpty,
+                        child: ElevatedApexButton(
+                          icon: Icons.article_outlined,
+                          callback:
+                              session.notes == null || session.notes!.isEmpty
+                                  ? null
+                                  : () => notesDialog(context, session.notes!),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              }).toList() ??
+              [],
+        ),
       ),
     );
   }
