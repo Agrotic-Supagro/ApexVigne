@@ -57,7 +57,7 @@ class TileApexButton extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    stadePheno['stade'],
+                    stadePheno['code'],
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(),
                   ),
                   const SizedBox(height: 5),

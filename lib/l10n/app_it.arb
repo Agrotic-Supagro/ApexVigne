@@ -649,6 +649,86 @@
     },
 
 
+    "codeStadeA": "Stade A (BBCH 00 à 03)",
+    "@codeStadeA": {
+        "description": ""
+    },
+
+    "codeStadeB": "Stade B (BBCH 05)",
+    "@codeStadeB": {
+        "description": ""
+    },
+
+    "codeStadeC": "Stade C (BBCH 09)",
+    "@codeStadeC": {
+        "description": ""
+    },
+
+    "codeStadeD": "Stade D (BBCH 10)",
+    "@codeStadeD": {
+        "description": ""
+    },
+
+    "codeStadeE": "Stade E (BBCH 11 à 19)",
+    "@codeStadeE": {
+        "description": ""
+    },
+
+    "codeStadeF": "Stade F (BBCH 53)",
+    "@codeStadeF": {
+        "description": ""
+    },
+
+    "codeStadeG": "Stade G (BBCH 55)",
+    "@codeStadeG": {
+        "description": ""
+    },
+
+    "codeStadeH": "Stade H (BBCH 57)",
+    "@codeStadeH": {
+        "description": ""
+    },
+
+    "codeStadeI": "Stade I (BBCH 60 à 69)",
+    "@codeStadeI": {
+        "description": ""
+    },
+
+    "codeStadeJ": "Stade J (BBCH 71)",
+    "@codeStadeJ": {
+        "description": ""
+    },
+
+    "codeStadeK": "Stade K (BBCH 75)",
+    "@codeStadeK": {
+        "description": ""
+    },
+
+    "codeStadeL": "Stade L (BBCH 77)",
+    "@codeStadeL": {
+        "description": ""
+    },
+
+    "codeStadeM": "Stade M (BBCH 81 à 85)",
+    "@codeStadeM": {
+        "description": ""
+    },
+
+    "codeStadeN": "Stade N (BBCH 89)",
+    "@codeStadeN": {
+        "description": ""
+    },
+
+    "codeStadeO": "Stade O (BBCH 91)",
+    "@codeStadeO": {
+        "description": ""
+    },
+
+    "codeStadeP": "Stade P (BBCH 92 à 97)",
+    "@codeStadeP": {
+        "description": ""
+    },
+
 
     "descriptionStadeA": "Début du gonflement du bourgeon et de la reprise de la végétation.",
     "@descriptionStadeA": {

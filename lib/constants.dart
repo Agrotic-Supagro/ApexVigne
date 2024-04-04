@@ -2,11 +2,11 @@ import 'package:apex_vigne/services/navigation.service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /* Local IP address */
- const String apiBaseUrl = 'http://192.168.1.118';
+// const String apiBaseUrl = 'http://192.168.1.118';
 // const String apiBaseUrl = 'http://172.17.0.1';
 
 /* Pre Prod */
-// const String apiBaseUrl = 'http://veneo5.servadmin.fr:81';
+const String apiBaseUrl = 'http://veneo5.servadmin.fr:81';
 
 /* Prod */
 // const String apiBaseUrl = '';
@@ -16,7 +16,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-A-00-03",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeA,
-    "stade": "Stade A (BBCH 00 à 03)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeA,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeA,
@@ -26,7 +27,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-B-05-05",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeB,
-    "stade": "Stade B (BBCH 05)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeB,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeB,
@@ -36,7 +38,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-C-09-09",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeC,
-    "stade": "Stade C (BBCH 09)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeC,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeC,
@@ -46,7 +49,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-D-10-10",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeD,
-    "stade": "Stade D (BBCH 10)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeD,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeD,
@@ -56,7 +60,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-E-11-19",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeE,
-    "stade": "Stade E (BBCH 11 à 19)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeE,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeE,
@@ -66,7 +71,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-F-53-53",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeF,
-    "stade": "Stade F (BBCH 53)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeF,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeF,
@@ -76,7 +82,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-G-55-55",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeG,
-    "stade": "Stade G (BBCH 55)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeG,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeG,
@@ -86,7 +93,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-H-57-57",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeH,
-    "stade": "Stade H (BBCH 57)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeH,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeH,
@@ -96,7 +104,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-I-60-69",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeI,
-    "stade": "Stade I (BBCH 60 à 69)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeI,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeI,
@@ -106,7 +115,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-J-71-71",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeJ,
-    "stade": "Stade J (BBCH 71)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeJ,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeJ,
@@ -116,7 +126,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-K-75-75",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeK,
-    "stade": "Stade K (BBCH 75)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeK,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeK,
@@ -126,7 +137,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-L-77-77",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeL,
-    "stade": "Stade L (BBCH 77)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeL,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeL,
@@ -136,7 +148,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-M-81-85",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeM,
-    "stade": "Stade M (BBCH 81 à 85)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeM,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeM,
@@ -146,7 +159,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-N-89-89",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeN,
-    "stade": "Stade N (BBCH 89)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeN,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeN,
@@ -156,7 +170,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-O-91-91",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeO,
-    "stade": "Stade O (BBCH 91)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeO,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeO,
@@ -166,7 +181,8 @@ final List<Map<String, dynamic>> stadesPheno = [
     "id": "st-P-92-97",
     "name": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
         .nameStadeP,
-    "stade": "Stade P (BBCH 92 à 97)",
+    "code": AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
+        .codeStadeP,
     "description":
         AppLocalizations.of(NavigationService.navigatorKey.currentContext!)!
             .descriptionStadeP,
