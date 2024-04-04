@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:apex_vigne/app_config.dart';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/services/navigation.service.dart';
 import 'package:apex_vigne/services/parcels_api.service.dart';
@@ -6,7 +7,6 @@ import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:http/http.dart' as http;
-import 'package:apex_vigne/constants.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -64,7 +64,7 @@ class AuthenticationService {
 
   /* Check connection */
   Future<bool> checkConnection(BuildContext context) async {
-    final url = Uri.parse(apiBaseUrl);
+    final url = Uri.parse(AppConfig.apiBaseUrl);
 
     try {
       final response = await http.get(url, headers: {
@@ -133,7 +133,7 @@ class AuthenticationService {
 
   Future<String?> login(LoginData data) async {
     final response = await http
-        .post(Uri.parse('$apiBaseUrl/login'),
+        .post(Uri.parse('$AppConfig.apiBaseUrl/login'),
             headers: {"Content-Type": "application/json"},
             body: json.encode({
               'email': data.name,
@@ -182,7 +182,7 @@ class AuthenticationService {
   }
 
   Future<void> getCurrentUserProfile() async {
-    final url = Uri.parse('$apiBaseUrl/me');
+    final url = Uri.parse('$AppConfig.apiBaseUrl/me');
     final response = await http.get(url, headers: {
       'Authorization': 'Bearer ${await token}',
       'Content-Type': 'application/json',
@@ -210,7 +210,7 @@ class AuthenticationService {
       jsonData[key] = value;
     });
     final response = await http
-        .post(Uri.parse('$apiBaseUrl/signup'),
+        .post(Uri.parse('$AppConfig.apiBaseUrl/signup'),
             headers: {"Content-Type": "application/json"},
             body: json.encode(jsonData))
         .timeout(const Duration(seconds: 20), onTimeout: () {

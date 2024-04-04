@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'color_schemes.g.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-void main() async {
+Future<void> mainCommon() async {
   WidgetsFlutterBinding.ensureInitialized();
   await IsarService().initIsar();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();

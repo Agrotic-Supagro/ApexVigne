@@ -1,15 +1,15 @@
 import 'dart:convert';
+import 'package:apex_vigne/app_config.dart';
 import 'package:apex_vigne/collections/session.collection.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:apex_vigne/constants.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SessionsApiService {
-  final url = Uri.parse('$apiBaseUrl/sessions');
+  final url = Uri.parse('$AppConfig.apiBaseUrl/sessions');
   Future<Map<String, String>> get headers async => {
         'Authorization': 'Bearer ${await AuthenticationService().token}',
         'Content-Type': 'application/json',

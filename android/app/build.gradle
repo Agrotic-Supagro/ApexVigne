@@ -61,6 +61,21 @@ android {
             outputFileName = "apex_vigne.apk"
         }
     }
+
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+            manifestPlaceholders = [appName: "ApeX Vigne Dev"]
+            resValue "string", "app_name", "ApeX Vigne Dev"
+        }
+        prod {
+            applicationId "ag.GB.apex"
+            manifestPlaceholders = [appName: "ApeX Vigne"]
+            resValue "string", "app_name", "ApeX Vigne"
+        }
+    }
 }
 
 flutter {

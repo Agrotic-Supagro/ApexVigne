@@ -1,5 +1,5 @@
 import 'package:apex_vigne/collections/user.collection.dart';
-import 'package:apex_vigne/main.dart';
+import 'package:apex_vigne/main_common.dart';
 import 'package:apex_vigne/pages/login/login.page.dart';
 import 'package:apex_vigne/pages/profile/widgets/list_tile.widget.dart';
 import 'package:apex_vigne/services/isar.service.dart';
