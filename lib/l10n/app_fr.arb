@@ -6,7 +6,7 @@
 
 
 
-    "tooltipIcApex": "iC-Apex est l'indice de croissance végétatif. Il varie entre 1 (pleine croissance) et 0 (croissance arrêtée).",
+    "tooltipIcApex": "iC-Apex est l'indice de croissance des apex. Il varie entre 1 (pleine croissance des apex) et 0 (croissance totalement arrêtée).",
     "@tooltipIcApex": {
         "description": ""
     },
@@ -38,7 +38,7 @@
         "description": ""
     },
 
-    "titlePrunedParcel": "Écimer la parcelle",
+    "titlePrunedParcel": "Noter la parcelle comme écimée",
     "@titlePrunedParcel": {
         "description": ""
     },
@@ -73,7 +73,7 @@
         "description": ""
     },
 
-    "titleLeaveSession": "Quitter la session",
+    "titleLeaveSession": "Quitter la session d'observations",
     "@titleLeaveSession": {
         "description": ""
     },
@@ -88,14 +88,14 @@
         "description": ""
     },
 
-    "titleTutoEditSession": "Vous pouvez éditer n'importe quelles sessions !",
+    "titleTutoEditSession": "Vous pouvez éditer n'importe quelle session d'observations !",
     "@titleTutoEditSession": {
         "description": ""
     },
 
 
 
-    "subtitleNoSaveParcelOfflineMode": "Vous ne pouvez pas créer de parcelle car vous êtes en mode déconnecté.",
+    "subtitleNoSaveParcelOfflineMode": "Vous ne pouvez pas créer de parcelle car vous êtes hors ligne.",
     "@subtitleNoSaveParcelOfflineMode": {
         "description": ""
     },
@@ -176,7 +176,7 @@
         "description": ""
     },
 
-    "infoSessionsLoading": "Chargement des sessions...",
+    "infoSessionsLoading": "Chargement des sessions d'observations...",
     "@infoSessionsLoading": {
         "description": ""
     },
@@ -186,12 +186,12 @@
         "description": ""
     },
 
-    "infoSendSessionServer": "Envoi des sessions au serveur...",
+    "infoSendSessionServer": "Envoi des sessions d'observations au serveur...",
     "@infoSendSessionServer": {
         "description": ""
     },
 
-    "infoLastSessionDate": "Dernière session le {sessionDate}",
+    "infoLastSessionDate": "Dernière session d'observations le {sessionDate}",
     "@infoLastSessionDate": {
         "description": "",
         "placeholders": {
@@ -207,12 +207,12 @@
         "description": ""
     },
 
-    "infoNoSessionInParcel": "Aucune session pour cette parcelle...",
+    "infoNoSessionInParcel": "Aucune session d'observations pour cette parcelle...",
     "@infoNoSessionInParcel": {
         "description": ""
     },
 
-    "infoHaveToRequired": "Vous devez être connecté pour modifier une session",
+    "infoHaveToRequired": "Vous devez être connecté pour modifier une session d'observations",
     "@infoHaveToRequired": {
         "description": ""
     },
@@ -238,17 +238,17 @@
         }
     },
 
-    "infoConfirmPrunedParcel": "Êtes-vous sûr de vouloir noter la parcelle comme étant écimée ?",
+    "infoConfirmPrunedParcel": "Êtes-vous sûr de vouloir noter la parcelle comme écimée ?",
     "@infoConfirmPrunedParcel": {
         "description": ""
     },
 
-    "infoExitSession": "La session ne sera pas sauvegardée",
+    "infoExitSession": "La session d'observations ne sera pas sauvegardée",
     "@infoExitSession": {
         "description": ""
     },
 
-    "infoChoiceStade": "Choix du stade",
+    "infoChoiceStade": "Choix du stade phénologique",
     "@infoChoiceStade": {
         "description": ""
     },
@@ -258,12 +258,12 @@
         "description": ""
     },
 
-    "infoTutoEditNumber": "Vous pouvez éditer le nombre d'observations en maintenant le compteur",
+    "infoTutoEditNumber": "Vous pouvez éditer le nombre d'observations en maintenant appuyé sur le compteur",
     "@infoTutoEditNumber": {
         "description": ""
     },
 
-    "infoTutoEditSession": "En appuyant longuement sur une des sessions présentes dans le tableau, vous pouvez la modifier",
+    "infoTutoEditSession": "En appuyant longuement sur une des sessions d'observations présentes dans le tableau, vous pouvez la modifier",
     "@infoTutoEditSession": {
         "description": ""
     },
@@ -298,12 +298,12 @@
         "description": ""
     },
 
-    "infoNbObsMin": "Nombre minimum d'observations par session",
+    "infoNbObsMin": "Nombre minimum d'observations par session d'observations",
     "@infoNbObsMin": {
         "description": ""
     },
 
-    "infoAboutDescription": "L'application ApeX Vigne a été conçue par l'équipe d'Eneo pour le compte d'AgroTIC de Montpellier SupAgro, bénéficiant du soutien de la région Occitanie. Cette initiative s'inscrit dans le cadre de recherches approfondies menées depuis plusieurs années sur la viticulture de précision. Le projet est réalisé en collaboration avec l'Institut Français de la Vigne et du Vin (IFV) ainsi que la chambre d'agriculture de l'Hérault.",
+    "infoAboutDescription": "L'application ApeX Vigne a été conçue par l'équipe d'Eneo pour le compte de l'Institut Agro Montpellier et de l'Institut Français de la Vigne et du vin. Ce projet a bénéficié du soutien financier de la région Occitanie et de la participation de la chambre d'agriculture de l'Hérault. Il s'inscrit dans le cadre de recherches sur la collecte collaboratives d'observations en agriculture.",
     "@infoAboutDescription": {
         "description": ""
     },
@@ -373,22 +373,22 @@
         "description": ""
     },
 
-    "infoWhyOffline": "Celà peut être dû à une mauvaise connexion internet ou à une maintenance du serveur.",
+    "infoWhyOffline": "Cela peut être dû à une mauvaise connexion internet ou à une maintenance du serveur.",
     "@infoWhyOffline": {
         "description": ""
     },
 
-    "infoLocationRequired": "Il faut autoriser la localisation pour pouvoir créer une session",
+    "infoLocationRequired": "Vous devez autoriser la localisation pour pouvoir créer une session d'observations",
     "@infoLocationRequired": {
         "description": ""
     },
 
-    "infoEnableLocationSystem": "Il faut autoriser la localisation dans les paramètres de votre téléphone pour pouvoir créer une session",
+    "infoEnableLocationSystem": "Vous devez autoriser la localisation dans les paramètres de votre téléphone pour pouvoir créer une session d'observations",
     "@infoEnableLocationSystem": {
         "description": ""
     },
 
-    "infoLocationDisabled": "La localisation sur votre téléphone n'est pas activé",
+    "infoLocationDisabled": "La localisation de votre téléphone n'est pas activé",
     "@infoLocationDisabled": {
         "description": ""
     },
@@ -413,12 +413,12 @@
         "description": ""
     },
 
-    "infoExportSessionsSuccess": "Les sessions ont été exportées avec succès par email",
+    "infoExportSessionsSuccess": "Les sessions d'observations vous ont été envoyées par email",
     "@infoExportSessions": {
         "description": ""
     },
 
-    "infoExportSessionsFailed": "Une erreur est survenue lors de l'exportation des sessions",
+    "infoExportSessionsFailed": "Une erreur est survenue lors de l'export des sessions d'observations",
     "@infoExportSessionsFailed": {
         "description": ""
     },
@@ -485,12 +485,12 @@
         "description": ""
     },
 
-    "actionDeleteAccountBody": "Merci de supprimer mon compte svp.",
+    "actionDeleteAccountBody": "Merci de supprimer mon compte ApeX-Vigne svp.",
     "@actionDeleteAccountBody": {
         "description": ""
     },
 
-    "actionExport": "Exporter les sessions",
+    "actionExport": "Exporter les sessions d'observations",
     "@actionExport": {
         "description": ""
     },
