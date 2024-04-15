@@ -93,6 +93,11 @@
         "description": ""
     },
 
+    "titleSuccess": "Success",
+    "@titleSuccess": {
+        "description": ""
+    },
+
 
 
     "subtitleNoSaveParcelOfflineMode": "You cannot create a plot because you are offline",
@@ -132,6 +137,10 @@
         "description": ""
     },
 
+    "hintRecoveryCode": "Code de récupération",
+    "@hintRecoveryCode": {
+        "description": ""
+    },
 
 
     "validatorParcelName": "Please enter a plot name",
@@ -348,6 +357,16 @@
         "description": ""
     },
 
+    "infoErrorRecoverPassword": "Error while recovering the password, check your e-mail",
+    "@infoErrorRecoverPassword": {
+        "description": ""
+    },
+
+    "infoErrorConfirmRecoverPassword": "Error while recovering the password, check that your confirmation code is correct",
+    "@infoErrorConfirmRecoverPassword": {
+        "description": ""
+    },
+
     "infoPruned": "Topped of trimmed",
     "@infoPruned": {
         "description": ""
@@ -417,8 +436,49 @@
     "@infoExportSessions": {
         "description": ""
     },
+
     "infoExportSessionsFailed": "An error occurred while exporting the observation sessions",
     "@infoExportSessionsFailed": {
+        "description": ""
+    },
+
+    "infoRecoverPasswordIntro": "Recover your password here",
+    "@infoRecoverPasswordIntro": {
+        "description": ""
+    },
+
+    "infoRecoverPasswordDescription": "We will send you a new password by e-mail",
+    "@infoRecoverPasswordDescription": {
+        "description": ""
+    },
+
+    "infoRecoverPasswordSuccess": "An email has been sent, check your inbox",
+    "@infoRecoverPasswordSuccess": {
+        "description": ""
+    },
+
+    "infoConfirmRecoverIntro": "Confirmez votre mot de passe ici",
+    "@infoConfirmRecoverIntro": {
+        "description": ""
+    },
+
+    "infoRecoverCodePasswordDescription": "Nous vous avons envoyé un code de récupération par e-mail",
+    "@infoRecoverCodePasswordDescription": {
+        "description": ""
+    },
+
+    "infoConfirmRecoverSuccess": "Votre mot de passe a été réinitialisé avec succès",
+    "@infoConfirmRecoverSuccess": {
+        "description": ""
+    },
+
+    "infoRecoveryCodeValidationError": "Le code de récupération est invalide",
+    "@infoRecoveryCodeValidationError": {
+        "description": ""
+    },
+
+    "infoResendCodeSuccess": "Un nouveau code de récupération a été envoyé",
+    "@infoResendCodeSuccess": {
         "description": ""
     },
 
@@ -538,6 +598,17 @@
     "@actionUnderstand": {
         "description": ""
     },
+
+    "actionRecoverPassword": "Recover",
+    "@actionRecoverPassword": {
+        "description": ""
+    },
+
+    "actionResendCode": "Renvoyer le code",
+    "@actionResendCode": {
+        "description": ""
+    },
+
 
 
     "sortByMostRecent": "From the most recent to the oldest",
