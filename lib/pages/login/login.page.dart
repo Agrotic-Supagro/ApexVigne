@@ -28,9 +28,8 @@ class _LoginPageState extends State<LoginPage> {
           builder: (context) => const LoadingPage(),
         ));
       },
-      onRecoverPassword: (_) => Future(
-        () => null,
-      ),
+      onRecoverPassword: auth.recoverPassword,
+      onConfirmRecover: auth.confirmRecoverPassword,
       theme: LoginTheme(
         titleStyle: const TextStyle(
           color: Colors.white,
@@ -54,7 +53,6 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-      hideForgotPasswordButton: true,
       loginAfterSignUp: true,
       additionalSignupFields: <UserFormField>[
         UserFormField(
@@ -99,6 +97,18 @@ class _LoginPageState extends State<LoginPage> {
         confirmPasswordError: AppLocalizations.of(context)!.infoConfirmPasswordError,
         loginButton: AppLocalizations.of(context)!.actionLogin,
         forgotPasswordButton: AppLocalizations.of(context)!.actionForgotPassword,
+        recoverPasswordIntro: AppLocalizations.of(context)!.infoRecoverPasswordIntro,
+        recoverPasswordDescription: AppLocalizations.of(context)!.infoRecoverPasswordDescription,
+        recoverPasswordButton: AppLocalizations.of(context)!.actionRecoverPassword,
+        flushbarTitleSuccess: AppLocalizations.of(context)!.titleSuccess,
+        recoverPasswordSuccess: AppLocalizations.of(context)!.infoRecoverPasswordSuccess,
+        confirmRecoverIntro: AppLocalizations.of(context)!.infoConfirmRecoverIntro,
+        recoverCodePasswordDescription: AppLocalizations.of(context)!.infoRecoverCodePasswordDescription,
+        recoveryCodeHint: AppLocalizations.of(context)!.hintRecoveryCode,
+        confirmRecoverSuccess: AppLocalizations.of(context)!.infoConfirmRecoverSuccess,
+        recoveryCodeValidationError: AppLocalizations.of(context)!.infoRecoveryCodeValidationError,
+        resendCodeButton: AppLocalizations.of(context)!.actionResendCode,
+        resendCodeSuccess: AppLocalizations.of(context)!.infoResendCodeSuccess,
         signupButton: AppLocalizations.of(context)!.actionSignup,
         goBackButton: AppLocalizations.of(context)!.actionGoBack,
         additionalSignUpFormDescription: AppLocalizations.of(context)!.infoSignUpFormDescription,

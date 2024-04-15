@@ -181,6 +181,51 @@ class AuthenticationService {
     }
   }
 
+  Future<String?> recoverPassword(String name) async {
+    final response = await http
+        .post(Uri.parse('${AppConfig.apiBaseUrl}/recover-password'),
+            headers: {"Content-Type": "application/json"},
+            body: json.encode({'email': name}))
+        .timeout(const Duration(seconds: 20), onTimeout: () {
+      return http.Response(
+        json.encode({'message': 'timeout'}),
+        408,
+      );
+    });
+    if (response.statusCode == 200) {
+      return null;
+    } else {
+      return AppLocalizations.of(
+        NavigationService.navigatorKey.currentContext!,
+      )!.infoErrorRecoverPassword;
+    }
+  }
+
+  Future<String?> confirmRecoverPassword(String code, LoginData data) async {
+    final response = await http
+        .post(Uri.parse('${AppConfig.apiBaseUrl}/confirm-recover-password'),
+            headers: {"Content-Type": "application/json"},
+            body: json.encode({
+              'code': code,
+              'email': data.name,
+              'password': data.password,
+            }))
+        .timeout(const Duration(seconds: 20), onTimeout: () {
+      return http.Response(
+        json.encode({'message': 'timeout'}),
+        408,
+      );
+    });
+
+    if (response.statusCode == 200) {
+      return null;
+    } else {
+      return AppLocalizations.of(
+        NavigationService.navigatorKey.currentContext!,
+      )!.infoErrorConfirmRecoverPassword;
+    }
+  }
+
   Future<void> getCurrentUserProfile() async {
     final url = Uri.parse('${AppConfig.apiBaseUrl}/me');
     final response = await http.get(url, headers: {
