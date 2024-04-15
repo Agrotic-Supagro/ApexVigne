@@ -137,7 +137,7 @@
         "description": ""
     },
 
-    "hintRecoveryCode": "Code de récupération",
+    "hintRecoveryCode": "Code de réinitialisation",
     "@hintRecoveryCode": {
         "description": ""
     },
@@ -358,12 +358,12 @@
         "description": ""
     },
 
-    "infoErrorRecoverPassword": "Erreur lors de la récupération du mot de passe, vérifier votre e-mail",
+    "infoErrorRecoverPassword": "Erreur lors de l'envoi du code de réinitialisation. Vérifiez que votre e-mail est correct.",
     "@infoErrorRecoverPassword": {
         "description": ""
     },
 
-    "infoErrorConfirmRecoverPassword": "Erreur lors de la récupération du mot de passe, vérifier que votre code de confirmation est correct",
+    "infoErrorConfirmRecoverPassword": "Erreur lors de la réinitialisation du mot de passe. Vérifiez que votre code est correct.",
     "@infoErrorConfirmRecoverPassword": {
         "description": ""
     },
@@ -443,12 +443,12 @@
         "description": ""
     },
 
-    "infoRecoverPasswordIntro": "Récupérez votre mot de passe ici",
+    "infoRecoverPasswordIntro": "Merci de renseigner votre adresse e-mail.",
     "@infoRecoverPasswordIntro": {
         "description": ""
     },
 
-    "infoRecoverPasswordDescription": "Nous vous enverrons votre mot de passe par e-mail",
+    "infoRecoverPasswordDescription": "Nous vous enverrons un code de réinitialisation par e-mail.",
     "@infoRecoverPasswordDescription": {
         "description": ""
     },
@@ -458,12 +458,12 @@
         "description": ""
     },
 
-    "infoConfirmRecoverIntro": "Confirmez votre mot de passe ici",
+    "infoConfirmRecoverIntro": "Renseignez votre code et votre nouveau mot de passe.",
     "@infoConfirmRecoverIntro": {
         "description": ""
     },
 
-    "infoRecoverCodePasswordDescription": "Nous vous avons envoyé un code de récupération par e-mail",
+    "infoRecoverCodePasswordDescription": "Un code de réinitialisation va vous être envoyé par e-mail.",
     "@infoRecoverCodePasswordDescription": {
         "description": ""
     },
@@ -600,7 +600,7 @@
         "description": ""
     },
 
-    "actionRecoverPassword": "Récupérer",
+    "actionRecoverPassword": "Envoyer le code",
     "@actionRecoverPassword": {
         "description": ""
     },

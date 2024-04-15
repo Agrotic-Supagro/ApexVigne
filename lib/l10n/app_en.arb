@@ -137,7 +137,7 @@
         "description": ""
     },
 
-    "hintRecoveryCode": "Code de récupération",
+    "hintRecoveryCode": "Reset code",
     "@hintRecoveryCode": {
         "description": ""
     },
@@ -357,12 +357,12 @@
         "description": ""
     },
 
-    "infoErrorRecoverPassword": "Error while recovering the password, check your e-mail",
+    "infoErrorRecoverPassword": "Error while sending the reset code. Check that your e-mail is correct.",
     "@infoErrorRecoverPassword": {
         "description": ""
     },
 
-    "infoErrorConfirmRecoverPassword": "Error while recovering the password, check that your confirmation code is correct",
+    "infoErrorConfirmRecoverPassword": "Error while resetting the password. Check that your reset code is correct",
     "@infoErrorConfirmRecoverPassword": {
         "description": ""
     },
@@ -442,12 +442,12 @@
         "description": ""
     },
 
-    "infoRecoverPasswordIntro": "Recover your password here",
+    "infoRecoverPasswordIntro": "Please enter your e-mail adress.",
     "@infoRecoverPasswordIntro": {
         "description": ""
     },
 
-    "infoRecoverPasswordDescription": "We will send you a new password by e-mail",
+    "infoRecoverPasswordDescription": "We will send you a reset code by e-mail.",
     "@infoRecoverPasswordDescription": {
         "description": ""
     },
@@ -457,27 +457,27 @@
         "description": ""
     },
 
-    "infoConfirmRecoverIntro": "Confirmez votre mot de passe ici",
+    "infoConfirmRecoverIntro": "Please fill in your code and new password.",
     "@infoConfirmRecoverIntro": {
         "description": ""
     },
 
-    "infoRecoverCodePasswordDescription": "Nous vous avons envoyé un code de récupération par e-mail",
+    "infoRecoverCodePasswordDescription": "A reset code will be sent to you by e-mail.",
     "@infoRecoverCodePasswordDescription": {
         "description": ""
     },
 
-    "infoConfirmRecoverSuccess": "Votre mot de passe a été réinitialisé avec succès",
+    "infoConfirmRecoverSuccess": "Your password has been reset successfully.",
     "@infoConfirmRecoverSuccess": {
         "description": ""
     },
 
-    "infoRecoveryCodeValidationError": "Le code de récupération est invalide",
+    "infoRecoveryCodeValidationError": "The reset code is wrong.",
     "@infoRecoveryCodeValidationError": {
         "description": ""
     },
 
-    "infoResendCodeSuccess": "Un nouveau code de récupération a été envoyé",
+    "infoResendCodeSuccess": "A new reset code has been sent.",
     "@infoResendCodeSuccess": {
         "description": ""
     },
@@ -599,12 +599,12 @@
         "description": ""
     },
 
-    "actionRecoverPassword": "Recover",
+    "actionRecoverPassword": "Send code",
     "@actionRecoverPassword": {
         "description": ""
     },
 
-    "actionResendCode": "Renvoyer le code",
+    "actionResendCode": "Resend code",
     "@actionResendCode": {
         "description": ""
     },
