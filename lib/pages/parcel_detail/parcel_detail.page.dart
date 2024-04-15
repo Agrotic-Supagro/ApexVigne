@@ -151,10 +151,11 @@ class _ParcelDetailPageState extends State<ParcelDetailPage> {
               if (widget.sessions?.isEmpty ?? false)
                 Text(
                   AppLocalizations.of(context)!.infoNoSessionInParcel,
+                  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         color: Colors.grey,
                         fontWeight: FontWeight.w500,
-                        letterSpacing: 1.2,
+                        letterSpacing: 1.2
                       ),
                 ),
               const SizedBox(height: 80),
