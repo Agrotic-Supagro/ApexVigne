@@ -142,7 +142,7 @@
         "description": ""
     },
 
-    "hintConfirmationCode": "Reset code",
+    "hintConfirmationCode": "Code de réinitialisation",
     "@hintConfirmationCode": {
         "description": ""
     },
@@ -478,17 +478,17 @@
         "description": ""
     },
 
-    "infoRecoveryCodeValidationError": "Le code de récupération est invalide",
+    "infoRecoveryCodeValidationError": "Le code de réinitialisation est invalide",
     "@infoRecoveryCodeValidationError": {
         "description": ""
     },
 
-    "infoResendCodeSuccess": "Un nouveau code de récupération a été envoyé",
+    "infoResendCodeSuccess": "Un nouveau code de réinitialisation a été envoyé",
     "@infoResendCodeSuccess": {
         "description": ""
     },
 
-    "infoConfirmationCodeValidationError": "Le code de confirmation est invalide",
+    "infoConfirmationCodeValidationError": "Le code de réinitialisation est invalide",
     "@infoConfirmationCodeValidationError": {
         "description": ""
     },
