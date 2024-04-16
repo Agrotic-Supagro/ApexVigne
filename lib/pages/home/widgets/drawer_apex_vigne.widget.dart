@@ -1,6 +1,5 @@
 import 'package:apex_vigne/pages/about/about.page.dart';
 import 'package:apex_vigne/pages/profile/profile.page.dart';
-import 'package:apex_vigne/services/auth.service.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:apex_vigne/utils/launch_mail.dart';

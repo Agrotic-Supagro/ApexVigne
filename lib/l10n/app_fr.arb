@@ -142,6 +142,11 @@
         "description": ""
     },
 
+    "hintConfirmationCode": "Code de réinitialisation",
+    "@hintConfirmationCode": {
+        "description": ""
+    },
+
 
 
     "validatorParcelName": "Veuillez entrer un nom de parcelle",
@@ -473,13 +478,18 @@
         "description": ""
     },
 
-    "infoRecoveryCodeValidationError": "Le code de récupération est invalide",
+    "infoRecoveryCodeValidationError": "Le code de réinitialisation est invalide",
     "@infoRecoveryCodeValidationError": {
         "description": ""
     },
 
-    "infoResendCodeSuccess": "Un nouveau code de récupération a été envoyé",
+    "infoResendCodeSuccess": "Un nouveau code de réinitialisation a été envoyé",
     "@infoResendCodeSuccess": {
+        "description": ""
+    },
+
+    "infoConfirmationCodeValidationError": "Le code de réinitialisation est invalide",
+    "@infoConfirmationCodeValidationError": {
         "description": ""
     },
 
@@ -545,7 +555,7 @@
         "description": ""
     },
 
-    "actionDeleteAccountBody": "Merci de supprimer mon compte ApeX-Vigne svp.",
+    "actionDeleteAccountBody": "Merci de supprimer mon compte ApeX-Vigne svp",
     "@actionDeleteAccountBody": {
         "description": ""
     },
@@ -607,6 +617,11 @@
 
     "actionResendCode": "Renvoyer le code",
     "@actionResendCode": {
+        "description": ""
+    },
+
+    "actionSetPassword": "Réinitialiser le mot de passe",
+    "@actionSetPassword": {
         "description": ""
     },
 

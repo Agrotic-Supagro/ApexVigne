@@ -142,6 +142,12 @@
         "description": ""
     },
 
+    "hintConfirmationCode": "Reset code",
+    "@hintConfirmationCode": {
+        "description": ""
+    },
+
+
 
     "validatorParcelName": "Please enter a plot name",
     "@validatorParcelName": {
@@ -357,7 +363,7 @@
         "description": ""
     },
 
-    "infoErrorRecoverPassword": "Error while sending the reset code. Check that your e-mail is correct.",
+    "infoErrorRecoverPassword": "Error while sending the reset code. Check that your e-mail is correct",
     "@infoErrorRecoverPassword": {
         "description": ""
     },
@@ -442,12 +448,12 @@
         "description": ""
     },
 
-    "infoRecoverPasswordIntro": "Please enter your e-mail adress.",
+    "infoRecoverPasswordIntro": "Please enter your e-mail adress",
     "@infoRecoverPasswordIntro": {
         "description": ""
     },
 
-    "infoRecoverPasswordDescription": "We will send you a reset code by e-mail.",
+    "infoRecoverPasswordDescription": "We will send you a reset code by e-mail",
     "@infoRecoverPasswordDescription": {
         "description": ""
     },
@@ -457,28 +463,33 @@
         "description": ""
     },
 
-    "infoConfirmRecoverIntro": "Please fill in your code and new password.",
+    "infoConfirmRecoverIntro": "Please fill in your code and new password",
     "@infoConfirmRecoverIntro": {
         "description": ""
     },
 
-    "infoRecoverCodePasswordDescription": "A reset code will be sent to you by e-mail.",
+    "infoRecoverCodePasswordDescription": "A reset code will be sent to you by e-mail",
     "@infoRecoverCodePasswordDescription": {
         "description": ""
     },
 
-    "infoConfirmRecoverSuccess": "Your password has been reset successfully.",
+    "infoConfirmRecoverSuccess": "Your password has been reset successfully",
     "@infoConfirmRecoverSuccess": {
         "description": ""
     },
 
-    "infoRecoveryCodeValidationError": "The reset code is wrong.",
+    "infoRecoveryCodeValidationError": "The reset code is wrong",
     "@infoRecoveryCodeValidationError": {
         "description": ""
     },
 
-    "infoResendCodeSuccess": "A new reset code has been sent.",
+    "infoResendCodeSuccess": "A new reset code has been sent",
     "@infoResendCodeSuccess": {
+        "description": ""
+    },
+
+    "infoConfirmationCodeValidationError": "The reset code is wrong",
+    "@infoConfirmationCodeValidationError": {
         "description": ""
     },
 
@@ -606,6 +617,11 @@
 
     "actionResendCode": "Resend code",
     "@actionResendCode": {
+        "description": ""
+    },
+
+    "actionSetPassword": "Set password",
+    "@actionSetPassword": {
         "description": ""
     },
 
