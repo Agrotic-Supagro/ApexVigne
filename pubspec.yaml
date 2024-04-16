@@ -1,0 +1,80 @@
+name: apex_vigne
+description: For monitoring the growth dynamics of your vines.
+publish_to: 'none'
+version: 6.0.0+60000
+
+environment:
+  sdk: '>=3.1.2 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  material_symbols_icons: ^4.2668.0
+  shared_preferences: ^2.2.2
+  http: ^1.1.0
+  flutter_login: ^4.2.1
+  intl: ^0.18.1
+  fl_chart: ^0.65.0
+  vibration: ^1.8.3
+  flutter_localizations:
+    sdk: flutter
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  path_provider: ^2.1.1
+  tutorial_coach_mark: ^1.2.11
+  flutter_launcher_icons: ^0.13.1
+  geolocator: ^10.1.0
+  url_launcher: ^6.2.3
+  device_info_plus: ^9.1.1
+  auto_size_text: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  build_runner: ^2.4.6
+  isar_generator: ^3.1.0+1
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+  - assets/images/
+  - assets/images/logos/
+  - assets/images/stades_phenologique/
+  fonts:
+    - family: MuseoSans
+      fonts:
+        - asset: assets/fonts/MuseoSans-100.otf
+          weight: 100
+        - asset: assets/fonts/MuseoSans-100Italic.otf
+          weight: 100
+          style: italic
+        - asset: assets/fonts/MuseoSans-300Italic.otf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/MuseoSans-300.otf
+          weight: 300
+        - asset: assets/fonts/MuseoSans-500.otf
+          weight: 500
+        - asset: assets/fonts/MuseoSans-500Italic.otf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/MuseoSans-700.otf
+          weight: 700
+        - asset: assets/fonts/MuseoSans-700Italic.otf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/MuseoSans-900.otf
+          weight: 900
+        - asset: assets/fonts/MuseoSans-900Italic.otf
+          weight: 900
+          style: italic
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logos/logo_apex_vigne.png"
+  min_sdk_android: 21

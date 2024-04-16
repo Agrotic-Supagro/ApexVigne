@@ -1,0 +1,898 @@
+{
+    "appName": "ApeX Vigne",
+    "@appName": {
+        "description": ""
+    },
+
+
+
+    "tooltipIcApex": "iC-Apex is the apex growth index. It varies between 1 (full apex growth) and 0 (growth completely stopped).",
+    "@tooltipIcApex": {
+        "description": ""
+    },
+
+    "tooltipHydricConstraint": "Vine Water stress",
+    "@tooltipHydricConstraint": {
+        "description": ""
+    },
+
+
+
+    "titleHome": "Plot",
+    "@titleHome": {
+        "description": ""
+    },
+
+    "titleAddParcel": "Add a plot",
+    "@titleAddParcel": {
+        "description": ""
+    },
+
+    "titleNotes": "Notes",
+    "@titleNotes": {
+        "description": ""
+    },
+
+    "titleEditSession": "Editing the observation session",
+    "@titleEditSession": {
+        "description": ""
+    },
+
+    "titlePrunedParcel": "Mark the plot as topped or trimmed",
+    "@titlePrunedParcel": {
+        "description": ""
+    },
+
+    "titleNewSession": "New observation session",
+    "@titleNewSession": {
+        "description": ""
+    },
+
+    "titleProfile": "Profile",
+    "@titleProfile": {
+        "description": ""
+    },
+
+    "titleStadePheno": "Phenological stages",
+    "@titleStadePheno": {
+        "description": ""
+    },
+
+    "titleDisconnected": "You are disconnected",
+    "@titleDisconnected": {
+        "description": ""
+    },
+
+    "titleAbout": "About us",
+    "@titleAbout": {
+        "description": ""
+    },
+
+    "titleContact": "Contact us",
+    "@titleContact": {
+        "description": ""
+    },
+
+    "titleLeaveSession": "Leave the observation session",
+    "@titleLeaveSession": {
+        "description": ""
+    },
+
+    "titleEditNumber": "Edit number",
+    "@titleEditNumber": {
+        "description": ""
+    },
+
+    "titleTutoEditNumber": "Change the number at any time !",
+    "@titleTutoEditNumber": {
+        "description": ""
+    },
+
+    "titleTutoEditSession": "You can edit any observation session !",
+    "@titleTutoEditSession": {
+        "description": ""
+    },
+
+    "titleSuccess": "Success",
+    "@titleSuccess": {
+        "description": ""
+    },
+
+
+
+    "subtitleNoSaveParcelOfflineMode": "You cannot create a plot because you are offline",
+    "@subtitleNoSaveParcelOfflineMode": {
+        "description": ""
+    },
+
+
+
+    "hintParcelName": "Plot name",
+    "@hintParcelName": {
+        "description": ""
+    },
+
+    "hintEmail": "Email",
+    "@hintEmail": {
+        "description": ""
+    },
+
+    "hintPassword": "Password",
+    "@hintPassword": {
+        "description": ""
+    },
+
+    "hintConfirmPassword": "Confirm password",
+    "@hintConfirmPassword": {
+        "description": ""
+    },
+
+    "hintWriteMessage": "Write your message here...",
+    "@hintWriteMessage": {
+        "description": ""
+    },
+
+    "hintWriteHere": "Write here...",
+    "@hintWriteHere": {
+        "description": ""
+    },
+
+    "hintRecoveryCode": "Reset code",
+    "@hintRecoveryCode": {
+        "description": ""
+    },
+
+    "hintConfirmationCode": "Reset code",
+    "@hintConfirmationCode": {
+        "description": ""
+    },
+
+
+
+    "validatorParcelName": "Please enter a plot name",
+    "@validatorParcelName": {
+        "description": ""
+    },
+
+
+
+    "infoLoading": "Loading...",
+    "@infoLoading": {
+        "description": ""
+    },
+
+    "infoCheckUser": "Checking user...",
+    "@infoCheckUser": {
+        "description": ""
+    },
+
+    "infoConnectServer": "Connection to the server...",
+    "@infoConnectServer": {
+        "description": ""
+    },
+
+    "infoOfflineMode": "Launch in disconnected mode...",
+    "@infoOfflineMode": {
+        "description": ""
+    },
+
+    "infoAuthRequired": "Authentication required...",
+    "@infoAuthRequired": {
+        "description": ""
+    },
+
+    "infoUserProfileLoading": "Loading user profil...",
+    "@infoUserProfileLoading": {
+        "description": ""
+    },
+
+    "infoParcelsLoading": "Loading plots...",
+    "@infoParcelsLoading": {
+        "description": ""
+    },
+
+    "infoSessionsLoading": "Loading observation sessions...",
+    "@infoSessionsLoading": {
+        "description": ""
+    },
+
+    "infoSendParcelServer": "Sending plots to the server...",
+    "@infoSendParcelServer": {
+        "description": ""
+    },
+
+    "infoSendSessionServer": "Sending observation sessions to the server...",
+    "@infoSendSessionServer": {
+        "description": ""
+    },
+
+    "infoLastSessionDate": "Last observation session on {sessionDate}",
+    "@infoLastSessionDate": {
+        "description": "",
+        "placeholders": {
+            "sessionDate": {
+              "type": "String",
+              "example": "May 20"
+            }
+          }
+    },
+
+    "infoNoParcels": "No plots...",
+    "@infoNoParcels": {
+        "description": ""
+    },
+
+    "infoNoSessionInParcel": "No observation session for this plot...",
+    "@infoNoSessionInParcel": {
+        "description": ""
+    },
+
+    "infoHaveToRequired": "You must be logged in to modify an observation session",
+    "@infoHaveToRequired": {
+        "description": ""
+    },
+
+    "infoDate": "Date",
+    "@infoDate": {
+        "description": ""
+    },
+
+    "infoIcApex": "iC-Apex",
+    "@infoIcApex": {
+        "description": ""
+    },
+
+    "infoNbSessions": "{count, plural, =0{0 sessions} =1{1 session} other{{count} sessions}}",
+    "@infoNbSessions": {
+        "description": "The number of sessions",
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+
+    "infoConfirmPrunedParcel": "Are you sure you want to note the plot as topped or trimmed ?",
+    "@infoConfirmPrunedParcel": {
+        "description": ""
+    },
+
+    "infoExitSession": "The observation session will not be saved",
+    "@infoExitSession": {
+        "description": ""
+    },
+
+    "infoChoiceStade": "Choice of phenological stage",
+    "@infoChoiceStade": {
+        "description": ""
+    },
+
+    "infoNumber": "Number",
+    "@infoNumber": {
+        "description": ""
+    },
+
+    "infoTutoEditNumber": "You can edit the number of observations by holding down the counter",
+    "@infoTutoEditNumber": {
+        "description": ""
+    },
+
+    "infoTutoEditSession": "You can modify an observation sessions by long pressing on it",
+    "@infoTutoEditSession": {
+        "description": ""
+    },
+
+    "infoAccount": "Account informations",
+    "@infoAccount": {
+        "description": ""
+    },
+
+    "infoErrorProfileInfo": "An error has occurred while retrieving your information",
+    "@infoErrorProfileInfo": {
+        "description": ""
+    },
+
+    "infoFirstname": "Firstname",
+    "@infoFirstname": {
+        "description": ""
+    },
+
+    "infoLastname": "Lastname",
+    "@infoLastname": {
+        "description": ""
+    },
+
+    "infoEmail": "Email",
+    "@infoEmail": {
+        "description": ""
+    },
+
+    "infoStructure": "Structure",
+    "@infoStructure": {
+        "description": ""
+    },
+
+    "infoNbObsMin": "Minimum number of observations per session",
+    "@infoNbObsMin": {
+        "description": ""
+    },
+
+    "infoAboutDescription": "The ApeX Vigne application was designed by Eneo team on behalf of Institut Agro Montpellier and Institut Français de la Vigne et du Vin. The project received financial support from Occitanie region and support from the Hérault's Chamber of Agriculture. This mobile app is part of research project about collaborative collection of agricultural observations.",
+    "@infoAboutDescription": {
+        "description": ""
+    },
+
+    "infoSectionApp": "ApeX Vigne application",
+    "@infoSectionApp": {
+        "description": ""
+    },
+
+    "infoSectionPartners": "Partners",
+    "@infoSectionPartners": {
+        "description": ""
+    },
+
+    "infoConnected": "You are connected",
+    "@infoConnected": {
+        "description": ""
+    },
+
+    "infoErrorDisconnected": "Connection failed, you are disconnected",
+    "@infoErrorDisconnected": {
+        "description": ""
+    },
+
+    "infoSyncData": "Synchronising data...",
+    "@infoSyncData": {
+        "description": ""
+    },
+
+    "infoInvalidEmailOrPassword": "Invalid email or password",
+    "@infoInvalidEmailOrPassword": {
+        "description": ""
+    },
+
+    "infoErrorLogin": "Connection error",
+    "@infoErrorLogin": {
+        "description": ""
+    },
+
+    "infoErrorSignup": "Signup error",
+    "@infoErrorSignup": {
+        "description": ""
+    },
+
+    "infoErrorRecoverPassword": "Error while sending the reset code. Check that your e-mail is correct",
+    "@infoErrorRecoverPassword": {
+        "description": ""
+    },
+
+    "infoErrorConfirmRecoverPassword": "Error while resetting the password. Check that your reset code is correct",
+    "@infoErrorConfirmRecoverPassword": {
+        "description": ""
+    },
+
+    "infoPruned": "Topped of trimmed",
+    "@infoPruned": {
+        "description": ""
+    },
+
+    "infoIFV0": "Absent",
+    "@infoIFV0": {
+        "description": ""
+    },
+
+    "infoIFV1": "Moderate",
+    "@infoIFV1": {
+        "description": ""
+    },
+
+    "infoIFV2": "Strong",
+    "@infoIFV2": {
+        "description": ""
+    },
+
+    "infoIFV3": "Severe",
+    "@infoIFV3": {
+        "description": ""
+    },
+
+    "infoWhyOffline": "This may be due to a poor internet connection or server maintenance.",
+    "@infoWhyOffline": {
+        "description": ""
+    },
+
+    "infoLocationRequired": "You need to authorise location to be able to create a session",
+    "@infoLocationRequired": {
+        "description": ""
+    },
+
+    "infoEnableLocationSystem": "You need to authorise location in your phone settings to be able to create an observation session",
+    "@infoEnableLocationSystem": {
+        "description": ""
+    },
+
+    "infoLocationDisabled": "The location on your phone is not enabled",
+    "@infoLocationDisabled": {
+        "description": ""
+    },
+
+    "infoSignUpFormDescription": "Please fill in this form to complete the signup",
+    "@infoSignUpFormDescription": {
+        "description": ""
+    },
+
+    "infoConfirmPasswordError": "Passwords are not matching",
+    "@infoConfirmPasswordError": {
+        "description": ""
+    },
+
+    "infoParcelName": "Plot name",
+    "@infoParcelName": {
+        "description": ""
+    },
+
+    "infoHydricConstraint": "Water stress",
+    "@infoHydricConstraint": {
+        "description": ""
+    },
+
+    "infoExportSessionsSuccess": "The observation sessions have been sent to you by email",
+    "@infoExportSessions": {
+        "description": ""
+    },
+
+    "infoExportSessionsFailed": "An error occurred while exporting the observation sessions",
+    "@infoExportSessionsFailed": {
+        "description": ""
+    },
+
+    "infoRecoverPasswordIntro": "Please enter your e-mail adress",
+    "@infoRecoverPasswordIntro": {
+        "description": ""
+    },
+
+    "infoRecoverPasswordDescription": "We will send you a reset code by e-mail",
+    "@infoRecoverPasswordDescription": {
+        "description": ""
+    },
+
+    "infoRecoverPasswordSuccess": "An email has been sent, check your inbox",
+    "@infoRecoverPasswordSuccess": {
+        "description": ""
+    },
+
+    "infoConfirmRecoverIntro": "Please fill in your code and new password",
+    "@infoConfirmRecoverIntro": {
+        "description": ""
+    },
+
+    "infoRecoverCodePasswordDescription": "A reset code will be sent to you by e-mail",
+    "@infoRecoverCodePasswordDescription": {
+        "description": ""
+    },
+
+    "infoConfirmRecoverSuccess": "Your password has been reset successfully",
+    "@infoConfirmRecoverSuccess": {
+        "description": ""
+    },
+
+    "infoRecoveryCodeValidationError": "The reset code is wrong",
+    "@infoRecoveryCodeValidationError": {
+        "description": ""
+    },
+
+    "infoResendCodeSuccess": "A new reset code has been sent",
+    "@infoResendCodeSuccess": {
+        "description": ""
+    },
+
+    "infoConfirmationCodeValidationError": "The reset code is wrong",
+    "@infoConfirmationCodeValidationError": {
+        "description": ""
+    },
+
+
+
+    "actionCancel": "Cancel",
+    "@actionCancel": {
+        "description": ""
+    },
+
+    "actionClose": "Close",
+    "@actionClose": {
+        "description": ""
+    },
+
+    "actionAdd": "Add",
+    "@actionAdd": {
+        "description": ""
+    },
+
+    "actionLogin": "Login",
+    "@actionLogin": {
+        "description": ""
+    },
+
+    "actionSignup": "Signup",
+    "@actionSignup": {
+        "description": ""
+    },
+
+    "actionForgotPassword": "Forgot password",
+    "@actionForgotPassword": {
+        "description": ""
+    },
+
+    "actionConfirm": "Confirm",
+    "@actionConfirm": {
+        "description": ""
+    },
+
+    "actionGoBack": "Go back",
+    "@actionGoBack": {
+        "description": ""
+    },
+
+    "actionNewSession": "New Session",
+    "@actionNewSession": {
+        "description": ""
+    },
+
+    "actionLogout": "Logout",
+    "@actionLogout": {
+        "description": ""
+    },
+
+    "actionDeleteAccount": "Ask for account deletion",
+    "@actionDeleteAccount": {
+        "description": ""
+    },
+
+    "actionDeleteAccountSubject": "Apex Vigne - Ask for account deletion",
+    "@actionDeleteAccountSubject": {
+        "description": ""
+    },
+
+    "actionDeleteAccountBody": "Could you please delete my account ?",
+    "@actionDeleteAccountBody": {
+        "description": ""
+    },
+
+    "actionExport": "Export observation sessions",
+    "@actionExport": {
+        "description": ""
+    },
+
+    "actionStayOffline": "Staying disconnected",
+    "@actionStayOffline": {
+        "description": ""
+    },
+
+    "actionGoOnline": "Try to connect",
+    "@actionGoOnline": {
+        "description": ""
+    },
+
+    "actionSend": "Send",
+    "@actionSend": {
+        "description": ""
+    },
+
+    "actionSave": "Save",
+    "@actionSave": {
+        "description": ""
+    },
+
+    "actionFullGrowth": "Full growth",
+    "@actionFullGrowth": {
+        "description": ""
+    },
+
+    "actionSlowerGrowth": "Moderate growth",
+    "@actionSlowerGrowth": {
+        "description": ""
+    },
+
+    "actionStuntedGrowth": "Stopped growth",
+    "@actionStuntedGrowth": {
+        "description": ""
+    },
+
+    "actionValidateSession": "Finish",
+    "@actionValidateSession": {
+        "description": ""
+    },
+
+    "actionUnderstand": "I've got it !",
+    "@actionUnderstand": {
+        "description": ""
+    },
+
+    "actionRecoverPassword": "Send code",
+    "@actionRecoverPassword": {
+        "description": ""
+    },
+
+    "actionResendCode": "Resend code",
+    "@actionResendCode": {
+        "description": ""
+    },
+
+    "actionSetPassword": "Set password",
+    "@actionSetPassword": {
+        "description": ""
+    },
+
+
+
+    "sortByMostRecent": "From the most recent to the oldest",
+    "@sortByMostRecent": {
+        "description": ""
+    },
+
+    "sortByOldest": "From the oldest to the most recent",
+    "@sortByOldest": {
+        "description": ""
+    },
+
+    "sortAZ": "A -> Z",
+    "@sortAZ": {
+        "description": ""
+    },
+
+    "sortZA": "Z -> A",
+    "@sortZA": {
+        "description": ""
+    },
+
+    "sortByNearest": "Nearest position",
+    "@sortByNearest": {
+        "description": ""
+    },
+
+
+
+    "nameStadeA": "Winter buds",
+    "@nameStadeA": {
+        "description": ""
+    },
+
+    "nameStadeB": "Wool stage",
+    "@nameStadeB": {
+        "description": ""
+    },
+
+    "nameStadeC": "Bud burst",
+    "@nameStadeC": {
+        "description": ""
+    },
+
+    "nameStadeD": "First leaf unfolded",
+    "@nameStadeD": {
+        "description": ""
+    },
+
+    "nameStadeE": "2nd to 3rd leaves unfolded",
+    "@nameStadeE": {
+        "description": ""
+    },
+
+    "nameStadeF": "Inflorescences clearly visible",
+    "@nameStadeF": {
+        "description": ""
+    },
+
+    "nameStadeG": "Flowers closely pressed together",
+    "@nameStadeG": {
+        "description": ""
+    },
+
+    "nameStadeH": "Flowers separating",
+    "@nameStadeH": {
+        "description": ""
+    },
+
+    "nameStadeI": "Flowering",
+    "@nameStadeI": {
+        "description": ""
+    },
+
+    "nameStadeJ": "Fruit set",
+    "@nameStadeJ": {
+        "description": ""
+    },
+
+    "nameStadeK": "Berries pea-sized",
+    "@nameStadeK": {
+        "description": ""
+    },
+
+    "nameStadeL": "Berries beginning to touch",
+    "@nameStadeL": {
+        "description": ""
+    },
+
+    "nameStadeM": "Ripening of berries",
+    "@nameStadeM": {
+        "description": ""
+    },
+
+    "nameStadeN": "Berries ripe for harvest",
+    "@nameStadeN": {
+        "description": ""
+    },
+
+    "nameStadeO": "End of wood maturation",
+    "@nameStadeO": {
+        "description": ""
+    },
+
+    "nameStadeP": "Leaf-fall",
+    "@nameStadeP": {
+        "description": ""
+    },
+
+
+    "codeStadeA": "Stage A (BBCH 00 à 03)",
+    "@codeStadeA": {
+        "description": ""
+    },
+
+    "codeStadeB": "Stage B (BBCH 05)",
+    "@codeStadeB": {
+        "description": ""
+    },
+
+    "codeStadeC": "Stage C (BBCH 09)",
+    "@codeStadeC": {
+        "description": ""
+    },
+
+    "codeStadeD": "Stage D (BBCH 10)",
+    "@codeStadeD": {
+        "description": ""
+    },
+
+    "codeStadeE": "Stage E (BBCH 11 à 19)",
+    "@codeStadeE": {
+        "description": ""
+    },
+
+    "codeStadeF": "Stage F (BBCH 53)",
+    "@codeStadeF": {
+        "description": ""
+    },
+
+    "codeStadeG": "Stage G (BBCH 55)",
+    "@codeStadeG": {
+        "description": ""
+    },
+
+    "codeStadeH": "Stage H (BBCH 57)",
+    "@codeStadeH": {
+        "description": ""
+    },
+
+    "codeStadeI": "Stage I (BBCH 60 à 69)",
+    "@codeStadeI": {
+        "description": ""
+    },
+
+    "codeStadeJ": "Stage J (BBCH 71)",
+    "@codeStadeJ": {
+        "description": ""
+    },
+
+    "codeStadeK": "Stage K (BBCH 75)",
+    "@codeStadeK": {
+        "description": ""
+    },
+
+    "codeStadeL": "Stage L (BBCH 77)",
+    "@codeStadeL": {
+        "description": ""
+    },
+
+    "codeStadeM": "Stage M (BBCH 81 à 85)",
+    "@codeStadeM": {
+        "description": ""
+    },
+
+    "codeStadeN": "Stage N (BBCH 89)",
+    "@codeStadeN": {
+        "description": ""
+    },
+
+    "codeStadeO": "Stage O (BBCH 91)",
+    "@codeStadeO": {
+        "description": ""
+    },
+
+    "codeStadeP": "Stage P (BBCH 92 à 97)",
+    "@codeStadeP": {
+        "description": ""
+    },
+
+
+    "descriptionStadeA": "",
+    "@descriptionStadeA": {
+        "description": ""
+    },
+
+    "descriptionStadeB": "",
+    "@descriptionStadeB": {
+        "description": ""
+    },
+
+    "descriptionStadeC": "",
+    "@descriptionStadeC": {
+        "description": ""
+    },
+
+    "descriptionStadeD": "",
+    "@descriptionStadeD": {
+        "description": ""
+    },
+
+    "descriptionStadeE": "",
+    "@descriptionStadeE": {
+        "description": ""
+    },
+
+    "descriptionStadeF": "",
+    "@descriptionStadeF": {
+        "description": ""
+    },
+
+    "descriptionStadeG": "",
+    "@descriptionStadeG": {
+        "description": ""
+    },
+
+    "descriptionStadeH": "",
+    "@descriptionStadeH": {
+        "description": ""
+    },
+
+    "descriptionStadeI": "",
+    "@descriptionStadeI": {
+        "description": ""
+    },
+
+    "descriptionStadeJ": "",
+    "@descriptionStadeJ": {
+        "description": ""
+    },
+
+    "descriptionStadeK": "",
+    "@descriptionStadeK": {
+        "description": ""
+    },
+
+    "descriptionStadeL": "",
+    "@descriptionStadeL": {
+        "description": ""
+    },
+
+    "descriptionStadeM": "",
+    "@descriptionStadeM": {
+        "description": ""
+    },
+
+    "descriptionStadeN": "",
+    "@descriptionStadeN": {
+        "description": ""
+    },
+
+    "descriptionStadeO": "",
+    "@descriptionStadeO": {
+        "description": ""
+    },
+
+    "descriptionStadeP": "",
+    "@descriptionStadeP": {
+        "description": ""
+    }
+}

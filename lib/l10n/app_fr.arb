@@ -1,0 +1,898 @@
+{
+    "appName": "ApeX Vigne",
+    "@appName": {
+        "description": ""
+    },
+
+
+
+    "tooltipIcApex": "iC-Apex est l'indice de croissance des apex. Il varie entre 1 (pleine croissance des apex) et 0 (croissance totalement arrêtée).",
+    "@tooltipIcApex": {
+        "description": ""
+    },
+
+    "tooltipHydricConstraint": "Contrainte hydrique",
+    "@tooltipHydricConstraint": {
+        "description": ""
+    },
+
+
+
+    "titleHome": "Parcelles",
+    "@titleHome": {
+        "description": ""
+    },
+
+    "titleAddParcel": "Ajouter une parcelle",
+    "@titleAddParcel": {
+        "description": ""
+    },
+
+    "titleNotes": "Notes",
+    "@titleNotes": {
+        "description": ""
+    },
+
+    "titleEditSession": "Modification de la session",
+    "@titleEditSession": {
+        "description": ""
+    },
+
+    "titlePrunedParcel": "Noter la parcelle comme écimée",
+    "@titlePrunedParcel": {
+        "description": ""
+    },
+
+    "titleNewSession": "Nouvelle session",
+    "@titleNewSession": {
+        "description": ""
+    },
+
+    "titleProfile": "Profil",
+    "@titleProfile": {
+        "description": ""
+    },
+
+    "titleStadePheno": "Stades phénologiques",
+    "@titleStadePheno": {
+        "description": ""
+    },
+
+    "titleDisconnected": "Vous êtes déconnecté",
+    "@titleDisconnected": {
+        "description": ""
+    },
+
+    "titleAbout": "À propos",
+    "@titleAbout": {
+        "description": ""
+    },
+
+    "titleContact": "Nous contacter",
+    "@titleContact": {
+        "description": ""
+    },
+
+    "titleLeaveSession": "Quitter la session d'observations",
+    "@titleLeaveSession": {
+        "description": ""
+    },
+
+    "titleEditNumber": "Éditer le nombre",
+    "@titleEditNumber": {
+        "description": ""
+    },
+
+    "titleTutoEditNumber": "Changer le nombre à tout moment !",
+    "@titleTutoEditNumber": {
+        "description": ""
+    },
+
+    "titleTutoEditSession": "Vous pouvez éditer n'importe quelle session d'observations !",
+    "@titleTutoEditSession": {
+        "description": ""
+    },
+
+    "titleSuccess": "Succès",
+    "@titleSuccess": {
+        "description": ""
+    },
+
+
+
+    "subtitleNoSaveParcelOfflineMode": "Vous ne pouvez pas créer de parcelle car vous êtes hors ligne.",
+    "@subtitleNoSaveParcelOfflineMode": {
+        "description": ""
+    },
+
+
+
+    "hintParcelName": "Nom de la parcelle",
+    "@hintParcelName": {
+        "description": ""
+    },
+
+    "hintEmail": "Email",
+    "@hintEmail": {
+        "description": ""
+    },
+
+    "hintPassword": "Mot de passe",
+    "@hintPassword": {
+        "description": ""
+    },
+
+    "hintConfirmPassword": "Confirmer le mot de passe",
+    "@hintConfirmPassword": {
+        "description": ""
+    },
+
+    "hintWriteMessage": "Écrivez votre message ici...",
+    "@hintWriteMessage": {
+        "description": ""
+    },
+
+    "hintWriteHere": "Écrivez ici...",
+    "@hintWriteHere": {
+        "description": ""
+    },
+
+    "hintRecoveryCode": "Code de réinitialisation",
+    "@hintRecoveryCode": {
+        "description": ""
+    },
+
+    "hintConfirmationCode": "Code de réinitialisation",
+    "@hintConfirmationCode": {
+        "description": ""
+    },
+
+
+
+    "validatorParcelName": "Veuillez entrer un nom de parcelle",
+    "@validatorParcelName": {
+        "description": ""
+    },
+
+
+
+    "infoLoading": "Chargement...",
+    "@infoLoading": {
+        "description": ""
+    },
+
+    "infoCheckUser": "Vérification de l'utilisateur...",
+    "@infoCheckUser": {
+        "description": ""
+    },
+
+    "infoConnectServer": "Connexion au serveur...",
+    "@infoConnectServer": {
+        "description": ""
+    },
+
+    "infoOfflineMode": "Lancemenent en mode déconnecté...",
+    "@infoOfflineMode": {
+        "description": ""
+    },
+
+    "infoAuthRequired": "Authentification requise...",
+    "@infoAuthRequired": {
+        "description": ""
+    },
+
+    "infoUserProfileLoading": "Chargement des données utilisateur...",
+    "@infoUserProfileLoading": {
+        "description": ""
+    },
+
+    "infoParcelsLoading": "Chargement des parcelles...",
+    "@infoParcelsLoading": {
+        "description": ""
+    },
+
+    "infoSessionsLoading": "Chargement des sessions d'observations...",
+    "@infoSessionsLoading": {
+        "description": ""
+    },
+
+    "infoSendParcelServer": "Envoi des parcelles au serveur...",
+    "@infoSendParcelServer": {
+        "description": ""
+    },
+
+    "infoSendSessionServer": "Envoi des sessions d'observations au serveur...",
+    "@infoSendSessionServer": {
+        "description": ""
+    },
+
+    "infoLastSessionDate": "Dernière session d'observations le {sessionDate}",
+    "@infoLastSessionDate": {
+        "description": "",
+        "placeholders": {
+            "sessionDate": {
+              "type": "String",
+              "example": "20 mai"
+            }
+          }
+    },
+
+    "infoNoParcels": "Aucune parcelle...",
+    "@infoNoParcels": {
+        "description": ""
+    },
+
+    "infoNoSessionInParcel": "Aucune session d'observations pour cette parcelle...",
+    "@infoNoSessionInParcel": {
+        "description": ""
+    },
+
+    "infoHaveToRequired": "Vous devez être connecté pour modifier une session d'observations",
+    "@infoHaveToRequired": {
+        "description": ""
+    },
+
+    "infoDate": "Date",
+    "@infoDate": {
+        "description": ""
+    },
+
+    "infoIcApex": "iC-Apex",
+    "@infoIcApex": {
+        "description": ""
+    },
+
+    "infoNbSessions": "{count, plural, =0{0 sessions} =1{1 session} other{{count} sessions}}",
+    "@infoNbSessions": {
+        "description": "Le nombre de sessions",
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+
+    "infoConfirmPrunedParcel": "Êtes-vous sûr de vouloir noter la parcelle comme écimée ?",
+    "@infoConfirmPrunedParcel": {
+        "description": ""
+    },
+
+    "infoExitSession": "La session d'observations ne sera pas sauvegardée",
+    "@infoExitSession": {
+        "description": ""
+    },
+
+    "infoChoiceStade": "Choix du stade phénologique",
+    "@infoChoiceStade": {
+        "description": ""
+    },
+
+    "infoNumber": "Nombre",
+    "@infoNumber": {
+        "description": ""
+    },
+
+    "infoTutoEditNumber": "Vous pouvez éditer le nombre d'observations en maintenant appuyé sur le compteur",
+    "@infoTutoEditNumber": {
+        "description": ""
+    },
+
+    "infoTutoEditSession": "En appuyant longuement sur une des sessions d'observations présentes dans le tableau, vous pouvez la modifier",
+    "@infoTutoEditSession": {
+        "description": ""
+    },
+
+    "infoAccount": "Information du compte",
+    "@infoAccount": {
+        "description": ""
+    },
+
+    "infoErrorProfileInfo": "Une erreur est survenue lors de la récupération de vos informations",
+    "@infoErrorProfileInfo": {
+        "description": ""
+    },
+
+    "infoFirstname": "Prénom",
+    "@infoFirstname": {
+        "description": ""
+    },
+
+    "infoLastname": "Nom",
+    "@infoLastname": {
+        "description": ""
+    },
+
+    "infoEmail": "Email",
+    "@infoEmail": {
+        "description": ""
+    },
+
+    "infoStructure": "Structure",
+    "@infoStructure": {
+        "description": ""
+    },
+
+    "infoNbObsMin": "Nombre minimum d'observations par session d'observations",
+    "@infoNbObsMin": {
+        "description": ""
+    },
+
+    "infoAboutDescription": "L'application ApeX Vigne a été conçue par l'équipe d'Eneo pour le compte de l'Institut Agro Montpellier et de l'Institut Français de la Vigne et du vin. Ce projet a bénéficié du soutien financier de la région Occitanie et de la participation de la chambre d'agriculture de l'Hérault. Il s'inscrit dans le cadre de recherches sur la collecte collaboratives d'observations en agriculture.",
+    "@infoAboutDescription": {
+        "description": ""
+    },
+
+    "infoSectionApp": "Application ApeX Vigne",
+    "@infoSectionApp": {
+        "description": ""
+    },
+
+    "infoSectionPartners": "Partenaires",
+    "@infoSectionPartners": {
+        "description": ""
+    },
+
+    "infoConnected": "Vous êtes connecté",
+    "@infoConnected": {
+        "description": ""
+    },
+
+    "infoErrorDisconnected": "Échec de la connexion, vous êtes déconnecté",
+    "@infoErrorDisconnected": {
+        "description": ""
+    },
+
+    "infoSyncData": "Synchronisation des données...",
+    "@infoSyncData": {
+        "description": ""
+    },
+
+    "infoInvalidEmailOrPassword": "Email ou mot de passe invalide",
+    "@infoInvalidEmailOrPassword": {
+        "description": ""
+    },
+
+    "infoErrorLogin": "Erreur de connexion",
+    "@infoErrorLogin": {
+        "description": ""
+    },
+
+    "infoErrorSignup": "Erreur lors de la création du compte",
+    "@infoErrorSignup": {
+        "description": ""
+    },
+
+    "infoErrorRecoverPassword": "Erreur lors de l'envoi du code de réinitialisation. Vérifiez que votre e-mail est correct.",
+    "@infoErrorRecoverPassword": {
+        "description": ""
+    },
+
+    "infoErrorConfirmRecoverPassword": "Erreur lors de la réinitialisation du mot de passe. Vérifiez que votre code est correct.",
+    "@infoErrorConfirmRecoverPassword": {
+        "description": ""
+    },
+
+    "infoPruned": "Écimée",
+    "@infoPruned": {
+        "description": ""
+    },
+
+    "infoIFV0": "Absente",
+    "@infoIFV0": {
+        "description": ""
+    },
+
+    "infoIFV1": "Modérée",
+    "@infoIFV1": {
+        "description": ""
+    },
+
+    "infoIFV2": "Forte",
+    "@infoIFV2": {
+        "description": ""
+    },
+
+    "infoIFV3": "Sévère",
+    "@infoIFV3": {
+        "description": ""
+    },
+
+    "infoWhyOffline": "Cela peut être dû à une mauvaise connexion internet ou à une maintenance du serveur.",
+    "@infoWhyOffline": {
+        "description": ""
+    },
+
+    "infoLocationRequired": "Vous devez autoriser la localisation pour pouvoir créer une session d'observations",
+    "@infoLocationRequired": {
+        "description": ""
+    },
+
+    "infoEnableLocationSystem": "Vous devez autoriser la localisation dans les paramètres de votre téléphone pour pouvoir créer une session d'observations",
+    "@infoEnableLocationSystem": {
+        "description": ""
+    },
+
+    "infoLocationDisabled": "La localisation de votre téléphone n'est pas activé",
+    "@infoLocationDisabled": {
+        "description": ""
+    },
+
+    "infoSignUpFormDescription": "Merci de compléter ce formulaire pour confirmer la création du compte",
+    "@infoSignUpFormDescription": {
+        "description": ""
+    },
+
+    "infoConfirmPasswordError": "Les mots de passe ne sont pas identiques.",
+    "@infoConfirmPasswordError": {
+        "description": ""
+    },
+
+    "infoParcelName": "Nom de la parcelle",
+    "@infoParcelName": {
+        "description": ""
+    },
+
+    "infoHydricConstraint": "Contrainte hydrique",
+    "@infoHydricConstraint": {
+        "description": ""
+    },
+
+    "infoExportSessionsSuccess": "Les sessions d'observations vous ont été envoyées par email",
+    "@infoExportSessions": {
+        "description": ""
+    },
+
+    "infoExportSessionsFailed": "Une erreur est survenue lors de l'export des sessions d'observations",
+    "@infoExportSessionsFailed": {
+        "description": ""
+    },
+
+    "infoRecoverPasswordIntro": "Merci de renseigner votre adresse e-mail.",
+    "@infoRecoverPasswordIntro": {
+        "description": ""
+    },
+
+    "infoRecoverPasswordDescription": "Nous vous enverrons un code de réinitialisation par e-mail.",
+    "@infoRecoverPasswordDescription": {
+        "description": ""
+    },
+
+    "infoRecoverPasswordSuccess": "Un e-mail a été envoyé, vérifiez votre boîte de réception",
+    "@infoRecoverPasswordSuccess": {
+        "description": ""
+    },
+
+    "infoConfirmRecoverIntro": "Renseignez votre code et votre nouveau mot de passe.",
+    "@infoConfirmRecoverIntro": {
+        "description": ""
+    },
+
+    "infoRecoverCodePasswordDescription": "Un code de réinitialisation va vous être envoyé par e-mail.",
+    "@infoRecoverCodePasswordDescription": {
+        "description": ""
+    },
+
+    "infoConfirmRecoverSuccess": "Votre mot de passe a été réinitialisé avec succès",
+    "@infoConfirmRecoverSuccess": {
+        "description": ""
+    },
+
+    "infoRecoveryCodeValidationError": "Le code de réinitialisation est invalide",
+    "@infoRecoveryCodeValidationError": {
+        "description": ""
+    },
+
+    "infoResendCodeSuccess": "Un nouveau code de réinitialisation a été envoyé",
+    "@infoResendCodeSuccess": {
+        "description": ""
+    },
+
+    "infoConfirmationCodeValidationError": "Le code de réinitialisation est invalide",
+    "@infoConfirmationCodeValidationError": {
+        "description": ""
+    },
+
+
+
+    "actionCancel": "Annuler",
+    "@actionCancel": {
+        "description": ""
+    },
+
+    "actionClose": "Fermer",
+    "@actionClose": {
+        "description": ""
+    },
+
+    "actionAdd": "Ajouter",
+    "@actionAdd": {
+        "description": ""
+    },
+
+    "actionLogin": "Se connecter",
+    "@actionLogin": {
+        "description": ""
+    },
+
+    "actionSignup": "Créer un compte",
+    "@actionSignup": {
+        "description": ""
+    },
+
+    "actionForgotPassword": "Mot de passe oublié",
+    "@actionForgotPassword": {
+        "description": ""
+    },
+
+    "actionConfirm": "Confirmer",
+    "@actionConfirm": {
+        "description": ""
+    },
+
+    "actionGoBack": "Retour",
+    "@actionGoBack": {
+        "description": ""
+    },
+
+    "actionNewSession": "Nouvelle session",
+    "@actionNewSession": {
+        "description": ""
+    },
+
+    "actionLogout": "Se déconnecter",
+    "@actionLogout": {
+        "description": ""
+    },
+
+    "actionDeleteAccount": "Demander la suppression du compte",
+    "@actionDeleteAccount": {
+        "description": ""
+    },
+
+    "actionDeleteAccountSubject": "Apex Vigne - Demande de suppression de compte",
+    "@actionDeleteAccountSubject": {
+        "description": ""
+    },
+
+    "actionDeleteAccountBody": "Merci de supprimer mon compte ApeX-Vigne svp",
+    "@actionDeleteAccountBody": {
+        "description": ""
+    },
+
+    "actionExport": "Exporter les sessions d'observations",
+    "@actionExport": {
+        "description": ""
+    },
+
+    "actionStayOffline": "Rester déconnecté",
+    "@actionStayOffline": {
+        "description": ""
+    },
+
+    "actionGoOnline": "Se connecter",
+    "@actionGoOnline": {
+        "description": ""
+    },
+
+    "actionSend": "Envoyer",
+    "@actionSend": {
+        "description": ""
+    },
+
+    "actionSave": "Sauvegarder",
+    "@actionSave": {
+        "description": ""
+    },
+
+    "actionFullGrowth": "Pleine croissance",
+    "@actionFullGrowth": {
+        "description": ""
+    },
+
+    "actionSlowerGrowth": "Croissance ralentie",
+    "@actionSlowerGrowth": {
+        "description": ""
+    },
+
+    "actionStuntedGrowth": "Arrêt de croissance",
+    "@actionStuntedGrowth": {
+        "description": ""
+    },
+
+    "actionValidateSession": "Terminer",
+    "@actionValidateSession": {
+        "description": ""
+    },
+
+    "actionUnderstand": "J'ai compris !",
+    "@actionUnderstand": {
+        "description": ""
+    },
+
+    "actionRecoverPassword": "Envoyer le code",
+    "@actionRecoverPassword": {
+        "description": ""
+    },
+
+    "actionResendCode": "Renvoyer le code",
+    "@actionResendCode": {
+        "description": ""
+    },
+
+    "actionSetPassword": "Réinitialiser le mot de passe",
+    "@actionSetPassword": {
+        "description": ""
+    },
+
+
+
+    "sortByMostRecent": "Du plus récent au plus ancien",
+    "@sortByMostRecent": {
+        "description": ""
+    },
+
+    "sortByOldest": "Du plus ancien au plus récent",
+    "@sortByOldest": {
+        "description": ""
+    },
+
+    "sortAZ": "A -> Z",
+    "@sortAZ": {
+        "description": ""
+    },
+
+    "sortZA": "Z -> A",
+    "@sortZA": {
+        "description": ""
+    },
+
+    "sortByNearest": "Position la plus proche",
+    "@sortByNearest": {
+        "description": ""
+    },
+
+
+
+    "nameStadeA": "Bourgeon d'hiver",
+    "@nameStadeA": {
+        "description": ""
+    },
+
+    "nameStadeB": "Bourgeon dans le coton",
+    "@nameStadeB": {
+        "description": ""
+    },
+
+    "nameStadeC": "Pointe verte",
+    "@nameStadeC": {
+        "description": ""
+    },
+
+    "nameStadeD": "Sortie des feuilles",
+    "@nameStadeD": {
+        "description": ""
+    },
+
+    "nameStadeE": "2 à 3 feuilles étalées",
+    "@nameStadeE": {
+        "description": ""
+    },
+
+    "nameStadeF": "Grappes visibles",
+    "@nameStadeF": {
+        "description": ""
+    },
+
+    "nameStadeG": "Boutons floraux agglomérées",
+    "@nameStadeG": {
+        "description": ""
+    },
+
+    "nameStadeH": "Boutons floraux séparés",
+    "@nameStadeH": {
+        "description": ""
+    },
+
+    "nameStadeI": "Floraison",
+    "@nameStadeI": {
+        "description": ""
+    },
+
+    "nameStadeJ": "Nouaison",
+    "@nameStadeJ": {
+        "description": ""
+    },
+
+    "nameStadeK": "Petits pois",
+    "@nameStadeK": {
+        "description": ""
+    },
+
+    "nameStadeL": "Fermeture de la grappe",
+    "@nameStadeL": {
+        "description": ""
+    },
+
+    "nameStadeM": "Véraison",
+    "@nameStadeM": {
+        "description": ""
+    },
+
+    "nameStadeN": "Maturité",
+    "@nameStadeN": {
+        "description": ""
+    },
+
+    "nameStadeO": "Fin aoûtement du bois",
+    "@nameStadeO": {
+        "description": ""
+    },
+
+    "nameStadeP": "Chute des feuilles",
+    "@nameStadeP": {
+        "description": ""
+    },
+
+
+    "codeStadeA": "Stade A (BBCH 00 à 03)",
+    "@codeStadeA": {
+        "description": ""
+    },
+
+    "codeStadeB": "Stade B (BBCH 05)",
+    "@codeStadeB": {
+        "description": ""
+    },
+
+    "codeStadeC": "Stade C (BBCH 09)",
+    "@codeStadeC": {
+        "description": ""
+    },
+
+    "codeStadeD": "Stade D (BBCH 10)",
+    "@codeStadeD": {
+        "description": ""
+    },
+
+    "codeStadeE": "Stade E (BBCH 11 à 19)",
+    "@codeStadeE": {
+        "description": ""
+    },
+
+    "codeStadeF": "Stade F (BBCH 53)",
+    "@codeStadeF": {
+        "description": ""
+    },
+
+    "codeStadeG": "Stade G (BBCH 55)",
+    "@codeStadeG": {
+        "description": ""
+    },
+
+    "codeStadeH": "Stade H (BBCH 57)",
+    "@codeStadeH": {
+        "description": ""
+    },
+
+    "codeStadeI": "Stade I (BBCH 60 à 69)",
+    "@codeStadeI": {
+        "description": ""
+    },
+
+    "codeStadeJ": "Stade J (BBCH 71)",
+    "@codeStadeJ": {
+        "description": ""
+    },
+
+    "codeStadeK": "Stade K (BBCH 75)",
+    "@codeStadeK": {
+        "description": ""
+    },
+
+    "codeStadeL": "Stade L (BBCH 77)",
+    "@codeStadeL": {
+        "description": ""
+    },
+
+    "codeStadeM": "Stade M (BBCH 81 à 85)",
+    "@codeStadeM": {
+        "description": ""
+    },
+
+    "codeStadeN": "Stade N (BBCH 89)",
+    "@codeStadeN": {
+        "description": ""
+    },
+
+    "codeStadeO": "Stade O (BBCH 91)",
+    "@codeStadeO": {
+        "description": ""
+    },
+
+    "codeStadeP": "Stade P (BBCH 92 à 97)",
+    "@codeStadeP": {
+        "description": ""
+    },
+
+
+    "descriptionStadeA": "Début du gonflement du bourgeon et de la reprise de la végétation.",
+    "@descriptionStadeA": {
+        "description": ""
+    },
+
+    "descriptionStadeB": "Les écailles s'écartent, la protection cotonneuse ou bourre devient visible.",
+    "@descriptionStadeB": {
+        "description": ""
+    },
+
+    "descriptionStadeC": "L'extrémité verte de la pousse devient visible.",
+    "@descriptionStadeC": {
+        "description": ""
+    },
+
+    "descriptionStadeD": "Les feuilles rudimentaires sont rassemblées en rosette. Leur base est protégée par la bourre qui est rejetée à pas hors des écailles.",
+    "@descriptionStadeD": {
+        "description": ""
+    },
+
+    "descriptionStadeE": "Les feuilles se dégagent l'une après l'autre et se développent. Les premières caractéristiques propres au cépage.",
+    "@descriptionStadeE": {
+        "description": ""
+    },
+
+    "descriptionStadeF": "La grappe rudimentaire est visible à l'extrémité de la pousse. Quatre à six feuilles sont étalées.",
+    "@descriptionStadeF": {
+        "description": ""
+    },
+
+    "descriptionStadeG": "La grappe se développe. Les boutons floraux restent agglomérés.",
+    "@descriptionStadeG": {
+        "description": ""
+    },
+
+    "descriptionStadeH": "La grappe est bien développée. Les boutons floraux sont nettement séparés.",
+    "@descriptionStadeH": {
+        "description": ""
+    },
+
+    "descriptionStadeI": "Les capuchons floraux se détachent puis tombent. Les étamines et le pistil sont visibles.",
+    "@descriptionStadeI": {
+        "description": ""
+    },
+
+    "descriptionStadeJ": "Les baies commencent à se développer. les pièces florales chutent.",
+    "@descriptionStadeJ": {
+        "description": ""
+    },
+
+    "descriptionStadeK": "Les baies ont la taille d'un petit pois. Les grappes s'inclinent vers le bas et gagnent leur position finale.",
+    "@descriptionStadeK": {
+        "description": ""
+    },
+
+    "descriptionStadeL": "Dans la grappe, les baies sont suffisament grosses pour qu'elles se touchent.",
+    "@descriptionStadeL": {
+        "description": ""
+    },
+
+    "descriptionStadeM": "Pour les cépages blancs, les baies deviennent légèrement translucides, et pour les cépages noirs, elles prennent une coloration violettes.",
+    "@descriptionStadeM": {
+        "description": ""
+    },
+
+    "descriptionStadeN": "Les baies ont atteint leur maturité pour la vendange.",
+    "@descriptionStadeN": {
+        "description": ""
+    },
+
+    "descriptionStadeO": "L'aoûtement du bois est amorcé lorsque la véraison arrive à son terme.",
+    "@descriptionStadeO": {
+        "description": ""
+    },
+
+    "descriptionStadeP": "Les feuilles se colorent puis tombent. La vigne entre en repos végétatif.",
+    "@descriptionStadeP": {
+        "description": ""
+    }
+}
