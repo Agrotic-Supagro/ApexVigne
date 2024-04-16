@@ -142,6 +142,11 @@
         "description": ""
     },
 
+    "hintConfirmationCode": "Reset code",
+    "@hintConfirmationCode": {
+        "description": ""
+    },
+
 
 
     "validatorParcelName": "Veuillez entrer un nom de parcelle",
@@ -483,6 +488,11 @@
         "description": ""
     },
 
+    "infoConfirmationCodeValidationError": "Le code de confirmation est invalide",
+    "@infoConfirmationCodeValidationError": {
+        "description": ""
+    },
+
 
 
     "actionCancel": "Annuler",
@@ -545,7 +555,7 @@
         "description": ""
     },
 
-    "actionDeleteAccountBody": "Merci de supprimer mon compte ApeX-Vigne svp.",
+    "actionDeleteAccountBody": "Merci de supprimer mon compte ApeX-Vigne svp",
     "@actionDeleteAccountBody": {
         "description": ""
     },
@@ -607,6 +617,11 @@
 
     "actionResendCode": "Renvoyer le code",
     "@actionResendCode": {
+        "description": ""
+    },
+
+    "actionSetPassword": "Réinitialiser le mot de passe",
+    "@actionSetPassword": {
         "description": ""
     },
 
