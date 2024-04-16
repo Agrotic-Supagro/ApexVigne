@@ -1,3 +1,4 @@
+import 'package:apex_vigne/app_config.dart';
 import 'package:apex_vigne/pages/loading/loading.page.dart';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/services/navigation.service.dart';
@@ -56,6 +57,7 @@ class _ApexVigneAppState extends State<ApexVigneApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: AppConfig.debugShowCheckedModeBanner,
       navigatorKey: NavigationService.navigatorKey,
       localizationsDelegates: const [
         AppLocalizations.delegate,
