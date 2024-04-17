@@ -508,6 +508,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 6.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ag.GB.apex;
 				PRODUCT_NAME = "ApeX Vigne - dev";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -649,6 +650,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 6.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ag.GB.apex;
 				PRODUCT_NAME = "ApeX Vigne";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -753,6 +755,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 6.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ag.GB.apex;
 				PRODUCT_NAME = "ApeX Vigne";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -851,6 +854,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 6.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ag.GB.apex;
 				PRODUCT_NAME = "ApeX Vigne";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1007,6 +1011,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 6.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ag.GB.apex;
 				PRODUCT_NAME = "ApeX Vigne - dev";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1038,6 +1043,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 6.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ag.GB.apex;
 				PRODUCT_NAME = "ApeX Vigne - dev";
 				PROVISIONING_PROFILE_SPECIFIER = "";
