@@ -70,10 +70,29 @@ class _ProfilPageState extends State<ProfilPage> {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: ElevatedApexButton(
-                callback: () {
-                  launchMail(
-                    subject: AppLocalizations.of(context)!.actionDeleteAccountSubject,
-                    body: '${AppLocalizations.of(context)!.actionDeleteAccountBody} : $userEmail',
+                callback: () async {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text(AppLocalizations.of(context)!.titleDeleteAccount),
+                        content: Text(AppLocalizations.of(context)!.messageDeleteAccount),
+                        actions: [
+                          TextButton(
+                            onPressed: () async {
+                              await auth.deleteAccount(context);
+                            },
+                            child: Text(AppLocalizations.of(context)!.actionYes),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text(AppLocalizations.of(context)!.actionCancel),
+                          ),
+                        ],
+                      );
+                    },
                   );
                 },
                 text: AppLocalizations.of(context)!.actionDeleteAccount,

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:apex_vigne/app_config.dart';
+import 'package:apex_vigne/pages/login/login.page.dart';
 import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/services/navigation.service.dart';
 import 'package:apex_vigne/services/parcels_api.service.dart';
@@ -91,6 +92,51 @@ class AuthenticationService {
       displayStateSnackBar(context, false);
       isOnlineState.value = false;
       return false;
+    }
+  }
+
+  Future<void> deleteAccount(BuildContext context) async {
+    final url = Uri.parse('${AppConfig.apiBaseUrl}/delete-account');
+    final response = await http.get(url, headers: {
+      'Authorization': 'Bearer ${await token}',
+      'Content-Type': 'application/json',
+    });
+
+    if (response.statusCode == 200) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(AppLocalizations.of(context)!.titleDeleteAccountConfirmation),
+            content: Text(AppLocalizations.of(context)!.messageDeleteAccountConfirmation),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  logout(() {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    ));
+                  });
+                },
+                child: Text(AppLocalizations.of(context)!.actionClose),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              "Erreur lors de la demande de suppression."//AppLocalizations.of(context)!.infoErrorDisconnected,
+            ),
+            duration: const Duration(seconds: 5),
+            backgroundColor: Colors.red.shade700,
+          ),
+        );
+      }
+      throw Exception('Failed to retrieve user data : ${response.body}');
     }
   }
 
