@@ -20,4 +20,12 @@ dart run _flutter_launcher_icons
 - You'll soon change WillPopScope by PopScope cause WillPopScope is deprecated but PopScope is actually bugged
 - Keep an eye on the 'vibration' package for any update, cause he's actually using a deprecated package
 
+### Build release version
+- Change version number in pubspec.yaml
+```
+flutter build ipa --flavor prod --target lib/main_prod.dart
+flutter build apk --flavor prod --target lib/main_prod.dart
+```
+
+
 
