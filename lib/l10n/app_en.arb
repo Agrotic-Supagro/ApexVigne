@@ -494,6 +494,10 @@
     },
 
 
+    "actionYes": "Yes",
+    "@actionYes": {
+        "description": ""
+    },
 
     "actionCancel": "Cancel",
     "@actionCancel": {
@@ -894,5 +898,27 @@
     "descriptionStadeP": "",
     "@descriptionStadeP": {
         "description": ""
+    },
+
+
+    "titleDeleteAccount": "Account deletion",
+    "@titleDeleteAccount": {
+        "description": ""
+    },
+
+    "messageDeleteAccount": "Are you sure you want to delete your account ?",
+    "@messageDeleteAccount": {
+        "description": ""
+    },
+
+    "titleDeleteAccountConfirmation": "Request received",
+    "@titleDeleteAccountConfirmation": {
+        "description": ""
+    },
+
+    "messageDeleteAccountConfirmation": "We will get back to you to confirm the deletion of the account. You will now be logged out.",
+    "@messageDeleteAccountConfirmation": {
+        "description": ""
     }
+    
 }

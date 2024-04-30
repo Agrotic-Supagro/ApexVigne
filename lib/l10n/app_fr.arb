@@ -4,8 +4,7 @@
         "description": ""
     },
 
-
-
+    
     "tooltipIcApex": "iC-Apex est l'indice de croissance des apex. Il varie entre 1 (pleine croissance des apex) et 0 (croissance totalement arrêtée).",
     "@tooltipIcApex": {
         "description": ""
@@ -494,6 +493,10 @@
     },
 
 
+    "actionYes": "Oui",
+    "@actionYes": {
+        "description": ""
+    },
 
     "actionCancel": "Annuler",
     "@actionCancel": {
@@ -893,6 +896,27 @@
 
     "descriptionStadeP": "Les feuilles se colorent puis tombent. La vigne entre en repos végétatif.",
     "@descriptionStadeP": {
+        "description": ""
+    },
+
+
+    "titleDeleteAccount": "Suppression du compte",
+    "@titleDeleteAccount": {
+        "description": ""
+    },
+
+    "messageDeleteAccount": "Etes-vous sûr·e de vouloir supprimer votre compte ?",
+    "@messageDeleteAccount": {
+        "description": ""
+    },
+
+    "titleDeleteAccountConfirmation": "Demande reçue",
+    "@titleDeleteAccountConfirmation": {
+        "description": ""
+    },
+
+    "messageDeleteAccountConfirmation": "Nous reviendrons vers vous pour vous confirmer la suppression du compte. Vous allez maintenant être déconnecté.",
+    "@messageDeleteAccountConfirmation": {
         "description": ""
     }
 }

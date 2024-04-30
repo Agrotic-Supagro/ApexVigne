@@ -1,7 +1,7 @@
 name: apex_vigne
 description: For monitoring the growth dynamics of your vines.
 publish_to: 'none'
-version: 6.0.0+60000
+version: 6.0.0+60002
 
 environment:
   sdk: '>=3.1.2 <4.0.0'

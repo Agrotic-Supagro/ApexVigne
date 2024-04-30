@@ -96,6 +96,7 @@ class DrawerApexVigne extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: ElevatedApexButton(
                     callback: () async {
+                      Navigator.of(context).pop();
                       final SessionsApiService sessionsApiService = SessionsApiService();
                       await sessionsApiService.exportSessions(context);
                     },
