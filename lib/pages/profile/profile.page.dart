@@ -6,7 +6,6 @@ import 'package:apex_vigne/services/isar.service.dart';
 import 'package:apex_vigne/services/sessions_api.service.dart';
 import 'package:apex_vigne/shared_widgets/elevated_apex_button.widget.dart';
 import 'package:apex_vigne/shared_widgets/offline_dialog.dart';
-import 'package:apex_vigne/utils/launch_mail.dart';
 import 'package:flutter/material.dart';
 import 'package:apex_vigne/services/auth.service.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -38,19 +37,12 @@ class _ProfilPageState extends State<ProfilPage> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              AppLocalizations.of(context)!.infoAccount,
-              style: Theme.of(context)
-                  .textTheme
-                  .labelMedium!
-                  .copyWith(letterSpacing: 1.2),
-            ),
-            const SizedBox(height: 20),
             _buildProfilInfo(),
+            Divider(color: Colors.grey[200]),
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -65,7 +57,7 @@ class _ProfilPageState extends State<ProfilPage> {
                 text: AppLocalizations.of(context)!.actionLogout,
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -99,6 +91,7 @@ class _ProfilPageState extends State<ProfilPage> {
                 alertButton: true,
               ),
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -137,19 +130,21 @@ class _ProfilPageState extends State<ProfilPage> {
           ApexVigneApp.of(context)?.changeLanguage(const Locale('fr'));
         } else if (selectedLanguage == 'English') {
           ApexVigneApp.of(context)?.changeLanguage(const Locale('en'));
+        } else if (selectedLanguage == 'Italiano') {
+          ApexVigneApp.of(context)?.changeLanguage(const Locale('it'));
+        } else if (selectedLanguage == 'Español') {
+          ApexVigneApp.of(context)?.changeLanguage(const Locale('es'));
+        } else if (selectedLanguage == 'Português') {
+          ApexVigneApp.of(context)?.changeLanguage(const Locale('pt'));
         }
-        // } else if (selectedLanguage == 'Italiano') {
-        //   ApexVigneApp.of(context)?.changeLanguage(const Locale('it'));
-        // } else if (selectedLanguage == 'Español') {
-        //   ApexVigneApp.of(context)?.changeLanguage(const Locale('es'));
-        // }
       },
       itemBuilder: (BuildContext context) {
         return [
-          'Français',
           'English',
-          // 'Italiano',
-          // 'Español',
+          'Español',
+          'Français',
+          'Italiano',
+          'Português',
         ].map((String language) {
           return PopupMenuItem<String>(
             value: language,
@@ -182,6 +177,16 @@ class _ProfilPageState extends State<ProfilPage> {
 
             return ListView(
               children: <Widget>[
+                const SizedBox(height: 20),
+                Text(
+                  AppLocalizations.of(context)!.infoAccount,
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium!
+                      .copyWith(letterSpacing: 1.2),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
                 ListTileInfo(
                   text: AppLocalizations.of(context)!.infoFirstname,
                   info: currentUserProfile.firstname,

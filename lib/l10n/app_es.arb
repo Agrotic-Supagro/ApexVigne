@@ -1,0 +1,903 @@
+{
+    "appName": "ApeX Vigne",
+    "@appName": {
+        "description": ""
+    },
+
+    "tooltipIcApex": "iC-Apex es el índice de crecimiento de los ápices. Varía entre 1 (crecimiento completo de los ápices) y 0 (crecimiento totalmente detenido).",
+    "@tooltipIcApex": {
+        "description": ""
+    },
+
+    "tooltipHydricConstraint": "Estrés hídrico",
+    "@tooltipHydricConstraint": {
+        "description": ""
+    },
+
+    "titleHome": "Parcelas",
+    "@titleHome": {
+        "description": ""
+    },
+
+    "titleAddParcel": "Agregar una parcela",
+    "@titleAddParcel": {
+        "description": ""
+    },
+
+    "titleNotes": "Notas",
+    "@titleNotes": {
+        "description": ""
+    },
+
+    "titleEditSession": "Editar la sesión",
+    "@titleEditSession": {
+        "description": ""
+    },
+
+    "titlePrunedParcel": "Marcar la parcela como rematada",
+    "@titlePrunedParcel": {
+        "description": ""
+    },
+
+    "titleNewSession": "Nueva sesión",
+    "@titleNewSession": {
+        "description": ""
+    },
+
+    "titleProfile": "Perfil",
+    "@titleProfile": {
+        "description": ""
+    },
+
+    "titleStadePheno": "Estados fenológicos",
+    "@titleStadePheno": {
+        "description": ""
+    },
+
+    "titleDisconnected": "Estás desconectado",
+    "@titleDisconnected": {
+        "description": ""
+    },
+
+    "titleAbout": "Acerca de",
+    "@titleAbout": {
+        "description": ""
+    },
+
+    "titleContact": "Contáctenos",
+    "@titleContact": {
+        "description": ""
+    },
+
+    "titleLeaveSession": "Salir de la sesión de observaciones",
+    "@titleLeaveSession": {
+        "description": ""
+    },
+
+    "titleEditNumber": "Editar el número",
+    "@titleEditNumber": {
+        "description": ""
+    },
+
+    "titleTutoEditNumber": "¡Cambia el número en cualquier momento!",
+    "@titleTutoEditNumber": {
+        "description": ""
+    },
+
+    "titleTutoEditSession": "¡Puedes editar cualquier sesión de observaciones!",
+    "@titleTutoEditSession": {
+        "description": ""
+    },
+
+    "titleSuccess": "Éxito",
+    "@titleSuccess": {
+        "description": ""
+    },
+
+    "subtitleNoSaveParcelOfflineMode": "No puedes crear una parcela porque estás desconectado.",
+    "@subtitleNoSaveParcelOfflineMode": {
+        "description": ""
+    },
+
+    "hintParcelName": "Nombre de la parcela",
+    "@hintParcelName": {
+        "description": ""
+    },
+
+    "hintEmail": "Correo electrónico",
+    "@hintEmail": {
+        "description": ""
+    },
+
+    "hintPassword": "Contraseña",
+    "@hintPassword": {
+        "description": ""
+    },
+
+    "hintConfirmPassword": "Confirmar contraseña",
+    "@hintConfirmPassword": {
+        "description": ""
+    },
+
+    "hintWriteMessage": "Escribe tu mensaje aquí...",
+    "@hintWriteMessage": {
+        "description": ""
+    },
+
+    "hintWriteHere": "Escribe aquí...",
+    "@hintWriteHere": {
+        "description": ""
+    },
+
+    "hintRecoveryCode": "Código de recuperación",
+    "@hintRecoveryCode": {
+        "description": ""
+    },
+
+    "hintConfirmationCode": "Código de confirmación",
+    "@hintConfirmationCode": {
+        "description": ""
+    },
+
+    "validatorParcelName": "Por favor, ingresa un nombre de parcela",
+    "@validatorParcelName": {
+        "description": ""
+    },
+
+    "infoLoading": "Cargando...",
+    "@infoLoading": {
+        "description": ""
+    },
+
+    "infoCheckUser": "Verificando usuario...",
+    "@infoCheckUser": {
+        "description": ""
+    },
+
+    "infoConnectServer": "Conectando al servidor...",
+    "@infoConnectServer": {
+        "description": ""
+    },
+
+    "infoOfflineMode": "Iniciando en modo sin conexión...",
+    "@infoOfflineMode": {
+        "description": ""
+    },
+
+    "infoAuthRequired": "Autenticación requerida...",
+    "@infoAuthRequired": {
+        "description": ""
+    },
+
+    "infoUserProfileLoading": "Cargando datos de usuario...",
+    "@infoUserProfileLoading": {
+        "description": ""
+    },
+
+    "infoParcelsLoading": "Cargando parcelas...",
+    "@infoParcelsLoading": {
+        "description": ""
+    },
+
+    "infoSessionsLoading": "Cargando sesiones de observación...",
+    "@infoSessionsLoading": {
+        "description": ""
+    },
+
+    "infoSendParcelServer": "Enviando parcelas al servidor...",
+    "@infoSendParcelServer": {
+        "description": ""
+    },
+
+    "infoSendSessionServer": "Enviando sesiones de observación al servidor...",
+    "@infoSendSessionServer": {
+        "description": ""
+    },
+
+    "infoLastSessionDate": "Última sesión de observación el {sessionDate}",
+    "@infoLastSessionDate": {
+        "description": "",
+        "placeholders": {
+            "sessionDate": {
+              "type": "String",
+              "example": "20 de mayo"
+            }
+          }
+    },
+
+    "infoNoParcels": "Sin parcelas...",
+    "@infoNoParcels": {
+        "description": ""
+    },
+
+    "infoNoSessionInParcel": "Sin sesiones de observación para esta parcela...",
+    "@infoNoSessionInParcel": {
+        "description": ""
+    },
+
+    "infoHaveToRequired": "Debes estar conectado para modificar una sesión de observación",
+    "@infoHaveToRequired": {
+        "description": ""
+    },
+
+    "infoDate": "Fecha",
+    "@infoDate": {
+        "description": ""
+    },
+
+    "infoIcApex": "iC-Apex",
+    "@infoIcApex": {
+        "description": ""
+    },
+
+    "infoNbSessions": "{count, plural, =0{0 sesiones} =1{1 sesión} other{{count} sesiones}}",
+    "@infoNbSessions": {
+        "description": "Número de sesiones",
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+
+    "infoConfirmPrunedParcel": "¿Estás seguro de querer marcar la parcela como rematada?",
+    "@infoConfirmPrunedParcel": {
+        "description": ""
+    },
+
+    "infoExitSession": "La sesión de observación no se guardará",
+    "@infoExitSession": {
+        "description": ""
+    },
+
+    "infoChoiceStade": "Selección del estado fenológico",
+    "@infoChoiceStade": {
+        "description": ""
+    },
+
+    "infoNumber": "Número",
+    "@infoNumber": {
+        "description": ""
+    },
+
+    "infoTutoEditNumber": "Puedes editar el número de observaciones manteniendo presionado el contador",
+    "@infoTutoEditNumber": {
+        "description": ""
+    },
+
+    "infoTutoEditSession": "Al mantener presionada una de las sesiones de observación en la tabla, puedes editarla",
+    "@infoTutoEditSession": {
+        "description": ""
+    },
+
+    "infoAccount": "Información de la cuenta",
+    "@infoAccount": {
+        "description": ""
+    },
+
+    "infoErrorProfileInfo": "Se produjo un error al recuperar tu información",
+    "@infoErrorProfileInfo": {
+        "description": ""
+    },
+
+    "infoFirstname": "Nombre",
+    "@infoFirstname": {
+        "description": ""
+    },
+
+    "infoLastname": "Apellido",
+    "@infoLastname": {
+        "description": ""
+    },
+
+    "infoEmail": "Email",
+    "@infoEmail": {
+        "description": ""
+    },
+
+    "infoStructure": "Estructura",
+    "@infoStructure": {
+        "description": ""
+    },
+
+    "infoNbObsMin": "Número mínimo de observaciones por sesión de observación",
+    "@infoNbObsMin": {
+        "description": ""
+    },
+
+    "infoAboutDescription": "La aplicación ApeX Vigne fue desarrollada por el equipo de Eneo para el Instituto Agro Montpellier y el Instituto Francés de la Viña y el Vino. Este proyecto recibió el apoyo financiero de la región de Occitania y la participación de la cámara de agricultura de Hérault. Se enmarca en investigaciones sobre la recopilación colaborativa de observaciones en agricultura.",
+    "@infoAboutDescription": {
+        "description": ""
+    },
+
+    "infoSectionApp": "Aplicación ApeX Vigne",
+    "@infoSectionApp": {
+        "description": ""
+    },
+
+    "infoSectionPartners": "Socios",
+    "@infoSectionPartners": {
+        "description": ""
+    },
+
+    "infoConnected": "Estás conectado",
+    "@infoConnected": {
+        "description": ""
+    },
+
+    "infoErrorDisconnected": "Error de conexión, estás desconectado",
+    "@infoErrorDisconnected": {
+        "description": ""
+    },
+
+    "infoSyncData": "Sincronizando datos...",
+    "@infoSyncData": {
+        "description": ""
+    },
+
+    "infoInvalidEmailOrPassword": "Email o contraseña inválidos",
+    "@infoInvalidEmailOrPassword": {
+        "description": ""
+    },
+
+    "infoErrorLogin": "Error de inicio de sesión",
+    "@infoErrorLogin": {
+        "description": ""
+    },
+
+    "infoErrorSignup": "Error al crear la cuenta",
+    "@infoErrorSignup": {
+        "description": ""
+    },
+
+    "infoErrorRecoverPassword": "Error al enviar el código de recuperación. Verifica que tu correo electrónico sea correcto.",
+    "@infoErrorRecoverPassword": {
+        "description": ""
+    },
+
+    "infoErrorConfirmRecoverPassword": "Error al restablecer la contraseña. Verifica que tu código sea correcto.",
+    "@infoErrorConfirmRecoverPassword": {
+        "description": ""
+    },
+
+    "infoPruned": "Rematada",
+    "@infoPruned": {
+        "description": ""
+    },
+
+    "infoIFV0": "Ausente",
+    "@infoIFV0": {
+        "description": ""
+    },
+
+    "infoIFV1": "Moderada",
+    "@infoIFV1": {
+        "description": ""
+    },
+
+    "infoIFV2": "Fuerte",
+    "@infoIFV2": {
+        "description": ""
+    },
+
+    "infoIFV3": "Severa",
+    "@infoIFV3": {
+        "description": ""
+    },
+
+    "infoWhyOffline": "Esto puede ser debido a una mala conexión a Internet o a un mantenimiento del servidor.",
+    "@infoWhyOffline": {
+        "description": ""
+    },
+
+    "infoLocationRequired": "Debes permitir la ubicación para poder crear una sesión de observaciones",
+    "@infoLocationRequired": {
+        "description": ""
+    },
+
+    "infoEnableLocationSystem": "Debes permitir la ubicación en la configuración de tu teléfono para poder crear una sesión de observaciones",
+    "@infoEnableLocationSystem": {
+        "description": ""
+    },
+
+    "infoLocationDisabled": "La ubicación de tu teléfono no está activada",
+    "@infoLocationDisabled": {
+        "description": ""
+    },
+
+    "infoSignUpFormDescription": "Por favor, completa este formulario para confirmar la creación de la cuenta",
+    "@infoSignUpFormDescription": {
+        "description": ""
+    },
+
+    "infoConfirmPasswordError": "Las contraseñas no coinciden.",
+    "@infoConfirmPasswordError": {
+        "description": ""
+    },
+
+    "infoParcelName": "Nombre de la parcela",
+    "@infoParcelName": {
+        "description": ""
+    },
+
+    "infoHydricConstraint": "Estrés hídrico",
+    "@infoHydricConstraint": {
+        "description": ""
+    },
+
+    "infoExportSessionsSuccess": "Las sesiones de observaciones se han enviado por correo electrónico",
+    "@infoExportSessions": {
+        "description": ""
+    },
+
+    "infoExportSessionsFailed": "Ha ocurrido un error al exportar las sesiones de observaciones",
+    "@infoExportSessionsFailed": {
+        "description": ""
+    },
+
+    "infoRecoverPasswordIntro": "Por favor, introduce tu dirección de correo electrónico.",
+    "@infoRecoverPasswordIntro": {
+        "description": ""
+    },
+
+    "infoRecoverPasswordDescription": "Te enviaremos un código de restablecimiento por correo electrónico.",
+    "@infoRecoverPasswordDescription": {
+        "description": ""
+    },
+
+    "infoRecoverPasswordSuccess": "Se ha enviado un correo electrónico, por favor revisa tu bandeja de entrada",
+    "@infoRecoverPasswordSuccess": {
+        "description": ""
+    },
+
+    "infoConfirmRecoverIntro": "Introduce tu código y tu nueva contraseña.",
+    "@infoConfirmRecoverIntro": {
+        "description": ""
+    },
+
+    "infoRecoverCodePasswordDescription": "Se enviará un código de restablecimiento por correo electrónico.",
+    "@infoRecoverCodePasswordDescription": {
+        "description": ""
+    },
+
+    "infoConfirmRecoverSuccess": "Tu contraseña se ha restablecido correctamente",
+    "@infoConfirmRecoverSuccess": {
+        "description": ""
+    },
+
+    "infoRecoveryCodeValidationError": "El código de restablecimiento es inválido",
+    "@infoRecoveryCodeValidationError": {
+        "description": ""
+    },
+
+    "infoResendCodeSuccess": "Se ha enviado un nuevo código de restablecimiento",
+    "@infoResendCodeSuccess": {
+        "description": ""
+    },
+
+    "infoConfirmationCodeValidationError": "El código de restablecimiento es inválido",
+    "@infoConfirmationCodeValidationError": {
+        "description": ""
+    },
+
+    "actionYes": "Sí",
+    "@actionYes": {
+        "description": ""
+    },
+
+    "actionCancel": "Cancelar",
+    "@actionCancel": {
+        "description": ""
+    },
+
+    "actionClose": "Cerrar",
+    "@actionClose": {
+        "description": ""
+    },
+
+    "actionAdd": "Agregar",
+    "@actionAdd": {
+        "description": ""
+    },
+
+    "actionLogin": "Iniciar sesión",
+    "@actionLogin": {
+        "description": ""
+    },
+
+    "actionSignup": "Crear una cuenta",
+    "@actionSignup": {
+        "description": ""
+    },
+
+    "actionForgotPassword": "¿Olvidaste tu contraseña?",
+    "@actionForgotPassword": {
+        "description": ""
+    },
+
+    "actionConfirm": "Confirmar",
+    "@actionConfirm": {
+        "description": ""
+    },
+
+    "actionGoBack": "Volver",
+    "@actionGoBack": {
+        "description": ""
+    },
+
+    "actionNewSession": "Nueva sesión",
+    "@actionNewSession": {
+        "description": ""
+    },
+
+    "actionLogout": "Cerrar sesión",
+    "@actionLogout": {
+        "description": ""
+    },
+
+    "actionDeleteAccount": "Solicitar eliminación de la cuenta",
+    "@actionDeleteAccount": {
+        "description": ""
+    },
+
+    "actionDeleteAccountSubject": "ApeX Vigne - Solicitud de eliminación de cuenta",
+    "@actionDeleteAccountSubject": {
+        "description": ""
+    },
+
+    "actionDeleteAccountBody": "Por favor, elimina mi cuenta de ApeX-Vigne",
+    "@actionDeleteAccountBody": {
+        "description": ""
+    },
+
+    "actionExport": "Exportar sesiones de observaciones",
+    "@actionExport": {
+        "description": ""
+    },
+
+    "actionStayOffline": "Permanecer desconectado",
+    "@actionStayOffline": {
+        "description": ""
+    },
+
+    "actionGoOnline": "Conectarse",
+    "@actionGoOnline": {
+        "description": ""
+    },
+
+    "actionSend": "Enviar",
+    "@actionSend": {
+        "description": ""
+    },
+
+    "actionSave": "Guardar",
+    "@actionSave": {
+        "description": ""
+    },
+
+    "actionFullGrowth": "Crecimiento completo",
+    "@actionFullGrowth": {
+        "description": ""
+    },
+
+    "actionSlowerGrowth": "Crecimiento más lento",
+    "@actionSlowerGrowth": {
+        "description": ""
+    },
+
+    "actionStuntedGrowth": "Crecimiento detenido",
+    "@actionStuntedGrowth": {
+        "description": ""
+    },
+
+    "actionValidateSession": "Finalizar",
+    "@actionValidateSession": {
+        "description": ""
+    },
+
+    "actionUnderstand": "¡Entendido!",
+    "@actionUnderstand": {
+        "description": ""
+    },
+
+    "actionRecoverPassword": "Enviar código",
+    "@actionRecoverPassword": {
+        "description": ""
+    },
+
+    "actionResendCode": "Reenviar código",
+    "@actionResendCode": {
+        "description": ""
+    },
+
+    "actionSetPassword": "Restablecer contraseña",
+    "@actionSetPassword": {
+        "description": ""
+    },
+
+    "sortByMostRecent": "De más reciente a más antiguo",
+    "@sortByMostRecent": {
+        "description": ""
+    },
+
+    "sortByOldest": "De más antiguo a más reciente",
+    "@sortByOldest": {
+        "description": ""
+    },
+
+    "sortAZ": "A -> Z",
+    "@sortAZ": {
+        "description": ""
+    },
+
+    "sortZA": "Z -> A",
+    "@sortZA": {
+        "description": ""
+    },
+
+    "sortByNearest": "Más cercano",
+    "@sortByNearest": {
+        "description": ""
+    },
+
+    "nameStadeA": "Brote de invierno",
+    "@nameStadeA": {
+        "description": ""
+    },
+
+    "nameStadeB": "Brote de algodón",
+    "@nameStadeB": {
+        "description": ""
+    },
+
+    "nameStadeC": "Punta verde",
+    "@nameStadeC": {
+        "description": ""
+    },
+
+    "nameStadeD": "Salida de hojas",
+    "@nameStadeD": {
+        "description": ""
+    },
+
+    "nameStadeE": "De 2 a 3 hojas extendidas",
+    "@nameStadeE": {
+        "description": ""
+    },
+
+    "nameStadeF": "Racimos visibles",
+    "@nameStadeF": {
+        "description": ""
+    },
+
+    "nameStadeG": "Botones florales agrupados",
+    "@nameStadeG": {
+        "description": ""
+    },
+
+    "nameStadeH": "Botones florales separados",
+    "@nameStadeH": {
+        "description": ""
+    },
+
+    "nameStadeI": "Floración",
+    "@nameStadeI": {
+        "description": ""
+    },
+
+    "nameStadeJ": "Cuajado",
+    "@nameStadeJ": {
+        "description": ""
+    },
+
+    "nameStadeK": "Pequeños guisantes",
+    "@nameStadeK": {
+        "description": ""
+    },
+
+    "nameStadeL": "Cierre del racimo",
+    "@nameStadeL": {
+        "description": ""
+    },
+
+    "nameStadeM": "Maduración",
+    "@nameStadeM": {
+        "description": ""
+    },
+
+    "nameStadeN": "Madurez",
+    "@nameStadeN": {
+        "description": ""
+    },
+
+    "nameStadeO": "Fin del endurecimiento de la madera",
+    "@nameStadeO": {
+        "description": ""
+    },
+
+    "nameStadeP": "Caída de las hojas",
+    "@nameStadeP": {
+        "description": ""
+    },
+
+    "codeStadeA": "Estadio A (BBCH 00 a 03)",
+    "@codeStadeA": {
+        "description": ""
+    },
+
+    "codeStadeB": "Estadio B (BBCH 05)",
+    "@codeStadeB": {
+        "description": ""
+    },
+
+    "codeStadeC": "Estadio C (BBCH 09)",
+    "@codeStadeC": {
+        "description": ""
+    },
+
+    "codeStadeD": "Estadio D (BBCH 10)",
+    "@codeStadeD": {
+        "description": ""
+    },
+
+    "codeStadeE": "Estadio E (BBCH 11 a 19)",
+    "@codeStadeE": {
+        "description": ""
+    },
+
+    "codeStadeF": "Estadio F (BBCH 53)",
+    "@codeStadeF": {
+        "description": ""
+    },
+
+    "codeStadeG": "Estadio G (BBCH 55)",
+    "@codeStadeG": {
+        "description": ""
+    },
+
+    "codeStadeH": "Estadio H (BBCH 57)",
+    "@codeStadeH": {
+        "description": ""
+    },
+
+    "codeStadeI": "Estadio I (BBCH 60 a 69)",
+    "@codeStadeI": {
+        "description": ""
+    },
+
+    "codeStadeJ": "Estadio J (BBCH 71)",
+    "@codeStadeJ": {
+        "description": ""
+    },
+
+    "codeStadeK": "Estadio K (BBCH 75)",
+    "@codeStadeK": {
+        "description": ""
+    },
+
+    "codeStadeL": "Estadio L (BBCH 77)",
+    "@codeStadeL": {
+        "description": ""
+    },
+
+    "codeStadeM": "Estadio M (BBCH 81 a 85)",
+    "@codeStadeM": {
+        "description": ""
+    },
+
+    "codeStadeN": "Estadio N (BBCH 89)",
+    "@codeStadeN": {
+        "description": ""
+    },
+
+    "codeStadeO": "Estadio O (BBCH 91)",
+    "@codeStadeO": {
+        "description": ""
+    },
+
+    "codeStadeP": "Estadio P (BBCH 92 a 97)",
+    "@codeStadeP": {
+        "description": ""
+    },
+
+    "descriptionStadeA": "Inicio de la hinchazón del brote y reanudación del crecimiento vegetativo.",
+    "@descriptionStadeA": {
+        "description": ""
+    },
+
+    "descriptionStadeB": "Las escamas se separan, la protección algodonosa o el acolchado se hacen visibles.",
+    "@descriptionStadeB": {
+        "description": ""
+    },
+
+    "descriptionStadeC": "La punta verde del brote se hace visible.",
+    "@descriptionStadeC": {
+        "description": ""
+    },
+
+    "descriptionStadeD": "Las hojas rudimentarias se recogen en una roseta. Su base aún está protegida por el relleno que se va expulsando poco a poco de las escamas.",
+    "@descriptionStadeD": {
+        "description": ""
+    },
+
+    "descriptionStadeE": "Las hojas emergen una tras otra y se desarrollan. Las primeras hojas presentan las características propias de la variedad de uva.",
+    "@descriptionStadeE": {
+        "description": ""
+    },
+
+    "descriptionStadeF": "El racimo rudimentario es visible en la punta del brote. Se extienden de cuatro a seis hojas.",
+    "@descriptionStadeF": {
+        "description": ""
+    },
+
+    "descriptionStadeG": "El cúmulo crece. Los botones florales se pegan.",
+    "@descriptionStadeG": {
+        "description": ""
+    },
+
+    "descriptionStadeH": "El clúster está bien desarrollado. Los botones florales están claramente separados.",
+    "@descriptionStadeH": {
+        "description": ""
+    },
+
+    "descriptionStadeI": "Las tapas de las flores se desprenden y luego se caen. Los estambres y el pistilo son visibles.",
+    "@descriptionStadeI": {
+        "description": ""
+    },
+
+    "descriptionStadeJ": "Las bayas comienzan a desarrollarse. Las partes florales caen.",
+    "@descriptionStadeJ": {
+        "description": ""
+    },
+
+    "descriptionStadeK": "Las bayas son del tamaño de un guisante. Los racimos se inclinan hacia abajo y ganan su posición final.",
+    "@descriptionStadeK": {
+        "description": ""
+    },
+
+    "descriptionStadeL": "En el racimo, las bayas son lo suficientemente grandes como para tocarse entre sí.",
+    "@descriptionStadeL": {
+        "description": ""
+    },
+
+    "descriptionStadeM": "Para los cepajes blancos, las bayas se vuelven ligeramente translúcidas, y para los cepajes negros, adquieren un color violeta.",
+    "@descriptionStadeM": {
+        "description": ""
+    },
+
+    "descriptionStadeN": "Las bayas han alcanzado su madurez para la vendimia.",
+    "@descriptionStadeN": {
+        "description": ""
+    },
+
+    "descriptionStadeO": "El endurecimiento de la madera comienza cuando finaliza el envero.",
+    "@descriptionStadeO": {
+        "description": ""
+    },
+
+    "descriptionStadeP": "Las hojas se tornan de color y caen. La vid entra en reposo vegetativo.",
+    "@descriptionStadeP": {
+        "description": ""
+    },
+
+    "titleDeleteAccount": "Eliminar cuenta",
+    "@titleDeleteAccount": {
+        "description": ""
+    },
+
+    "messageDeleteAccount": "¿Estás seguro(a) de que quieres eliminar tu cuenta?",
+    "@messageDeleteAccount": {
+        "description": ""
+    },
+
+    "titleDeleteAccountConfirmation": "Solicitud recibida",
+    "@titleDeleteAccountConfirmation": {
+        "description": ""
+    },
+
+    "messageDeleteAccountConfirmation": "Nos pondremos en contacto contigo para confirmar la eliminación de la cuenta. Ahora serás desconectado.",
+    "@messageDeleteAccountConfirmation": {
+        "description": ""
+    }
+}

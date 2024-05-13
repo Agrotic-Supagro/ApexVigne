@@ -4,102 +4,102 @@
         "description": ""
     },
 
-    "tooltipIcApex": "iC-Apex is the apex growth index. It varies between 1 (full apex growth) and 0 (growth completely stopped).",
+    "tooltipIcApex": "iC-Apex è l'indice di accrescimento dell'apice. Varia da 1 (crescita massima) a 0 (crescita completamente interrotta).",
     "@tooltipIcApex": {
         "description": ""
     },
 
-    "tooltipHydricConstraint": "Vine Water stress",
+    "tooltipHydricConstraint": "Stress idrico",
     "@tooltipHydricConstraint": {
         "description": ""
     },
 
-    "titleHome": "Plot",
+    "titleHome": "Lotti",
     "@titleHome": {
         "description": ""
     },
 
-    "titleAddParcel": "Add a plot",
+    "titleAddParcel": "Aggiungi una parcella",
     "@titleAddParcel": {
         "description": ""
     },
 
-    "titleNotes": "Notes",
+    "titleNotes": "Appunti",
     "@titleNotes": {
         "description": ""
     },
 
-    "titleEditSession": "Editing the observation session",
+    "titleEditSession": "Modifica sessione",
     "@titleEditSession": {
         "description": ""
     },
 
-    "titlePrunedParcel": "Mark the plot as topped or trimmed",
+    "titlePrunedParcel": "Annota la parcella come potato",
     "@titlePrunedParcel": {
         "description": ""
     },
 
-    "titleNewSession": "New observation session",
+    "titleNewSession": "Nuova sessione",
     "@titleNewSession": {
         "description": ""
     },
 
-    "titleProfile": "Profile",
+    "titleProfile": "Profilo",
     "@titleProfile": {
         "description": ""
     },
 
-    "titleStadePheno": "Phenological stages",
+    "titleStadePheno": "Stadi fenologici",
     "@titleStadePheno": {
         "description": ""
     },
 
-    "titleDisconnected": "You are disconnected",
+    "titleDisconnected": "Sei disconnesso",
     "@titleDisconnected": {
         "description": ""
     },
 
-    "titleAbout": "About us",
+    "titleAbout": "Informazioni",
     "@titleAbout": {
         "description": ""
     },
 
-    "titleContact": "Contact us",
+    "titleContact": "Contattaci",
     "@titleContact": {
         "description": ""
     },
 
-    "titleLeaveSession": "Leave the observation session",
+    "titleLeaveSession": "Abbandona la sessione di osservazione",
     "@titleLeaveSession": {
         "description": ""
     },
 
-    "titleEditNumber": "Edit number",
+    "titleEditNumber": "Modifica numero",
     "@titleEditNumber": {
         "description": ""
     },
 
-    "titleTutoEditNumber": "Change the number at any time !",
+    "titleTutoEditNumber": "Cambia il numero in qualsiasi momento!",
     "@titleTutoEditNumber": {
         "description": ""
     },
 
-    "titleTutoEditSession": "You can edit any observation session !",
+    "titleTutoEditSession": "Puoi modificare qualsiasi sessione di osservazione!",
     "@titleTutoEditSession": {
         "description": ""
     },
 
-    "titleSuccess": "Success",
+    "titleSuccess": "Successo",
     "@titleSuccess": {
         "description": ""
     },
 
-    "subtitleNoSaveParcelOfflineMode": "You cannot create a plot because you are offline",
+    "subtitleNoSaveParcelOfflineMode": "Non puoi creare una nuova parcelle perché sei offline.",
     "@subtitleNoSaveParcelOfflineMode": {
         "description": ""
     },
 
-    "hintParcelName": "Plot name",
+    "hintParcelName": "Nome della parcelle",
     "@hintParcelName": {
         "description": ""
     },
@@ -114,113 +114,113 @@
         "description": ""
     },
 
-    "hintConfirmPassword": "Confirm password",
+    "hintConfirmPassword": "Conferma la password",
     "@hintConfirmPassword": {
         "description": ""
     },
 
-    "hintWriteMessage": "Write your message here...",
+    "hintWriteMessage": "Scrivi qui il tuo messaggio...",
     "@hintWriteMessage": {
         "description": ""
     },
 
-    "hintWriteHere": "Write here...",
+    "hintWriteHere": "Scrivi qui...",
     "@hintWriteHere": {
         "description": ""
     },
 
-    "hintRecoveryCode": "Reset code",
+    "hintRecoveryCode": "Codice di recupero",
     "@hintRecoveryCode": {
         "description": ""
     },
 
-    "hintConfirmationCode": "Reset code",
+    "hintConfirmationCode": "Codice di conferma",
     "@hintConfirmationCode": {
         "description": ""
     },
 
-    "validatorParcelName": "Please enter a plot name",
+    "validatorParcelName": "Si prega di inserire un nome della parcelle",
     "@validatorParcelName": {
         "description": ""
     },
 
-    "infoLoading": "Loading...",
+    "infoLoading": "Caricamento...",
     "@infoLoading": {
         "description": ""
     },
 
-    "infoCheckUser": "Checking user...",
+    "infoCheckUser": "Controllo utente...",
     "@infoCheckUser": {
         "description": ""
     },
 
-    "infoConnectServer": "Connection to the server...",
+    "infoConnectServer": "Connessione al server...",
     "@infoConnectServer": {
         "description": ""
     },
 
-    "infoOfflineMode": "Launch in disconnected mode...",
+    "infoOfflineMode": "Avvio in modalità offline...",
     "@infoOfflineMode": {
         "description": ""
     },
 
-    "infoAuthRequired": "Authentication required...",
+    "infoAuthRequired": "Autenticazione richiesta...",
     "@infoAuthRequired": {
         "description": ""
     },
 
-    "infoUserProfileLoading": "Loading user profil...",
+    "infoUserProfileLoading": "Caricamento dati utente...",
     "@infoUserProfileLoading": {
         "description": ""
     },
 
-    "infoParcelsLoading": "Loading plots...",
+    "infoParcelsLoading": "Caricamento delle parcelles...",
     "@infoParcelsLoading": {
         "description": ""
     },
 
-    "infoSessionsLoading": "Loading observation sessions...",
+    "infoSessionsLoading": "Caricamento delle sessioni di osservazione...",
     "@infoSessionsLoading": {
         "description": ""
     },
 
-    "infoSendParcelServer": "Sending plots to the server...",
+    "infoSendParcelServer": "Invio delle parcelles al server...",
     "@infoSendParcelServer": {
         "description": ""
     },
 
-    "infoSendSessionServer": "Sending observation sessions to the server...",
+    "infoSendSessionServer": "Invio delle sessioni di osservazione al server...",
     "@infoSendSessionServer": {
         "description": ""
     },
 
-    "infoLastSessionDate": "Last observation session on {sessionDate}",
+    "infoLastSessionDate": "Ultima sessione di osservazione il {sessionDate}",
     "@infoLastSessionDate": {
         "description": "",
         "placeholders": {
             "sessionDate": {
               "type": "String",
-              "example": "May 20"
+              "example": "20 maggio"
             }
           }
     },
 
-    "infoNoParcels": "No plots...",
+    "infoNoParcels": "Nessuna parcelle...",
     "@infoNoParcels": {
         "description": ""
     },
 
-    "infoNoSessionInParcel": "No observation session for this plot...",
+    "infoNoSessionInParcel": "Nessuna sessione di osservazione per questa parcelle...",
     "@infoNoSessionInParcel": {
         "description": ""
     },
 
-    "infoHaveToRequired": "You must be logged in to modify an observation session",
+    "infoHaveToRequired": "Devi essere connesso per modificare una sessione di osservazione",
     "@infoHaveToRequired": {
         "description": ""
     },
 
-    "infoDate": "Date",
+    "infoDate": "Data",
     "@infoDate": {
         "description": ""
     },
@@ -230,9 +230,9 @@
         "description": ""
     },
 
-    "infoNbSessions": "{count, plural, =0{0 sessions} =1{1 session} other{{count} sessions}}",
+    "infoNbSessions": "{count, plural, =0{0 sessioni} =1{1 sessione} other{{count} sessioni}}",
     "@infoNbSessions": {
-        "description": "The number of sessions",
+        "description": "Il numero di sessioni",
         "placeholders": {
             "count": {
                 "type": "num",
@@ -241,52 +241,52 @@
         }
     },
 
-    "infoConfirmPrunedParcel": "Are you sure you want to note the plot as topped or trimmed ?",
+    "infoConfirmPrunedParcel": "Sei sicuro di voler annotare la parcelle come potata?",
     "@infoConfirmPrunedParcel": {
         "description": ""
     },
 
-    "infoExitSession": "The observation session will not be saved",
+    "infoExitSession": "La sessione di osservazione non sarà salvata",
     "@infoExitSession": {
         "description": ""
     },
 
-    "infoChoiceStade": "Choice of phenological stage",
+    "infoChoiceStade": "Scelta dello stadio fenologico",
     "@infoChoiceStade": {
         "description": ""
     },
 
-    "infoNumber": "Number",
+    "infoNumber": "Numero",
     "@infoNumber": {
         "description": ""
     },
 
-    "infoTutoEditNumber": "You can edit the number of observations by holding down the counter",
+    "infoTutoEditNumber": "Puoi modificare il numero di osservazioni tenendo premuto il contatore",
     "@infoTutoEditNumber": {
         "description": ""
     },
 
-    "infoTutoEditSession": "You can modify an observation sessions by long pressing on it",
+    "infoTutoEditSession": "Tenendo premuta una delle sessioni di osservazione presenti nella tabella, puoi modificarla",
     "@infoTutoEditSession": {
         "description": ""
     },
 
-    "infoAccount": "Account informations",
+    "infoAccount": "Informazioni dell'account",
     "@infoAccount": {
         "description": ""
     },
 
-    "infoErrorProfileInfo": "An error has occurred while retrieving your information",
+    "infoErrorProfileInfo": "Si è verificato un errore durante il recupero delle tue informazioni",
     "@infoErrorProfileInfo": {
         "description": ""
     },
 
-    "infoFirstname": "Firstname",
+    "infoFirstname": "Nome",
     "@infoFirstname": {
         "description": ""
     },
 
-    "infoLastname": "Lastname",
+    "infoLastname": "Cognome",
     "@infoLastname": {
         "description": ""
     },
@@ -296,332 +296,332 @@
         "description": ""
     },
 
-    "infoStructure": "Structure",
+    "infoStructure": "Struttura",
     "@infoStructure": {
         "description": ""
     },
 
-    "infoNbObsMin": "Minimum number of observations per session",
+    "infoNbObsMin": "Numero minimo di osservazioni per sessione di osservazione",
     "@infoNbObsMin": {
         "description": ""
     },
 
-    "infoAboutDescription": "The ApeX Vigne application was designed by Eneo team on behalf of Institut Agro Montpellier and Institut Français de la Vigne et du Vin. The project received financial support from Occitanie region and support from the Hérault's Chamber of Agriculture. This mobile app is part of research project about collaborative collection of agricultural observations.",
+    "infoAboutDescription": "L'applicazione ApeX Vigne è stata sviluppata dal team di Eneo per conto dell'Istituto Agro Montpellier e dell'Istituto Francese della Vite e del Vino. Questo progetto è stato finanziato dalla regione Occitania e ha avuto il sostegno della camera di agricoltura di Hérault. Si inserisce nel contesto della ricerca sulla raccolta collaborativa di osservazioni in agricoltura.",
     "@infoAboutDescription": {
         "description": ""
     },
 
-    "infoSectionApp": "ApeX Vigne application",
+    "infoSectionApp": "Applicazione ApeX Vigne",
     "@infoSectionApp": {
         "description": ""
     },
 
-    "infoSectionPartners": "Partners",
+    "infoSectionPartners": "Partner",
     "@infoSectionPartners": {
         "description": ""
     },
 
-    "infoConnected": "You are connected",
+    "infoConnected": "Sei connesso",
     "@infoConnected": {
         "description": ""
     },
 
-    "infoErrorDisconnected": "Connection failed, you are disconnected",
+    "infoErrorDisconnected": "Connessione fallita, sei disconnesso",
     "@infoErrorDisconnected": {
         "description": ""
     },
 
-    "infoSyncData": "Synchronising data...",
+    "infoSyncData": "Sincronizzazione dei dati...",
     "@infoSyncData": {
         "description": ""
     },
 
-    "infoInvalidEmailOrPassword": "Invalid email or password",
+    "infoInvalidEmailOrPassword": "Email o password non valide",
     "@infoInvalidEmailOrPassword": {
         "description": ""
     },
 
-    "infoErrorLogin": "Connection error",
+    "infoErrorLogin": "Errore di accesso",
     "@infoErrorLogin": {
         "description": ""
     },
 
-    "infoErrorSignup": "Signup error",
+    "infoErrorSignup": "Errore durante la registrazione dell'account",
     "@infoErrorSignup": {
         "description": ""
     },
 
-    "infoErrorRecoverPassword": "Error while sending the reset code. Check that your e-mail is correct",
+    "infoErrorRecoverPassword": "Errore durante l'invio del codice di ripristino. Verifica che l'email sia corretta.",
     "@infoErrorRecoverPassword": {
         "description": ""
     },
 
-    "infoErrorConfirmRecoverPassword": "Error while resetting the password. Check that your reset code is correct",
+    "infoErrorConfirmRecoverPassword": "Errore durante il ripristino della password. Verifica che il codice sia corretto.",
     "@infoErrorConfirmRecoverPassword": {
         "description": ""
     },
 
-    "infoPruned": "Topped of trimmed",
+    "infoPruned": "Potata",
     "@infoPruned": {
         "description": ""
     },
 
-    "infoIFV0": "Absent",
+    "infoIFV0": "Assente",
     "@infoIFV0": {
         "description": ""
     },
 
-    "infoIFV1": "Moderate",
+    "infoIFV1": "Moderata",
     "@infoIFV1": {
         "description": ""
     },
 
-    "infoIFV2": "Strong",
+    "infoIFV2": "Forte",
     "@infoIFV2": {
         "description": ""
     },
 
-    "infoIFV3": "Severe",
+    "infoIFV3": "Severa",
     "@infoIFV3": {
         "description": ""
     },
 
-    "infoWhyOffline": "This may be due to a poor internet connection or server maintenance.",
+    "infoWhyOffline": "Questo potrebbe essere dovuto a una connessione internet instabile o a una manutenzione del server.",
     "@infoWhyOffline": {
         "description": ""
     },
 
-    "infoLocationRequired": "You need to authorise location to be able to create a session",
+    "infoLocationRequired": "Devi autorizzare la posizione per poter creare una sessione di osservazione",
     "@infoLocationRequired": {
         "description": ""
     },
 
-    "infoEnableLocationSystem": "You need to authorise location in your phone settings to be able to create an observation session",
+    "infoEnableLocationSystem": "Devi autorizzare la posizione nelle impostazioni del tuo telefono per poter creare una sessione di osservazione",
     "@infoEnableLocationSystem": {
         "description": ""
     },
 
-    "infoLocationDisabled": "The location on your phone is not enabled",
+    "infoLocationDisabled": "La posizione del tuo telefono non è attivata",
     "@infoLocationDisabled": {
         "description": ""
     },
 
-    "infoSignUpFormDescription": "Please fill in this form to complete the signup",
+    "infoSignUpFormDescription": "Completa questo modulo per confermare la creazione dell'account",
     "@infoSignUpFormDescription": {
         "description": ""
     },
 
-    "infoConfirmPasswordError": "Passwords are not matching",
+    "infoConfirmPasswordError": "Le password non corrispondono.",
     "@infoConfirmPasswordError": {
         "description": ""
     },
 
-    "infoParcelName": "Plot name",
+    "infoParcelName": "Nome della parcelle",
     "@infoParcelName": {
         "description": ""
     },
 
-    "infoHydricConstraint": "Water stress",
+    "infoHydricConstraint": "Stress idrico",
     "@infoHydricConstraint": {
         "description": ""
     },
 
-    "infoExportSessionsSuccess": "The observation sessions have been sent to you by email",
+    "infoExportSessionsSuccess": "Le sessioni di osservazione sono state inviate via email",
     "@infoExportSessions": {
         "description": ""
     },
 
-    "infoExportSessionsFailed": "An error occurred while exporting the observation sessions",
+    "infoExportSessionsFailed": "Si è verificato un errore durante l'esportazione delle sessioni di osservazione",
     "@infoExportSessionsFailed": {
         "description": ""
     },
 
-    "infoRecoverPasswordIntro": "Please enter your e-mail adress",
+    "infoRecoverPasswordIntro": "Per favore, inserisci il tuo indirizzo email.",
     "@infoRecoverPasswordIntro": {
         "description": ""
     },
 
-    "infoRecoverPasswordDescription": "We will send you a reset code by e-mail",
+    "infoRecoverPasswordDescription": "Ti invieremo un codice di ripristino via email.",
     "@infoRecoverPasswordDescription": {
         "description": ""
     },
 
-    "infoRecoverPasswordSuccess": "An email has been sent, check your inbox",
+    "infoRecoverPasswordSuccess": "Un'email è stata inviata, controlla la tua casella di posta in arrivo",
     "@infoRecoverPasswordSuccess": {
         "description": ""
     },
 
-    "infoConfirmRecoverIntro": "Please fill in your code and new password",
+    "infoConfirmRecoverIntro": "Inserisci il codice e la tua nuova password.",
     "@infoConfirmRecoverIntro": {
         "description": ""
     },
 
-    "infoRecoverCodePasswordDescription": "A reset code will be sent to you by e-mail",
+    "infoRecoverCodePasswordDescription": "Ti invieremo un codice di ripristino via email.",
     "@infoRecoverCodePasswordDescription": {
         "description": ""
     },
 
-    "infoConfirmRecoverSuccess": "Your password has been reset successfully",
+    "infoConfirmRecoverSuccess": "La tua password è stata reimpostata con successo",
     "@infoConfirmRecoverSuccess": {
         "description": ""
     },
 
-    "infoRecoveryCodeValidationError": "The reset code is wrong",
+    "infoRecoveryCodeValidationError": "Il codice di ripristino non è valido",
     "@infoRecoveryCodeValidationError": {
         "description": ""
     },
 
-    "infoResendCodeSuccess": "A new reset code has been sent",
+    "infoResendCodeSuccess": "È stato inviato un nuovo codice di ripristino",
     "@infoResendCodeSuccess": {
         "description": ""
     },
 
-    "infoConfirmationCodeValidationError": "The reset code is wrong",
+    "infoConfirmationCodeValidationError": "Il codice di conferma non è valido",
     "@infoConfirmationCodeValidationError": {
         "description": ""
     },
 
-    "actionYes": "Yes",
+    "actionYes": "Sì",
     "@actionYes": {
         "description": ""
     },
 
-    "actionCancel": "Cancel",
+    "actionCancel": "Annulla",
     "@actionCancel": {
         "description": ""
     },
 
-    "actionClose": "Close",
+    "actionClose": "Chiudi",
     "@actionClose": {
         "description": ""
     },
 
-    "actionAdd": "Add",
+    "actionAdd": "Aggiungi",
     "@actionAdd": {
         "description": ""
     },
 
-    "actionLogin": "Login",
+    "actionLogin": "Accedi",
     "@actionLogin": {
         "description": ""
     },
 
-    "actionSignup": "Signup",
+    "actionSignup": "Registrati",
     "@actionSignup": {
         "description": ""
     },
 
-    "actionForgotPassword": "Forgot password",
+    "actionForgotPassword": "Password dimenticata",
     "@actionForgotPassword": {
         "description": ""
     },
 
-    "actionConfirm": "Confirm",
+    "actionConfirm": "Conferma",
     "@actionConfirm": {
         "description": ""
     },
 
-    "actionGoBack": "Go back",
+    "actionGoBack": "Indietro",
     "@actionGoBack": {
         "description": ""
     },
 
-    "actionNewSession": "New Session",
+    "actionNewSession": "Nuova sessione",
     "@actionNewSession": {
         "description": ""
     },
 
-    "actionLogout": "Logout",
+    "actionLogout": "Disconnetti",
     "@actionLogout": {
         "description": ""
     },
 
-    "actionDeleteAccount": "Ask for account deletion",
+    "actionDeleteAccount": "Richiedi la cancellazione dell'account",
     "@actionDeleteAccount": {
         "description": ""
     },
 
-    "actionDeleteAccountSubject": "Apex Vigne - Ask for account deletion",
+    "actionDeleteAccountSubject": "ApeX Vigne - Richiesta di cancellazione dell'account",
     "@actionDeleteAccountSubject": {
         "description": ""
     },
 
-    "actionDeleteAccountBody": "Could you please delete my account ?",
+    "actionDeleteAccountBody": "Per favore, elimina il mio account ApeX-Vigne",
     "@actionDeleteAccountBody": {
         "description": ""
     },
 
-    "actionExport": "Export observation sessions",
+    "actionExport": "Esporta le sessioni di osservazione",
     "@actionExport": {
         "description": ""
     },
 
-    "actionStayOffline": "Staying disconnected",
+    "actionStayOffline": "Rimani disconnesso",
     "@actionStayOffline": {
         "description": ""
     },
 
-    "actionGoOnline": "Try to connect",
+    "actionGoOnline": "Connetti",
     "@actionGoOnline": {
         "description": ""
     },
 
-    "actionSend": "Send",
+    "actionSend": "Invia",
     "@actionSend": {
         "description": ""
     },
 
-    "actionSave": "Save",
+    "actionSave": "Salva",
     "@actionSave": {
         "description": ""
     },
 
-    "actionFullGrowth": "Full growth",
+    "actionFullGrowth": "Crescita completa",
     "@actionFullGrowth": {
         "description": ""
     },
 
-    "actionSlowerGrowth": "Moderate growth",
+    "actionSlowerGrowth": "Crescita più lenta",
     "@actionSlowerGrowth": {
         "description": ""
     },
 
-    "actionStuntedGrowth": "Stopped growth",
+    "actionStuntedGrowth": "Crescita bloccata",
     "@actionStuntedGrowth": {
         "description": ""
     },
 
-    "actionValidateSession": "Finish",
+    "actionValidateSession": "Fine",
     "@actionValidateSession": {
         "description": ""
     },
 
-    "actionUnderstand": "I've got it !",
+    "actionUnderstand": "Ho capito!",
     "@actionUnderstand": {
         "description": ""
     },
 
-    "actionRecoverPassword": "Send code",
+    "actionRecoverPassword": "Invia il codice",
     "@actionRecoverPassword": {
         "description": ""
     },
 
-    "actionResendCode": "Resend code",
+    "actionResendCode": "Invia di nuovo il codice",
     "@actionResendCode": {
         "description": ""
     },
 
-    "actionSetPassword": "Set password",
+    "actionSetPassword": "Reimposta la password",
     "@actionSetPassword": {
         "description": ""
     },
 
-    "sortByMostRecent": "From the most recent to the oldest",
+    "sortByMostRecent": "Dal più recente al più antico",
     "@sortByMostRecent": {
         "description": ""
     },
 
-    "sortByOldest": "From the oldest to the most recent",
+    "sortByOldest": "Dal più antico al più recente",
     "@sortByOldest": {
         "description": ""
     },
@@ -636,267 +636,267 @@
         "description": ""
     },
 
-    "sortByNearest": "Nearest position",
+    "sortByNearest": "Più vicino",
     "@sortByNearest": {
         "description": ""
     },
 
-    "nameStadeA": "Winter buds",
+    "nameStadeA": "Gemma invernale",
     "@nameStadeA": {
         "description": ""
     },
 
-    "nameStadeB": "Wool stage",
+    "nameStadeB": "Gemma nel cotone",
     "@nameStadeB": {
         "description": ""
     },
 
-    "nameStadeC": "Bud burst",
+    "nameStadeC": "Punta verde",
     "@nameStadeC": {
         "description": ""
     },
 
-    "nameStadeD": "First leaf unfolded",
+    "nameStadeD": "Emergenza delle foglie",
     "@nameStadeD": {
         "description": ""
     },
 
-    "nameStadeE": "2nd to 3rd leaves unfolded",
+    "nameStadeE": "2-3 foglie distese",
     "@nameStadeE": {
         "description": ""
     },
 
-    "nameStadeF": "Inflorescences clearly visible",
+    "nameStadeF": "Grappoli visibili",
     "@nameStadeF": {
         "description": ""
     },
 
-    "nameStadeG": "Flowers closely pressed together",
+    "nameStadeG": "Bottoni fiorali agglomerati",
     "@nameStadeG": {
         "description": ""
     },
 
-    "nameStadeH": "Flowers separating",
+    "nameStadeH": "Bottoni fiorali separati",
     "@nameStadeH": {
         "description": ""
     },
 
-    "nameStadeI": "Flowering",
+    "nameStadeI": "Fioritura",
     "@nameStadeI": {
         "description": ""
     },
 
-    "nameStadeJ": "Fruit set",
+    "nameStadeJ": "Allegagione",
     "@nameStadeJ": {
         "description": ""
     },
 
-    "nameStadeK": "Berries pea-sized",
+    "nameStadeK": "piselli",
     "@nameStadeK": {
         "description": ""
     },
 
-    "nameStadeL": "Berries beginning to touch",
+    "nameStadeL": "Chiusura del grappolo",
     "@nameStadeL": {
         "description": ""
     },
 
-    "nameStadeM": "Ripening of berries",
+    "nameStadeM": "Veraison",
     "@nameStadeM": {
         "description": ""
     },
 
-    "nameStadeN": "Berries ripe for harvest",
+    "nameStadeN": "Maturità",
     "@nameStadeN": {
         "description": ""
     },
 
-    "nameStadeO": "End of wood maturation",
+    "nameStadeO": "Fine dell'indurimento del legno",
     "@nameStadeO": {
         "description": ""
     },
 
-    "nameStadeP": "Leaf-fall",
+    "nameStadeP": "Caduta delle foglie",
     "@nameStadeP": {
         "description": ""
     },
 
-    "codeStadeA": "Stage A (BBCH 00 à 03)",
+    "codeStadeA": "Stadio A (BBCH 00 a 03)",
     "@codeStadeA": {
         "description": ""
     },
 
-    "codeStadeB": "Stage B (BBCH 05)",
+    "codeStadeB": "Stadio B (BBCH 05)",
     "@codeStadeB": {
         "description": ""
     },
 
-    "codeStadeC": "Stage C (BBCH 09)",
+    "codeStadeC": "Stadio C (BBCH 09)",
     "@codeStadeC": {
         "description": ""
     },
 
-    "codeStadeD": "Stage D (BBCH 10)",
+    "codeStadeD": "Stadio D (BBCH 10)",
     "@codeStadeD": {
         "description": ""
     },
 
-    "codeStadeE": "Stage E (BBCH 11 à 19)",
+    "codeStadeE": "Stadio E (BBCH 11 a 19)",
     "@codeStadeE": {
         "description": ""
     },
 
-    "codeStadeF": "Stage F (BBCH 53)",
+    "codeStadeF": "Stadio F (BBCH 53)",
     "@codeStadeF": {
         "description": ""
     },
 
-    "codeStadeG": "Stage G (BBCH 55)",
+    "codeStadeG": "Stadio G (BBCH 55)",
     "@codeStadeG": {
         "description": ""
     },
 
-    "codeStadeH": "Stage H (BBCH 57)",
+    "codeStadeH": "Stadio H (BBCH 57)",
     "@codeStadeH": {
         "description": ""
     },
 
-    "codeStadeI": "Stage I (BBCH 60 à 69)",
+    "codeStadeI": "Stadio I (BBCH 60 a 69)",
     "@codeStadeI": {
         "description": ""
     },
 
-    "codeStadeJ": "Stage J (BBCH 71)",
+    "codeStadeJ": "Stadio J (BBCH 71)",
     "@codeStadeJ": {
         "description": ""
     },
 
-    "codeStadeK": "Stage K (BBCH 75)",
+    "codeStadeK": "Stadio K (BBCH 75)",
     "@codeStadeK": {
         "description": ""
     },
 
-    "codeStadeL": "Stage L (BBCH 77)",
+    "codeStadeL": "Stadio L (BBCH 77)",
     "@codeStadeL": {
         "description": ""
     },
 
-    "codeStadeM": "Stage M (BBCH 81 à 85)",
+    "codeStadeM": "Stadio M (BBCH 81 a 85)",
     "@codeStadeM": {
         "description": ""
     },
 
-    "codeStadeN": "Stage N (BBCH 89)",
+    "codeStadeN": "Stadio N (BBCH 89)",
     "@codeStadeN": {
         "description": ""
     },
 
-    "codeStadeO": "Stage O (BBCH 91)",
+    "codeStadeO": "Stadio O (BBCH 91)",
     "@codeStadeO": {
         "description": ""
     },
 
-    "codeStadeP": "Stage P (BBCH 92 à 97)",
+    "codeStadeP": "Stadio P (BBCH 92 a 97)",
     "@codeStadeP": {
         "description": ""
     },
 
-    "descriptionStadeA": "",
+    "descriptionStadeA": "Inizio dell'ingrossamento del germoglio e ripresa della vegetazione.",
     "@descriptionStadeA": {
         "description": ""
     },
 
-    "descriptionStadeB": "",
+    "descriptionStadeB": "Le squame si separano, la protezione cotonosa o l'imbottitura diventa visibile.",
     "@descriptionStadeB": {
         "description": ""
     },
 
-    "descriptionStadeC": "",
+    "descriptionStadeC": "La punta verde del germoglio diventa visibile.",
     "@descriptionStadeC": {
         "description": ""
     },
 
-    "descriptionStadeD": "",
+    "descriptionStadeD": "Le foglie rudimentali sono raccolte in una rosetta. La loro base è ancora protetta dalla peluria che viene gradualmente lanciata fuori dalle squame.",
     "@descriptionStadeD": {
         "description": ""
     },
 
-    "descriptionStadeE": "",
+    "descriptionStadeE": "Le foglie emergono una dopo l'altra e si sviluppano. Le prime foglie presentano le caratteristiche proprie del vitigno.",
     "@descriptionStadeE": {
         "description": ""
     },
 
-    "descriptionStadeF": "",
+    "descriptionStadeF": "Il racemo rudimentale è visibile all'estremità del germoglio. Da quattro a sei foglie sono sparse.",
     "@descriptionStadeF": {
         "description": ""
     },
 
-    "descriptionStadeG": "",
+    "descriptionStadeG": "Il grappolo cresce. I boccioli dei fiori si uniscono.",
     "@descriptionStadeG": {
         "description": ""
     },
 
-    "descriptionStadeH": "",
+    "descriptionStadeH": "Il cluster è ben sviluppato. I boccioli dei fiori sono nettamente separati.",
     "@descriptionStadeH": {
         "description": ""
     },
 
-    "descriptionStadeI": "",
+    "descriptionStadeI": "I calicini floreali si staccano poi cadono. Gli stami e il pistillo sono visibili.",
     "@descriptionStadeI": {
         "description": ""
     },
 
-    "descriptionStadeJ": "",
+    "descriptionStadeJ": "Le bacche iniziano a svilupparsi. Le parti floreali cadono.",
     "@descriptionStadeJ": {
         "description": ""
     },
 
-    "descriptionStadeK": "",
+    "descriptionStadeK": "Le bacche hanno le dimensioni di un pisello. I grappoli si inclinano verso il basso e ottengono la loro posizione finale.",
     "@descriptionStadeK": {
         "description": ""
     },
 
-    "descriptionStadeL": "",
+    "descriptionStadeL": "Nel grappolo, le bacche sono abbastanza grandi da toccarsi.",
     "@descriptionStadeL": {
         "description": ""
     },
 
-    "descriptionStadeM": "",
+    "descriptionStadeM": "Per i vitigni bianchi, le bacche diventano leggermente traslucide, mentre per quelli neri, assumono una colorazione violacea.",
     "@descriptionStadeM": {
         "description": ""
     },
 
-    "descriptionStadeN": "",
+    "descriptionStadeN": "Le bacche hanno raggiunto la loro maturità per la vendemmia.",
     "@descriptionStadeN": {
         "description": ""
     },
 
-    "descriptionStadeO": "",
+    "descriptionStadeO": "L'indurimento del legno inizia al termine dell'invaiatura.",
     "@descriptionStadeO": {
         "description": ""
     },
 
-    "descriptionStadeP": "",
+    "descriptionStadeP": "Le foglie si colorano poi cadono. La vite entra in riposo vegetativo.",
     "@descriptionStadeP": {
         "description": ""
     },
 
-    "titleDeleteAccount": "Account deletion",
+    "titleDeleteAccount": "Eliminazione dell'account",
     "@titleDeleteAccount": {
         "description": ""
     },
 
-    "messageDeleteAccount": "Are you sure you want to delete your account ?",
+    "messageDeleteAccount": "Sei sicuro di voler eliminare il tuo account?",
     "@messageDeleteAccount": {
         "description": ""
     },
 
-    "titleDeleteAccountConfirmation": "Request received",
+    "titleDeleteAccountConfirmation": "Richiesta ricevuta",
     "@titleDeleteAccountConfirmation": {
         "description": ""
     },
 
-    "messageDeleteAccountConfirmation": "We will get back to you to confirm the deletion of the account. You will now be logged out.",
+    "messageDeleteAccountConfirmation": "Ti contatteremo per confermare l'eliminazione dell'account. Sarai ora disconnesso.",
     "@messageDeleteAccountConfirmation": {
         "description": ""
     }
