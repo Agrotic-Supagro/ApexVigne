@@ -4,7 +4,6 @@
         "description": ""
     },
 
-    
     "tooltipIcApex": "iC-Apex est l'indice de croissance des apex. Il varie entre 1 (pleine croissance des apex) et 0 (croissance totalement arrêtée).",
     "@tooltipIcApex": {
         "description": ""
@@ -14,8 +13,6 @@
     "@tooltipHydricConstraint": {
         "description": ""
     },
-
-
 
     "titleHome": "Parcelles",
     "@titleHome": {
@@ -97,14 +94,10 @@
         "description": ""
     },
 
-
-
     "subtitleNoSaveParcelOfflineMode": "Vous ne pouvez pas créer de parcelle car vous êtes hors ligne.",
     "@subtitleNoSaveParcelOfflineMode": {
         "description": ""
     },
-
-
 
     "hintParcelName": "Nom de la parcelle",
     "@hintParcelName": {
@@ -146,14 +139,10 @@
         "description": ""
     },
 
-
-
     "validatorParcelName": "Veuillez entrer un nom de parcelle",
     "@validatorParcelName": {
         "description": ""
     },
-
-
 
     "infoLoading": "Chargement...",
     "@infoLoading": {
@@ -282,7 +271,7 @@
         "description": ""
     },
 
-    "infoAccount": "Information du compte",
+    "infoAccount": "Informations du compte",
     "@infoAccount": {
         "description": ""
     },
@@ -492,7 +481,6 @@
         "description": ""
     },
 
-
     "actionYes": "Oui",
     "@actionYes": {
         "description": ""
@@ -628,8 +616,6 @@
         "description": ""
     },
 
-
-
     "sortByMostRecent": "Du plus récent au plus ancien",
     "@sortByMostRecent": {
         "description": ""
@@ -654,8 +640,6 @@
     "@sortByNearest": {
         "description": ""
     },
-
-
 
     "nameStadeA": "Bourgeon d'hiver",
     "@nameStadeA": {
@@ -737,7 +721,6 @@
         "description": ""
     },
 
-
     "codeStadeA": "Stade A (BBCH 00 à 03)",
     "@codeStadeA": {
         "description": ""
@@ -818,7 +801,6 @@
         "description": ""
     },
 
-
     "descriptionStadeA": "Début du gonflement du bourgeon et de la reprise de la végétation.",
     "@descriptionStadeA": {
         "description": ""
@@ -898,7 +880,6 @@
     "@descriptionStadeP": {
         "description": ""
     },
-
 
     "titleDeleteAccount": "Suppression du compte",
     "@titleDeleteAccount": {
